@@ -1,45 +1,68 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+# Quizz
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+### Greeting
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+Dear user!
 
----
+We are excited to offer you an opportunity to use our application as a user or improve it as a developer.
+# Description
+Quiz is a captivating quiz app that tests your knowledge across various categories. Enjoy  quiz modes, create custom quizzes, and check out your statistics.
 
-## Edit a file
+Featuring an intuitive and user-friendly interface, the app makes it easy to navigate through a great amount of exciting quizzes. Whether you're enthusiast looking to test your general knowledge or a curious learner seeking to expand your expertise in specific subjects like History, Science, Technology, Movies, Politics, and more – Quiz has got you covered.
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
+![](https://png.pngtree.com/png-vector/20230120/ourmid/pngtree-quiz-logo-with-speech-bubble-symbols-png-image_6568572.png)
 
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+# Application flow
+1. Firstly, you face with 'Quzz' logo and list of topics
++ We also can click on "I'm lucky" to choose a random quiz from list
 
----
+"Screen shoot"
 
-## Create a file
+2. Then, when we started our quiz we can see our first question and variants of answers.We can have two types of questions:
++ multiple
++ boolean
 
-Next, you’ll add a new file to this repository.
+"Screen shoot"
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+3. The last part of our application is statistics. We can observe
++ Time spent for quiz
++ Seconds spent per question
++ Seconds spent per correct question
++ Seconds spent per wrong question
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+"Screen shoot"
 
----
+## Development Server
 
-## Clone a repository
+To run the app locally for development, use the following command: `ng serve`. Navigate to `http://localhost:4200/`, and the application will automatically reload if you make any changes to the source files.
 
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
+## Code Generation
 
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
+You can generate new components using the following command: `ng generate component component-name`. Additionally, you can create other Angular artifacts like directives, pipes, services, classes, guards, interfaces, enums, or modules.
 
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+## Building the Project
+
+To build the project, use the command: `ng build`. The build artifacts will be stored in the `dist/` directory.
+
+## Running Unit Tests
+
+Execute unit tests via [Karma](https://karma-runner.github.io) using the command: `ng test`.
+
+## Running End-to-End Tests
+
+To run end-to-end tests, use the command: `ng e2e`. Before using this command, you may need to add a package that implements end-to-end testing capabilities.
+
+
+
+
+Package                            Version
+------------------------------------------------------------
+* Angular CLI: 15.2.9
+* Node: 16.15.1
+* Package Manager: npm 8.11.0
+* OS: win32 x64
+* @angular-devkit/architect    0.1502.9 (cli-only)
+* @angular-devkit/core         15.2.9 (cli-only)
+* @angular-devkit/schematics   15.2.9 (cli-only)
+* @schematics/angular          15.2.9 (cli-only)
+
