@@ -1,0 +1,25 @@
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+
+
+  .title-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+
+    .title{
+      font: small-caps bold 70px/1 sans-serif;
+    }
+  }
+
+  .description-container{
+    width: 80%;
+  }
+}
