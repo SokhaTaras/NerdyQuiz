@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
   min-height: 100%;
 
@@ -10,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    text-align: center;
     height: 100%;
     width: 50%;
 
@@ -20,6 +21,24 @@
   }
 
   .description-container{
-    width: 80%;
+    padding: 50px 0 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+  }
+
+  @media (max-width: 768px){
+    .description-container{
+      width: 75%;
+    }
+  }
+
+  @media (max-width: 480px){
+      .description-container{
+        width: 75%;
+      }
   }
 }

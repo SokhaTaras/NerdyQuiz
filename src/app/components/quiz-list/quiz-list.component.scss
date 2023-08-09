@@ -1,49 +1,58 @@
 .container {
   max-width: 1200px;
   margin: auto;
-  margin-top: 100px;
 }
 
 .quiz-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
 }
 
 .quiz-list-item {
   display: flex;
-  justify-content: space-between; /* Distribute space evenly between cards */
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   margin: 10px 0;
-  width: calc(33.33% - 10px); /* Set width for 3 cards in a row */
+  width: calc(33% - 10px);
   flex-grow: 1;
   text-align: center;
   height: 300px;
-  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
 }
 
-app-quiz-card {
+quiz-app-quiz-card {
   display: flex;
   flex-grow: 1;
   text-align: center;
   height: 300px;
-  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
   margin: 5px;
-  width: calc(100% - 10px);
 }
 
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .quiz-list-item,
-  app-quiz-card {
-    width: calc(50% - 10px);
+  .quiz-list-item {
+    width: calc(33.33% - 10px);
+  }
+
+  quiz-app-quiz-card {
+    width: calc(33.33% - 10px);
   }
 }
 
 @media (max-width: 480px) {
-  .quiz-list-item,
-  app-quiz-card {
-    width: calc(100% - 10px);
+  .container{
+    margin: 50px auto auto;
+  }
+  .quiz-list-item {
+    width: calc(75% - 10px);
+  }
+
+  quiz-app-quiz-card {
+    width: calc(50% - 10px);
   }
 }
+
+
+
+
