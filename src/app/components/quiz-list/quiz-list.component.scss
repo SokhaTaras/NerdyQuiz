@@ -3,6 +3,28 @@
   margin: auto;
 }
 
+.new-quiz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  margin-bottom: 10px;
+
+  .new-quiz-btn {
+    width: 33%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom, #dcdcff, #c7c7ff);
+  }
+
+  .new-quiz-btn:hover {
+    transition: 0.5s;
+    background-image: linear-gradient(to bottom, #c7c7ff, #b3b3ff);
+  }
+}
+
 .quiz-list {
   display: flex;
   flex-wrap: wrap;
