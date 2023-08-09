@@ -1,13 +1,31 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
 import {IQuiz} from "../../interfaces/quiz.interface";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizStateService {
 
-  constructor(private http: HttpClient) { }
+  addQuiz(name:string, body:IQuiz[] | undefined): void{
+    localStorage.setItem(name,JSON.stringify(body));
+  }
+
+  getOneQuiz(name: string): IQuiz | undefined {
+    let item = localStorage.getItem(name);
+    if (item !== null) {
+      return JSON.parse(item);
+    }
+    return undefined;
+  }
+
+  getAllQuizzes(name: string): IQuiz[] | undefined{
+    let allQuizzes = localStorage.getItem(name)
+    if (allQuizzes !== null){
+      return JSON.parse(allQuizzes);
+    }
+    return undefined;
+  }
 
 
 }
