@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ModalService } from '../../services/modal/modal.service';
+import { IInitialQuiz } from '../../interfaces/initial-quiz.interface';
+import { QuizStateService } from '../../services/quiz-state/quiz-state.service';
 
 @Component({
   selector: 'quiz-app-init-quiz-modal',
@@ -12,6 +15,8 @@ export class InitQuizModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private modalService: ModalService,
+    private quizService: QuizStateService,
   ) {}
   ngOnInit() {
     this.initForm();
@@ -23,8 +28,22 @@ export class InitQuizModalComponent implements OnInit {
     });
   }
 
-  handleCancel() {}
+  getInitialQuizObject(form: FormGroup): IInitialQuiz {
+    return {
+      title: form.get('title')?.value || '',
+      theme: form.get('theme')?.value || '',
+    };
+  }
+  handleCancel() {
+    this.modalService.closeModal();
+  }
   handleOk() {
+    this.quizService.addInitialQuiz(
+      'test',
+      this.getInitialQuizObject(this.initQuizForm),
+    );
+
+    this.modalService.closeModal();
     this.router.navigate(['quiz-details-page']);
   }
 }

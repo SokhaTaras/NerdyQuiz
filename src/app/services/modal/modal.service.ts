@@ -17,4 +17,8 @@ export class ModalService {
       },
     });
   }
+
+  closeModal(): void {
+    this.modalService.closeAll();
+  }
 }
