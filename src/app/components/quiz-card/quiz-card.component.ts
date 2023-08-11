@@ -1,24 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IQuiz } from '../../interfaces/quiz.interface';
 import { Router } from '@angular/router';
-import { ModalService } from '../../services/modal/modal.service';
+import { NavigationRoutes } from '../../enums/routes';
 
 @Component({
   selector: 'quiz-app-quiz-card',
   templateUrl: './quiz-card.component.html',
   styleUrls: ['./quiz-card.component.scss'],
 })
-export class QuizCardComponent implements OnInit {
+export class QuizCardComponent {
   @Input() quiz: IQuiz | undefined;
+  routeNavigateTo: string = NavigationRoutes.LOGIN;
 
-  constructor(
-    private router: Router,
-    private modalService: ModalService,
-  ) {}
-
-  ngOnInit() {}
-  selectQuiz() {}
+  constructor(private router: Router) {}
   goToPage() {
-    this.router.navigate(['login']);
+    this.router.navigate([this.routeNavigateTo]);
   }
 }

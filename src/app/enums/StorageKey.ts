@@ -1,3 +1,3 @@
 export enum StorageKey {
-  'quizzes' = 'quizzes'
+  QUIZZES = 'quizzes'
 }

@@ -11,17 +11,19 @@ import { InitQuizModalComponent } from '../init-quiz-modal/init-quiz-modal.compo
   styleUrls: ['./quiz-list.component.scss'],
 })
 export class QuizListComponent implements OnInit {
+
   constructor(
     private quizService: QuizStateService,
     private modalService: ModalService,
   ) {}
-  ngOnInit(): void {
+
+  ngOnInit() {
     this.allQuizzes = this.quizService.getAllQuizzes(this.keyForQuizzes);
   }
-
-  keyForQuizzes: string = StorageKey.quizzes;
-  allQuizzes: IQuiz[] | undefined = [];
   openInitPopUp(): void {
     this.modalService.showModal(InitQuizModalComponent);
   }
+
+  keyForQuizzes: string = StorageKey.QUIZZES;
+  allQuizzes: IQuiz[] | undefined = [];
 }
