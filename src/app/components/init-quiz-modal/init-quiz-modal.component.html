@@ -1,0 +1,16 @@
+<div class="test">
+    <form [formGroup]="initQuizForm">
+      <div class="place-content-center">
+        <span class="text-2xl">Title</span>
+        <input type="text" formControlName="title" placeholder="Enter title of quiz">
+      </div>
+      <div class="place-content-center">
+        <span class="text-2xl">Theme</span>
+        <input type="text" formControlName="theme" placeholder="Enter Theme of quiz">
+      </div>
+    </form>
+  <div>
+    <button nz-button nzt>Save</button>
+    <button nz-button nzt>Cancel</button>
+  </div>
+</div>
