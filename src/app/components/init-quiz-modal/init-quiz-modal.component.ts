@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'quiz-app-init-quiz-modal',
@@ -8,7 +9,10 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class InitQuizModalComponent implements OnInit {
   initQuizForm: FormGroup = new FormGroup({});
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+  ) {}
   ngOnInit() {
     this.initForm();
   }
@@ -17,5 +21,10 @@ export class InitQuizModalComponent implements OnInit {
       title: new FormControl(''),
       theme: new FormControl(''),
     });
+  }
+
+  handleCancel() {}
+  handleOk() {
+    this.router.navigate(['quiz-details-page']);
   }
 }

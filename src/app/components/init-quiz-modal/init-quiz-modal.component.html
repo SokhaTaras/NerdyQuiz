@@ -9,8 +9,8 @@
         <input type="text" formControlName="theme" placeholder="Enter Theme of quiz">
       </div>
     </form>
-  <div>
-    <button nz-button nzt>Save</button>
-    <button nz-button nzt>Cancel</button>
+  <div *nzModalFooter class="">
+    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+    <button nz-button nzType="primary" (click)="handleOk()">Save</button>
   </div>
 </div>

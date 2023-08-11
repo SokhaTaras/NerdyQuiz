@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IQuiz } from '../../interfaces/quiz.interface';
 import { Router } from '@angular/router';
-import { ModalService } from '../../services/modal.service';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'quiz-app-quiz-card',
