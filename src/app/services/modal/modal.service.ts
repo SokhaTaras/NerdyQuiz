@@ -10,14 +10,12 @@ export class ModalService {
     this.modalService.create({
       nzContent: component,
       nzFooter: null,
-      nzOkText: 'Save',
       nzCentered: true,
       nzBodyStyle: {
         'background-image': 'linear-gradient(to bottom, #c7c7ff, #b3b3ff)',
       },
     });
   }
-
   closeModal(): void {
     this.modalService.closeAll();
   }

@@ -25,10 +25,17 @@ export class QuizStateService {
     }
     return undefined;
   }
-
   addInitialQuiz(key: string, quiz: IInitialQuiz): void {
     if (quiz !== null) {
       localStorage.setItem(key, JSON.stringify(quiz));
     }
+  }
+
+  getInitialQuiz(key: string): IInitialQuiz | undefined {
+    let initialQuiz = localStorage.getItem(key);
+    if (initialQuiz !== null) {
+      return JSON.parse(initialQuiz);
+    }
+    return undefined;
   }
 }

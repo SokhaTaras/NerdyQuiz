@@ -6,17 +6,16 @@ import { QuizDetailsComponent } from './components/quiz-details/quiz-details.com
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
     component: HomeComponent,
-    children: [
-      {
-        path: 'home',
-        component: HomeComponent,
-      },
-      {
-        path: 'quiz-details-page',
-        component: QuizDetailsComponent,
-      },
-    ],
+  },
+  {
+    path: 'home/quiz-details-page',
+    component: QuizDetailsComponent,
   },
 ];
 

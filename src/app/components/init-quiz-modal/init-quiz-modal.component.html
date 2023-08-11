@@ -1,17 +1,48 @@
-<div class="test">
-    <form [formGroup]="initQuizForm">
-      <span *nzModalTitle class="text-2xl">Initial quiz creation</span>
-      <div class="place-content-center">
-        <span class="text-1xl">Title</span>
-        <input type="text" formControlName="title" placeholder="Enter title of quiz">
+<div class="container p-6">
+  <h1 class="text-3xl text-center mb-6">Initial Quiz Creation</h1>
+  <form class="flex justify-center" [formGroup]="initQuizForm">
+    <div class="flex flex-col space-y-4">
+      <div class="flex flex-col">
+        <label class="text-2xl">Title</label>
+        <input
+                type="text"
+                formControlName="title"
+                placeholder="Enter title of quiz"
+                class="border rounded p-2"
+        >
+        <div
+                *ngIf="initQuizForm.controls['title'].invalid && initQuizForm.controls['title'].touched"
+                class="text-red-500"
+        >
+          Field cannot be empty
+        </div>
       </div>
-      <div class="place-content-center">
-        <span class="text-1xl">Theme</span>
-        <input type="text" formControlName="theme" placeholder="Enter Theme of quiz">
+
+      <div class="flex flex-col">
+        <label class="text-2xl">Theme</label>
+        <input
+                type="text"
+                formControlName="theme"
+                placeholder="Enter Theme of quiz"
+                class="border rounded p-2"
+        >
+        <div
+                *ngIf="initQuizForm.controls['theme'].invalid && initQuizForm.controls['theme'].touched"
+                class="text-red-500"
+        >
+          Field cannot be empty
+        </div>
       </div>
-    </form>
-  <div *nzModalFooter class="">
-    <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
-    <button nz-button nzType="primary" (click)="handleOk()">Save</button>
+    </div>
+  </form>
+  <div class="flex justify-center pt-6">
+    <div class="flex w-1/2 space-x-4">
+      <button class="flex justify-center items-center w-1/2 bg-gray-200 hover:bg-gray-300 rounded" (click)="handleCancel()">
+        Cancel
+      </button>
+      <button class="flex justify-center items-center w-1/2 bg-gray-200 hover:bg-gray-300 rounded" [disabled]="hasFormErrors()" (click)="handleOk()">
+        Save
+      </button>
+    </div>
   </div>
 </div>

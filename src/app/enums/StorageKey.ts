@@ -1,3 +1,4 @@
 export enum StorageKey {
-  QUIZZES = 'quizzes'
+  QUIZZES = 'quizzes',
+  INIT_QUIZ = 'initQuiz',
 }
