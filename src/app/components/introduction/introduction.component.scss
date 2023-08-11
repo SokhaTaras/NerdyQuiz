@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,8 +6,7 @@
   width: 100%;
   min-height: 100%;
 
-
-  .title-container{
+  .title-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,12 +14,12 @@
     height: 100%;
     width: 50%;
 
-    .title{
+    .title {
       font: small-caps bold 70px/1 sans-serif;
     }
   }
 
-  .description-container{
+  .description-container {
     padding: 50px 0 50px 0;
     display: flex;
     align-items: center;
@@ -30,15 +29,15 @@
     width: 50%;
   }
 
-  @media (max-width: 768px){
-    .description-container{
+  @media (max-width: 768px) {
+    .description-container {
       width: 75%;
     }
   }
 
-  @media (max-width: 480px){
-      .description-container{
-        width: 75%;
-      }
+  @media (max-width: 480px) {
+    .description-container {
+      width: 75%;
+    }
   }
 }

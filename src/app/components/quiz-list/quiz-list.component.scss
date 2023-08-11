@@ -1,6 +1,7 @@
 .container {
   max-width: 1200px;
   margin: auto;
+  margin-top: 100px;
 }
 
 .new-quiz {
@@ -50,7 +51,6 @@ quiz-app-quiz-card {
   margin: 5px;
 }
 
-
 /* Responsive Styles */
 @media (max-width: 768px) {
   .quiz-list-item {
@@ -63,7 +63,7 @@ quiz-app-quiz-card {
 }
 
 @media (max-width: 480px) {
-  .container{
+  .container {
     margin: 50px auto auto;
   }
   .quiz-list-item {
@@ -74,7 +74,3 @@ quiz-app-quiz-card {
     width: calc(50% - 10px);
   }
 }
-
-
-
-

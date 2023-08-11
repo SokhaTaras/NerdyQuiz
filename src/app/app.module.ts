@@ -8,7 +8,14 @@ import { MainComponent } from './components/main/main.component';
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
-import {HttpClientModule} from "@angular/common/http";
+
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { InitQuizModalComponent } from './components/init-quiz-modal/init-quiz-modal.component';
+import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
   declarations: [
@@ -18,13 +25,20 @@ import {HttpClientModule} from "@angular/common/http";
     QuizListComponent,
     QuizCardComponent,
     IntroductionComponent,
+    InitQuizModalComponent,
+    QuizDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    NzModalModule,
+    ReactiveFormsModule,
+    NzButtonModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
