@@ -1,9 +1,8 @@
-import { IQuestion } from "./question.interface";
-
-export interface IQuiz {
+import { Question } from './question.interface';
+export interface Quiz {
   title: string;
   theme: string;
   type: string;
   id: number;
-  questions: IQuestion[];
+  questions: Question[];
 }

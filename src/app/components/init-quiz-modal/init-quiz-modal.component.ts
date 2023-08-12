@@ -7,9 +7,10 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalService } from '../../services/modal/modal.service';
-import { IInitialQuiz } from '../../interfaces/initial-quiz.interface';
+import { InitialQuiz } from '../../interfaces/initial-quiz.interface';
 import { QuizStateService } from '../../services/quiz-state/quiz-state.service';
-import { StorageKey } from '../../enums/StorageKey';
+import { StorageKey } from '../../enums/storageKey';
+import { NavigationRoutes } from '../../enums/navigationRoutes';
 
 @Component({
   selector: 'quiz-app-init-quiz-modal',
@@ -39,14 +40,13 @@ export class InitQuizModalComponent implements OnInit {
       ]),
     });
   }
-  getInitialQuizObject(form: FormGroup): IInitialQuiz {
+  getInitialQuizObject(form: FormGroup): InitialQuiz {
     return {
       title: form.get('title')?.value,
       theme: form.get('theme')?.value,
     };
   }
   hasFormErrors(): boolean {
-    // console.log(this.initQuizForm.get('title')?.errors);
     return this.initQuizForm.invalid;
   }
   handleCancel(): void {
@@ -58,6 +58,9 @@ export class InitQuizModalComponent implements OnInit {
       this.getInitialQuizObject(this.initQuizForm),
     );
     this.modalService.closeModal();
-    this.router.navigate(['home', 'quiz-details-page']);
+    this.router.navigate([
+      NavigationRoutes.HOME,
+      NavigationRoutes.QUIZ_DETAILS,
+    ]);
   }
 }

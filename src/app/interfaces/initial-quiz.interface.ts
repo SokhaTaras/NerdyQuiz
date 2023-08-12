@@ -1,4 +1,4 @@
-export interface IInitialQuiz {
+export interface InitialQuiz {
   title: string;
   theme: string;
 }
