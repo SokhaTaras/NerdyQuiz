@@ -15,6 +15,7 @@ import { IntroductionComponent } from './components/introduction/introduction.co
 import { InitQuizModalComponent } from './components/init-quiz-modal/init-quiz-modal.component';
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
+import { InputComponent } from './components/modal-input/input.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,8 @@ import { ModalFooterComponent } from './components/modal-footer/modal-footer.com
     InitQuizModalComponent,
     QuizDetailsComponent,
     ModalFooterComponent,
+    InputComponent,
+    FormControlPipe,
   ],
   imports: [
     BrowserModule,

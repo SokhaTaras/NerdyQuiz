@@ -2,36 +2,8 @@
   <h1 class="text-3xl text-center mb-6">Create quiz</h1>
   <form class="flex justify-center" [formGroup]="initQuizForm">
     <div class="flex flex-col space-y-4">
-      <div class="flex flex-col">
-        <label class="text-2xl">Title</label>
-        <input
-                type="text"
-                formControlName="title"
-                placeholder="Enter title of quiz"
-                class="border rounded p-2"
-        >
-        <div
-                *ngIf="initQuizForm.controls['title'].invalid && initQuizForm.controls['title'].touched"
-                class="text-red-500"
-        >
-          Field cannot be empty
-        </div>
-      </div>
-      <div class="flex flex-col">
-        <label class="text-2xl">Theme</label>
-        <input
-                type="text"
-                formControlName="theme"
-                placeholder="Enter Theme of quiz"
-                class="border rounded p-2"
-        >
-        <div
-                *ngIf="initQuizForm.controls['theme'].invalid && initQuizForm.controls['theme'].touched"
-                class="text-red-500"
-        >
-          Field cannot be empty
-        </div>
-      </div>
+      <quiz-app-modal-input [control]="initQuizForm.controls['title']" [title]="'Title'"></quiz-app-modal-input>
+      <quiz-app-modal-input [control]="initQuizForm.controls['theme']" [title]="'Theme'"></quiz-app-modal-input>
     </div>
   </form>
  <quiz-app-modal-footer [form]="initQuizForm"></quiz-app-modal-footer>

@@ -12,7 +12,7 @@ import {
   styleUrls: ['./init-quiz-modal.component.scss'],
 })
 export class InitQuizModalComponent implements OnInit {
-  initQuizForm: FormGroup = new FormGroup({});
+  public initQuizForm: FormGroup = new FormGroup({});
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {
     this.initForm();

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from './services/quiz-state/quiz.service';
+import { QuizService } from './services/quiz/quiz.service';
 import { StorageKey } from './enums/storageKey';
 
 @Component({

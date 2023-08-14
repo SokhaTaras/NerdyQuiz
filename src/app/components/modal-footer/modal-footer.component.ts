@@ -3,10 +3,9 @@ import { FormGroup } from '@angular/forms';
 import { StorageKey } from '../../enums/storageKey';
 import { NavigationRoutes } from '../../enums/navigationRoutes';
 import { Router } from '@angular/router';
-import { QuizService } from '../../services/quiz-state/quiz.service';
+import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalFacadeService } from '../../services/modal-facade/modal-facade.service';
 import { Quiz } from '../../interfaces/quiz.interface';
-
 @Component({
   selector: 'quiz-app-modal-footer',
   templateUrl: './modal-footer.component.html',
@@ -14,7 +13,6 @@ import { Quiz } from '../../interfaces/quiz.interface';
 })
 export class ModalFooterComponent {
   @Input() form: FormGroup = new FormGroup({});
-
   constructor(
     private modalFacadeService: ModalFacadeService,
     private router: Router,

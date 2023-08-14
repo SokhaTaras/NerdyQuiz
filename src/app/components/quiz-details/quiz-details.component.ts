@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from '../../services/quiz-state/quiz.service';
+import { QuizService } from '../../services/quiz/quiz.service';
 import { Quiz } from '../../interfaces/quiz.interface';
-
 @Component({
   selector: 'quiz-app-quiz-details',
   templateUrl: './quiz-details.component.html',

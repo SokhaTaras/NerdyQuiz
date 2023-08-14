@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QuizService } from '../../services/quiz-state/quiz.service';
+import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalFacadeService } from '../../services/modal-facade/modal-facade.service';
 
 @Component({
