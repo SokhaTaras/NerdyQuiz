@@ -9,7 +9,6 @@ import {
 @Component({
   selector: 'quiz-app-init-quiz-modal',
   templateUrl: './init-quiz-modal.component.html',
-  styleUrls: ['./init-quiz-modal.component.scss'],
 })
 export class InitQuizModalComponent implements OnInit {
   public initQuizForm: FormGroup = new FormGroup({});

@@ -1,7 +1,7 @@
 <div class="container p-6">
   <h1 class="text-3xl text-center mb-6">Create quiz</h1>
   <form class="flex justify-center" [formGroup]="initQuizForm">
-    <div class="flex flex-col space-y-4">
+    <div class="flex flex-col space-y-4 w-1/2">
       <quiz-app-modal-input [control]="initQuizForm.controls['title']" [title]="'Title'"></quiz-app-modal-input>
       <quiz-app-modal-input [control]="initQuizForm.controls['theme']" [title]="'Theme'"></quiz-app-modal-input>
     </div>

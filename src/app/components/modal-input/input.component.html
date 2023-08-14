@@ -6,10 +6,5 @@
             class="border rounded p-2"
             [formControl]="formControl"
     >
-<!--    <div-->
-<!--            *ngIf="form.controls['title'].invalid && form.controls['title'].touched"-->
-<!--            class="text-red-500"-->
-<!--    >-->
-<!--        Field cannot be empty-->
-<!--    </div>-->
 </div>
+    <quiz-app-error-message [control]="control"></quiz-app-error-message>

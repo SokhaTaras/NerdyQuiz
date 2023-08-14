@@ -9,7 +9,6 @@ import { Quiz } from '../../interfaces/quiz.interface';
 @Component({
   selector: 'quiz-app-modal-footer',
   templateUrl: './modal-footer.component.html',
-  styleUrls: ['./modal-footer.component.scss'],
 })
 export class ModalFooterComponent {
   @Input() form: FormGroup = new FormGroup({});

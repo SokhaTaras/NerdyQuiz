@@ -4,7 +4,6 @@ import { AbstractControl, FormControl } from '@angular/forms';
 @Component({
   selector: 'quiz-app-modal-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
   @Input() control: AbstractControl = new FormControl();
@@ -17,7 +16,7 @@ export class InputComponent implements OnInit {
     this.getPlaceHolder();
   }
 
-  //Todo incapsulate this method
+  //Todo encapsulate this method
   getPlaceHolder() {
     if (this.title === 'Title') {
       this.placeHolder = 'Enter title';

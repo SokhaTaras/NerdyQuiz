@@ -4,7 +4,6 @@ import { Quiz } from '../../interfaces/quiz.interface';
 @Component({
   selector: 'quiz-app-quiz-details',
   templateUrl: './quiz-details.component.html',
-  styleUrls: ['./quiz-details.component.scss'],
 })
 export class QuizDetailsComponent implements OnInit {
   initialQuiz: Quiz | undefined;
