@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../services/quiz-state/quiz.service';
 import { Quiz } from '../../interfaces/quiz.interface';
 import { StorageKey } from '../../enums/storageKey';
-import { ModalService } from '../../services/modal/modal.service';
-import { InitQuizModalComponent } from '../init-quiz-modal/init-quiz-modal.component';
+import { ModalFacadeService } from '../../services/modal-facade/modal-facade.service';
 
 @Component({
   selector: 'quiz-app-quiz-list',
@@ -15,12 +14,12 @@ export class QuizListComponent implements OnInit {
   allQuizzes: Quiz[] | undefined = [];
   constructor(
     private quizService: QuizService,
-    private modalService: ModalService,
+    private modalFacadeService: ModalFacadeService,
   ) {}
   ngOnInit() {
     this.allQuizzes = this.quizService.getAllQuizzes(this.keyForQuizzes);
   }
   openInitPopUp(): void {
-    this.modalService.showModal(InitQuizModalComponent);
+    this.modalFacadeService.showInitQuizModal();
   }
 }

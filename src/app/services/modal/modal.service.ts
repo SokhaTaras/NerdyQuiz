@@ -6,6 +6,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 })
 export class ModalService {
   constructor(private modalService: NzModalService) {}
+
+  // Todo move nzBodyStyle to variable
   showModal(component: any): void {
     this.modalService.create({
       nzContent: component,
