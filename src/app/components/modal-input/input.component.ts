@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-
 @Component({
   selector: 'quiz-app-modal-input',
   templateUrl: './input.component.html',
@@ -15,8 +14,6 @@ export class InputComponent implements OnInit {
   ngOnInit() {
     this.getPlaceHolder();
   }
-
-  //Todo encapsulate this method
   getPlaceHolder() {
     if (this.title === 'Title') {
       this.placeHolder = 'Enter title';

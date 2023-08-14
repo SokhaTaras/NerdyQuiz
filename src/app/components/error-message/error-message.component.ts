@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-
 @Component({
   selector: 'quiz-app-error-message',
   templateUrl: './error-message.component.html',
@@ -10,8 +9,6 @@ export class ErrorMessageComponent {
 
   // TODO remake it when translations will be ready
   getErrorMessage(): string | undefined {
-    console.log(this.control);
-
     if (this.control.errors?.['required']) {
       return 'This field is required.';
     }
@@ -19,7 +16,6 @@ export class ErrorMessageComponent {
     if (this.control.errors?.['minlength']) {
       return 'This field must have at least 2 characters.';
     }
-
     return undefined;
   }
 }

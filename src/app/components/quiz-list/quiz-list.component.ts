@@ -9,12 +9,10 @@ import { ModalFacadeService } from '../../services/modal-facade/modal-facade.ser
 })
 export class QuizListComponent {
   allQuizzes$ = this.quizService.quizzes$;
-
   constructor(
     private quizService: QuizService,
     private modalFacadeService: ModalFacadeService,
   ) {}
-
   openInitPopUp(): void {
     this.modalFacadeService.showInitQuizModal();
   }

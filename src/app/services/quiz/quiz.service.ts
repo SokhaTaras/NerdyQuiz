@@ -3,7 +3,6 @@ import { Quiz } from '../../interfaces/quiz.interface';
 import { StorageError } from '../../classes/storageError/storage-error';
 import { StorageErrorMessage } from '../../enums/storageErrorMessage';
 import { BehaviorSubject } from 'rxjs';
-
 @Injectable({
   providedIn: 'root',
 })

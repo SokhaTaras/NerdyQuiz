@@ -5,7 +5,6 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
-
 @Component({
   selector: 'quiz-app-init-quiz-modal',
   templateUrl: './init-quiz-modal.component.html',
