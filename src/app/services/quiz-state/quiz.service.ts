@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Quiz } from '../../interfaces/quiz.interface';
-import { InitialQuiz } from '../../interfaces/initial-quiz.interface';
 import { StorageError } from '../../classes/storageError/storage-error';
 import { StorageErrorMessage } from '../../enums/storageErrorMessage';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuizService {
-  addQuiz(name: string, body: Quiz[] | undefined): void {
+  public quizzes$ = new BehaviorSubject<Quiz[]>([]);
+  addQuiz(key: string, quiz: Quiz): void {
     try {
-      localStorage.setItem(name, JSON.stringify(body));
+      if (quiz !== null) {
+        this.quizzes$.next([...this.quizzes$.value, quiz]);
+        localStorage.setItem(key, JSON.stringify(this.quizzes$.value));
+      }
     } catch (error) {
       throw new StorageError(StorageErrorMessage.stringify);
     }
@@ -26,35 +30,19 @@ export class QuizService {
     }
     return undefined;
   }
-  getAllQuizzes(name: string): Quiz[] | undefined {
+  initAllQuizzes(key: string): void {
     try {
-      let allQuizzes = localStorage.getItem(name);
+      let allQuizzes: string | null = localStorage.getItem(key);
       if (allQuizzes !== null) {
-        return JSON.parse(allQuizzes);
+        localStorage.setItem(key, allQuizzes);
+        this.quizzes$.next(JSON.parse(allQuizzes));
       }
     } catch (error) {
       throw new StorageError(StorageErrorMessage.parse);
     }
-    return undefined;
   }
-  addInitialQuiz(key: string, quiz: InitialQuiz): void {
-    try {
-      if (quiz !== null) {
-        localStorage.setItem(key, JSON.stringify(quiz));
-      }
-    } catch (error) {
-      throw new StorageError(StorageErrorMessage.stringify);
-    }
-  }
-  getInitialQuiz(key: string): InitialQuiz | undefined {
-    try {
-      let initialQuiz = localStorage.getItem(key);
-      if (initialQuiz !== null) {
-        return JSON.parse(initialQuiz);
-      }
-    } catch (error) {
-      throw new StorageError(StorageErrorMessage.parse);
-    }
-    return undefined;
+  geNewQuizId(): string {
+    const decimalSystem = 10;
+    return new Date().getTime().toString(decimalSystem);
   }
 }

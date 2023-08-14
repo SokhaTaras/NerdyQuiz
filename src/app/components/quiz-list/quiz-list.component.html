@@ -3,7 +3,7 @@
     <button class="new-quiz-btn" (click)="openInitPopUp()">Add new quiz</button>
   </div>
   <div class='quiz-list'>
-    <div class='quiz-list-item' *ngFor='let quiz of allQuizzes'>
+    <div class='quiz-list-item' *ngFor='let quiz of (allQuizzes$ | async)'>
       <quiz-app-quiz-card [quiz]='quiz'></quiz-app-quiz-card>
     </div>
   </div>

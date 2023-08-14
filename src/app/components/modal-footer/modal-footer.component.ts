@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { InitialQuiz } from '../../interfaces/initial-quiz.interface';
 import { StorageKey } from '../../enums/storageKey';
 import { NavigationRoutes } from '../../enums/navigationRoutes';
 import { Router } from '@angular/router';
 import { QuizService } from '../../services/quiz-state/quiz.service';
 import { ModalFacadeService } from '../../services/modal-facade/modal-facade.service';
+import { Quiz } from '../../interfaces/quiz.interface';
 
 @Component({
   selector: 'quiz-app-modal-footer',
@@ -26,15 +26,16 @@ export class ModalFooterComponent {
   handleCancel(): void {
     this.modalFacadeService.closeModal();
   }
-  getInitialQuizObject(form: FormGroup): InitialQuiz {
+  getInitialQuizObject(form: FormGroup): Quiz {
     return {
       title: form.get('title')?.value,
       theme: form.get('theme')?.value,
+      id: this.quizService.geNewQuizId(),
     };
   }
   saveQuiz(): void {
-    this.quizService.addInitialQuiz(
-      StorageKey.INIT_QUIZ,
+    this.quizService.addQuiz(
+      StorageKey.QUIZZES,
       this.getInitialQuizObject(this.form),
     );
     this.modalFacadeService.closeModal();

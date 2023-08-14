@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { QuizService } from '../../services/quiz-state/quiz.service';
-import { Quiz } from '../../interfaces/quiz.interface';
-import { StorageKey } from '../../enums/storageKey';
 import { ModalFacadeService } from '../../services/modal-facade/modal-facade.service';
 
 @Component({
@@ -9,16 +7,14 @@ import { ModalFacadeService } from '../../services/modal-facade/modal-facade.ser
   templateUrl: './quiz-list.component.html',
   styleUrls: ['./quiz-list.component.scss'],
 })
-export class QuizListComponent implements OnInit {
-  keyForQuizzes: string = StorageKey.QUIZZES;
-  allQuizzes: Quiz[] | undefined = [];
+export class QuizListComponent {
+  allQuizzes$ = this.quizService.quizzes$;
+
   constructor(
     private quizService: QuizService,
     private modalFacadeService: ModalFacadeService,
   ) {}
-  ngOnInit() {
-    this.allQuizzes = this.quizService.getAllQuizzes(this.keyForQuizzes);
-  }
+
   openInitPopUp(): void {
     this.modalFacadeService.showInitQuizModal();
   }

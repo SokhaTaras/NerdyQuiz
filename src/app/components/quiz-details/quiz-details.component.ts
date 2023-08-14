@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InitialQuiz } from '../../interfaces/initial-quiz.interface';
 import { QuizService } from '../../services/quiz-state/quiz.service';
-import { StorageKey } from '../../enums/storageKey';
+import { Quiz } from '../../interfaces/quiz.interface';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -9,10 +8,10 @@ import { StorageKey } from '../../enums/storageKey';
   styleUrls: ['./quiz-details.component.scss'],
 })
 export class QuizDetailsComponent implements OnInit {
-  initialQuiz: InitialQuiz | undefined;
+  initialQuiz: Quiz | undefined;
+  lastQuizIndex: number = this.quizService.quizzes$.value.length - 1;
   constructor(private quizService: QuizService) {}
   ngOnInit() {
-    this.initialQuiz = this.quizService.getInitialQuiz(StorageKey.INIT_QUIZ);
-    console.log(this.initialQuiz);
+    this.initialQuiz = this.quizService.quizzes$.value[this.lastQuizIndex];
   }
 }

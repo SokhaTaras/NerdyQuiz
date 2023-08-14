@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { Quiz } from '../../interfaces/quiz.interface';
 import { Router } from '@angular/router';
 import { NavigationRoutes } from '../../enums/navigationRoutes';
-
 @Component({
   selector: 'quiz-app-quiz-card',
   templateUrl: './quiz-card.component.html',
