@@ -7,12 +7,12 @@ import { StorageErrorMessage } from '../../enums/storageErrorMessage';
 @Injectable({
   providedIn: 'root',
 })
-export class QuizStateService {
+export class QuizService {
   addQuiz(name: string, body: Quiz[] | undefined): void {
     try {
       localStorage.setItem(name, JSON.stringify(body));
     } catch (error) {
-      new StorageError(StorageErrorMessage.stringify);
+      throw new StorageError(StorageErrorMessage.stringify);
     }
   }
   getOneQuiz(name: string): Quiz | undefined {
@@ -22,7 +22,7 @@ export class QuizStateService {
         return JSON.parse(item);
       }
     } catch (error) {
-      new StorageError(StorageErrorMessage.parse);
+      throw new StorageError(StorageErrorMessage.parse);
     }
     return undefined;
   }
@@ -33,7 +33,7 @@ export class QuizStateService {
         return JSON.parse(allQuizzes);
       }
     } catch (error) {
-      new StorageError(StorageErrorMessage.parse);
+      throw new StorageError(StorageErrorMessage.parse);
     }
     return undefined;
   }
@@ -43,7 +43,7 @@ export class QuizStateService {
         localStorage.setItem(key, JSON.stringify(quiz));
       }
     } catch (error) {
-      new StorageError(StorageErrorMessage.stringify);
+      throw new StorageError(StorageErrorMessage.stringify);
     }
   }
   getInitialQuiz(key: string): InitialQuiz | undefined {
@@ -53,7 +53,7 @@ export class QuizStateService {
         return JSON.parse(initialQuiz);
       }
     } catch (error) {
-      new StorageError(StorageErrorMessage.parse);
+      throw new StorageError(StorageErrorMessage.parse);
     }
     return undefined;
   }

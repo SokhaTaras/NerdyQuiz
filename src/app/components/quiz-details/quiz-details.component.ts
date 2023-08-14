@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InitialQuiz } from '../../interfaces/initial-quiz.interface';
-import { QuizStateService } from '../../services/quiz-state/quiz-state.service';
+import { QuizService } from '../../services/quiz-state/quiz.service';
 import { StorageKey } from '../../enums/storageKey';
 
 @Component({
@@ -10,7 +10,7 @@ import { StorageKey } from '../../enums/storageKey';
 })
 export class QuizDetailsComponent implements OnInit {
   initialQuiz: InitialQuiz | undefined;
-  constructor(private quizService: QuizStateService) {}
+  constructor(private quizService: QuizService) {}
   ngOnInit() {
     this.initialQuiz = this.quizService.getInitialQuiz(StorageKey.INIT_QUIZ);
     console.log(this.initialQuiz);

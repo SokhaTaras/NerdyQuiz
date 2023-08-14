@@ -5,12 +5,6 @@ import {
   FormBuilder,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ModalService } from '../../services/modal/modal.service';
-import { InitialQuiz } from '../../interfaces/initial-quiz.interface';
-import { QuizStateService } from '../../services/quiz-state/quiz-state.service';
-import { StorageKey } from '../../enums/storageKey';
-import { NavigationRoutes } from '../../enums/navigationRoutes';
 
 @Component({
   selector: 'quiz-app-init-quiz-modal',
@@ -19,12 +13,7 @@ import { NavigationRoutes } from '../../enums/navigationRoutes';
 })
 export class InitQuizModalComponent implements OnInit {
   initQuizForm: FormGroup = new FormGroup({});
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private modalService: ModalService,
-    private quizService: QuizStateService,
-  ) {}
+  constructor(private fb: FormBuilder) {}
   ngOnInit(): void {
     this.initForm();
   }
@@ -39,28 +28,5 @@ export class InitQuizModalComponent implements OnInit {
         Validators.minLength(2),
       ]),
     });
-  }
-  getInitialQuizObject(form: FormGroup): InitialQuiz {
-    return {
-      title: form.get('title')?.value,
-      theme: form.get('theme')?.value,
-    };
-  }
-  hasFormErrors(): boolean {
-    return this.initQuizForm.invalid;
-  }
-  handleCancel(): void {
-    this.modalService.closeModal();
-  }
-  handleOk(): void {
-    this.quizService.addInitialQuiz(
-      StorageKey.INIT_QUIZ,
-      this.getInitialQuizObject(this.initQuizForm),
-    );
-    this.modalService.closeModal();
-    this.router.navigate([
-      NavigationRoutes.HOME,
-      NavigationRoutes.QUIZ_DETAILS,
-    ]);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizStateService } from '../../services/quiz-state/quiz-state.service';
+import { QuizService } from '../../services/quiz-state/quiz.service';
 import { Quiz } from '../../interfaces/quiz.interface';
 import { StorageKey } from '../../enums/storageKey';
 import { ModalService } from '../../services/modal/modal.service';
@@ -14,7 +14,7 @@ export class QuizListComponent implements OnInit {
   keyForQuizzes: string = StorageKey.QUIZZES;
   allQuizzes: Quiz[] | undefined = [];
   constructor(
-    private quizService: QuizStateService,
+    private quizService: QuizService,
     private modalService: ModalService,
   ) {}
   ngOnInit() {
