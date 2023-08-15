@@ -6,5 +6,5 @@
       <quiz-app-modal-input formControlName="theme" [control]="theme" [title]="'Theme'" [placeHolder]="PlaceHolder.theme" ></quiz-app-modal-input>
     </div>
   </form>
- <quiz-app-modal-footer [form]="initQuizForm" (saveEvent)="saveQuiz()"></quiz-app-modal-footer>
+ <quiz-app-modal-footer [disableButton]="isValid" (saveEvent)="saveQuiz()"></quiz-app-modal-footer>
 </div>

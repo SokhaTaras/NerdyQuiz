@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ModalService {
   constructor(private modalService: NzModalService) {}
@@ -14,10 +14,11 @@ export class ModalService {
       nzFooter: null,
       nzCentered: true,
       nzBodyStyle: {
-        'background-image': 'linear-gradient(to bottom, #c7c7ff, #b3b3ff)',
-      },
+        'background-image': 'linear-gradient(to bottom, #c7c7ff, #b3b3ff)'
+      }
     });
   }
+
   closeModal(): void {
     this.modalService.closeAll();
   }

@@ -3,7 +3,7 @@
     <button class="flex justify-center items-center w-1/2 bg-gray-200 hover:bg-gray-300 rounded" (click)="handleCancel()">
       Cancel
     </button>
-    <button class="flex justify-center items-center w-1/2 bg-gray-200 hover:bg-gray-300 rounded" [disabled]="isValid" (click)="handleSave()">
+    <button class="flex justify-center items-center w-1/2 bg-gray-200 hover:bg-gray-300 rounded" [disabled]="disableButton" (click)="handleSave()">
       Save
     </button>
   </div>
