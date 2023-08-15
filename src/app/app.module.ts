@@ -12,10 +12,10 @@ import { HomeComponent } from './components/home/home.component';
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
-import { InitQuizModalComponent } from './components/init-quiz-modal/init-quiz-modal.component';
+import { CreateQuizModalComponent } from './components/create-quiz-modal/create-quiz-modal.component';
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
-import { InputComponent } from './components/modal-input/input.component';
+import { ModalInputComponent } from './components/modal-input/modal-input.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 
 @NgModule({
@@ -25,10 +25,10 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     QuizListComponent,
     QuizCardComponent,
     IntroductionComponent,
-    InitQuizModalComponent,
+    CreateQuizModalComponent,
     QuizDetailsComponent,
     ModalFooterComponent,
-    InputComponent,
+    ModalInputComponent,
     ErrorMessageComponent,
   ],
   imports: [

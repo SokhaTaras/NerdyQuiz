@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { QuizService } from '../../services/quiz/quiz.service';
-import { ModalFacadeService } from '../../services/modal-facade/modal-facade.service';
+import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 
 @Component({
   selector: 'quiz-app-quiz-list',
@@ -9,11 +9,13 @@ import { ModalFacadeService } from '../../services/modal-facade/modal-facade.ser
 })
 export class QuizListComponent {
   allQuizzes$ = this.quizService.quizzes$;
+
   constructor(
     private quizService: QuizService,
-    private modalFacadeService: ModalFacadeService,
+    private modalQuizService: ModalQuizService,
   ) {}
+
   openInitPopUp(): void {
-    this.modalFacadeService.showInitQuizModal();
+    this.modalQuizService.showInitQuizModal();
   }
 }

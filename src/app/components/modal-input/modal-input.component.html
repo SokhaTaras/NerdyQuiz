@@ -4,7 +4,9 @@
             type="text"
             [placeholder]="placeHolder"
             class="border rounded p-2"
-            [formControl]="formControl"
+            [(ngModel)]="input"
+            (ngModelChange)="onChange($event)"
+            (blur)="onTouched()"
     >
 </div>
     <quiz-app-error-message [control]="control"></quiz-app-error-message>

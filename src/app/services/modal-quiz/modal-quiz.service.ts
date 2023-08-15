@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ModalService } from '../modal/modal.service';
-import { InitQuizModalComponent } from '../../components/init-quiz-modal/init-quiz-modal.component';
+import { CreateQuizModalComponent } from '../../components/create-quiz-modal/create-quiz-modal.component';
 @Injectable({
   providedIn: 'root',
 })
-export class ModalFacadeService {
+export class ModalQuizService {
   constructor(private modalService: ModalService) {}
   showInitQuizModal(): void {
-    this.modalService.showModal(InitQuizModalComponent);
+    this.modalService.showModal(CreateQuizModalComponent);
   }
   closeModal(): void {
     this.modalService.closeModal();

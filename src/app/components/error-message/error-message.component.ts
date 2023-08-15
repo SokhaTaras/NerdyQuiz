@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
+
 @Component({
   selector: 'quiz-app-error-message',
   templateUrl: './error-message.component.html',

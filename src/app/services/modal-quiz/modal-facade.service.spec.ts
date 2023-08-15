@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ModalFacadeService } from './modal-facade.service';
+import { ModalQuizService } from './modal-quiz.service';
 
-describe('ModalFacadeService', () => {
-  let service: ModalFacadeService;
+describe('ModalQuizService', () => {
+  let service: ModalQuizService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ModalFacadeService);
+    service = TestBed.inject(ModalQuizService);
   });
 
   it('should be created', () => {
