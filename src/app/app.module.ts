@@ -6,17 +6,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { SharedModule } from './shared/shared.module';
+import { QuizzesModule } from './quizzes/quizzes.module';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { QuizListComponent } from './components/quiz-list/quiz-list.component';
-import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
-import { IntroductionComponent } from './components/introduction/introduction.component';
-import { CreateQuizModalComponent } from './components/create-quiz-modal/create-quiz-modal.component';
-import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
-import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
-import { ModalInputComponent } from './components/modal-input/modal-input.component';
-import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { HomeComponent } from './quizzes/components/home/home.component';
+import { QuizListComponent } from './quizzes/components/quiz-list/quiz-list.component';
+import { QuizCardComponent } from './quizzes/components/quiz-card/quiz-card.component';
+import { IntroductionComponent } from './quizzes/components/introduction/introduction.component';
+import { CreateQuizModalComponent } from './quizzes/components/create-quiz-modal/create-quiz-modal.component';
+import { QuizDetailsComponent } from './quizzes/components/quiz-details/quiz-details.component';
+import { ModalFooterComponent } from './shared/components/modal-footer/modal-footer.component';
+import { ModalInputComponent } from './shared/components/modal-input/modal-input.component';
+import { ErrorMessageComponent } from './shared/components/error-message/error-message.component';
 
 @NgModule({
   declarations: [

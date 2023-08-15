@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
+import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
 
 @Component({
   selector: 'quiz-app-modal-footer',

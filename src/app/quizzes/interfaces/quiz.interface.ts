@@ -1,4 +1,4 @@
-import { Question } from './question.interface';
+import { Question } from '../../shared/interfaces/question.interface';
 export interface Quiz {
   title: string;
   theme: string;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from './services/quiz/quiz.service';
-import { StorageKey } from './enums/storageKey';
+import { QuizService } from './quizzes/services/quiz/quiz.service';
+import { StorageKey } from './shared/enums/storageKey';
 
 @Component({
   selector: 'app-root',

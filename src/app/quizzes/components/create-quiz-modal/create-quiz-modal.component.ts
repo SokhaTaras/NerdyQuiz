@@ -7,12 +7,12 @@ import {
 } from '@angular/forms';
 import { InitQuizForm } from '../../interfaces/initQuizForm.interface';
 import { Quiz } from '../../interfaces/quiz.interface';
-import { StorageKey } from '../../enums/storageKey';
-import { NavigationRoutes } from '../../enums/navigationRoutes';
+import { StorageKey } from '../../../shared/enums/storageKey';
+import { NavigationRoutes } from '../../../shared/enums/navigationRoutes';
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { Router } from '@angular/router';
-import { PlaceHolder } from '../../enums/placeHolder';
+import { PlaceHolder } from '../../../shared/enums/placeHolder';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',

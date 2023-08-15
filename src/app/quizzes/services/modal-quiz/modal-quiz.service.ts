@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ModalService } from '../modal/modal.service';
+import { ModalService } from '../../../shared/services/modal/modal.service';
 import { CreateQuizModalComponent } from '../../components/create-quiz-modal/create-quiz-modal.component';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ModalQuizService {
   constructor(private modalService: ModalService) {}
