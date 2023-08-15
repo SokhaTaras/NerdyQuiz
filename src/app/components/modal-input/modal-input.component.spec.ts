@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ModalInputComponent } from './modal-input.component';
 
 describe('InputComponent', () => {
@@ -8,7 +7,7 @@ describe('InputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModalInputComponent],
+      declarations: [ModalInputComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ModalInputComponent);

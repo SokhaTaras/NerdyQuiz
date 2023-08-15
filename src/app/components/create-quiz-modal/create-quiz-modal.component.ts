@@ -3,7 +3,7 @@ import {
   FormControl,
   FormGroup,
   FormBuilder,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { InitQuizForm } from '../../interfaces/initQuizForm.interface';
 import { Quiz } from '../../interfaces/quiz.interface';
@@ -16,7 +16,7 @@ import { PlaceHolder } from '../../enums/placeHolder';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
-  templateUrl: './create-quiz-modal.component.html',
+  templateUrl: './create-quiz-modal.component.html'
 })
 export class CreateQuizModalComponent implements OnInit {
   protected readonly PlaceHolder = PlaceHolder;
@@ -35,7 +35,7 @@ export class CreateQuizModalComponent implements OnInit {
     private fb: FormBuilder,
     private quizService: QuizService,
     private quizModal: ModalQuizService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,12 +46,9 @@ export class CreateQuizModalComponent implements OnInit {
     this.initQuizForm = this.fb.nonNullable.group<InitQuizForm>({
       title: new FormControl('', [
         Validators.required,
-        Validators.minLength(2),
+        Validators.minLength(2)
       ]),
-      theme: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-      ]),
+      theme: new FormControl('', [Validators.required, Validators.minLength(2)])
     });
   }
 
@@ -59,14 +56,14 @@ export class CreateQuizModalComponent implements OnInit {
     return {
       title: form.get('title')?.value,
       theme: form.get('theme')?.value,
-      id: this.quizService.geNewQuizId(),
+      id: this.quizService.geNewQuizId()
     };
   }
 
   saveQuiz(): void {
     this.quizService.addQuiz(
       StorageKey.QUIZZES,
-      this.getInitialQuizObject(this.initQuizForm),
+      this.getInitialQuizObject(this.initQuizForm)
     );
     this.quizModal.closeModal();
     this.navigateToQuizDetailsPage();
@@ -75,7 +72,7 @@ export class CreateQuizModalComponent implements OnInit {
   navigateToQuizDetailsPage() {
     this.router.navigate([
       NavigationRoutes.HOME,
-      NavigationRoutes.QUIZ_DETAILS,
+      NavigationRoutes.QUIZ_DETAILS
     ]);
   }
 }

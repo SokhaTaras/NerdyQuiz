@@ -29,7 +29,7 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     QuizDetailsComponent,
     ModalFooterComponent,
     ModalInputComponent,
-    ErrorMessageComponent,
+    ErrorMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +39,9 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     BrowserAnimationsModule,
     NzModalModule,
     ReactiveFormsModule,
-    NzButtonModule,
+    NzButtonModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

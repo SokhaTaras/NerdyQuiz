@@ -4,7 +4,7 @@ import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 
 @Component({
   selector: 'quiz-app-modal-footer',
-  templateUrl: './modal-footer.component.html',
+  templateUrl: './modal-footer.component.html'
 })
 export class ModalFooterComponent implements OnInit {
   @Input() form: FormGroup = new FormGroup({});

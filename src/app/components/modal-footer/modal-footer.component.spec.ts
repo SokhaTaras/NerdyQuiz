@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ModalFooterComponent } from './modal-footer.component';
 
 describe('ModalFooterComponent', () => {
@@ -8,9 +7,8 @@ describe('ModalFooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalFooterComponent ]
-    })
-    .compileComponents();
+      declarations: [ModalFooterComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ModalFooterComponent);
     component = fixture.componentInstance;

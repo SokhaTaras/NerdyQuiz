@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
   FormControl,
-  NG_VALUE_ACCESSOR,
+  NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
 @Component({
@@ -13,9 +13,9 @@ import {
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: ModalInputComponent,
-      multi: true,
-    },
-  ],
+      multi: true
+    }
+  ]
 })
 export class ModalInputComponent implements ControlValueAccessor {
   @Input() control: AbstractControl = new FormControl();
