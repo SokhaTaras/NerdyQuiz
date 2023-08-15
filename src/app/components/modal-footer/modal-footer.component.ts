@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 
@@ -6,14 +6,20 @@ import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
   selector: 'quiz-app-modal-footer',
   templateUrl: './modal-footer.component.html',
 })
-export class ModalFooterComponent {
+export class ModalFooterComponent implements OnInit {
   @Input() form: FormGroup = new FormGroup({});
-  @Output() saveEvent = new EventEmitter();
+  @Output() saveEvent: EventEmitter<any> = new EventEmitter();
+
+  isValid: object | undefined;
+
+  get validForm() {
+    return this.form.statusChanges.subscribe((isValid) => isValid);
+  }
 
   constructor(private modalQuizService: ModalQuizService) {}
 
-  hasFormErrors(form: FormGroup): boolean {
-    return form.invalid;
+  ngOnInit() {
+    this.isValid = this.validForm;
   }
 
   handleSave(): void {

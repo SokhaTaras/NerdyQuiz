@@ -17,19 +17,14 @@ import {
     },
   ],
 })
-export class ModalInputComponent implements OnInit, ControlValueAccessor {
+export class ModalInputComponent implements ControlValueAccessor {
   @Input() control: AbstractControl = new FormControl();
   @Input() title: string = '';
+  @Input() placeHolder: string = '';
   input!: string;
-  placeHolder: string = '';
-  disabled: boolean = false;
 
   onChange: any = (): void => {};
   onTouched: any = (): void => {};
-
-  ngOnInit() {
-    this.getPlaceHolder();
-  }
 
   writeValue(input: any): void {
     this.input = input;
@@ -41,18 +36,5 @@ export class ModalInputComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
-  getPlaceHolder() {
-    if (this.title === 'Title') {
-      this.placeHolder = 'Enter title';
-    }
-    if (this.title === 'Theme') {
-      this.placeHolder = 'Enter theme';
-    }
   }
 }

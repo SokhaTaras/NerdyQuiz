@@ -12,12 +12,15 @@ import { NavigationRoutes } from '../../enums/navigationRoutes';
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { Router } from '@angular/router';
+import { PlaceHolder } from '../../enums/placeHolder';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
   templateUrl: './create-quiz-modal.component.html',
 })
 export class CreateQuizModalComponent implements OnInit {
+  protected readonly PlaceHolder = PlaceHolder;
+
   public initQuizForm!: FormGroup<InitQuizForm>;
 
   get title() {
