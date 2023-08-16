@@ -3,8 +3,39 @@
 @tailwind components;
 @tailwind utilities;
 
+$background: #e6e6ff;
+$backgroundGradient: linear-gradient(to bottom, #c7c7ff, #b3b3ff);
+$border-radius: 10px;
+
 body {
-  background-color: #e6e6ff;
+  background-color: $background;
   color: #333333;
   font-family: system-ui;
+}
+
+.ant-modal-content {
+  border-radius: $border-radius;
+  background-image: $backgroundGradient;
+}
+
+@layer components {
+  .btn-pop-up {
+    @apply flex justify-center items-center w-1/2 bg-buttons hover:bg-buttonsHover rounded disabled:opacity-70 disabled:cursor-not-allowed
+  }
+
+  .backgroundGradient {
+    @apply bg-gradient-to-bottom
+  }
+
+  .errorMessage {
+    @apply underline text-errorMessage
+  }
+
+  .labels {
+    @apply text-2xl
+  }
+
+  .input {
+    @apply border rounded p-2 border-none focus:outline-none
+  }
 }
