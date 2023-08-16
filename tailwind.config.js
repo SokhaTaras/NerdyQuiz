@@ -3,16 +3,12 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     colors: {
-      primaryBackground: "#e6e6ff",
-      popUpBackground: "",
+      primary: "#e6e6ff",
       buttons: "#E5E7EB",
-      buttonsHover: "#D1D5DB",
-      errorMessage: "#D10000"
+      "buttons-hover": "#D1D5DB",
+      "error-message": "#D10000"
     },
-    cursor: {
-      "not-allowed": "not-allowed"
-    },
-    backgroundImage: {
+    "background-image": {
       "gradient-to-bottom": "linear-gradient(to bottom, #c7c7ff, #b3b3ff)"
     },
     extend: {}

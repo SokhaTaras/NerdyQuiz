@@ -20,15 +20,15 @@ body {
 
 @layer components {
   .btn-pop-up {
-    @apply flex justify-center items-center w-1/2 bg-buttons hover:bg-buttonsHover rounded disabled:opacity-70 disabled:cursor-not-allowed
+    @apply flex justify-center items-center w-1/2 bg-buttons hover:bg-buttons-hover rounded disabled:opacity-70 disabled:cursor-not-allowed
   }
 
-  .backgroundGradient {
+  .background-gradient {
     @apply bg-gradient-to-bottom
   }
 
-  .errorMessage {
-    @apply underline text-errorMessage
+  .error-message {
+    @apply underline text-error-message
   }
 
   .labels {
@@ -39,7 +39,7 @@ body {
     @apply border rounded p-2 border-none focus:outline-none
   }
 
-  .modalTitle {
+  .modal-title {
     @apply text-3xl text-center mb-6
   }
 }
