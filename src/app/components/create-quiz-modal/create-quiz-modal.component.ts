@@ -55,8 +55,8 @@ export class CreateQuizModalComponent implements OnInit {
     });
   }
 
-  getValidForm() {
-    this.initQuizForm.statusChanges.subscribe((isValid) => {
+  getValidForm(): void {
+    this.initQuizForm.statusChanges.subscribe((isValid): void => {
       this.isValid = isValid !== 'VALID';
     });
   }

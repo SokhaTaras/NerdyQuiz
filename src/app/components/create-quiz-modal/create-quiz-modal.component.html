@@ -2,8 +2,8 @@
   <h1 class="text-3xl text-center mb-6">Create quiz</h1>
   <form class="flex justify-center" [formGroup]="initQuizForm">
     <div class="flex flex-col space-y-4 w-1/2">
-      <quiz-app-modal-input formControlName="title" [control]="title" [title]="'Title'" [placeHolder]="PlaceHolder.title"></quiz-app-modal-input>
-      <quiz-app-modal-input formControlName="theme" [control]="theme" [title]="'Theme'" [placeHolder]="PlaceHolder.theme" ></quiz-app-modal-input>
+      <quiz-app-input [control]="title" [title]="'Title'" [placeHolder]="PlaceHolder.title"></quiz-app-input>
+      <quiz-app-input [control]="theme" [title]="'Theme'" [placeHolder]="PlaceHolder.theme" ></quiz-app-input>
     </div>
   </form>
  <quiz-app-modal-footer [disableButton]="isValid" (saveEvent)="saveQuiz()"></quiz-app-modal-footer>

@@ -15,7 +15,7 @@ import { IntroductionComponent } from './components/introduction/introduction.co
 import { CreateQuizModalComponent } from './components/create-quiz-modal/create-quiz-modal.component';
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
-import { ModalInputComponent } from './components/modal-input/modal-input.component';
+import { InputComponent } from './components/input/input.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     CreateQuizModalComponent,
     QuizDetailsComponent,
     ModalFooterComponent,
-    ModalInputComponent,
+    InputComponent,
     ErrorMessageComponent
   ],
   imports: [
