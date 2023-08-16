@@ -3,7 +3,8 @@ import {
   FormControl,
   FormGroup,
   FormBuilder,
-  Validators
+  Validators,
+  FormControlStatus
 } from '@angular/forms';
 import { InitQuizForm } from '../../interfaces/initQuizForm.interface';
 import { Quiz } from '../../interfaces/quiz.interface';
@@ -22,6 +23,7 @@ export class CreateQuizModalComponent implements OnInit {
   protected readonly PlaceHolder = PlaceHolder;
 
   public initQuizForm!: FormGroup<InitQuizForm>;
+  isValid: FormControlStatus | boolean = true;
 
   get title() {
     return this.initQuizForm.controls.title;
@@ -40,6 +42,7 @@ export class CreateQuizModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.getValidForm();
   }
 
   initForm(): void {
@@ -49,6 +52,12 @@ export class CreateQuizModalComponent implements OnInit {
         Validators.minLength(2)
       ]),
       theme: new FormControl('', [Validators.required, Validators.minLength(2)])
+    });
+  }
+
+  getValidForm(): void {
+    this.initQuizForm.statusChanges.subscribe((isValid): void => {
+      this.isValid = isValid !== 'VALID';
     });
   }
 

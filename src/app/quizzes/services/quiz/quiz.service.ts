@@ -3,11 +3,13 @@ import { Quiz } from '../../interfaces/quiz.interface';
 import { StorageError } from '../../../shared/classes/storageError/storage-error';
 import { StorageErrorMessage } from '../../../shared/enums/storageErrorMessage';
 import { BehaviorSubject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
   public quizzes$ = new BehaviorSubject<Quiz[]>([]);
+
   addQuiz(key: string, quiz: Quiz): void {
     try {
       if (quiz !== null) {
@@ -18,6 +20,7 @@ export class QuizService {
       throw new StorageError(StorageErrorMessage.stringify);
     }
   }
+
   getOneQuiz(name: string): Quiz | undefined {
     try {
       let item = localStorage.getItem(name);
@@ -29,6 +32,7 @@ export class QuizService {
     }
     return undefined;
   }
+
   initAllQuizzes(key: string): void {
     try {
       let allQuizzes: string | null = localStorage.getItem(key);
@@ -40,6 +44,7 @@ export class QuizService {
       throw new StorageError(StorageErrorMessage.parse);
     }
   }
+
   geNewQuizId(): string {
     const decimalSystem = 10;
     return new Date().getTime().toString(decimalSystem);

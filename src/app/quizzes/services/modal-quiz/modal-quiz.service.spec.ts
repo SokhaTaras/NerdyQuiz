@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { ModalQuizService } from './modal-quiz.service';
 
 describe('ModalQuizService', () => {
