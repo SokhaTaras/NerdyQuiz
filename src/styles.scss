@@ -3,19 +3,15 @@
 @tailwind components;
 @tailwind utilities;
 
-$background: #e6e6ff;
-$backgroundGradient: linear-gradient(to bottom, #c7c7ff, #b3b3ff);
-$border-radius: 10px;
-
 body {
-  background-color: $background;
-  color: #333333;
-  font-family: system-ui;
+  background-color: var(--color-primary);
+  color: var(--primary-font-color);
+  font-family: var(--primary-font-family);
 }
 
 .ant-modal-content {
-  border-radius: $border-radius;
-  background-image: $backgroundGradient;
+  border-radius: var(--border-radius);
+  background-image: var(--background-image);
 }
 
 @layer components {
@@ -41,5 +37,18 @@ body {
 
   .modal-title {
     @apply text-3xl text-center mb-6
+  }
+}
+
+@layer base {
+  :root {
+    --color-primary: #e6e6ff;
+    --color-button: #E5E7EB;
+    --color-buttons-hover: #D1D5DB;
+    --color-error-message: #D10000;
+    --primary-font-color: #333333;
+    --primary-font-family: system-ui;
+    --background-image: linear-gradient(to bottom, #c7c7ff, #b3b3ff);
+    --border-radius: 10px
   }
 }
