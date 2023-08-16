@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './quizzes/components/home/home.component';
-import { QuizDetailsComponent } from './quizzes/components/quiz-details/quiz-details.component';
 
 const routes: Routes = [
   {
@@ -11,11 +9,10 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'home/quiz-details-page',
-    component: QuizDetailsComponent
+    loadChildren: () =>
+      import('./quizzes/quizzes-routing.module').then(
+        (m) => m.QuizzesRoutingModule
+      )
   }
 ];
 
