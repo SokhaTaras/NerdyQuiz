@@ -1,2 +1,13 @@
-Title: {{initialQuiz?.title}}
-Theme: {{initialQuiz?.theme}}
+<div>
+  <div class="flex content-center justify-center pt-10 text-2xl">
+    <div class="modal-title">
+      Title: {{initialQuiz?.title}}
+      Theme: {{initialQuiz?.theme}}
+      <div class="flex content-center justify-center">
+        <button>Edit title</button>
+      </div>
+    </div>
+  </div>
+  <quiz-app-question-list></quiz-app-question-list>
+</div>
+

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { QuizzesRoutingModule } from './quizzes-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { QuestionsModule } from '../questions/questions.module';
 
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
@@ -23,6 +24,7 @@ import { IntroductionComponent } from './components/introduction/introduction.co
   imports: [
     CommonModule,
     SharedModule,
+    QuestionsModule,
     QuizzesRoutingModule,
     ReactiveFormsModule
   ]
