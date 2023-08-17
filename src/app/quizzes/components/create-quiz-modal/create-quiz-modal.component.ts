@@ -24,6 +24,7 @@ export class CreateQuizModalComponent implements OnInit {
 
   public initQuizForm!: FormGroup<InitQuizForm>;
   isValid: FormControlStatus | boolean = true;
+  quizId: string | undefined;
 
   get title() {
     return this.initQuizForm.controls.title;
@@ -62,11 +63,16 @@ export class CreateQuizModalComponent implements OnInit {
   }
 
   getInitialQuizObject(form: FormGroup): Quiz {
-    return {
+    const newQuizId: string = this.quizService.geNewQuizId();
+    const quiz: Quiz = {
       title: form.get('title')?.value,
       theme: form.get('theme')?.value,
-      id: this.quizService.geNewQuizId()
+      id: newQuizId
     };
+
+    this.quizId = newQuizId;
+
+    return quiz;
   }
 
   saveQuiz(): void {
@@ -80,8 +86,9 @@ export class CreateQuizModalComponent implements OnInit {
 
   navigateToQuizDetailsPage() {
     this.router.navigate([
-      NavigationRoutes.HOME,
-      NavigationRoutes.QUIZ_DETAILS
+      NavigationRoutes.QUIZ,
+      `${this.quizId}`,
+      NavigationRoutes.DETAILS
     ]);
   }
 }

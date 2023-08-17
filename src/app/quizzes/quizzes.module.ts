@@ -8,7 +8,7 @@ import { QuizDetailsComponent } from './components/quiz-details/quiz-details.com
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { CreateQuizModalComponent } from './components/create-quiz-modal/create-quiz-modal.component';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from '../home/components/home/home.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
 
 @NgModule({
