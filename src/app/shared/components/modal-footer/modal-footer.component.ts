@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
+import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
 
 @Component({
   selector: 'quiz-app-modal-footer',

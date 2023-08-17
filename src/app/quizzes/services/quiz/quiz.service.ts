@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Quiz } from '../../interfaces/quiz.interface';
-import { StorageError } from '../../classes/storageError/storage-error';
-import { StorageErrorMessage } from '../../enums/storageErrorMessage';
+import { StorageError } from '../../../shared/classes/storageError/storage-error';
+import { StorageErrorMessage } from '../../../shared/enums/storageErrorMessage';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
