@@ -4,7 +4,51 @@
 @tailwind utilities;
 
 body {
-  background-color: #e6e6ff;
-  color: #333333;
-  font-family: system-ui;
+  background-color: var(--color-primary);
+  color: var(--primary-font-color);
+  font-family: var(--primary-font-family);
+}
+
+.ant-modal-content {
+  border-radius: var(--border-radius);
+  background-image: var(--background-image);
+}
+
+@layer components {
+  .btn-pop-up {
+    @apply flex justify-center items-center w-1/2 bg-buttons hover:bg-buttons-hover rounded disabled:opacity-70 disabled:cursor-not-allowed
+  }
+
+  .background-gradient {
+    @apply bg-gradient-to-bottom
+  }
+
+  .error-message {
+    @apply underline text-error-message
+  }
+
+  .labels {
+    @apply text-2xl
+  }
+
+  .input {
+    @apply border rounded p-2 border-none focus:outline-none
+  }
+
+  .modal-title {
+    @apply text-3xl text-center mb-6
+  }
+}
+
+@layer base {
+  :root {
+    --color-primary: #e6e6ff;
+    --color-button: #E5E7EB;
+    --color-buttons-hover: #D1D5DB;
+    --color-error-message: #D10000;
+    --primary-font-color: #333333;
+    --primary-font-family: system-ui;
+    --background-image: linear-gradient(to bottom, #c7c7ff, #b3b3ff);
+    --border-radius: 10px
+  }
 }

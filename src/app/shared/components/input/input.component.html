@@ -1,8 +1,8 @@
-<div class="flex flex-col">
-    <label class="text-2xl">{{ title }}</label>
+<div class="flex flex-col" >
+    <label class="labels">{{ title }}</label>
     <input
             type="text"
-            class="border rounded p-2"
+            class="input"
             [placeholder]="placeHolder"
             [formControl]="control"
             (blur)="onTouched()"
