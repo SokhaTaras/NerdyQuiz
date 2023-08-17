@@ -6,16 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    children: [
-      {
-        path: 'quiz/:id',
-        loadChildren: () =>
-          import('../quizzes/quizzes-routing.module').then(
-            (m) => m.QuizzesRoutingModule
-          )
-      }
-    ]
+    component: HomeComponent
   }
 ];
 

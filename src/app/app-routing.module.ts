@@ -3,9 +3,26 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () =>
-      import('./home/home-routing.module').then((m) => m.HomeRoutingModule)
+    path: '',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home'
+      },
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./home/home-routing.module').then((m) => m.HomeRoutingModule)
+      },
+      {
+        path: 'quiz/:id',
+        loadChildren: () =>
+          import('./quizzes/quizzes-routing.module').then(
+            (m) => m.QuizzesRoutingModule
+          )
+      }
+    ]
   }
 ];
 

@@ -85,6 +85,10 @@ export class CreateQuizModalComponent implements OnInit {
   }
 
   navigateToQuizDetailsPage() {
-    this.router.navigate([NavigationRoutes.QUIZ, `${this.quizId}`]);
+    this.router.navigate([
+      NavigationRoutes.QUIZ,
+      `${this.quizId}`,
+      NavigationRoutes.DETAILS
+    ]);
   }
 }
