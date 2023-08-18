@@ -1,16 +1,16 @@
 <div class="flex">
   <div class="flex w-full justify-between">
     <div class="flex-auto m-1.5 border-2">
-      <span class="labels">Title:</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, sint.
+      <span class="labels">Title:</span> {{question?.title}}
     </div>
-    <div class="flex-auto m-1.5 border-2">
-      <span class="labels">Questions:</span> 10
+    <div class="flex  m-1.5 border-2">
+      <span class="labels">Type:</span> {{question?.type}}
     </div>
-    <div class="flex-auto  m-1.5 border-2">
-      <span class="labels">Type:</span> boolean
+    <div class="flex  m-1.5 border-2">
+      <span class="labels">Difficulty:</span> {{question?.difficulty}}
     </div>
     <div class="flex m-1.5 border-2">
-      <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition duration-350 ease-in-out">Delete question</button>
+      <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition duration-350 ease-in-out" (click)="deleteQuestionConfirm()">Delete question</button>
     </div>
   </div>
 </div>

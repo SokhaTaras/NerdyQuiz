@@ -67,6 +67,8 @@ export class CreateQuizModalComponent implements OnInit {
     const quiz: Quiz = {
       title: form.get('title')?.value,
       theme: form.get('theme')?.value,
+      type: '',
+      questions: [],
       id: newQuizId
     };
 

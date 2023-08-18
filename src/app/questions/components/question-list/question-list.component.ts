@@ -1,17 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { QuestionsService } from '../../services/questions/questions.service';
+import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'quiz-app-question-list',
   templateUrl: './question-list.component.html',
   styleUrls: ['./question-list.component.scss']
 })
-export class QuestionListComponent {
+export class QuestionListComponent implements OnInit {
   @Input() quizId: string | undefined;
   displayCreateQuestion: boolean = false;
-  allQuestions$ = this.questionService.questions$;
+  allQuestions: Question[] | undefined;
 
   constructor(private questionService: QuestionsService) {}
+
+  ngOnInit() {
+    this.allQuestions = this.questionService.getQuizQuestions(this.quizId);
+  }
 
   addQuestion() {
     this.displayCreateQuestion = true;

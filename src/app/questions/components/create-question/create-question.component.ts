@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import {
   FormBuilder,
@@ -31,6 +31,7 @@ import { QuestionsService } from '../../services/questions/questions.service';
 })
 export class CreateQuestionComponent implements OnInit {
   @Output() displayFalse: EventEmitter<void> = new EventEmitter();
+  @Input() quizId: string | undefined = '';
 
   difficultyList: QuestionDifficulty[] = DifficultyList;
   typeList: QuestionType[] = TypeList;
@@ -57,10 +58,6 @@ export class CreateQuestionComponent implements OnInit {
 
   get correctBooleanAnswer() {
     return this.questionForm.controls.correctBooleanAnswer;
-  }
-
-  get booleanVariantsGroup() {
-    return this.questionForm.controls.booleanVariants;
   }
 
   get multipleVariantsGroup() {
@@ -109,7 +106,7 @@ export class CreateQuestionComponent implements OnInit {
 
   saveQuestion(): void {
     this.displayFalse.emit();
-    this.formQuestionToObject();
+    this.questionService.addQuestion(this.quizId, this.formQuestionToObject());
   }
 
   formQuestionToObject(): Question {
