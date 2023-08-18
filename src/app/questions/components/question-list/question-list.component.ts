@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'quiz-app-question-list',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./question-list.component.scss']
 })
 export class QuestionListComponent {
+  @Input() quizId: string | undefined;
 
+  constructor() {}
 }

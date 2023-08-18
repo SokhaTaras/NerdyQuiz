@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PlaceHolder } from '../../../shared/enums/placeHolder';
 
 @Component({
   selector: 'quiz-app-create-question',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-question.component.scss']
 })
 export class CreateQuestionComponent {
-
+  protected readonly PlaceHolder = PlaceHolder;
 }
