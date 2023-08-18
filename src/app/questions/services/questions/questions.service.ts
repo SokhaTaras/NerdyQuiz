@@ -11,4 +11,9 @@ export class QuestionsService {
   constructor() {}
 
   addQuestion(): void {}
+
+  geNewQuestionId(): string {
+    const hexadecimalSystem = 16;
+    return new Date().getTime().toString(hexadecimalSystem);
+  }
 }

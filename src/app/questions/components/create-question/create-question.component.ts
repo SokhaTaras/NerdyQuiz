@@ -21,6 +21,8 @@ import {
   DifficultyList,
   TypeList
 } from '../../constants/dropdonws';
+import { Question, wrongAnswers } from '../../interfaces/question.interface';
+import { QuestionsService } from '../../services/questions/questions.service';
 
 @Component({
   selector: 'quiz-app-create-question',
@@ -65,7 +67,10 @@ export class CreateQuestionComponent implements OnInit {
     return this.questionForm.controls.multipleVariants;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private questionService: QuestionsService
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -80,7 +85,7 @@ export class CreateQuestionComponent implements OnInit {
         Validators.required
       ]),
       correctAnswer: new FormControl('', [Validators.required]),
-      correctBooleanAnswer: new FormControl('True', [Validators.required]),
+      correctBooleanAnswer: new FormControl(true, [Validators.required]),
 
       booleanVariants: new FormGroup<BooleanQuestionForm>({
         variant1: new FormControl(true),
@@ -104,7 +109,24 @@ export class CreateQuestionComponent implements OnInit {
 
   saveQuestion(): void {
     this.displayFalse.emit();
-    console.log('questForm', this.questionForm);
+    this.formQuestionToObject();
+  }
+
+  formQuestionToObject(): Question {
+    const questionId: string = this.questionService.geNewQuestionId();
+    const question: Question = {
+      title: this.questionForm.controls.title.value as string,
+      correctAnswer: this.questionForm.controls.correctAnswer.value as string,
+      correctBooleanAnswer: this.questionForm.controls.correctBooleanAnswer
+        .value as boolean,
+      wrongAnswers: this.questionForm.controls.multipleVariants
+        .value as wrongAnswers,
+      type: this.questionForm.controls.type.value as string,
+      difficulty: this.questionForm.controls.difficulty.value as string,
+      id: questionId
+    };
+
+    return question;
   }
 
   cancelQuestion(): void {

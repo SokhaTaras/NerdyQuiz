@@ -10,7 +10,7 @@ export interface QuestionForm {
   type: FormControl<string | null>;
   difficulty: FormControl<string | null>;
   correctAnswer: FormControl<string | null>;
-  correctBooleanAnswer: FormControl<string | null>;
+  correctBooleanAnswer: FormControl<boolean | null>;
   booleanVariants: FormGroup<BooleanQuestionForm>;
   multipleVariants: FormGroup<MultipleQuestionForm>;
 }
