@@ -1,21 +1,28 @@
-<div class="flex border-2">
+<div class="flex-col border-2">
   <form class="flex-auto">
     <div class="modal-title">
       <quiz-app-input [control]="title" [title]="'Title'" [placeHolder]="PlaceHolder.title"></quiz-app-input>
     </div>
     <div class="type&strong border-2">
-      <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [title]="'Difficulty'"></quiz-app-dropdown>
-      <quiz-app-dropdown [control]="type" [list]="typeList" [title]="'Types'"></quiz-app-dropdown>
+      <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [title]="'Difficulty'"></quiz-app-dropdown> {{difficulty.value}}
+      <quiz-app-dropdown [control]="type" [list]="typeList" [title]="'Types'"></quiz-app-dropdown> {{type.value }}
     </div>
-    <div class="variants"></div>
-    <div class="correct">
+    <div class="variants" *ngIf="!isBoolean">
+      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant1" [title]="'Answer 1'"></quiz-app-input>
+      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant2" [title]="'Answer 2'"></quiz-app-input>
+      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant3" [title]="'Answer 3'"></quiz-app-input>
+    </div>
+    <div class="correct" *ngIf="!isBoolean">
       <quiz-app-input [control]="correctAnswer" [title]="'Correct answer'" [placeHolder]="PlaceHolder.correctAnswer"></quiz-app-input>
     </div>
+    <div *ngIf="isBoolean">
+      <quiz-app-dropdown [control]="correctBooleanAnswer" [list]="booleanList" [title]="'Correct answer: '"></quiz-app-dropdown> {{correctBooleanAnswer.value}}
+    </div>
   </form>
-  <div class="footer flex">
-    <div class="flex-auto">
-      <button class="border">Cancel</button>
-      <button class="border" (click)="fn()">Save</button>
+  <div class="footer flex justify-center mt-3.5 mb-2">
+    <div class="flex space-x-4">
+      <button class="border" (click)="cancelQuestion()">Cancel</button>
+      <button class="border" (click)="saveQuestion()">Save</button>
     </div>
   </div>
 </div>

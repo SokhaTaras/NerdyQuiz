@@ -41,7 +41,7 @@ export class DropdownComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  selectItem(item: QuestionDifficulty | QuestionType) {
+  selectItem(item: QuestionDifficulty | QuestionType | string) {
     this.control.setValue(item);
     this.onChange(item);
     this.onTouched();

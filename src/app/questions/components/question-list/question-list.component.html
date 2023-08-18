@@ -6,7 +6,7 @@
   </div>
   <div class="question-list flex-col justify-center">
     <div class="m-1.5 p-1.5 border-2" *ngIf="displayCreateQuestion">
-      <quiz-app-create-question></quiz-app-create-question>
+      <quiz-app-create-question  (displayFalse)="hideCreateQuestion()"></quiz-app-create-question>
     </div>
     <div class="m-1.5 p-1.5 border-2">
       <quiz-app-question-card class=""></quiz-app-question-card>

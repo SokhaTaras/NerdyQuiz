@@ -3,6 +3,6 @@
 </a>
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul nz-menu *ngFor="let item of list">
-    <li nz-menu-item (click)="selectItem(item)">{{item.nameEn}}</li>
+    <li nz-menu-item (click)="selectItem(item.nameEn)">{{item.nameEn}}</li>
   </ul>
 </nz-dropdown-menu>

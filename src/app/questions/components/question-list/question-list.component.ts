@@ -16,4 +16,8 @@ export class QuestionListComponent {
   addQuestion() {
     this.displayCreateQuestion = true;
   }
+
+  hideCreateQuestion() {
+    this.displayCreateQuestion = false;
+  }
 }
