@@ -1,5 +1,8 @@
 export interface Question {
-  question: string;
+  title: string;
   correctAnswer: string;
   incorrectAnswers: string[];
+  type: string;
+  difficulty: string;
+  id: string;
 }

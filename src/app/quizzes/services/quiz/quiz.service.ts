@@ -3,12 +3,15 @@ import { Quiz } from '../../interfaces/quiz.interface';
 import { StorageError } from '../../../shared/classes/storageError/storage-error';
 import { StorageErrorMessage } from '../../../shared/enums/storageErrorMessage';
 import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
   public quizzes$ = new BehaviorSubject<Quiz[]>([]);
+
+  constructor(private route: ActivatedRoute) {}
 
   addQuiz(key: string, quiz: Quiz): void {
     try {
@@ -21,16 +24,16 @@ export class QuizService {
     }
   }
 
-  getOneQuiz(name: string): Quiz | undefined {
-    try {
-      let item = localStorage.getItem(name);
-      if (item !== null) {
-        return JSON.parse(item);
-      }
-    } catch (error) {
-      throw new StorageError(StorageErrorMessage.parse);
-    }
-    return undefined;
+  getOneQuiz(name: string) {
+    // try {
+    //   let item = localStorage.getItem(name);
+    //   if (item !== null) {
+    //     return JSON.parse(item);
+    //   }
+    // } catch (error) {
+    //   throw new StorageError(StorageErrorMessage.parse);
+    // }
+    // return undefined;
   }
 
   initAllQuizzes(key: string): void {

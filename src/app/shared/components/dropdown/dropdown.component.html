@@ -1,0 +1,8 @@
+<a nz-dropdown [nzDropdownMenu]="menu">
+  {{title}}
+</a>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu *ngFor="let item of list">
+    <li nz-menu-item (click)="selectItem(item)">{{item.nameEn}}</li>
+  </ul>
+</nz-dropdown-menu>

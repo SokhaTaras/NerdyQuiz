@@ -1,14 +1,21 @@
-<div class="flex">
-  <form>
+<div class="flex border-2">
+  <form class="flex-auto">
     <div class="modal-title">
-      <quiz-app-input [title]="'Title'" [placeHolder]="PlaceHolder.title"></quiz-app-input>
+      <quiz-app-input [control]="title" [title]="'Title'" [placeHolder]="PlaceHolder.title"></quiz-app-input>
     </div>
-    <div class="type&strong">
-      <quiz-app-input></quiz-app-input>
-      <quiz-app-input></quiz-app-input>
+    <div class="type&strong border-2">
+      <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [title]="'Difficulty'"></quiz-app-dropdown>
+      <quiz-app-dropdown [control]="type" [list]="typeList" [title]="'Types'"></quiz-app-dropdown>
     </div>
     <div class="variants"></div>
-    <div class="correct"></div>
-    <quiz-app-modal-footer></quiz-app-modal-footer>
+    <div class="correct">
+      <quiz-app-input [control]="correctAnswer" [title]="'Correct answer'" [placeHolder]="PlaceHolder.correctAnswer"></quiz-app-input>
+    </div>
   </form>
+  <div class="footer flex">
+    <div class="flex-auto">
+      <button class="border">Cancel</button>
+      <button class="border" (click)="fn()">Save</button>
+    </div>
+  </div>
 </div>

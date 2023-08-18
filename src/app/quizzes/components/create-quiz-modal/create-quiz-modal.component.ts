@@ -6,7 +6,7 @@ import {
   Validators,
   FormControlStatus
 } from '@angular/forms';
-import { InitQuizForm } from '../../interfaces/initQuizForm.interface';
+import { InitQuizForm } from '../../../shared/interfaces/forms.interface';
 import { Quiz } from '../../interfaces/quiz.interface';
 import { StorageKey } from '../../../shared/enums/storageKey';
 import { NavigationRoutes } from '../../../shared/enums/navigationRoutes';
