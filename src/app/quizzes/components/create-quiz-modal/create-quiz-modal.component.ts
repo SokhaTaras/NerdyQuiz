@@ -13,14 +13,14 @@ import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { Router } from '@angular/router';
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { ModalInputDataInterface } from '../../../shared/interfaces/modalInputData.interface';
+import { ModalDataInterface } from '../../../shared/interfaces/modalData.interface';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
   templateUrl: './create-quiz-modal.component.html'
 })
 export class CreateQuizModalComponent implements OnInit {
-  @Input() inputData: ModalInputDataInterface | undefined;
+  @Input() inputData: ModalDataInterface | undefined;
   protected readonly PlaceHolder = PlaceHolder;
 
   public initQuizForm!: FormGroup<InitQuizForm>;

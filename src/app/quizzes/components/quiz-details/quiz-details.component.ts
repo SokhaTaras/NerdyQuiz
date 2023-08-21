@@ -4,7 +4,7 @@ import { Quiz } from '../../interfaces/quiz.interface';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
-import { ModalInputDataInterface } from '../../../shared/interfaces/modalInputData.interface';
+import { ModalDataInterface } from '../../../shared/interfaces/modalData.interface';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -39,7 +39,7 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
 
   //TODO change hardcode when json with text will be ready
   openEditPopUp(): void {
-    const data: ModalInputDataInterface = {
+    const data: ModalDataInterface = {
       title: 'Edit quiz',
       buttonText: 'Edit',
       currentQuizId: this.id as string,

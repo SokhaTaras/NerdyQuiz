@@ -12,13 +12,15 @@ import { ModalFooterComponent } from './components/modal-footer/modal-footer.com
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
     InputComponent,
     ModalFooterComponent,
     ErrorMessageComponent,
-    DropdownComponent
+    DropdownComponent,
+    ConfirmModalComponent
   ],
   imports: [
     CommonModule,

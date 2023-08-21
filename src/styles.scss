@@ -22,6 +22,18 @@ body {
   background-image: var(--background-image-hover);
 }
 
+.ant-modal-confirm-btns{
+  display: none;
+}
+
+.anticon-question-circle{
+  display: none;
+}
+
+.ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content{
+  margin-left: 0;
+}
+
 @layer components {
   .btn-pop-up {
     @apply flex justify-center items-center w-1/2 bg-buttons hover:bg-buttons-hover rounded disabled:opacity-70 disabled:cursor-not-allowed;

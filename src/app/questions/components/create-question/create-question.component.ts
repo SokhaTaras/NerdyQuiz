@@ -54,11 +54,12 @@ export class CreateQuestionComponent implements OnInit {
     return this.questionForm.controls.type;
   }
   get correctAnswer() {
-    return this.questionForm.controls.correctAnswer;
+    return this.questionForm.controls.multipleVariants.controls.correctAnswer;
   }
 
   get correctBooleanAnswer() {
-    return this.questionForm.controls.correctBooleanAnswer;
+    return this.questionForm.controls.booleanVariants.controls
+      .correctBooleanAnswer;
   }
 
   get multipleVariantsGroup() {
@@ -76,27 +77,27 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   initForm() {
-    this.questionForm = this.fb.nonNullable.group<QuestionForm>({
+    this.questionForm = this.fb.group<QuestionForm>({
       title: new FormControl('', [
         Validators.required,
-        Validators.minLength(3)
+        Validators.minLength(2)
       ]),
       type: new FormControl(this.typeList[1].nameEn, [Validators.required]),
       difficulty: new FormControl(this.difficultyList[0].nameEn, [
         Validators.required
       ]),
-      correctAnswer: new FormControl('', [Validators.required]),
-      correctBooleanAnswer: new FormControl(true, [Validators.required]),
 
-      booleanVariants: new FormGroup<BooleanQuestionForm>({
+      booleanVariants: this.fb.group<BooleanQuestionForm>({
+        correctBooleanAnswer: new FormControl(true),
         variant1: new FormControl(true),
         variant2: new FormControl(false)
       }),
 
-      multipleVariants: new FormGroup<MultipleQuestionForm>({
-        variant1: new FormControl('', [Validators.required]),
-        variant2: new FormControl('', [Validators.required]),
-        variant3: new FormControl('', [Validators.required])
+      multipleVariants: this.fb.group<MultipleQuestionForm>({
+        correctAnswer: new FormControl(''),
+        variant1: new FormControl(''),
+        variant2: new FormControl(''),
+        variant3: new FormControl('')
       })
     });
   }
@@ -117,9 +118,10 @@ export class CreateQuestionComponent implements OnInit {
     const questionId: string = this.questionService.geNewQuestionId();
     const question: Question = {
       title: this.questionForm.controls.title.value as string,
-      correctAnswer: this.questionForm.controls.correctAnswer.value as string,
-      correctBooleanAnswer: this.questionForm.controls.correctBooleanAnswer
-        .value as boolean,
+      correctAnswer: this.questionForm.controls.multipleVariants.controls
+        .correctAnswer.value as string,
+      correctBooleanAnswer: this.questionForm.controls.booleanVariants.controls
+        .correctBooleanAnswer.value as boolean,
       wrongAnswers: this.questionForm.controls.multipleVariants
         .value as wrongAnswers,
       type: this.questionForm.controls.type.value as string,
@@ -128,6 +130,16 @@ export class CreateQuestionComponent implements OnInit {
     };
 
     return question;
+  }
+  fn() {
+    console.log('mult', this.questionForm.controls.multipleVariants.invalid);
+    console.log('multform', this.questionForm.controls.multipleVariants);
+    console.log('boolean', this.questionForm.controls.booleanVariants.invalid);
+    console.log('booleanFOrm', this.questionForm.controls.booleanVariants);
+    return (
+      this.questionForm.controls.booleanVariants.invalid ||
+      this.questionForm.controls.multipleVariants.invalid
+    );
   }
 
   cancelQuestion(): void {
