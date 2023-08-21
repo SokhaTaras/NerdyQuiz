@@ -4,8 +4,7 @@ import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'quiz-app-question-list',
-  templateUrl: './question-list.component.html',
-  styleUrls: ['./question-list.component.scss']
+  templateUrl: './question-list.component.html'
 })
 export class QuestionListComponent implements OnInit {
   @Input() quizId: string | undefined;

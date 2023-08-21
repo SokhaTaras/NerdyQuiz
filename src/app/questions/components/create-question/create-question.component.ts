@@ -26,8 +26,7 @@ import { PlaceHolder } from '../../../shared/enums/placeHolder';
 
 @Component({
   selector: 'quiz-app-create-question',
-  templateUrl: './create-question.component.html',
-  styleUrls: ['./create-question.component.scss']
+  templateUrl: './create-question.component.html'
 })
 export class CreateQuestionComponent implements OnInit {
   @Output() displayFalse: EventEmitter<void> = new EventEmitter();

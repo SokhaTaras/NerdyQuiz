@@ -12,7 +12,6 @@ import {
 @Component({
   selector: 'quiz-app-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -6,8 +6,7 @@ import { QuestionsService } from '../../../questions/services/questions/question
 
 @Component({
   selector: 'quiz-app-confirm-modal',
-  templateUrl: './confirm-modal.component.html',
-  styleUrls: ['./confirm-modal.component.scss']
+  templateUrl: './confirm-modal.component.html'
 })
 export class ConfirmModalComponent {
   @Input() inputData: confirmModalInterface | undefined;
