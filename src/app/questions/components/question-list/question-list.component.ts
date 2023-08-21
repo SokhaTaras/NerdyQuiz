@@ -18,7 +18,7 @@ export class QuestionListComponent implements OnInit {
     this.allQuestions = this.questionService.getQuizQuestions(this.quizId);
   }
 
-  addQuestion() {
+  displayCreateQuestionForm() {
     this.displayCreateQuestion = true;
   }
 

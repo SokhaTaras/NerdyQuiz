@@ -1,28 +1,40 @@
-<div class="flex-col border-2">
+<div class="flex-col py-3.5">
   <form class="flex-auto">
     <div class="modal-title">
       <quiz-app-input [control]="title" [title]="'Title'" [placeHolder]="PlaceHolder.title"></quiz-app-input>
     </div>
-    <div class="type&strong border-2">
-      <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [title]="'Difficulty'"></quiz-app-dropdown> {{difficulty.value}}
-      <quiz-app-dropdown [control]="type" [list]="typeList" [title]="'Types'"></quiz-app-dropdown> {{type.value }}
+    <div class="flex justify-center items-center h-20 labels">
+      <div class="flex justify-center w-3/5 overflow-hidden">
+        <div class="flex justify-center w-1/2 p-2">
+          <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [title]="difficulty.value"></quiz-app-dropdown>
+        </div>
+        <div class="flex justify-center w-1/2 p-2">
+          <quiz-app-dropdown class="pr-2.5" [control]="type" [list]="typeList" [title]="type.value"></quiz-app-dropdown>
+        </div>
+      </div>
     </div>
+
     <div class="variants" *ngIf="!isBoolean">
-      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant1" [title]="'Answer 1'"></quiz-app-input>
-      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant2" [title]="'Answer 2'"></quiz-app-input>
-      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant3" [title]="'Answer 3'"></quiz-app-input>
+      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant1" [title]="'Answer 1'" [placeHolder]="PlaceHolder.answer"></quiz-app-input>
+      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant2" [title]="'Answer 2'" [placeHolder]="PlaceHolder.answer"></quiz-app-input>
+      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant3" [title]="'Answer 3'" [placeHolder]="PlaceHolder.answer"></quiz-app-input>
     </div>
     <div class="correct" *ngIf="!isBoolean">
       <quiz-app-input [control]="correctAnswer" [title]="'Correct answer'" [placeHolder]="PlaceHolder.correctAnswer"></quiz-app-input>
     </div>
-    <div *ngIf="isBoolean">
-      <quiz-app-dropdown [control]="correctBooleanAnswer" [list]="booleanList" [title]="'Correct answer: '"></quiz-app-dropdown> {{correctBooleanAnswer.value}}
+    <div class="flex justify-center items-center h-20 text-xl" *ngIf="isBoolean">
+      <div class="flex justify-center w-3/5">
+        <div class="flex justify-center items-center w-3/5">
+          <p class="m-2.5">Correct answer: </p>
+          <quiz-app-dropdown class="m-1" [control]="correctBooleanAnswer" [list]="booleanList" [title]="correctBooleanAnswer.value"></quiz-app-dropdown>
+        </div>
+      </div>
     </div>
   </form>
-  <div class="footer flex justify-center mt-3.5 mb-2">
-    <div class="flex space-x-4">
-      <button class="border" (click)="cancelQuestion()">Cancel</button>
-      <button class="border" (click)="saveQuestion()">Save</button>
+  <div class="footer flex justify-center mt-3.5 mb-2 h-10">
+    <div class="flex space-x-4 w-1/3">
+      <button class="w-1/2 rounded bg-buttons-hover btn-pop-up" (click)="cancelQuestion()">Cancel</button>
+      <button class="btn-background-gradient w-1/2 rounded" (click)="saveQuestion()">Save</button>
     </div>
   </div>
 </div>

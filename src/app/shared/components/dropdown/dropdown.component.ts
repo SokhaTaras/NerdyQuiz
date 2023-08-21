@@ -23,7 +23,7 @@ import {
 })
 export class DropdownComponent implements ControlValueAccessor {
   @Input() list: QuestionDifficulty[] | QuestionType[] | undefined;
-  @Input() title: string | undefined;
+  @Input() title: string | null | undefined | boolean;
   @Input() control: FormControl = new FormControl();
 
   onChange: any = (): void => {};
