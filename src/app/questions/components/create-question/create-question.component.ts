@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import {
   FormBuilder,
   FormControl,
@@ -23,6 +22,7 @@ import {
 } from '../../constants/dropdonws';
 import { Question, wrongAnswers } from '../../interfaces/question.interface';
 import { QuestionsService } from '../../services/questions/questions.service';
+import { PlaceHolder } from '../../../shared/enums/placeHolder';
 
 @Component({
   selector: 'quiz-app-create-question',
@@ -65,6 +65,9 @@ export class CreateQuestionComponent implements OnInit {
   get multipleVariantsGroup() {
     return this.questionForm.controls.multipleVariants;
   }
+  get booleanVariantsGroup() {
+    return this.questionForm.controls.booleanVariants;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -94,7 +97,7 @@ export class CreateQuestionComponent implements OnInit {
       }),
 
       multipleVariants: this.fb.group<MultipleQuestionForm>({
-        correctAnswer: new FormControl(''),
+        correctAnswer: new FormControl(null),
         variant1: new FormControl(''),
         variant2: new FormControl(''),
         variant3: new FormControl('')
@@ -106,7 +109,34 @@ export class CreateQuestionComponent implements OnInit {
     this.questionForm.controls?.type.valueChanges.subscribe((selectedType) => {
       const booleanType = this.typeList[0].nameEn;
       this.isBoolean = selectedType === booleanType;
+      this.updateValidators();
     });
+  }
+
+  updateValidators(): void {
+    if (this.isBoolean) {
+      this.multipleVariantsGroup.controls.correctAnswer.clearValidators();
+      this.booleanVariantsGroup.controls.correctBooleanAnswer.setValidators([
+        Validators.required
+      ]);
+    } else {
+      this.booleanVariantsGroup.controls.correctBooleanAnswer.clearValidators();
+      this.multipleVariantsGroup.controls.correctAnswer.setValidators([
+        Validators.required
+      ]);
+      this.multipleVariantsGroup.controls.variant1.setValidators([
+        Validators.required
+      ]);
+      this.multipleVariantsGroup.controls.variant2.setValidators([
+        Validators.required
+      ]);
+      this.multipleVariantsGroup.controls.variant3.setValidators([
+        Validators.required
+      ]);
+    }
+
+    this.multipleVariantsGroup.controls.correctAnswer.updateValueAndValidity();
+    this.booleanVariantsGroup.controls.correctBooleanAnswer.updateValueAndValidity();
   }
 
   saveQuestion(): void {
@@ -130,16 +160,6 @@ export class CreateQuestionComponent implements OnInit {
     };
 
     return question;
-  }
-  fn() {
-    console.log('mult', this.questionForm.controls.multipleVariants.invalid);
-    console.log('multform', this.questionForm.controls.multipleVariants);
-    console.log('boolean', this.questionForm.controls.booleanVariants.invalid);
-    console.log('booleanFOrm', this.questionForm.controls.booleanVariants);
-    return (
-      this.questionForm.controls.booleanVariants.invalid ||
-      this.questionForm.controls.multipleVariants.invalid
-    );
   }
 
   cancelQuestion(): void {
