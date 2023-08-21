@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
+import { ModalInputDataInterface } from '../../../shared/interfaces/modalInputData.interface';
 
 @Component({
   selector: 'quiz-app-quiz-list',
@@ -15,7 +16,13 @@ export class QuizListComponent {
     private modalQuizService: ModalQuizService
   ) {}
 
+  //TODO change hardcode when json with text will be ready
   openInitPopUp(): void {
-    this.modalQuizService.showInitQuizModal();
+    const data: ModalInputDataInterface = {
+      title: 'Create quiz',
+      buttonText: 'Save',
+      isSave: true
+    };
+    this.modalQuizService.showInitQuizModal(data);
   }
 }

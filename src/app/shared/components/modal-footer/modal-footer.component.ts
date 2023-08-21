@@ -6,13 +6,20 @@ import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-qui
   templateUrl: './modal-footer.component.html'
 })
 export class ModalFooterComponent {
-  @Input() disableButton: any;
+  @Input() disableButton: boolean | undefined;
+  @Input() buttonText: string | undefined;
+  @Input() isSave: boolean | undefined;
   @Output() saveEvent: EventEmitter<void> = new EventEmitter();
+  @Output() editEvent: EventEmitter<void> = new EventEmitter();
 
   constructor(private modalQuizService: ModalQuizService) {}
 
-  handleSave(): void {
-    this.saveEvent.emit();
+  handleSubmit(): void {
+    if (this.isSave) {
+      this.saveEvent.emit();
+    } else {
+      this.editEvent.emit();
+    }
   }
 
   handleCancel(): void {

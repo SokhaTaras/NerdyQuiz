@@ -33,12 +33,13 @@ export class CreateQuestionComponent implements OnInit {
   @Output() displayFalse: EventEmitter<void> = new EventEmitter();
   @Input() quizId: string | undefined = '';
 
+  public questionForm!: FormGroup<QuestionForm>;
+
   difficultyList: QuestionDifficulty[] = DifficultyList;
   typeList: QuestionType[] = TypeList;
   booleanList: QuestionBoolean[] = BooleanList;
   isBoolean: boolean | undefined;
 
-  public questionForm!: FormGroup<QuestionForm>;
   protected readonly PlaceHolder = PlaceHolder;
 
   get title() {
@@ -76,7 +77,10 @@ export class CreateQuestionComponent implements OnInit {
 
   initForm() {
     this.questionForm = this.fb.nonNullable.group<QuestionForm>({
-      title: new FormControl('', [Validators.required]),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3)
+      ]),
       type: new FormControl(this.typeList[1].nameEn, [Validators.required]),
       difficulty: new FormControl(this.difficultyList[0].nameEn, [
         Validators.required
@@ -90,9 +94,9 @@ export class CreateQuestionComponent implements OnInit {
       }),
 
       multipleVariants: new FormGroup<MultipleQuestionForm>({
-        variant1: new FormControl(''),
-        variant2: new FormControl(''),
-        variant3: new FormControl('')
+        variant1: new FormControl('', [Validators.required]),
+        variant2: new FormControl('', [Validators.required]),
+        variant3: new FormControl('', [Validators.required])
       })
     });
   }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalService } from '../../../shared/services/modal/modal.service';
 import { CreateQuizModalComponent } from '../../components/create-quiz-modal/create-quiz-modal.component';
+import { ModalInputDataInterface } from '../../../shared/interfaces/modalInputData.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,8 @@ import { CreateQuizModalComponent } from '../../components/create-quiz-modal/cre
 export class ModalQuizService {
   constructor(private modalService: ModalService) {}
 
-  showInitQuizModal(): void {
-    this.modalService.showModal(CreateQuizModalComponent);
+  showInitQuizModal(data: ModalInputDataInterface): void {
+    this.modalService.showModal(CreateQuizModalComponent, data);
   }
 
   closeModal(): void {

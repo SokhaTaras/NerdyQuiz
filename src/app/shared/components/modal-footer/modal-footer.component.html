@@ -3,8 +3,8 @@
     <button class="btn-pop-up" (click)="handleCancel()">
       Cancel
     </button>
-    <button class="btn-pop-up" [disabled]="disableButton" (click)="handleSave()">
-      Save
+    <button class="btn-pop-up" [disabled]="disableButton" (click)="handleSubmit()">
+      {{ buttonText }}
     </button>
   </div>
 </div>

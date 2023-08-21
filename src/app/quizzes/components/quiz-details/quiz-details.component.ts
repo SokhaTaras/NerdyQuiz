@@ -3,6 +3,8 @@ import { QuizService } from '../../services/quiz/quiz.service';
 import { Quiz } from '../../interfaces/quiz.interface';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
+import { ModalInputDataInterface } from '../../../shared/interfaces/modalInputData.interface';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -16,7 +18,8 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private quizService: QuizService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalQuiz: ModalQuizService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +35,17 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
 
   getCurrentQuiz(): Quiz | undefined {
     return this.quizService.quizzes$.value.find((q) => q.id === this.id);
+  }
+
+  //TODO change hardcode when json with text will be ready
+  openEditPopUp(): void {
+    const data: ModalInputDataInterface = {
+      title: 'Edit quiz',
+      buttonText: 'Edit',
+      currentQuizId: this.id as string,
+      isSave: false
+    };
+    this.modalQuiz.showInitQuizModal(data);
   }
 
   ngOnDestroy(): void {

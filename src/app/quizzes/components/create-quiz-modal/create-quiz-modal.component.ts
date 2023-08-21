@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   FormBuilder,
-  Validators,
-  FormControlStatus
+  Validators
 } from '@angular/forms';
 import { InitQuizForm } from '../../../shared/interfaces/forms.interface';
 import { Quiz } from '../../interfaces/quiz.interface';
@@ -14,17 +13,18 @@ import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { Router } from '@angular/router';
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
+import { ModalInputDataInterface } from '../../../shared/interfaces/modalInputData.interface';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
   templateUrl: './create-quiz-modal.component.html'
 })
 export class CreateQuizModalComponent implements OnInit {
+  @Input() inputData: ModalInputDataInterface | undefined;
   protected readonly PlaceHolder = PlaceHolder;
 
   public initQuizForm!: FormGroup<InitQuizForm>;
-  isValid: FormControlStatus | boolean = true;
-  quizId: string | undefined;
+  newQuizId: string | undefined;
 
   get title() {
     return this.initQuizForm.controls.title;
@@ -43,7 +43,7 @@ export class CreateQuizModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.getValidForm();
+    this.newQuizId = this.quizService.getNewQuizId();
   }
 
   initForm(): void {
@@ -56,25 +56,24 @@ export class CreateQuizModalComponent implements OnInit {
     });
   }
 
-  getValidForm(): void {
-    this.initQuizForm.statusChanges.subscribe((isValid): void => {
-      this.isValid = isValid !== 'VALID';
-    });
-  }
-
   getInitialQuizObject(form: FormGroup): Quiz {
-    const newQuizId: string = this.quizService.geNewQuizId();
     const quiz: Quiz = {
       title: form.get('title')?.value,
       theme: form.get('theme')?.value,
       type: '',
       questions: [],
-      id: newQuizId
+      id: this.newQuizId as string
     };
 
-    this.quizId = newQuizId;
-
     return quiz;
+  }
+
+  editQuiz(): void {
+    this.quizService.editQuiz(
+      this.inputData?.currentQuizId,
+      this.getInitialQuizObject(this.initQuizForm)
+    );
+    this.quizModal.closeModal();
   }
 
   saveQuiz(): void {
@@ -89,7 +88,7 @@ export class CreateQuizModalComponent implements OnInit {
   navigateToQuizDetailsPage() {
     this.router.navigate([
       NavigationRoutes.QUIZ,
-      `${this.quizId}`,
+      `${this.newQuizId}`,
       NavigationRoutes.DETAILS
     ]);
   }
