@@ -14,7 +14,7 @@ export class ModalQuizService {
   constructor(private modalService: ModalService) {}
 
   showInitQuizModal(data: ModalDataInterface): void {
-    this.modalService.showModal(CreateQuizModalComponent, data);
+    this.modalService.showCreateModal(CreateQuizModalComponent, data);
   }
 
   showConfirmModal(data: confirmModalInterface): void {

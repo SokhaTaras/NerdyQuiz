@@ -11,7 +11,7 @@ import {
 export class ModalService {
   constructor(private modalService: NzModalService) {}
 
-  showModal(component: any, data?: ModalDataInterface): void {
+  showCreateModal(component: any, data?: ModalDataInterface): void {
     this.modalService.create({
       nzContent: component,
       nzFooter: null,
