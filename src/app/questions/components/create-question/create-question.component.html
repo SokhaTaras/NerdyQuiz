@@ -1,32 +1,31 @@
 <div class="flex-col py-3.5">
   <form class="flex-auto">
     <div class="modal-title">
-      <quiz-app-input [control]="title" [title]="'Title'" [placeHolder]="PlaceHolder.title"></quiz-app-input>
+      <quiz-app-input [control]="title" label="Title" [placeHolder]="PlaceHolder.title"></quiz-app-input>
     </div>
     <div class="flex justify-center items-center h-20 labels">
       <div class="flex justify-center w-3/5 overflow-hidden">
         <div class="flex justify-center w-1/2 p-2">
-          <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [title]="difficulty.value"></quiz-app-dropdown>
+          <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [label]="difficulty.value"></quiz-app-dropdown>
         </div>
         <div class="flex justify-center w-1/2 p-2">
-          <quiz-app-dropdown class="pr-2.5" [control]="type" [list]="typeList" [title]="type.value"></quiz-app-dropdown>
+          <quiz-app-dropdown class="pr-2.5" [control]="type" [list]="typeList" [label]="type.value"></quiz-app-dropdown>
         </div>
       </div>
     </div>
-
     <div class="variants" *ngIf="!isBoolean">
-      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant1" [title]="'Answer 1'" [placeHolder]="PlaceHolder.answer"></quiz-app-input>
-      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant2" [title]="'Answer 2'" [placeHolder]="PlaceHolder.answer"></quiz-app-input>
-      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant3" [title]="'Answer 3'" [placeHolder]="PlaceHolder.answer"></quiz-app-input>
+      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant1" label="Answer 1" [placeHolder]="PlaceHolder.answer"></quiz-app-input>
+      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant2" label="Answer 2" [placeHolder]="PlaceHolder.answer"></quiz-app-input>
+      <quiz-app-input class="m-1" [control]="multipleVariantsGroup.controls.variant3" label="Answer 3" [placeHolder]="PlaceHolder.answer"></quiz-app-input>
     </div>
     <div class="correct" *ngIf="!isBoolean">
-      <quiz-app-input [control]="correctAnswer" [title]="'Correct answer'" [placeHolder]="PlaceHolder.correctAnswer"></quiz-app-input>
+      <quiz-app-input [control]="correctAnswer" label="Correct answer" [placeHolder]="PlaceHolder.correctAnswer"></quiz-app-input>
     </div>
     <div class="flex justify-center items-center h-20 text-xl" *ngIf="isBoolean">
       <div class="flex justify-center w-3/5">
         <div class="flex justify-center items-center w-3/5">
           <p class="m-2.5">Correct answer: </p>
-          <quiz-app-dropdown class="m-1" [control]="correctBooleanAnswer" [list]="booleanList" [title]="correctBooleanAnswer.value"></quiz-app-dropdown>
+          <quiz-app-dropdown class="m-1" [control]="correctBooleanAnswer" [list]="booleanList" [label]="correctBooleanAnswer.value"></quiz-app-dropdown>
         </div>
       </div>
     </div>

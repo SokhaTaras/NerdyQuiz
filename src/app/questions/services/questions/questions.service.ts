@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Question } from '../../interfaces/question.interface';
+
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
+
+import { Question } from '../../interfaces/question.interface';
 import { StorageError } from '../../../shared/classes/storageError/storage-error';
 import { StorageErrorMessage } from '../../../shared/enums/storageErrorMessage';
 import { StorageKey } from '../../../shared/enums/storageKey';
@@ -11,7 +13,7 @@ import { StorageKey } from '../../../shared/enums/storageKey';
 export class QuestionsService {
   constructor(private quizService: QuizService) {}
 
-  addQuestion(quizId: string | undefined, question: Question): void {
+  addQuestion(quizId: string, question: Question): void {
     const currentQuizzes = [...this.quizService.quizzes$.value];
     const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
 
@@ -22,7 +24,7 @@ export class QuestionsService {
     }
   }
 
-  getQuizQuestions(quizId: string | undefined): Question[] | undefined {
+  getQuizQuestions(quizId: string): Question[] | undefined {
     const currentQuiz = this.quizService.getQuizById(quizId);
     const questions: Question[] | undefined = currentQuiz?.questions;
     return questions;
@@ -42,7 +44,7 @@ export class QuestionsService {
     }
   }
 
-  geNewQuestionId(): string {
+  getNewQuestionId(): string {
     const hexadecimalSystem = 16;
     return new Date().getTime().toString(hexadecimalSystem);
   }

@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { QuizService } from '../../services/quiz/quiz.service';
-import { Quiz } from '../../interfaces/quiz.interface';
-import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
+
+import { Quiz } from '../../interfaces/quiz.interface';
 import { ModalDataInterface } from '../../../shared/interfaces/modalData.interface';
 
 @Component({
@@ -12,7 +14,7 @@ import { ModalDataInterface } from '../../../shared/interfaces/modalData.interfa
 })
 export class QuizDetailsComponent implements OnInit, OnDestroy {
   initialQuiz: Quiz | undefined;
-  id: string | undefined;
+  id: string;
 
   private routeSub: Subscription = new Subscription();
 

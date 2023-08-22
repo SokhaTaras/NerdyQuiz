@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { QuizzesRoutingModule } from './quizzes-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { QuestionsModule } from '../questions/questions.module';
 
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { CreateQuizModalComponent } from './create-quiz-modal.component';
 
 describe('InitQuizModalComponent', () => {

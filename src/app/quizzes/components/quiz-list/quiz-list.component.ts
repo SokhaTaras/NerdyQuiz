@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
+
 import { ModalDataInterface } from '../../../shared/interfaces/modalData.interface';
 
 @Component({

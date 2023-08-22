@@ -13,3 +13,7 @@ export interface wrongAnswers {
   variant2?: string | boolean;
   variant3?: string;
 }
+
+export interface Answer {
+  isCorrect: boolean;
+}

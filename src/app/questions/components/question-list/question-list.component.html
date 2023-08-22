@@ -1,15 +1,15 @@
 <div class="container mx-auto mt-16 max-w-screen-xl">
   <div class=" flex justify-center items-center h-8 mb-2">
-    <button class="btn-add" (click)="displayCreateQuestionForm()">
+    <button class="btn-add" (click)="toggleQuestionCreation()">
       Add new question
     </button>
   </div>
   <div class="question-list flex-col justify-center">
     <div class="m-2.5 p-2.5" *ngIf="displayCreateQuestion">
-      <quiz-app-create-question [quizId]="quizId"  (displayFalse)="hideCreateQuestion()"></quiz-app-create-question>
+      <quiz-app-create-question [quizId]="quizId" (displayFalse)="toggleQuestionCreation()"></quiz-app-create-question>
     </div>
     <div class="m-2.5 p-2.5">
-      <quiz-app-question-card class="" [quizId]="quizId" [questionIndex]="index" [question]="question" *ngFor="let question of allQuestions; let index = index"></quiz-app-question-card>
+      <quiz-app-question-card [quizId]="quizId" [questionIndex]="index" [question]="question" *ngFor="let question of allQuestions; let index = index"></quiz-app-question-card>
     </div>
   </div>
 </div>

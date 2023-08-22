@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import { Quiz } from '../../interfaces/quiz.interface';
 
 @Component({
@@ -7,5 +8,5 @@ import { Quiz } from '../../interfaces/quiz.interface';
   styleUrls: ['./quiz-card.component.scss']
 })
 export class QuizCardComponent {
-  @Input() quiz: Quiz | undefined;
+  @Input() quiz: Quiz;
 }

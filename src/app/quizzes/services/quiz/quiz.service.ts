@@ -11,8 +11,6 @@ import { StorageKey } from '../../../shared/enums/storageKey';
 export class QuizService {
   public quizzes$ = new BehaviorSubject<Quiz[]>([]);
 
-  constructor() {}
-
   addQuiz(key: string, quiz: Quiz): void {
     try {
       if (quiz !== null) {
@@ -32,13 +30,12 @@ export class QuizService {
     if (quizIndex !== -1) {
       currentQuizzes[quizIndex].title = data.title;
       currentQuizzes[quizIndex].type = data.type;
-      console.log('currQuiz after', currentQuizzes[quizIndex]);
       this.quizzes$.next(currentQuizzes);
       this.updateLocalStorage();
     }
   }
 
-  getQuizById(id: string | undefined): Quiz | undefined {
+  getQuizById(id: string): Quiz | undefined {
     return this.quizzes$.value.find((q) => q.id == id);
   }
 

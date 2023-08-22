@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Question } from '../../interfaces/question.interface';
+
 import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
+
+import { Question } from '../../interfaces/question.interface';
 import { confirmModalInterface } from '../../../shared/interfaces/modalData.interface';
 
 @Component({
@@ -8,9 +10,9 @@ import { confirmModalInterface } from '../../../shared/interfaces/modalData.inte
   templateUrl: './question-card.component.html'
 })
 export class QuestionCardComponent {
-  @Input() question: Question | undefined;
-  @Input() questionIndex: number | undefined;
-  @Input() quizId: string | undefined;
+  @Input() question: Question;
+  @Input() questionIndex: number;
+  @Input() quizId: string;
 
   constructor(private modalQuizService: ModalQuizService) {}
 

@@ -7,7 +7,7 @@ import { AbstractControl, FormControl } from '@angular/forms';
 })
 export class ErrorMessageComponent implements OnInit {
   @Input() control: AbstractControl = new FormControl();
-  errorMessage: string | undefined;
+  errorMessage: string;
 
   ngOnInit(): void {
     this.subscribeToControlStatusChanges();

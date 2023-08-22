@@ -5,39 +5,37 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import {
-  BooleanQuestionForm,
-  MultipleQuestionForm,
-  QuestionForm
-} from '../../../shared/interfaces/forms.interface';
-import {
-  QuestionBoolean,
-  QuestionDifficulty,
-  QuestionType
-} from '../../interfaces/drowdown.interface';
+
 import {
   BooleanList,
   DifficultyList,
   TypeList
 } from '../../constants/dropdonws';
+
+import {
+  BooleanQuestionForm,
+  MultipleQuestionForm,
+  QuestionForm
+} from '../../../shared/interfaces/forms.interface';
 import { Question, wrongAnswers } from '../../interfaces/question.interface';
 import { QuestionsService } from '../../services/questions/questions.service';
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
+import { Translations } from '../../../shared/types/translations.type';
 
 @Component({
   selector: 'quiz-app-create-question',
   templateUrl: './create-question.component.html'
 })
 export class CreateQuestionComponent implements OnInit {
+  @Input() quizId: string = '';
   @Output() displayFalse: EventEmitter<void> = new EventEmitter();
-  @Input() quizId: string | undefined = '';
 
   public questionForm!: FormGroup<QuestionForm>;
 
-  difficultyList: QuestionDifficulty[] = DifficultyList;
-  typeList: QuestionType[] = TypeList;
-  booleanList: QuestionBoolean[] = BooleanList;
-  isBoolean: boolean | undefined;
+  difficultyList: Translations = DifficultyList;
+  typeList: Translations = TypeList;
+  booleanList: Translations = BooleanList;
+  isBoolean: boolean;
 
   protected readonly PlaceHolder = PlaceHolder;
 
@@ -73,19 +71,22 @@ export class CreateQuestionComponent implements OnInit {
     private questionService: QuestionsService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    console.log(this.typeList);
     this.initForm();
     this.updateIsBoolean();
   }
 
-  initForm() {
+  private initForm() {
     this.questionForm = this.fb.group<QuestionForm>({
       title: new FormControl('', [
         Validators.required,
         Validators.minLength(2)
       ]),
-      type: new FormControl(this.typeList[1].nameEn, [Validators.required]),
-      difficulty: new FormControl(this.difficultyList[0].nameEn, [
+      type: new FormControl(this.typeList['boolean'][0].text, [
+        Validators.required
+      ]),
+      difficulty: new FormControl(this.difficultyList['easy'][0].text, [
         Validators.required
       ]),
 
@@ -106,7 +107,7 @@ export class CreateQuestionComponent implements OnInit {
 
   updateIsBoolean(): void {
     this.questionForm.controls?.type.valueChanges.subscribe((selectedType) => {
-      const booleanType = this.typeList[0].nameEn;
+      const booleanType = this.typeList[0][0].text;
       this.isBoolean = selectedType === booleanType;
       this.updateValidators();
     });
@@ -144,7 +145,7 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   formQuestionToObject(): Question {
-    const questionId: string = this.questionService.geNewQuestionId();
+    const questionId: string = this.questionService.getNewQuestionId();
     const question: Question = {
       title: this.questionForm.controls.title.value as string,
       correctAnswer: this.questionForm.controls.multipleVariants.controls

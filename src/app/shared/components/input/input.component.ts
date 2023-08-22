@@ -18,7 +18,7 @@ import {
 })
 export class InputComponent implements ControlValueAccessor {
   @Input() control: FormControl = new FormControl();
-  @Input() title: string = '';
+  @Input() label: string = '';
   @Input() placeHolder: string = '';
 
   onChange: any = (): void => {};

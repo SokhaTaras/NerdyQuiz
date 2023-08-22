@@ -5,13 +5,15 @@ import {
   FormBuilder,
   Validators
 } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { QuizService } from '../../services/quiz/quiz.service';
+import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
+
 import { InitQuizForm } from '../../../shared/interfaces/forms.interface';
 import { Quiz } from '../../interfaces/quiz.interface';
 import { StorageKey } from '../../../shared/enums/storageKey';
 import { NavigationRoutes } from '../../../shared/enums/navigationRoutes';
-import { QuizService } from '../../services/quiz/quiz.service';
-import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
-import { Router } from '@angular/router';
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { ModalDataInterface } from '../../../shared/interfaces/modalData.interface';
 
@@ -20,11 +22,11 @@ import { ModalDataInterface } from '../../../shared/interfaces/modalData.interfa
   templateUrl: './create-quiz-modal.component.html'
 })
 export class CreateQuizModalComponent implements OnInit {
-  @Input() inputData: ModalDataInterface | undefined;
+  @Input() inputData: ModalDataInterface;
   protected readonly PlaceHolder = PlaceHolder;
 
   public initQuizForm!: FormGroup<InitQuizForm>;
-  newQuizId: string | undefined;
+  newQuizId: string;
 
   get title() {
     return this.initQuizForm.controls.title;

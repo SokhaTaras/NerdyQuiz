@@ -1,13 +1,11 @@
 import { Component, Input } from '@angular/core';
 import {
-  QuestionDifficulty,
-  QuestionType
-} from '../../../questions/interfaces/drowdown.interface';
-import {
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
+
+import { Translations } from '../../types/translations.type';
 
 @Component({
   selector: 'quiz-app-dropdown',
@@ -21,8 +19,8 @@ import {
   ]
 })
 export class DropdownComponent implements ControlValueAccessor {
-  @Input() list: QuestionDifficulty[] | QuestionType[] | undefined;
-  @Input() title: string | null | undefined | boolean;
+  @Input() list: Translations = {};
+  @Input() label: string | null | boolean;
   @Input() control: FormControl = new FormControl();
 
   onChange: any = (): void => {};
@@ -40,7 +38,7 @@ export class DropdownComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  selectItem(item: QuestionDifficulty | QuestionType | string) {
+  selectItem(item: string) {
     this.control.setValue(item);
     this.onChange(item);
     this.onTouched();

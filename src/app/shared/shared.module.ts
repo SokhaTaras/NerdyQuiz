@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 import { InputComponent } from './components/input/input.component';
 import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
