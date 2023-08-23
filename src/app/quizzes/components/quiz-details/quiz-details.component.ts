@@ -1,22 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
-
 import { Quiz } from '../../interfaces/quiz.interface';
-import { ModalDataInterface } from '../../../shared/interfaces/modalData.interface';
 
 @Component({
   selector: 'quiz-app-quiz-details',
   templateUrl: './quiz-details.component.html'
 })
-export class QuizDetailsComponent implements OnInit, OnDestroy {
+export class QuizDetailsComponent implements OnInit {
   initialQuiz: Quiz | undefined;
-  id: string;
-
-  private routeSub: Subscription = new Subscription();
+  id: string | null;
 
   constructor(
     private quizService: QuizService,
@@ -30,9 +25,7 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
   }
 
   getCurrentQuizId(): void {
-    this.routeSub = this.route.params.subscribe(
-      (params) => (this.id = params['id'])
-    );
+    this.id = this.route.snapshot.paramMap.get('id');
   }
 
   getCurrentQuiz(): Quiz | undefined {
@@ -41,16 +34,12 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
 
   //TODO change hardcode when json with text will be ready
   openEditPopUp(): void {
-    const data: ModalDataInterface = {
-      title: 'Edit quiz',
+    const data: any = {
+      label: 'Edit quiz',
       buttonText: 'Edit',
-      currentQuizId: this.id as string,
-      isSave: false
+      isSave: false,
+      quizId: this.id as string
     };
     this.modalQuiz.showInitQuizModal(data);
-  }
-
-  ngOnDestroy(): void {
-    this.routeSub.unsubscribe();
   }
 }

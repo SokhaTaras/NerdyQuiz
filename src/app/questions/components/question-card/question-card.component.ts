@@ -3,7 +3,6 @@ import { Component, Input } from '@angular/core';
 import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
 
 import { Question } from '../../interfaces/question.interface';
-import { confirmModalInterface } from '../../../shared/interfaces/modalData.interface';
 
 @Component({
   selector: 'quiz-app-question-card',
@@ -12,12 +11,12 @@ import { confirmModalInterface } from '../../../shared/interfaces/modalData.inte
 export class QuestionCardComponent {
   @Input() question: Question;
   @Input() questionIndex: number;
-  @Input() quizId: string;
+  @Input() quizId: string | null;
 
   constructor(private modalQuizService: ModalQuizService) {}
 
   deleteQuestionConfirm(): void {
-    const data: confirmModalInterface = {
+    const data: any = {
       text: 'Are you sure you want delete question?',
       buttonText: 'Confirm',
       questionIndex: this.questionIndex as number,

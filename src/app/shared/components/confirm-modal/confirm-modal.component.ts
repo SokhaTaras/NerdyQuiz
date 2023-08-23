@@ -1,25 +1,25 @@
 import { Component, Input } from '@angular/core';
 
-import { confirmModalInterface } from '../../interfaces/modalData.interface';
 import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
-import { QuestionsService } from '../../../questions/services/questions/questions.service';
+import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 
 @Component({
   selector: 'quiz-app-confirm-modal',
   templateUrl: './confirm-modal.component.html'
 })
 export class ConfirmModalComponent {
-  @Input() inputData: confirmModalInterface;
+  @Input() text: string;
+  @Input() buttonText: string;
+  @Input() questionIndex: number;
+  @Input() quizId: string;
 
   constructor(
     private modalQuiz: ModalQuizService,
-    private questionService: QuestionsService
+    private quizService: QuizService
   ) {}
 
   deleteQuiz(): void {
-    const quizId = this.inputData?.quizId;
-    const questionIndex = this.inputData?.questionIndex;
-    this.questionService.deleteQuestion(quizId, questionIndex);
+    this.quizService.deleteQuestion(this.quizId, this.questionIndex);
     this.modalQuiz.closeModal();
   }
 }

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { QuestionsService } from '../../services/questions/questions.service';
-
+import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { Question } from '../../interfaces/question.interface';
 
 @Component({
@@ -9,22 +8,33 @@ import { Question } from '../../interfaces/question.interface';
   templateUrl: './question-list.component.html'
 })
 export class QuestionListComponent implements OnInit {
-  @Input() quizId: string;
+  @Input() quizId: string | null;
 
-  displayCreateQuestion: boolean = false;
+  displayCreateQuestion = false;
+  isBoolean: boolean;
   allQuestions: Question[] | undefined;
 
-  constructor(private questionService: QuestionsService) {}
+  constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
     this.initQuestions();
   }
 
   initQuestions(): void {
-    this.allQuestions = this.questionService.getQuizQuestions(this.quizId);
+    this.allQuestions = this.quizService.getQuizQuestions(this.quizId);
   }
 
   toggleQuestionCreation() {
     this.displayCreateQuestion = !this.displayCreateQuestion;
+  }
+
+  showBooleanCreation(): void {
+    this.isBoolean = true;
+    this.displayCreateQuestion = true;
+  }
+
+  showMultipleCreation(): void {
+    this.isBoolean = false;
+    this.displayCreateQuestion = true;
   }
 }

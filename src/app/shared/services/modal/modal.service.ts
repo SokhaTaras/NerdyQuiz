@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
-import {
-  confirmModalInterface,
-  ModalDataInterface
-} from '../../interfaces/modalData.interface';
+import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +9,24 @@ import {
 export class ModalService {
   constructor(private modalService: NzModalService) {}
 
-  showCreateModal(component: any, data?: ModalDataInterface): void {
+  showModal(component: any, data?: any): void {
     this.modalService.create({
       nzContent: component,
       nzFooter: null,
       nzCentered: true,
       nzComponentParams: {
-        inputData: data
+        ...data
       }
     });
   }
 
-  showConfirmModal(component: any, data: confirmModalInterface): void {
+  showConfirmModal(data: any): void {
     this.modalService.confirm({
-      nzContent: component,
+      nzContent: ConfirmModalComponent,
       nzCentered: true,
       nzFooter: null,
       nzComponentParams: {
-        inputData: data
+        ...data
       }
     });
   }

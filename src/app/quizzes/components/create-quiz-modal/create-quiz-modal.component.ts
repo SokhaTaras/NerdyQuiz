@@ -9,20 +9,23 @@ import { Router } from '@angular/router';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
-
+import { getNewQuizId } from '../../../shared/utils/getId';
 import { InitQuizForm } from '../../../shared/interfaces/forms.interface';
 import { Quiz } from '../../interfaces/quiz.interface';
 import { StorageKey } from '../../../shared/enums/storageKey';
 import { NavigationRoutes } from '../../../shared/enums/navigationRoutes';
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { ModalDataInterface } from '../../../shared/interfaces/modalData.interface';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
   templateUrl: './create-quiz-modal.component.html'
 })
 export class CreateQuizModalComponent implements OnInit {
-  @Input() inputData: ModalDataInterface;
+  @Input() quizId: string;
+  @Input() label: string;
+  @Input() isSave: boolean;
+  @Input() buttonText: string;
+
   protected readonly PlaceHolder = PlaceHolder;
 
   public initQuizForm!: FormGroup<InitQuizForm>;
@@ -45,7 +48,7 @@ export class CreateQuizModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.newQuizId = this.quizService.getNewQuizId();
+    this.newQuizId = getNewQuizId();
   }
 
   initForm(): void {
@@ -58,13 +61,13 @@ export class CreateQuizModalComponent implements OnInit {
     });
   }
 
-  getInitialQuizObject(form: FormGroup): Quiz {
+  getInitialQuizObject(quizInitForm: FormGroup<InitQuizForm>): Quiz {
     const quiz: Quiz = {
-      title: form.get('title')?.value,
-      theme: form.get('theme')?.value,
+      title: quizInitForm.controls.title.value as string,
+      theme: quizInitForm.controls.theme.value as string,
       type: '',
       questions: [],
-      id: this.newQuizId as string
+      id: this.newQuizId
     };
 
     return quiz;
@@ -72,7 +75,7 @@ export class CreateQuizModalComponent implements OnInit {
 
   editQuiz(): void {
     this.quizService.editQuiz(
-      this.inputData?.currentQuizId,
+      this?.quizId,
       this.getInitialQuizObject(this.initQuizForm)
     );
     this.quizModal.closeModal();

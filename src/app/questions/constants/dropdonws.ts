@@ -28,11 +28,11 @@ export const DifficultyList: Translations = {
 
 export const BooleanList: Translations = {
   true: [
-    { lang: 'en', text: 'true' },
+    { lang: 'en', text: 'True' },
     { lang: 'ua', text: 'Істина' }
   ],
   false: [
-    { lang: 'en', text: 'false' },
+    { lang: 'en', text: 'False' },
     { lang: 'ua', text: 'Хибно' }
   ]
 };

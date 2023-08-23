@@ -7,7 +7,7 @@ import { StorageErrorMessage } from '../../enums/storageErrorMessage';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  private updateLocalStorage(value: any): void {
+  updateLocalStorage(value: any): void {
     try {
       localStorage.setItem(StorageKey.QUIZZES, JSON.stringify(value));
     } catch (error) {

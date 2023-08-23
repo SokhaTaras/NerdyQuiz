@@ -1,0 +1,28 @@
+<div>
+  <form [formGroup]="multipleQuestionForm">
+    <div class="modal-title">
+      <quiz-app-input [control]="title" label="Title" [placeHolder]="PlaceHolder.title"></quiz-app-input>
+    </div>
+    <div class="flex justify-center items-center h-20 labels">
+      <div class="flex justify-center w-3/5 overflow-hidden">
+        <div class="flex justify-center w-1/2 p-2">
+          <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [label]="difficulty.value"></quiz-app-dropdown>
+        </div>
+      </div>
+    </div>
+    <div>
+      <ng-container formArrayName="answers" class="py-10">
+       <ng-container *ngFor="let answer of answersFormArray.controls; let index = index">
+        <quiz-app-input class="m-10" [label]="'Answer : ' + (index + 1)" [control]="answersControl[index].controls.text" ></quiz-app-input>
+         <quiz-app-check-box [control]="answersControl[index].controls.isCorrect" [id]="index+1"></quiz-app-check-box>
+<!--         <label [formControl]="answersControl[index].controls.isCorrect" nz-checkbox></label>-->
+       </ng-container>
+      </ng-container>
+    </div>
+  </form>
+  <div class="flex justify-center items-center h-8 my-10">
+    <button type="button" class="btn-add btn-pop-up"  [disabled]="answerLength >= maxQuestionsAmount" (click)="addAnswer()">
+      Add answer
+    </button>
+  </div>
+</div>
