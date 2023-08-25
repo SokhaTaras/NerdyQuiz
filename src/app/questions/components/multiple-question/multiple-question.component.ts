@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -18,12 +18,16 @@ import { maxQuestions } from '../../constants/max-questions';
   templateUrl: './multiple-question.component.html'
 })
 export class MultipleQuestionComponent implements OnInit {
+  @Output() saveMultipleFormEvent: EventEmitter<
+    FormGroup<MultipleQuestionForm>
+  > = new EventEmitter<FormGroup<MultipleQuestionForm>>();
+
+  multipleQuestionForm: FormGroup<MultipleQuestionForm>;
+
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
   protected readonly typeList = TypeList;
   protected readonly maxQuestionsAmount = maxQuestions;
-
-  multipleQuestionForm: FormGroup<MultipleQuestionForm>;
 
   get title(): FormControl {
     return this.multipleQuestionForm.controls.title;
@@ -47,22 +51,31 @@ export class MultipleQuestionComponent implements OnInit {
 
   get answersControl(): AnswersFormType[] {
     const formArray = this.multipleQuestionForm.controls.answers;
-    return formArray.controls as AnswersFormType[];
+    return formArray.controls;
   }
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.initCheckboxes();
+    this.subscribeToMultipleQuestionFormChanges();
   }
 
   addAnswer(): void {
     const answer: AnswersFormType = this.generateNewAnswer('', false);
     this.answersControl.push(answer);
     this.initCheckboxes();
+    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
   }
 
-  initCheckboxes(): void {
+  private subscribeToMultipleQuestionFormChanges(): void {
+    this.multipleQuestionForm.valueChanges.subscribe(() =>
+      this.saveMultipleFormEvent.emit(this.multipleQuestionForm)
+    );
+  }
+
+  private initCheckboxes(): void {
     this.answersFormArray.controls.forEach((control, index) => {
       control.valueChanges.subscribe((checked) => {
         if (checked.isCorrect) {

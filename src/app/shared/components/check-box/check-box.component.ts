@@ -3,8 +3,7 @@ import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'quiz-app-check-box',
-  templateUrl: './check-box.component.html',
-  styleUrls: ['./check-box.component.scss']
+  templateUrl: './check-box.component.html'
 })
 export class CheckBoxComponent implements OnInit {
   @Input() id: number;

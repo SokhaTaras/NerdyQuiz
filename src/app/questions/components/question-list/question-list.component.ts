@@ -12,16 +12,12 @@ export class QuestionListComponent implements OnInit {
 
   displayCreateQuestion = false;
   isBoolean: boolean;
-  allQuestions: Question[] | undefined;
+  allQuestions: Question[];
 
   constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
     this.initQuestions();
-  }
-
-  initQuestions(): void {
-    this.allQuestions = this.quizService.getQuizQuestions(this.quizId);
   }
 
   toggleQuestionCreation() {
@@ -36,5 +32,13 @@ export class QuestionListComponent implements OnInit {
   showMultipleCreation(): void {
     this.isBoolean = false;
     this.displayCreateQuestion = true;
+  }
+
+  private initQuestions(): void {
+    this.quizService.quizzes$.subscribe((): Question[] => {
+      return (this.allQuestions = this.quizService.getQuizQuestions(
+        this.quizId
+      ));
+    });
   }
 }

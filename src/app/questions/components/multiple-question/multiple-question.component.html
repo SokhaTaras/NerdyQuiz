@@ -12,11 +12,14 @@
     </div>
     <div>
       <ng-container formArrayName="answers" class="py-10">
-       <ng-container *ngFor="let answer of answersFormArray.controls; let index = index">
-        <quiz-app-input class="m-10" [label]="'Answer : ' + (index + 1)" [control]="answersControl[index].controls.text" ></quiz-app-input>
-         <quiz-app-check-box [control]="answersControl[index].controls.isCorrect" [id]="index+1"></quiz-app-check-box>
-<!--         <label [formControl]="answersControl[index].controls.isCorrect" nz-checkbox></label>-->
-       </ng-container>
+        <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
+          <div class="flex items-center">
+
+            <quiz-app-input class="m-10 w-full" [label]="'Answer : ' + (index + 1)" [control]="answersControl[index].controls.text"></quiz-app-input>
+            <quiz-app-check-box class="w-1/10 pt-7" [control]="answersControl[index].controls.isCorrect" [id]="index+1"></quiz-app-check-box>
+
+          </div>
+        </ng-container>
       </ng-container>
     </div>
   </form>

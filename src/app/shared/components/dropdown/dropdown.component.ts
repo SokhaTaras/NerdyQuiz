@@ -20,7 +20,7 @@ import { Translations } from '../../types/translations.type';
 })
 export class DropdownComponent implements ControlValueAccessor {
   @Input() list: Translations = {};
-  @Input() label: string | null | boolean;
+  @Input() label: string | boolean;
   @Input() control: FormControl = new FormControl();
 
   onChange: any = (): void => {};
@@ -38,7 +38,7 @@ export class DropdownComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  selectItem(item: string) {
+  selectItem(item: string): void {
     this.control.setValue(item);
     this.onChange(item);
     this.onTouched();

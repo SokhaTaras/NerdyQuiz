@@ -22,17 +22,18 @@ body {
   background-image: var(--background-image-hover);
 }
 
-.ant-modal-confirm-btns{
+.ant-modal-confirm-btns {
   display: none;
 }
 
-.anticon-question-circle{
+.anticon-question-circle {
   display: none;
 }
 
-.ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content{
+.ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
   margin-left: 0;
 }
+
 
 @layer components {
   .btn-pop-up {
@@ -80,6 +81,5 @@ body {
     --background-image: linear-gradient(to bottom, #dcdcff, #c7c7ff);
     --background-image-hover: linear-gradient(to bottom, #c7c7ff, #b3b3ff);
     --border-radius: 10px;
-    --btn-delete-hover: #FECDD3
   }
 }

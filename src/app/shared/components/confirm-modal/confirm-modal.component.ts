@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
-import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
-import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
+import { ModalRefFacadeService } from '../../services/modal-ref-facade/modal-ref-facade.service';
 
 @Component({
   selector: 'quiz-app-confirm-modal',
-  templateUrl: './confirm-modal.component.html'
+  templateUrl: './confirm-modal.component.html',
+  providers: [ModalRefFacadeService]
 })
 export class ConfirmModalComponent {
   @Input() text: string;
@@ -13,13 +13,9 @@ export class ConfirmModalComponent {
   @Input() questionIndex: number;
   @Input() quizId: string;
 
-  constructor(
-    private modalQuiz: ModalQuizService,
-    private quizService: QuizService
-  ) {}
+  constructor(private modalRefFacadeService: ModalRefFacadeService) {}
 
-  deleteQuiz(): void {
-    this.quizService.deleteQuestion(this.quizId, this.questionIndex);
-    this.modalQuiz.closeModal();
+  close(isConfirm: boolean): void {
+    this.modalRefFacadeService.close(isConfirm);
   }
 }

@@ -1,169 +1,106 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
-import { DifficultyList, TypeList } from '../../constants/dropdonws';
-import { QuestionForm } from '../../../shared/interfaces/forms.interface';
-import { Question } from '../../interfaces/question.interface';
-import { Translations } from '../../../shared/types/translations.type';
-import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { getNewQuestionId } from '../../../shared/utils/getId';
+import {
+  BooleanQuestionForm,
+  MultipleQuestionForm
+} from '../../../shared/interfaces/forms.interface';
+import { Answer, Question } from '../../interfaces/question.interface';
+import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 
 @Component({
   selector: 'quiz-app-create-question',
   templateUrl: './create-question.component.html'
 })
-export class CreateQuestionComponent implements OnInit, OnDestroy {
+export class CreateQuestionComponent {
   @Input() quizId: string | null;
   @Input() isBoolean: boolean;
   @Output() displayFalse: EventEmitter<void> = new EventEmitter();
 
-  public questionForm!: FormGroup<QuestionForm>;
+  booleanQuestionForm: FormGroup<BooleanQuestionForm>;
+  multipleQuestionForm: FormGroup<MultipleQuestionForm>;
 
-  difficultyList: Translations = DifficultyList;
-  typeList: Translations = TypeList;
-
-  private typeSubscription: Subscription;
-
-  get title() {
-    return this.questionForm.controls.title;
+  get multipleTitle(): string {
+    return this.multipleQuestionForm.controls.title.value;
   }
 
-  get difficulty() {
-    return this.questionForm.controls.difficulty;
+  get multipleType(): string {
+    return this.multipleQuestionForm.controls.type.value;
   }
 
-  get type() {
-    return this.questionForm.controls.type;
-  }
-  // get correctAnswer() {
-  //   return this.questionForm.controls.multipleVariants.controls.correctAnswer;
-  // }
-  //
-  // get correctBooleanAnswer() {
-  //   return this.questionForm.controls.booleanVariants.controls
-  //     .correctBooleanAnswer;
-  // }
-  //
-  // get multipleVariantsGroup() {
-  //   return this.questionForm.controls.multipleVariants;
-  // }
-  // get booleanVariantsGroup() {
-  //   return this.questionForm.controls.booleanVariants;
-  // }
-
-  constructor(
-    private fb: FormBuilder,
-    private quizService: QuizService
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-    this.updateIsBoolean();
+  get multipleDifficulty(): string {
+    return this.multipleQuestionForm.controls.difficulty.value;
   }
 
-  updateIsBoolean(): void {
-    this.typeSubscription =
-      this.questionForm.controls?.type.valueChanges.subscribe(
-        (selectedType) => {
-          const booleanType = this.typeList['boolean'][0].text;
-          this.isBoolean = selectedType === booleanType;
-          // this.updateValidators();
-        }
-      );
+  get booleanTitle(): string {
+    return this.booleanQuestionForm.controls.title.value;
   }
 
-  // updateValidators(): void {
-  //   if (this.isBoolean) {
-  //     this.multipleVariantsGroup.controls.correctAnswer.clearValidators();
-  //     this.booleanVariantsGroup.controls.correctBooleanAnswer.setValidators([
-  //       Validators.required
-  //     ]);
-  //   } else {
-  //     this.booleanVariantsGroup.controls.correctBooleanAnswer.clearValidators();
-  //     this.multipleVariantsGroup.controls.correctAnswer.setValidators([
-  //       Validators.required
-  //     ]);
-  //     this.multipleVariantsGroup.controls.variant1.setValidators([
-  //       Validators.required
-  //     ]);
-  //     this.multipleVariantsGroup.controls.variant2.setValidators([
-  //       Validators.required
-  //     ]);
-  //     this.multipleVariantsGroup.controls.variant3.setValidators([
-  //       Validators.required
-  //     ]);
-  //   }
-  //
-  //   this.multipleVariantsGroup.controls.correctAnswer.updateValueAndValidity();
-  //   this.booleanVariantsGroup.controls.correctBooleanAnswer.updateValueAndValidity();
-  // }
+  get booleanType(): string {
+    return this.booleanQuestionForm.controls.type.value;
+  }
+
+  get booleanDifficulty(): string {
+    return this.booleanQuestionForm.controls.difficulty.value;
+  }
+
+  get BooleanCorrectAnswer(): string {
+    return this.booleanQuestionForm.controls.correctAnswer.value;
+  }
+
+  constructor(private quizService: QuizService) {}
+
+  getBooleanQuestionForm(event: any): void {
+    this.booleanQuestionForm = event;
+  }
+
+  getMultipleQuestionForm(event: any): void {
+    this.multipleQuestionForm = event;
+  }
 
   saveQuestion(): void {
-    this.displayFalse.emit();
     this.quizService.addQuestion(this.quizId, this.formQuestionToObject());
-  }
-
-  formQuestionToObject(): Question {
-    const questionId: string = getNewQuestionId();
-    const question: Question = {
-      title: this.questionForm.controls.title.value as string,
-      // correctAnswer: this.questionForm.controls.multipleVariants.controls
-      //   .correctAnswer.value as string,
-      // correctBooleanAnswer: this.questionForm.controls.booleanVariants.controls
-      //   .correctBooleanAnswer.value as boolean,
-      type: this.questionForm.controls.type.value as string,
-      difficulty: this.questionForm.controls.difficulty.value as string,
-      id: questionId
-    };
-
-    return question;
+    this.displayFalse.emit();
   }
 
   cancelQuestion(): void {
     this.displayFalse.emit();
   }
 
-  private initForm() {
-    this.questionForm = this.fb.group<QuestionForm>({
-      title: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2)
-      ]),
-      type: new FormControl(this.typeList['multiple'][0].text, [
-        Validators.required
-      ]),
-      difficulty: new FormControl(this.difficultyList['easy'][0].text, [
-        Validators.required
-      ])
+  private formQuestionToObject(): Question {
+    const questionId: string = getNewQuestionId();
 
-      // booleanVariants: this.fb.group<BooleanQuestionForm>({
-      //   correctBooleanAnswer: new FormControl(true),
-      //   variant1: new FormControl(true)
-      // }),
-      //
-      // multipleVariants: this.fb.group<MultipleQuestionForm>({
-      //   correctAnswer: new FormControl(null),
-      //   variant1: new FormControl(''),
-      //   variant2: new FormControl(''),
-      //   variant3: new FormControl('')
-      // })
-    });
+    if (this.multipleQuestionForm) {
+      const multipleQuestion: Question = {
+        title: this.multipleTitle,
+        type: this.multipleType,
+        difficulty: this.multipleDifficulty,
+        answers: this.getMultipleAnswers(),
+        id: questionId
+      };
+
+      return multipleQuestion;
+    } else {
+      const booleanQuestion: Question = {
+        title: this.booleanTitle,
+        type: this.booleanType,
+        difficulty: this.booleanDifficulty,
+        answers: this.BooleanCorrectAnswer,
+        id: questionId
+      };
+
+      return booleanQuestion;
+    }
   }
 
-  ngOnDestroy() {
-    this.typeSubscription.unsubscribe();
+  private getMultipleAnswers(): Answer[] {
+    const answersArray: Answer[] =
+      this.multipleQuestionForm.controls.answers.controls.map((answerForm) => {
+        const text = answerForm.controls.text.value;
+        const isCorrect = answerForm.controls.isCorrect.value;
+        return { text, isCorrect };
+      });
+    return answersArray;
   }
 }

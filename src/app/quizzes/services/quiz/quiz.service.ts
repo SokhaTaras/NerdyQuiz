@@ -38,7 +38,7 @@ export class QuizService {
     }
   }
 
-  getQuizById(id: string | null): Quiz | undefined {
+  getQuizById(id: string): Quiz | undefined {
     return this.quizzes$.value.find((q) => q.id == id);
   }
 
@@ -74,7 +74,7 @@ export class QuizService {
       return [];
     }
 
-    return currentQuiz.questions;
+    return [...currentQuiz.questions];
   }
 
   deleteQuestion(
@@ -83,12 +83,13 @@ export class QuizService {
   ): void {
     const currentQuizzes = this.quizzes$.value;
     const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
+    const currentQuiz = currentQuizzes[quizIndex];
 
     if (quizIndex !== -1) {
-      const updatedQuestions = [...currentQuizzes[quizIndex].questions];
-      updatedQuestions.splice(questionIndex as number, 1);
+      const updatedQuestions = [...currentQuiz.questions];
+      updatedQuestions.splice(questionIndex, 1);
 
-      currentQuizzes[quizIndex].questions = updatedQuestions;
+      currentQuiz.questions = updatedQuestions;
 
       this.quizzes$.next(currentQuizzes);
       this.localStorageService.updateLocalStorage(this.quizzes$.value);

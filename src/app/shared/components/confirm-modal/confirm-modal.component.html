@@ -3,6 +3,10 @@
     <div class="flex justify-center">
       {{text}}
     </div>
-    <quiz-app-modal-footer [buttonText]="buttonText" [isConfirm]="true" (confirmEvent)="deleteQuiz()"></quiz-app-modal-footer>
+    <quiz-app-modal-footer
+      [buttonText]="buttonText"
+      (whenConfirm)="close(true)"
+      (whenCancel)="close(false)">
+    </quiz-app-modal-footer>
   </div>
 </div>

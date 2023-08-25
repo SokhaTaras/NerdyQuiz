@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 import { ConfirmModalComponent } from '../../components/confirm-modal/confirm-modal.component';
+import { ModalResponseType } from '../../types/modalResponse.type';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class ModalService {
     });
   }
 
-  showConfirmModal(data: any): void {
-    this.modalService.confirm({
+  showConfirmModal(data: any): ModalResponseType {
+    const modalRef = this.modalService.confirm({
       nzContent: ConfirmModalComponent,
       nzCentered: true,
       nzFooter: null,
@@ -29,6 +30,8 @@ export class ModalService {
         ...data
       }
     });
+
+    return { onClose: modalRef.afterClose };
   }
 
   closeModal(): void {

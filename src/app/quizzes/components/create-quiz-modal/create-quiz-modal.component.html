@@ -6,5 +6,18 @@
       <quiz-app-input [control]="theme" label="Theme" [placeHolder]="PlaceHolder.theme" ></quiz-app-input>
     </div>
   </form>
- <quiz-app-modal-footer [disableButton]="initQuizForm.invalid" [buttonText]="buttonText" [isSave]="isSave" (saveEvent)="saveQuiz()" (editEvent)="editQuiz()"></quiz-app-modal-footer>
+ <quiz-app-modal-footer
+   *ngIf="isSave"
+   [disableButton]="initQuizForm.invalid"
+   [buttonText]="buttonText"
+   (whenConfirm)="saveQuiz()"
+   (whenCancel)="close(false)"
+ ></quiz-app-modal-footer>
+ <quiz-app-modal-footer
+   *ngIf="!isSave"
+   [disableButton]="initQuizForm.invalid"
+   [buttonText]="buttonText"
+   (whenConfirm)="editQuiz()"
+   (whenCancel)="close(false)"
+ ></quiz-app-modal-footer>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -19,35 +19,45 @@ import { BooleanQuestionForm } from '../../../shared/interfaces/forms.interface'
   templateUrl: './boolean-question.component.html'
 })
 export class BooleanQuestionComponent implements OnInit {
-  booleanQuizForm: FormGroup<BooleanQuestionForm>;
+  @Output() saveBooleanFormEvent: EventEmitter<FormGroup<BooleanQuestionForm>> =
+    new EventEmitter<FormGroup<BooleanQuestionForm>>();
+
+  booleanQuestionForm: FormGroup<BooleanQuestionForm>;
 
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
   protected readonly typeList = TypeList;
   protected readonly booleanList = BooleanList;
 
-  get title() {
-    return this.booleanQuizForm.controls.title;
+  get title(): FormControl {
+    return this.booleanQuestionForm.controls.title;
   }
 
-  get type() {
-    return this.booleanQuizForm.controls.type;
+  get type(): FormControl {
+    return this.booleanQuestionForm.controls.type;
   }
-  get difficulty() {
-    return this.booleanQuizForm.controls.difficulty;
+  get difficulty(): FormControl {
+    return this.booleanQuestionForm.controls.difficulty;
   }
 
-  get correctBooleanAnswer() {
-    return this.booleanQuizForm.controls.correctBooleanAnswer;
+  get correctBooleanAnswer(): FormControl {
+    return this.booleanQuestionForm.controls.correctAnswer;
   }
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initForm();
+    this.subscribeToBooleanQuestionFormChanges();
   }
 
-  private initForm() {
-    this.booleanQuizForm = this.fb.nonNullable.group<BooleanQuestionForm>({
+  private subscribeToBooleanQuestionFormChanges(): void {
+    this.booleanQuestionForm.valueChanges.subscribe(() =>
+      this.saveBooleanFormEvent.emit(this.booleanQuestionForm)
+    );
+  }
+
+  private initForm(): void {
+    this.booleanQuestionForm = this.fb.group<BooleanQuestionForm>({
       title: new FormControl('', [
         Validators.required,
         Validators.minLength(2)
@@ -58,7 +68,7 @@ export class BooleanQuestionComponent implements OnInit {
       difficulty: new FormControl(this.difficultyList['easy'][0].text, [
         Validators.required
       ]),
-      correctBooleanAnswer: new FormControl('True', [Validators.required])
+      correctAnswer: new FormControl('True', [Validators.required])
     });
   }
 }
