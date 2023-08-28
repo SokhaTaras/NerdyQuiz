@@ -2,12 +2,12 @@ import { Translations } from '../../shared/types/translations.type';
 
 export const TypeList: Translations[] = [
   [
-    { lang: 'en', text: 'Boolean' },
-    { lang: 'ua', text: 'Істинний' }
-  ],
-  [
     { lang: 'en', text: 'Multiple' },
     { lang: 'ua', text: 'Кілька запитань' }
+  ],
+  [
+    { lang: 'en', text: 'Boolean' },
+    { lang: 'ua', text: 'Істинний' }
   ]
 ];
 
