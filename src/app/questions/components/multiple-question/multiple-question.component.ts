@@ -58,14 +58,14 @@ export class MultipleQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.initCheckboxes();
+    this.initRadioButtons();
     this.subscribeToMultipleQuestionFormChanges();
   }
 
   addAnswer(): void {
     const answer: AnswersFormType = this.generateNewAnswer('', false);
     this.answersControl.push(answer);
-    this.initCheckboxes();
+    this.initRadioButtons();
     this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
   }
 
@@ -75,7 +75,7 @@ export class MultipleQuestionComponent implements OnInit {
     );
   }
 
-  private initCheckboxes(): void {
+  private initRadioButtons(): void {
     this.answersFormArray.controls.forEach((control, index) => {
       control.valueChanges.subscribe((checked) => {
         if (checked.isCorrect) {
@@ -107,7 +107,7 @@ export class MultipleQuestionComponent implements OnInit {
 
   private generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
     return this.fb.group({
-      text: new FormControl(text),
+      text: new FormControl(text, [Validators.required]),
       isCorrect: new FormControl(isCorrect)
     });
   }

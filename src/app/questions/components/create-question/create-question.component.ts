@@ -20,6 +20,7 @@ export class CreateQuestionComponent {
 
   booleanQuestionForm: FormGroup<BooleanQuestionForm>;
   multipleQuestionForm: FormGroup<MultipleQuestionForm>;
+  isFormNotValid = true;
 
   get multipleTitle(): string {
     return this.multipleQuestionForm.controls.title.value;
@@ -53,10 +54,14 @@ export class CreateQuestionComponent {
 
   getBooleanQuestionForm(event: any): void {
     this.booleanQuestionForm = event;
+    this.isFormNotValid = true;
+    this.isFormNotValid = this.disableButton(this.booleanQuestionForm);
   }
 
   getMultipleQuestionForm(event: any): void {
     this.multipleQuestionForm = event;
+    this.isFormNotValid = true;
+    this.isFormNotValid = this.disableButton(this.multipleQuestionForm);
   }
 
   saveQuestion(): void {
@@ -102,5 +107,9 @@ export class CreateQuestionComponent {
         return { text, isCorrect };
       });
     return answersArray;
+  }
+
+  private disableButton(formGroup: FormGroup): boolean {
+    return formGroup && formGroup.invalid;
   }
 }

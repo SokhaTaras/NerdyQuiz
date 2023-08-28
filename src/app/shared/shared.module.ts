@@ -6,15 +6,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 import { InputComponent } from './components/input/input.component';
 import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
-import { CheckBoxComponent } from './components/check-box/check-box.component';
+import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { CheckBoxComponent } from './components/check-box/check-box.component';
     ErrorMessageComponent,
     DropdownComponent,
     ConfirmModalComponent,
-    CheckBoxComponent
+    RadioButtonComponent
   ],
   imports: [
     CommonModule,
@@ -35,14 +35,14 @@ import { CheckBoxComponent } from './components/check-box/check-box.component';
     BrowserModule,
     BrowserAnimationsModule,
     NzDropDownModule,
-    NzCheckboxModule
+    NzRadioModule
   ],
   exports: [
     InputComponent,
     ModalFooterComponent,
     ErrorMessageComponent,
     DropdownComponent,
-    CheckBoxComponent
+    RadioButtonComponent
   ]
 })
 export class SharedModule {}

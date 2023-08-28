@@ -2,17 +2,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'quiz-app-check-box',
-  templateUrl: './check-box.component.html'
+  selector: 'quiz-app-radio-button',
+  templateUrl: './radio-button.component.html'
 })
-export class CheckBoxComponent implements OnInit {
+export class RadioButtonComponent implements OnInit {
   @Input() id: number;
   @Input() control: FormControl;
 
-  isChecked: boolean;
+  isSelected: boolean;
 
   ngOnInit() {
-    this.isChecked = this.control.value;
+    this.isSelected = this.control.value;
   }
 
   selectItem(item: boolean) {

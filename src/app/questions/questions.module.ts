@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionsRoutingModule } from './questions-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 import { QuestionCardComponent } from './components/question-card/question-card.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
@@ -27,7 +27,7 @@ import { MultipleQuestionComponent } from './components/multiple-question/multip
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    NzCheckboxModule
+    NzRadioModule
   ],
   exports: [
     QuestionListComponent,

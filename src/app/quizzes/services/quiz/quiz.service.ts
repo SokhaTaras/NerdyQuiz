@@ -55,7 +55,7 @@ export class QuizService {
   }
 
   addQuestion(quizId: string | null, question: Question): void {
-    if (this.quizzes$.value !== undefined) {
+    if (this.quizzes$.value) {
       const currentQuizzes = [...this.quizzes$.value];
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
 
