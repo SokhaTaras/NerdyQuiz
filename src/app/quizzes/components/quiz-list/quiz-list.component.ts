@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
-import { NavigateToService } from '../../../shared/services/navigate-to.service';
+import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 
 @Component({
   selector: 'quiz-app-quiz-list',
