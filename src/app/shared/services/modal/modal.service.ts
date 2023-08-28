@@ -10,8 +10,8 @@ import { ModalResponseType } from '../../types/modalResponse.type';
 export class ModalService {
   constructor(private modalService: NzModalService) {}
 
-  showModal(component: any, data?: any): void {
-    this.modalService.create({
+  showModal(component: any, data?: any): ModalResponseType {
+    const modalRef = this.modalService.create({
       nzContent: component,
       nzFooter: null,
       nzCentered: true,
@@ -19,6 +19,8 @@ export class ModalService {
         ...data
       }
     });
+
+    return { onClose: modalRef.afterClose };
   }
 
   showConfirmModal(data: any): ModalResponseType {
@@ -32,9 +34,5 @@ export class ModalService {
     });
 
     return { onClose: modalRef.afterClose };
-  }
-
-  closeModal(): void {
-    this.modalService.closeAll();
   }
 }

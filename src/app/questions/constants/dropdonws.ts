@@ -1,38 +1,38 @@
 import { Translations } from '../../shared/types/translations.type';
 
-export const TypeList: Translations = {
-  boolean: [
+export const TypeList: Translations[] = [
+  [
     { lang: 'en', text: 'Boolean' },
     { lang: 'ua', text: 'Істинний' }
   ],
-  multiple: [
+  [
     { lang: 'en', text: 'Multiple' },
     { lang: 'ua', text: 'Кілька запитань' }
   ]
-};
+];
 
-export const DifficultyList: Translations = {
-  easy: [
+export const DifficultyList: Translations[] = [
+  [
     { lang: 'en', text: 'Easy' },
     { lang: 'ua', text: 'Просто' }
   ],
-  medium: [
+  [
     { lang: 'en', text: 'Medium' },
     { lang: 'ua', text: 'Середньо' }
   ],
-  hard: [
+  [
     { lang: 'en', text: 'Hard' },
     { lang: 'ua', text: 'Важко' }
   ]
-};
+];
 
-export const BooleanList: Translations = {
-  true: [
+export const BooleanList: Translations[] = [
+  [
     { lang: 'en', text: 'True' },
     { lang: 'ua', text: 'Істина' }
   ],
-  false: [
+  [
     { lang: 'en', text: 'False' },
     { lang: 'ua', text: 'Хибно' }
   ]
-};
+];

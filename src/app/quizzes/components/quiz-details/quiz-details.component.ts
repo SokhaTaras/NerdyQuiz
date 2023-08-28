@@ -29,10 +29,7 @@ export class QuizDetailsComponent implements OnInit {
     const data: any = {
       label: 'Edit quiz',
       buttonText: 'Edit',
-      isSave: false,
-      quizId: this.id,
-      editTitle: this.initialQuiz.title,
-      editTheme: this.initialQuiz.theme
+      quiz: this.initialQuiz
     };
     this.modalQuiz.showInitQuizModal(data);
   }

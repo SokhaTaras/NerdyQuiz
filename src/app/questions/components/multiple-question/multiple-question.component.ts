@@ -92,10 +92,8 @@ export class MultipleQuestionComponent implements OnInit {
   private initForm(): void {
     this.multipleQuestionForm = this.fb.group<MultipleQuestionForm>({
       title: new FormControl('', [Validators.required]),
-      type: new FormControl(this.typeList['multiple'][0].text, [
-        Validators.required
-      ]),
-      difficulty: new FormControl(this.difficultyList['easy'][0].text, [
+      type: new FormControl(this.typeList[0][0].text, [Validators.required]),
+      difficulty: new FormControl(this.difficultyList[0][0].text, [
         Validators.required
       ]),
       answers: this.fb.array(

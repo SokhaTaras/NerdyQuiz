@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { StorageKey } from '../../enums/storageKey';
 import { StorageError } from '../../classes/storageError/storage-error';
 import { StorageErrorMessage } from '../../enums/storageErrorMessage';
 
@@ -8,9 +7,9 @@ import { StorageErrorMessage } from '../../enums/storageErrorMessage';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  updateLocalStorage(value: any): void {
+  updateLocalStorage(key: string, value: any): void {
     try {
-      localStorage.setItem(StorageKey.QUIZZES, JSON.stringify(value));
+      localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       throw new StorageError(StorageErrorMessage.stringify);
     }

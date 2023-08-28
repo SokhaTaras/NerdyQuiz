@@ -2,7 +2,7 @@
   {{label}}
 </a>
 <nz-dropdown-menu #menu="nzDropdownMenu">
-  <ul nz-menu *ngFor="let item of list | keyvalue">
-    <li nz-menu-item (click)="selectItem(item.value[0].text)">{{item.value[0].text}}</li>
+  <ul nz-menu *ngFor="let item of list">
+    <li nz-menu-item (click)="selectItem(item[0].text)">{{item[0].text}}</li>
   </ul>
 </nz-dropdown-menu>

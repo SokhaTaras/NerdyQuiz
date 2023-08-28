@@ -7,17 +7,9 @@
     </div>
   </form>
  <quiz-app-modal-footer
-   *ngIf="isSave"
    [disableButton]="initQuizForm.invalid"
    [buttonText]="buttonText"
    (whenConfirm)="saveQuiz()"
-   (whenCancel)="close(false)"
- ></quiz-app-modal-footer>
- <quiz-app-modal-footer
-   *ngIf="!isSave"
-   [disableButton]="initQuizForm.invalid"
-   [buttonText]="buttonText"
-   (whenConfirm)="editQuiz()"
-   (whenCancel)="close(false)"
- ></quiz-app-modal-footer>
+   (whenCancel)="close()">
+ </quiz-app-modal-footer>
 </div>

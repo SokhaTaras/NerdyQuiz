@@ -62,10 +62,8 @@ export class BooleanQuestionComponent implements OnInit {
         Validators.required,
         Validators.minLength(2)
       ]),
-      type: new FormControl(this.typeList['boolean'][0].text, [
-        Validators.required
-      ]),
-      difficulty: new FormControl(this.difficultyList['easy'][0].text, [
+      type: new FormControl(this.typeList[0][0].text, [Validators.required]),
+      difficulty: new FormControl(this.difficultyList[0][0].text, [
         Validators.required
       ]),
       correctAnswer: new FormControl('True', [Validators.required])

@@ -19,7 +19,7 @@ import { Translations } from '../../types/translations.type';
   ]
 })
 export class DropdownComponent implements ControlValueAccessor {
-  @Input() list: Translations = {};
+  @Input() list: Translations[];
   @Input() label: string | boolean;
   @Input() control: FormControl = new FormControl();
 
