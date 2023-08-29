@@ -24,7 +24,8 @@
     "delete-question": "Delete question",
     "edit-title": "Edit title",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "home": "Home"
   },
 
   "errors": {
