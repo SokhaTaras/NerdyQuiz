@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { Question } from '../../interfaces/question.interface';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-question-list',
@@ -41,4 +42,6 @@ export class QuestionListComponent implements OnInit {
       ));
     });
   }
+
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

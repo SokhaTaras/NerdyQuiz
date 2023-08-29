@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { NavigateToService } from '../../../shared/services/navigate-to.service';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-quiz-list',
@@ -29,4 +30,6 @@ export class QuizListComponent {
       }
     });
   }
+
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

@@ -8,6 +8,7 @@ import {
 } from '../../../shared/interfaces/forms.interface';
 import { Answer, Question } from '../../interfaces/question.interface';
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-create-question',
@@ -112,4 +113,6 @@ export class CreateQuestionComponent {
   private disableButton(formGroup: FormGroup): boolean {
     return formGroup && formGroup.invalid;
   }
+
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

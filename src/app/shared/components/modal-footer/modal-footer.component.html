@@ -1,13 +1,10 @@
 <div class="flex justify-center pt-6">
-  <div class="flex w-1/2 space-x-4">
-    <button class="btn-pop-up" (click)="handleCancel()">
-     {{'buttons.cancel' | translateJson}}
-    </button>
-    <button
-      class="btn-pop-up"
-      [disabled]="disableButton"
-      (click)="handleSubmit()">
+  <div class="flex space-x-4">
+    <quiz-app-button class="" [type]="BUTTON_TYPE.SECONDARY" (onClick)="handleCancel()">
+      {{'buttons.cancel' | translateJson}}
+    </quiz-app-button>
+    <quiz-app-button [type]="BUTTON_TYPE.PRIMARY" [isDisabled]="disableButton" (onClick)="handleSubmit()">
       {{ buttonText |  translateJson }}
-    </button>
+    </quiz-app-button>
   </div>
 </div>

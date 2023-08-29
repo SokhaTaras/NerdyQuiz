@@ -12,6 +12,7 @@ import { MultipleQuestionForm } from '../../../shared/interfaces/forms.interface
 import { DifficultyList, TypeList } from '../../constants/dropdonws';
 import { AnswersFormType } from '../../../shared/types/forms.type ts';
 import { maxQuestions } from '../../constants/max-questions';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-multiple-question',
@@ -111,4 +112,5 @@ export class MultipleQuestionComponent implements OnInit {
   }
 
   protected readonly toString = toString;
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

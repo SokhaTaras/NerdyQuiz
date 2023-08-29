@@ -5,6 +5,7 @@ import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { Quiz } from '../../interfaces/quiz.interface';
 import { NavigateToService } from '../../../shared/services/navigate-to.service';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -46,4 +47,6 @@ export class QuizDetailsComponent implements OnInit {
   private getCurrentQuiz(): Quiz | undefined {
     return this.quizService.quizzes$.value.find((q) => q.id === this.id);
   }
+
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

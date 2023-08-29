@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BUTTON_TYPE } from '../../enums/buttonType';
 
 @Component({
   selector: 'quiz-app-modal-footer',
@@ -18,4 +19,6 @@ export class ModalFooterComponent {
   handleCancel(): void {
     this.whenCancel.emit();
   }
+
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

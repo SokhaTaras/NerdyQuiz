@@ -34,6 +34,12 @@ body {
   margin-left: 0;
 }
 
+button {
+  background-color: var(--color-primary);
+  min-width: 100px;
+  padding: 4px 8px;
+}
+
 
 @layer components {
   .btn-pop-up {
@@ -67,6 +73,22 @@ body {
   .modal-title {
     @apply text-3xl text-center mb-6;
   }
+
+  .btn-primary {
+    @apply bg-amber-500 w-full h-full border rounded hover:after:bg-buttons-hover disabled:disabled-button
+  }
+
+  .btn-secondary {
+    @apply w-full h-full border border-gray-700 rounded bg-transparent hover:bg-buttons-hover disabled:disabled-button
+  }
+
+  .btn-error {
+    @apply border border-error-message text-error-message rounded hover:after:bg-buttons-hover disabled:disabled-button
+  }
+
+  .disabled-button {
+    @apply opacity-80 cursor-not-allowed pointer-events-none
+  }
 }
 
 
@@ -74,7 +96,7 @@ body {
   :root {
     --color-primary: #e6e6ff;
     --color-button: #E5E7EB;
-    --color-buttons-hover: #D1D5DB;
+    --color-buttons-hover: rgba(0, 0, 0, 0.05);
     --color-error-message: #D10000;
     --primary-font-color: #333333;
     --primary-font-family: system-ui;
