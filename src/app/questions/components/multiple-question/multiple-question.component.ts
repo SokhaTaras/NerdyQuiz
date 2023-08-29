@@ -109,4 +109,6 @@ export class MultipleQuestionComponent implements OnInit {
       isCorrect: new FormControl(isCorrect)
     });
   }
+
+  protected readonly toString = toString;
 }

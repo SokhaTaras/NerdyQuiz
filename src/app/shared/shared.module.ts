@@ -15,6 +15,7 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { TranslateJsonPipe } from './pipes/translate-json/translate-json.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
     ErrorMessageComponent,
     DropdownComponent,
     ConfirmModalComponent,
-    RadioButtonComponent
+    RadioButtonComponent,
+    TranslateJsonPipe
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
     ModalFooterComponent,
     ErrorMessageComponent,
     DropdownComponent,
-    RadioButtonComponent
+    RadioButtonComponent,
+    TranslateJsonPipe
   ]
 })
 export class SharedModule {}

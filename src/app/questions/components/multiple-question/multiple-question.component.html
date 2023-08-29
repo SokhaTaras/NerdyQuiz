@@ -1,12 +1,20 @@
 <div>
   <form [formGroup]="multipleQuestionForm">
     <div class="modal-title">
-      <quiz-app-input [control]="title" label="Title" [placeHolder]="PlaceHolder.title"></quiz-app-input>
+      <quiz-app-input
+        [control]="title"
+        label="Title"
+        [placeHolder]="PlaceHolder.title | translateJson">
+      </quiz-app-input>
     </div>
     <div class="flex justify-center items-center h-20 labels">
       <div class="flex justify-center w-3/5 overflow-hidden">
         <div class="flex justify-center w-1/2 p-2">
-          <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [label]="difficulty.value"></quiz-app-dropdown>
+          <quiz-app-dropdown
+            [control]="difficulty"
+            [list]="difficultyList"
+            [label]="difficulty.value">
+          </quiz-app-dropdown>
         </div>
       </div>
     </div>
@@ -14,16 +22,24 @@
       <ng-container formArrayName="answers" class="py-10">
         <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
           <div class="flex items-center">
-            <quiz-app-input class="m-10 w-full" [label]="'Answer : ' + (index + 1)" [control]="answersControl[index].controls.text"></quiz-app-input>
-              <quiz-app-radio-button class="w-1/10 pt-7" [control]="answersControl[index].controls.isCorrect" [id]="index+1"></quiz-app-radio-button>
+            <quiz-app-input class="m-10 w-full" [label]="(index+1).toString()" [control]="answersControl[index].controls.text"></quiz-app-input>
+              <quiz-app-radio-button
+                class="w-1/10 pt-7"
+                [control]="answersControl[index].controls.isCorrect"
+                [id]="index+1">
+              </quiz-app-radio-button>
           </div>
         </ng-container>
       </ng-container>
     </div>
   </form>
   <div class="flex justify-center items-center h-8 my-10">
-    <button type="button" class="btn-add btn-pop-up"  [disabled]="answerLength >= maxQuestionsAmount" (click)="addAnswer()">
-      Add answer
+    <button
+      type="button"
+      class="btn-add btn-pop-up"
+      [disabled]="answerLength >= maxQuestionsAmount"
+      (click)="addAnswer()">
+      {{'buttons.new-answer' | translateJson}}
     </button>
   </div>
 </div>

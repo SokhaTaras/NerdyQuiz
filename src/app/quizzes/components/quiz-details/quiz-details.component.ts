@@ -24,11 +24,10 @@ export class QuizDetailsComponent implements OnInit {
     this.initialQuiz = this.getCurrentQuiz();
   }
 
-  //TODO change hardcode when json with text will be ready
   openEditPopUp(): void {
     const data: any = {
-      label: 'Edit quiz',
-      buttonText: 'Edit',
+      label: 'buttons.edit-quiz',
+      buttonText: 'buttons.edit',
       quiz: this.initialQuiz
     };
     this.modalQuiz.showInitQuizModal(data);

@@ -1,1 +1,6 @@
-<label nz-radio [formControl]="control" (click)="selectItem(isSelected)">Correct</label>
+<label
+  nz-radio
+  [formControl]="control"
+  (click)="selectItem(isSelected)">
+  {{'labels.correct' | translateJson}}
+</label>

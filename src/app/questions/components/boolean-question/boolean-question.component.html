@@ -1,20 +1,33 @@
 <div>
   <form [formGroup]="booleanQuestionForm">
     <div class="modal-title">
-      <quiz-app-input [control]="title" label="Title" [placeHolder]="PlaceHolder.title"></quiz-app-input>
+      <quiz-app-input
+        [control]="title"
+        label="Title"
+        [placeHolder]="PlaceHolder.title | translateJson">
+      </quiz-app-input>
     </div>
     <div class="flex justify-center items-center h-20 labels">
       <div class="flex justify-center w-3/5 overflow-hidden">
         <div class="flex justify-center w-1/2 p-2">
-          <quiz-app-dropdown [control]="difficulty" [list]="difficultyList" [label]="difficulty.value"></quiz-app-dropdown>
+          <quiz-app-dropdown
+            [control]="difficulty"
+            [list]="difficultyList"
+            [label]="difficulty.value">
+          </quiz-app-dropdown>
         </div>
       </div>
     </div>
     <div class="flex justify-center items-center h-20 text-xl">
       <div class="flex justify-center w-3/5">
         <div class="flex justify-center items-center w-3/5">
-          <p class="m-2.5">Correct answer: </p>
-          <quiz-app-dropdown class="m-1" [label]="correctBooleanAnswer.value" [control]="correctBooleanAnswer" [list]="booleanList"></quiz-app-dropdown>
+          <p class="m-2.5">{{'labels.correct-answer' | translateJson}} </p>
+          <quiz-app-dropdown
+            class="m-1"
+            [label]="correctBooleanAnswer.value"
+            [control]="correctBooleanAnswer"
+            [list]="booleanList">
+          </quiz-app-dropdown>
         </div>
       </div>
     </div>

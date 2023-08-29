@@ -1,0 +1,39 @@
+{
+  "labels": {
+    "title": "Title: ",
+    "theme": "Theme: ",
+    "type": "Type: ",
+    "difficulty": "Difficulty: ",
+    "correct-answer": "Correct answer: ",
+    "correct": "Correct"
+  },
+
+  "titles": {
+    "app-title": "Nerdy quiz"
+  },
+
+  "buttons": {
+    "new-quiz": "Add new quiz",
+    "new-answer": "Add answer",
+    "new-multiple-question": "Add multiple question",
+    "new-boolean-question": "Add boolean question",
+    "create-quiz": "Create quiz",
+    "edit": "Edit",
+    "edit-quiz": "Edit quiz",
+    "amount-of-questions": "Amount of question: ",
+    "delete-question": "Delete question",
+    "edit-title": "Edit title",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+
+  "errors": {
+    "error": "error",
+    "required": "This field is required.",
+    "min-length-2": "This field must have at least 2 characters."
+  },
+
+  "introduction": {
+    "welcome-text": "Embark on a journey of exploration and engagement as you take control of your learning journey. Our app offers you the unique opportunity to unleash your creativity by creating your very own quizzes, tailored to your interests and expertise. Craft questions that challenge and inspire, and share them with friends, family, or a global audience."
+  }
+}
