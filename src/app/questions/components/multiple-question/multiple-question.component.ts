@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -6,6 +12,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { MultipleQuestionForm } from '../../../shared/interfaces/forms.interface';
@@ -17,12 +24,14 @@ import { maxQuestions } from '../../constants/max-questions';
   selector: 'quiz-app-multiple-question',
   templateUrl: './multiple-question.component.html'
 })
-export class MultipleQuestionComponent implements OnInit {
+export class MultipleQuestionComponent implements OnInit, OnDestroy {
   @Output() saveMultipleFormEvent: EventEmitter<
     FormGroup<MultipleQuestionForm>
   > = new EventEmitter<FormGroup<MultipleQuestionForm>>();
 
   multipleQuestionForm: FormGroup<MultipleQuestionForm>;
+  formSubscription: Subscription;
+  radioButtonsSubscription: Subscription;
 
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
@@ -70,30 +79,34 @@ export class MultipleQuestionComponent implements OnInit {
   }
 
   private subscribeToMultipleQuestionFormChanges(): void {
-    this.multipleQuestionForm.valueChanges.subscribe(() =>
-      this.saveMultipleFormEvent.emit(this.multipleQuestionForm)
+    this.formSubscription = this.multipleQuestionForm.valueChanges.subscribe(
+      () => this.saveMultipleFormEvent.emit(this.multipleQuestionForm)
     );
   }
 
   private initRadioButtons(): void {
     this.answersFormArray.controls.forEach((control, index) => {
-      control.valueChanges.subscribe((checked) => {
-        if (checked.isCorrect) {
-          this.answersFormArray.controls.forEach((otherControl, otherIndex) => {
-            if (otherIndex !== index) {
-              otherControl.get('isCorrect')?.setValue(false);
-            }
-          });
+      this.radioButtonsSubscription = control.valueChanges.subscribe(
+        (checked) => {
+          if (checked.isCorrect) {
+            this.answersFormArray.controls.forEach(
+              (otherControl, otherIndex) => {
+                if (otherIndex !== index) {
+                  otherControl.get('isCorrect')?.setValue(false);
+                }
+              }
+            );
+          }
         }
-      });
+      );
     });
   }
 
   private initForm(): void {
     this.multipleQuestionForm = this.fb.group<MultipleQuestionForm>({
-      title: new FormControl('', [Validators.required]),
-      type: new FormControl(this.typeList[0][0].text, [Validators.required]),
-      difficulty: new FormControl(this.difficultyList[0][0].text, [
+      title: this.fb.control('', [Validators.required]),
+      type: this.fb.control(this.typeList[0][0].text, [Validators.required]),
+      difficulty: this.fb.control(this.difficultyList[0][0].text, [
         Validators.required
       ]),
       answers: this.fb.array(
@@ -105,8 +118,13 @@ export class MultipleQuestionComponent implements OnInit {
 
   private generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
     return this.fb.group({
-      text: new FormControl(text, [Validators.required]),
-      isCorrect: new FormControl(isCorrect)
+      text: this.fb.control(text, [Validators.required]),
+      isCorrect: this.fb.control(isCorrect)
     });
+  }
+
+  ngOnDestroy() {
+    this.formSubscription.unsubscribe();
+    this.radioButtonsSubscription.unsubscribe();
   }
 }

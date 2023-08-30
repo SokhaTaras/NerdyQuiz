@@ -1,17 +1,17 @@
 <div class="container mx-auto mt-16 max-w-screen-xl">
   <div class="flex justify-center items-center h-8 mb-2">
-    <button class="btn-add" (click)="showMultipleCreation()">
+    <button class="btn-add" (click)="showQuestionCreation(true)">
       Add multiple question
     </button>
   </div>
   <div class="flex justify-center items-center h-8 mb-2">
-    <button class="btn-add" (click)="showBooleanCreation()">
+    <button class="btn-add" (click)="showQuestionCreation(false)">
       Add boolean question
     </button>
   </div>
   <div class="question-list flex-col justify-center">
     <div class="m-2.5 p-2.5" *ngIf="displayCreateQuestion">
-      <quiz-app-create-question [quizId]="quizId" [isBoolean]="isBoolean" (displayFalse)="toggleQuestionCreation()"></quiz-app-create-question>
+      <quiz-app-create-question [quizId]="quizId" [isBoolean]="isBoolean" (hideCreation)="toggleQuestionCreation()"></quiz-app-create-question>
     </div>
     <div class="m-2.5 p-2.5">
       <quiz-app-question-card [quizId]="quizId" [questionIndex]="index" [question]="question" *ngFor="let question of allQuestions; let index = index"></quiz-app-question-card>

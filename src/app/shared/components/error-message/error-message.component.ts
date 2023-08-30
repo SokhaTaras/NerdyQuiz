@@ -1,14 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
+
+import { FORM_STATUS } from '../../enums/formStatus';
 
 @Component({
   selector: 'quiz-app-error-message',
   templateUrl: './error-message.component.html'
 })
-export class ErrorMessageComponent implements OnInit {
+export class ErrorMessageComponent implements OnInit, OnDestroy {
   @Input() control: AbstractControl = new FormControl();
 
   errorMessage: string;
+  controlSubscription: Subscription;
 
   ngOnInit(): void {
     this.subscribeToControlStatusChanges();
@@ -26,11 +30,17 @@ export class ErrorMessageComponent implements OnInit {
   }
 
   private subscribeToControlStatusChanges(): void {
-    this.control.statusChanges.subscribe((status) => {
-      if (status === 'INVALID' && this.control.errors) {
-        const errorNames = Object.keys(this.control.errors);
-        this.setErrorMessage(errorNames);
+    this.controlSubscription = this.control.statusChanges.subscribe(
+      (status) => {
+        if (status === FORM_STATUS.INVALID && this.control.errors) {
+          const errorNames = Object.keys(this.control.errors);
+          this.setErrorMessage(errorNames);
+        }
       }
-    });
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.controlSubscription.unsubscribe();
   }
 }

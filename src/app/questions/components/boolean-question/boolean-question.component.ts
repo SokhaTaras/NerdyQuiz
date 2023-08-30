@@ -1,10 +1,17 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import {
@@ -13,16 +20,18 @@ import {
   TypeList
 } from '../../constants/dropdonws';
 import { BooleanQuestionForm } from '../../../shared/interfaces/forms.interface';
+import { AnswersFormType } from '../../../shared/types/forms.type ts';
 
 @Component({
   selector: 'quiz-app-boolean-question',
   templateUrl: './boolean-question.component.html'
 })
-export class BooleanQuestionComponent implements OnInit {
+export class BooleanQuestionComponent implements OnInit, OnDestroy {
   @Output() saveBooleanFormEvent: EventEmitter<FormGroup<BooleanQuestionForm>> =
     new EventEmitter<FormGroup<BooleanQuestionForm>>();
 
   booleanQuestionForm: FormGroup<BooleanQuestionForm>;
+  formSubscription: Subscription;
 
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
@@ -40,9 +49,10 @@ export class BooleanQuestionComponent implements OnInit {
     return this.booleanQuestionForm.controls.difficulty;
   }
 
-  get correctBooleanAnswer(): FormControl {
-    return this.booleanQuestionForm.controls.correctAnswer;
+  get correctAnswer() {
+    return this.booleanQuestionForm.controls.answers.controls;
   }
+
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -51,22 +61,39 @@ export class BooleanQuestionComponent implements OnInit {
   }
 
   private subscribeToBooleanQuestionFormChanges(): void {
-    this.booleanQuestionForm.valueChanges.subscribe(() =>
-      this.saveBooleanFormEvent.emit(this.booleanQuestionForm)
+    this.formSubscription = this.booleanQuestionForm.valueChanges.subscribe(
+      () => this.saveBooleanFormEvent.emit(this.booleanQuestionForm)
     );
   }
 
   private initForm(): void {
     this.booleanQuestionForm = this.fb.group<BooleanQuestionForm>({
-      title: new FormControl('', [
+      title: this.fb.control('', [
         Validators.required,
         Validators.minLength(2)
       ]),
-      type: new FormControl(this.typeList[1][0].text, [Validators.required]),
-      difficulty: new FormControl(this.difficultyList[0][0].text, [
+      type: this.fb.control(this.typeList[1][0].text, [Validators.required]),
+      difficulty: this.fb.control(this.difficultyList[0][0].text, [
         Validators.required
       ]),
-      correctAnswer: new FormControl('True', [Validators.required])
+      answers: this.fb.array(
+        [
+          this.generateNewAnswer('True', true),
+          this.generateNewAnswer('False', false)
+        ],
+        [Validators.required]
+      )
     });
+  }
+
+  private generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
+    return this.fb.group({
+      text: this.fb.control(text, [Validators.required]),
+      isCorrect: this.fb.control(isCorrect)
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.formSubscription.unsubscribe();
   }
 }

@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { Quiz } from '../../interfaces/quiz.interface';
 import { StorageError } from '../../../shared/classes/storageError/storage-error';
-import { StorageErrorMessage } from '../../../shared/enums/storageErrorMessage';
+import { STORAGE_ERROR_MESSAGE } from '../../../shared/enums/storageErrorMessage';
 import { Question } from '../../../questions/interfaces/question.interface';
 import { LocalStorageService } from '../../../shared/services/local-storage/local-storage.service';
 import { getNewQuizId } from '../../../shared/utils/getId';
@@ -54,13 +54,14 @@ export class QuizService {
 
   initAllQuizzes(key: string): void {
     try {
-      let allQuizzes: string | null = localStorage.getItem(key);
+      let allQuizzes: string =
+        this.localStorageService.getLocalStorageData(key);
       if (allQuizzes !== null) {
-        localStorage.setItem(key, allQuizzes);
+        this.localStorageService.setLocalStorageData(key, allQuizzes);
         this.quizzes$.next(JSON.parse(allQuizzes));
       }
     } catch (error) {
-      throw new StorageError(StorageErrorMessage.parse);
+      throw new StorageError(STORAGE_ERROR_MESSAGE.PARSE);
     }
   }
 

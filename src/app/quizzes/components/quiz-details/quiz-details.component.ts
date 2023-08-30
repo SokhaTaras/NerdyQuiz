@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
@@ -9,9 +10,10 @@ import { Quiz } from '../../interfaces/quiz.interface';
   selector: 'quiz-app-quiz-details',
   templateUrl: './quiz-details.component.html'
 })
-export class QuizDetailsComponent implements OnInit {
+export class QuizDetailsComponent implements OnInit, OnDestroy {
   initialQuiz: Quiz | undefined;
   id: string | null;
+  quizSubscription: Subscription;
 
   constructor(
     private quizService: QuizService,
@@ -38,7 +40,17 @@ export class QuizDetailsComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
   }
 
-  private getCurrentQuiz(): Quiz | undefined {
-    return this.quizService.quizzes$.value.find((q) => q.id === this.id);
+  private getCurrentQuiz(): Quiz {
+    let currentQuiz: Quiz;
+
+    this.quizSubscription = this.quizService.quizzes$.subscribe((val) => {
+      currentQuiz = val.find((q) => q.id === this.id);
+    });
+
+    return currentQuiz;
+  }
+
+  ngOnDestroy(): void {
+    this.quizSubscription.unsubscribe();
   }
 }

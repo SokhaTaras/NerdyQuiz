@@ -24,13 +24,8 @@ export class QuestionListComponent implements OnInit {
     this.displayCreateQuestion = !this.displayCreateQuestion;
   }
 
-  showBooleanCreation(): void {
-    this.isBoolean = true;
-    this.displayCreateQuestion = true;
-  }
-
-  showMultipleCreation(): void {
-    this.isBoolean = false;
+  showQuestionCreation(isMultiple: boolean): void {
+    this.isBoolean = !isMultiple;
     this.displayCreateQuestion = true;
   }
 

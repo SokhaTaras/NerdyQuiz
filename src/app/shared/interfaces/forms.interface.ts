@@ -11,7 +11,7 @@ export interface BooleanQuestionForm {
   title: FormControl<string>;
   type: FormControl<string>;
   difficulty: FormControl<string>;
-  correctAnswer: FormControl<string>;
+  answers: FormArray<AnswersFormType>;
 }
 
 export interface MultipleQuestionForm {

@@ -3,7 +3,7 @@ export interface Question {
   type: string;
   difficulty: string;
   id: string;
-  answers: Answer[] | string;
+  answers: Answer[];
 }
 
 export interface Answer {

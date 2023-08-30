@@ -16,7 +16,7 @@ import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 export class CreateQuestionComponent {
   @Input() quizId: string | null;
   @Input() isBoolean: boolean;
-  @Output() displayFalse: EventEmitter<void> = new EventEmitter();
+  @Output() hideCreation: EventEmitter<void> = new EventEmitter();
 
   booleanQuestionForm: FormGroup<BooleanQuestionForm>;
   multipleQuestionForm: FormGroup<MultipleQuestionForm>;
@@ -46,52 +46,50 @@ export class CreateQuestionComponent {
     return this.booleanQuestionForm.controls.difficulty.value;
   }
 
-  get BooleanCorrectAnswer(): string {
-    return this.booleanQuestionForm.controls.correctAnswer.value;
-  }
-
   constructor(private quizService: QuizService) {}
 
   getBooleanQuestionForm(event: any): void {
     this.booleanQuestionForm = event;
-    this.isFormNotValid = true;
     this.isFormNotValid = this.disableButton(this.booleanQuestionForm);
   }
 
   getMultipleQuestionForm(event: any): void {
     this.multipleQuestionForm = event;
-    this.isFormNotValid = true;
     this.isFormNotValid = this.disableButton(this.multipleQuestionForm);
   }
 
   saveQuestion(): void {
-    this.quizService.addQuestion(this.quizId, this.formQuestionToObject());
-    this.displayFalse.emit();
+    const question: Question = this.mapQuestionToObject();
+    this.quizService.addQuestion(this.quizId, question);
+    this.hideCreation.emit();
   }
 
   cancelQuestion(): void {
-    this.displayFalse.emit();
+    this.hideCreation.emit();
   }
 
-  private formQuestionToObject(): Question {
+  private mapQuestionToObject(): Question {
     const questionId: string = getNewQuestionId();
 
     if (this.multipleQuestionForm) {
+      const formData = this.multipleQuestionForm.value;
       const multipleQuestion: Question = {
-        title: this.multipleTitle,
-        type: this.multipleType,
-        difficulty: this.multipleDifficulty,
-        answers: this.getMultipleAnswers(),
+        title: formData.title,
+        type: formData.type,
+        difficulty: formData.difficulty,
+        answers: this.getMultipleAnswers(this.multipleQuestionForm),
+        // answers: formData.answers.map(),
         id: questionId
       };
 
       return multipleQuestion;
     } else {
+      const fromData = this.booleanQuestionForm.value;
       const booleanQuestion: Question = {
         title: this.booleanTitle,
         type: this.booleanType,
         difficulty: this.booleanDifficulty,
-        answers: this.BooleanCorrectAnswer,
+        answers: this.getMultipleAnswers(this.booleanQuestionForm),
         id: questionId
       };
 
@@ -99,13 +97,18 @@ export class CreateQuestionComponent {
     }
   }
 
-  private getMultipleAnswers(): Answer[] {
-    const answersArray: Answer[] =
-      this.multipleQuestionForm.controls.answers.controls.map((answerForm) => {
+  private getFormData() {}
+
+  private getMultipleAnswers(
+    form: FormGroup<MultipleQuestionForm> | FormGroup<BooleanQuestionForm>
+  ): Answer[] {
+    const answersArray: Answer[] = form.controls.answers.controls.map(
+      (answerForm) => {
         const text = answerForm.controls.text.value;
         const isCorrect = answerForm.controls.isCorrect.value;
         return { text, isCorrect };
-      });
+      }
+    );
     return answersArray;
   }
 
