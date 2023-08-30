@@ -1,6 +1,6 @@
 import { FormArray, FormControl } from '@angular/forms';
 
-import { AnswersFormType } from '../types/forms.type ts';
+import { AnswersFormType } from '../types/forms.type';
 
 export interface InitQuizForm {
   title: FormControl<string>;

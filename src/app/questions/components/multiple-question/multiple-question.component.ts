@@ -1,39 +1,26 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output
-} from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { QuestionForm } from '../../../shared/interfaces/forms.interface';
-import { DifficultyList, TypeList } from '../../constants/dropdonws';
-import { AnswersFormType } from '../../../shared/types/forms.type ts';
+import { DifficultyList } from '../../constants/dropdonws';
+import { AnswersFormType } from '../../../shared/types/forms.type';
 import { maxQuestions } from '../../constants/max-questions';
+import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
+import { QUESTION_TYPE } from '../../../shared/enums/questionType';
 
 @Component({
   selector: 'quiz-app-multiple-question',
   templateUrl: './multiple-question.component.html'
 })
-export class MultipleQuestionComponent implements OnInit, OnDestroy {
+export class MultipleQuestionComponent implements OnInit {
   @Output() saveMultipleFormEvent: EventEmitter<FormGroup<QuestionForm>> =
     new EventEmitter<FormGroup<QuestionForm>>();
 
   multipleQuestionForm: FormGroup<QuestionForm>;
-  radioButtonsSubscription: Subscription;
 
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
-  protected readonly typeList = TypeList;
   protected readonly maxQuestionsAmount = maxQuestions;
 
   get title(): FormControl {
@@ -61,62 +48,29 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
     return formArray.controls;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.initRadioButtons();
+    this.questionFormHelper.initRadioButtons(this.answersFormArray);
   }
 
   addAnswer(): void {
-    const answer: AnswersFormType = this.generateNewAnswer('', false);
-    this.answersControl.push(answer);
-    this.initRadioButtons();
-    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
-  }
+    const answer: AnswersFormType = this.questionFormHelper.generateNewAnswer(
+      '',
+      false
+    );
 
-  private initRadioButtons(): void {
-    this.answersFormArray.controls.forEach((control, index) => {
-      this.radioButtonsSubscription = control.valueChanges.subscribe(
-        (checked) => {
-          if (checked.isCorrect) {
-            this.answersFormArray.controls.forEach(
-              (otherControl, otherIndex) => {
-                if (otherIndex !== index) {
-                  otherControl.get('isCorrect')?.setValue(false);
-                }
-              }
-            );
-          }
-        }
-      );
-    });
+    this.answersControl.push(answer);
+    this.questionFormHelper.initRadioButtons(this.answersFormArray);
+    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
   }
 
   private initForm(): void {
-    this.multipleQuestionForm = this.fb.group<QuestionForm>({
-      title: this.fb.control('', [Validators.required]),
-      type: this.fb.control(this.typeList[0][0].text, [Validators.required]),
-      difficulty: this.fb.control(this.difficultyList[0][0].text, [
-        Validators.required
-      ]),
-      answers: this.fb.array(
-        [this.generateNewAnswer('', true), this.generateNewAnswer('', false)],
-        [Validators.required]
-      )
-    });
+    this.multipleQuestionForm = this.questionFormHelper.initForm(
+      QUESTION_TYPE.MULTIPLE
+    );
 
     this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
-  }
-
-  private generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
-    return this.fb.group({
-      text: this.fb.control(text, [Validators.required]),
-      isCorrect: this.fb.control(isCorrect)
-    });
-  }
-
-  ngOnDestroy() {
-    this.radioButtonsSubscription.unsubscribe();
   }
 }

@@ -5,18 +5,15 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { DifficultyList, TypeList } from '../../constants/dropdonws';
-import { AnswersFormType } from '../../../shared/types/forms.type ts';
+import { DifficultyList } from '../../constants/dropdonws';
+import { AnswersFormType } from '../../../shared/types/forms.type';
 import { QuestionForm } from '../../../shared/interfaces/forms.interface';
+import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
+import { QUESTION_TYPE } from '../../../shared/enums/questionType';
 
 @Component({
   selector: 'quiz-app-boolean-question',
@@ -31,7 +28,6 @@ export class BooleanQuestionComponent implements OnInit, OnDestroy {
 
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
-  protected readonly typeList = TypeList;
 
   get title(): FormControl {
     return this.booleanQuestionForm.controls.title;
@@ -44,60 +40,26 @@ export class BooleanQuestionComponent implements OnInit, OnDestroy {
     return this.booleanQuestionForm.controls.difficulty;
   }
 
+  get answersFormArray(): FormArray {
+    return this.booleanQuestionForm.controls.answers;
+  }
+
   get answersControl(): AnswersFormType[] {
     const formArray = this.booleanQuestionForm.controls.answers;
     return formArray.controls;
   }
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.initRadioButtons();
-  }
-
-  private initRadioButtons(): void {
-    this.answersControl.forEach((control, index) => {
-      this.radioButtonsSubscription = control.valueChanges.subscribe(
-        (checked) => {
-          if (checked.isCorrect) {
-            this.answersControl.forEach((otherControl, otherIndex) => {
-              if (otherIndex !== index) {
-                otherControl.get('isCorrect')?.setValue(false);
-              }
-            });
-          }
-        }
-      );
-    });
+    this.questionFormHelper.initRadioButtons(this.answersFormArray);
   }
 
   private initForm(): void {
-    this.booleanQuestionForm = this.fb.group<QuestionForm>({
-      title: this.fb.control('', [
-        Validators.required,
-        Validators.minLength(2)
-      ]),
-      type: this.fb.control(this.typeList[1][0].text, [Validators.required]),
-      difficulty: this.fb.control(this.difficultyList[0][0].text, [
-        Validators.required
-      ]),
-      answers: this.fb.array(
-        [
-          this.generateNewAnswer('True', true),
-          this.generateNewAnswer('False', false)
-        ],
-        [Validators.required]
-      )
-    });
+    this.booleanQuestionForm = this.questionFormHelper.initForm(
+      QUESTION_TYPE.BOOLEAN
+    );
     this.saveBooleanFormEvent.emit(this.booleanQuestionForm);
-  }
-
-  private generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
-    return this.fb.group({
-      text: this.fb.control(text, [Validators.required]),
-      isCorrect: this.fb.control(isCorrect)
-    });
   }
 
   ngOnDestroy(): void {
