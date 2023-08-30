@@ -10,7 +10,7 @@
       <span class="text-lg font-semibold">{{'labels.difficulty' | translateJson}}</span> {{question.difficulty}}
     </div>
     <div class="w-full font-semibold m-1.5 border bg-primary hover:bg-delete-buttons-hover rounded">
-      <quiz-app-button class="w-full h-full" [type]="BUTTON_TYPE.SECONDARY" (onClick)="deleteQuestionConfirm()">{{'buttons.delete-question' | translateJson}}</quiz-app-button>
+      <quiz-app-button class="w-full h-full" [type]="BUTTON_TYPE.SECONDARY" (whenClicked)="deleteQuestionConfirm()">{{'buttons.delete-question' | translateJson}}</quiz-app-button>
 <!--      <button class="w-full h-full p-2" (click)="deleteQuestionConfirm()">{{'buttons.delete-question' | translateJson}}</button>-->
     </div>
   </div>

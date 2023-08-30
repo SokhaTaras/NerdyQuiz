@@ -1,5 +1,4 @@
-
-  <button [class]="dynamicClass" [disabled]="isDisabled" (click)="emitClick()"><ng-content></ng-content></button>
+<button class="rounded border hover:after:bg-buttons-hover disabled:disabled-button {{ dynamicClass }}" [disabled]="isDisabled" (click)="emitClick()"><ng-content></ng-content></button>
 
 
 <!--class="btn-primary"-->

@@ -10,10 +10,10 @@
         </div>
       </div>
       <div class="flex content-center justify-center mt-10">
-        <quiz-app-button [type]="BUTTON_TYPE.PRIMARY" (onClick)="openEditPopUp()">{{'buttons.edit-title' | translateJson}}</quiz-app-button>
+        <quiz-app-button [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="openEditPopUp()">{{'buttons.edit-title' | translateJson}}</quiz-app-button>
       </div>
       <div class="flex items-center justify-center">
-        <quiz-app-button class="items-center justify-center" [type]="BUTTON_TYPE.SECONDARY" (onClick)="goHome()">
+        <quiz-app-button class="items-center justify-center" [type]="BUTTON_TYPE.SECONDARY" (whenClicked)="goHome()">
           {{ 'buttons.home' | translateJson }}
         </quiz-app-button>
       </div>

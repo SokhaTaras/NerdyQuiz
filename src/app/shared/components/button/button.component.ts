@@ -10,7 +10,7 @@ import { BUTTON_TYPE } from '../../enums/buttonType';
 export class ButtonComponent implements OnInit {
   @Input() type: BUTTON_TYPE;
   @Input() isDisabled: boolean;
-  @Output() onClick: EventEmitter<void> = new EventEmitter();
+  @Output() whenClicked: EventEmitter<void> = new EventEmitter();
 
   dynamicClass: string;
 
@@ -20,7 +20,7 @@ export class ButtonComponent implements OnInit {
   }
 
   emitClick(): void {
-    this.onClick.emit();
+    this.whenClicked.emit();
   }
 
   private getType() {
@@ -35,7 +35,7 @@ export class ButtonComponent implements OnInit {
         this.dynamicClass = 'btn-error';
         break;
       default:
-        console.log('test');
+        console.log('default');
     }
   }
 }

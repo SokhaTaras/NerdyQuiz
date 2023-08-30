@@ -79,7 +79,7 @@ button {
   }
 
   .btn-secondary {
-    @apply w-full h-full border border-gray-700 rounded bg-transparent hover:bg-buttons-hover disabled:disabled-button
+    @apply w-full h-full border border-gray-700 rounded bg-transparent hover:after:bg-buttons-hover disabled:disabled-button
   }
 
   .btn-error {
