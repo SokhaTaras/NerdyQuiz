@@ -7,14 +7,7 @@ export interface InitQuizForm {
   theme: FormControl<string>;
 }
 
-export interface BooleanQuestionForm {
-  title: FormControl<string>;
-  type: FormControl<string>;
-  difficulty: FormControl<string>;
-  answers: FormArray<AnswersFormType>;
-}
-
-export interface MultipleQuestionForm {
+export interface QuestionForm {
   title: FormControl<string>;
   type: FormControl<string>;
   difficulty: FormControl<string>;

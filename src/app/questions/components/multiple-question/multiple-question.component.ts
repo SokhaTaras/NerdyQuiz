@@ -15,7 +15,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { MultipleQuestionForm } from '../../../shared/interfaces/forms.interface';
+import { QuestionForm } from '../../../shared/interfaces/forms.interface';
 import { DifficultyList, TypeList } from '../../constants/dropdonws';
 import { AnswersFormType } from '../../../shared/types/forms.type ts';
 import { maxQuestions } from '../../constants/max-questions';
@@ -25,12 +25,10 @@ import { maxQuestions } from '../../constants/max-questions';
   templateUrl: './multiple-question.component.html'
 })
 export class MultipleQuestionComponent implements OnInit, OnDestroy {
-  @Output() saveMultipleFormEvent: EventEmitter<
-    FormGroup<MultipleQuestionForm>
-  > = new EventEmitter<FormGroup<MultipleQuestionForm>>();
+  @Output() saveMultipleFormEvent: EventEmitter<FormGroup<QuestionForm>> =
+    new EventEmitter<FormGroup<QuestionForm>>();
 
-  multipleQuestionForm: FormGroup<MultipleQuestionForm>;
-  formSubscription: Subscription;
+  multipleQuestionForm: FormGroup<QuestionForm>;
   radioButtonsSubscription: Subscription;
 
   protected readonly PlaceHolder = PlaceHolder;
@@ -68,7 +66,6 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     this.initRadioButtons();
-    this.subscribeToMultipleQuestionFormChanges();
   }
 
   addAnswer(): void {
@@ -76,12 +73,6 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
     this.answersControl.push(answer);
     this.initRadioButtons();
     this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
-  }
-
-  private subscribeToMultipleQuestionFormChanges(): void {
-    this.formSubscription = this.multipleQuestionForm.valueChanges.subscribe(
-      () => this.saveMultipleFormEvent.emit(this.multipleQuestionForm)
-    );
   }
 
   private initRadioButtons(): void {
@@ -103,7 +94,7 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
   }
 
   private initForm(): void {
-    this.multipleQuestionForm = this.fb.group<MultipleQuestionForm>({
+    this.multipleQuestionForm = this.fb.group<QuestionForm>({
       title: this.fb.control('', [Validators.required]),
       type: this.fb.control(this.typeList[0][0].text, [Validators.required]),
       difficulty: this.fb.control(this.difficultyList[0][0].text, [
@@ -114,6 +105,8 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
         [Validators.required]
       )
     });
+
+    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
   }
 
   private generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
@@ -124,7 +117,6 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.formSubscription.unsubscribe();
     this.radioButtonsSubscription.unsubscribe();
   }
 }

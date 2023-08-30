@@ -14,29 +14,24 @@ import {
 import { Subscription } from 'rxjs';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import {
-  BooleanList,
-  DifficultyList,
-  TypeList
-} from '../../constants/dropdonws';
-import { BooleanQuestionForm } from '../../../shared/interfaces/forms.interface';
+import { DifficultyList, TypeList } from '../../constants/dropdonws';
 import { AnswersFormType } from '../../../shared/types/forms.type ts';
+import { QuestionForm } from '../../../shared/interfaces/forms.interface';
 
 @Component({
   selector: 'quiz-app-boolean-question',
   templateUrl: './boolean-question.component.html'
 })
 export class BooleanQuestionComponent implements OnInit, OnDestroy {
-  @Output() saveBooleanFormEvent: EventEmitter<FormGroup<BooleanQuestionForm>> =
-    new EventEmitter<FormGroup<BooleanQuestionForm>>();
+  @Output() saveBooleanFormEvent: EventEmitter<FormGroup<QuestionForm>> =
+    new EventEmitter<FormGroup<QuestionForm>>();
 
-  booleanQuestionForm: FormGroup<BooleanQuestionForm>;
-  formSubscription: Subscription;
+  booleanQuestionForm: FormGroup<QuestionForm>;
+  radioButtonsSubscription: Subscription;
 
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
   protected readonly typeList = TypeList;
-  protected readonly booleanList = BooleanList;
 
   get title(): FormControl {
     return this.booleanQuestionForm.controls.title;
@@ -49,25 +44,36 @@ export class BooleanQuestionComponent implements OnInit, OnDestroy {
     return this.booleanQuestionForm.controls.difficulty;
   }
 
-  get correctAnswer() {
-    return this.booleanQuestionForm.controls.answers.controls;
+  get answersControl(): AnswersFormType[] {
+    const formArray = this.booleanQuestionForm.controls.answers;
+    return formArray.controls;
   }
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.subscribeToBooleanQuestionFormChanges();
+    this.initRadioButtons();
   }
 
-  private subscribeToBooleanQuestionFormChanges(): void {
-    this.formSubscription = this.booleanQuestionForm.valueChanges.subscribe(
-      () => this.saveBooleanFormEvent.emit(this.booleanQuestionForm)
-    );
+  private initRadioButtons(): void {
+    this.answersControl.forEach((control, index) => {
+      this.radioButtonsSubscription = control.valueChanges.subscribe(
+        (checked) => {
+          if (checked.isCorrect) {
+            this.answersControl.forEach((otherControl, otherIndex) => {
+              if (otherIndex !== index) {
+                otherControl.get('isCorrect')?.setValue(false);
+              }
+            });
+          }
+        }
+      );
+    });
   }
 
   private initForm(): void {
-    this.booleanQuestionForm = this.fb.group<BooleanQuestionForm>({
+    this.booleanQuestionForm = this.fb.group<QuestionForm>({
       title: this.fb.control('', [
         Validators.required,
         Validators.minLength(2)
@@ -84,6 +90,7 @@ export class BooleanQuestionComponent implements OnInit, OnDestroy {
         [Validators.required]
       )
     });
+    this.saveBooleanFormEvent.emit(this.booleanQuestionForm);
   }
 
   private generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
@@ -94,6 +101,6 @@ export class BooleanQuestionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.formSubscription.unsubscribe();
+    this.radioButtonsSubscription.unsubscribe();
   }
 }
