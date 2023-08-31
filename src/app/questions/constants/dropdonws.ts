@@ -1,4 +1,4 @@
-import { Translations } from '../../shared/types/translations.type';
+import { Translations } from '../../shared/types/translations';
 
 export const TypeList: Translations[] = [
   [

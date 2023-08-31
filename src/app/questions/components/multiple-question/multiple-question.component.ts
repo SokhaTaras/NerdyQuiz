@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -6,23 +12,24 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { MultipleQuestionForm } from '../../../shared/interfaces/forms.interface';
+import { QuestionForm } from '../../../shared/interfaces/forms';
 import { DifficultyList, TypeList } from '../../constants/dropdonws';
-import { AnswersFormType } from '../../../shared/types/forms.type ts';
+import { AnswersFormType } from '../../../shared/types/formsType';
 import { maxQuestions } from '../../constants/max-questions';
 
 @Component({
   selector: 'quiz-app-multiple-question',
   templateUrl: './multiple-question.component.html'
 })
-export class MultipleQuestionComponent implements OnInit {
-  @Output() saveMultipleFormEvent: EventEmitter<
-    FormGroup<MultipleQuestionForm>
-  > = new EventEmitter<FormGroup<MultipleQuestionForm>>();
+export class MultipleQuestionComponent implements OnInit, OnDestroy {
+  @Output() saveMultipleFormEvent: EventEmitter<FormGroup<QuestionForm>> =
+    new EventEmitter<FormGroup<QuestionForm>>();
 
-  multipleQuestionForm: FormGroup<MultipleQuestionForm>;
+  multipleQuestionForm: FormGroup<QuestionForm>;
+  radioButtonsSubscription: Subscription;
 
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
@@ -59,7 +66,6 @@ export class MultipleQuestionComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.initRadioButtons();
-    this.subscribeToMultipleQuestionFormChanges();
   }
 
   addAnswer(): void {
@@ -69,31 +75,29 @@ export class MultipleQuestionComponent implements OnInit {
     this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
   }
 
-  private subscribeToMultipleQuestionFormChanges(): void {
-    this.multipleQuestionForm.valueChanges.subscribe(() =>
-      this.saveMultipleFormEvent.emit(this.multipleQuestionForm)
-    );
-  }
-
   private initRadioButtons(): void {
     this.answersFormArray.controls.forEach((control, index) => {
-      control.valueChanges.subscribe((checked) => {
-        if (checked.isCorrect) {
-          this.answersFormArray.controls.forEach((otherControl, otherIndex) => {
-            if (otherIndex !== index) {
-              otherControl.get('isCorrect')?.setValue(false);
-            }
-          });
+      this.radioButtonsSubscription = control.valueChanges.subscribe(
+        (checked) => {
+          if (checked.isCorrect) {
+            this.answersFormArray.controls.forEach(
+              (otherControl, otherIndex) => {
+                if (otherIndex !== index) {
+                  otherControl.get('isCorrect')?.setValue(false);
+                }
+              }
+            );
+          }
         }
-      });
+      );
     });
   }
 
   private initForm(): void {
-    this.multipleQuestionForm = this.fb.group<MultipleQuestionForm>({
-      title: new FormControl('', [Validators.required]),
-      type: new FormControl(this.typeList[0][0].text, [Validators.required]),
-      difficulty: new FormControl(this.difficultyList[0][0].text, [
+    this.multipleQuestionForm = this.fb.group<QuestionForm>({
+      title: this.fb.control('', [Validators.required]),
+      type: this.fb.control(this.typeList[0][0].text, [Validators.required]),
+      difficulty: this.fb.control(this.difficultyList[0][0].text, [
         Validators.required
       ]),
       answers: this.fb.array(
@@ -101,14 +105,18 @@ export class MultipleQuestionComponent implements OnInit {
         [Validators.required]
       )
     });
+
+    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
   }
 
   private generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
     return this.fb.group({
-      text: new FormControl(text, [Validators.required]),
-      isCorrect: new FormControl(isCorrect)
+      text: this.fb.control(text, [Validators.required]),
+      isCorrect: this.fb.control(isCorrect)
     });
   }
 
-  protected readonly toString = toString;
+  ngOnDestroy() {
+    this.radioButtonsSubscription.unsubscribe();
+  }
 }

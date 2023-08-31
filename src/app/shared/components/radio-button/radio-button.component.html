@@ -2,5 +2,5 @@
   nz-radio
   [formControl]="control"
   (click)="selectItem(isSelected)">
-  {{'labels.correct' | translateJson}}
+  <ng-content></ng-content>
 </label>
