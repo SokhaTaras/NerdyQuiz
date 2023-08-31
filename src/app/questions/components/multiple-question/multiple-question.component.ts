@@ -8,6 +8,7 @@ import { AnswersFormType } from '../../../shared/types/forms.type';
 import { maxQuestions } from '../../constants/max-questions';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/questionType';
+import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'quiz-app-multiple-question',
@@ -67,9 +68,10 @@ export class MultipleQuestionComponent implements OnInit {
   }
 
   private initForm(): void {
-    this.multipleQuestionForm = this.questionFormHelper.initForm(
-      QUESTION_TYPE.MULTIPLE
-    );
+    const question: Question = {
+      type: QUESTION_TYPE.MULTIPLE
+    };
+    this.multipleQuestionForm = this.questionFormHelper.initForm(question);
 
     this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
   }

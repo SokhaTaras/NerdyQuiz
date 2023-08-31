@@ -5,9 +5,11 @@ import { Subscription } from 'rxjs';
 import { QuestionForm } from '../../interfaces/forms.interface';
 import { AnswersFormType } from '../../types/forms.type';
 import {
-  DifficultyList,
-  TypeList
+  questionBooleanObj,
+  questionDifficultyObj,
+  questionTypeObj
 } from '../../../questions/constants/dropdonws';
+import { Question } from '../../../questions/interfaces/question.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,26 +17,24 @@ import {
 export class QuestionFormHelperService implements OnDestroy {
   radioButtonsSubscription: Subscription;
 
-  protected readonly typeList = TypeList;
-  protected readonly difficultyList = DifficultyList;
+  protected readonly typeObj = questionTypeObj;
+  protected readonly difficultyObj = questionDifficultyObj;
+  protected readonly booleanObj = questionBooleanObj;
   constructor(private fb: FormBuilder) {}
 
-  initForm(questionType: string): FormGroup<QuestionForm> {
-    const questionFormConfig = this.getConfig();
+  initForm(question: Question): FormGroup<QuestionForm> {
+    const questionFormConfig = this.getFormConfig();
 
-    if (questionType === 'multiple') {
-      questionFormConfig.type.setValue(this.typeList[0][0].text);
+    if (question.type === 'multiple') {
+      questionFormConfig.type.setValue(this.typeObj.multiple[0].text);
       questionFormConfig.answers = this.fb.array(
-        [this.generateNewAnswer('', true), this.generateNewAnswer('', false)],
+        this.generateDefaultAnswers(question.type),
         [Validators.required]
       );
-    } else if (questionType === 'boolean') {
-      questionFormConfig.type.setValue(this.typeList[1][0].text);
+    } else if (question.type === 'boolean') {
+      questionFormConfig.type.setValue(this.typeObj.boolean[0].text);
       questionFormConfig.answers = this.fb.array(
-        [
-          this.generateNewAnswer('True', true),
-          this.generateNewAnswer('False', false)
-        ],
+        this.generateDefaultAnswers(question.type),
         [Validators.required]
       );
     }
@@ -65,15 +65,33 @@ export class QuestionFormHelperService implements OnDestroy {
     });
   }
 
-  private getConfig(): QuestionForm {
+  private generateDefaultAnswers(answerType: string): AnswersFormType[] {
+    if (answerType === 'multiple') {
+      const answers = [
+        this.generateNewAnswer('', true),
+        this.generateNewAnswer('', false)
+      ];
+      return answers;
+    } else if (answerType === 'boolean') {
+      const answers = [
+        this.generateNewAnswer(this.booleanObj.true[0].text || 'True', true),
+        this.generateNewAnswer(this.booleanObj.false[0].text || 'False', false)
+      ];
+      return answers;
+    } else {
+      return [];
+    }
+  }
+
+  private getFormConfig(): QuestionForm {
     return {
       title: this.fb.control('', [Validators.required]),
       type: this.fb.control('', [Validators.required]),
-      difficulty: this.fb.control(this.difficultyList[0][0].text, [
+      difficulty: this.fb.control(this.difficultyObj.easy[0].text, [
         Validators.required
       ]),
       answers: this.fb.array(
-        [this.generateNewAnswer('', true), this.generateNewAnswer('', false)],
+        [this.generateNewAnswer('', true)],
         [Validators.required]
       )
     };

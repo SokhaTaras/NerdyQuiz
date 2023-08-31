@@ -1,12 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { DifficultyList } from '../../constants/dropdonws';
@@ -14,17 +7,17 @@ import { AnswersFormType } from '../../../shared/types/forms.type';
 import { QuestionForm } from '../../../shared/interfaces/forms.interface';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/questionType';
+import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'quiz-app-boolean-question',
   templateUrl: './boolean-question.component.html'
 })
-export class BooleanQuestionComponent implements OnInit, OnDestroy {
+export class BooleanQuestionComponent implements OnInit {
   @Output() saveBooleanFormEvent: EventEmitter<FormGroup<QuestionForm>> =
     new EventEmitter<FormGroup<QuestionForm>>();
 
   booleanQuestionForm: FormGroup<QuestionForm>;
-  radioButtonsSubscription: Subscription;
 
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
@@ -48,6 +41,7 @@ export class BooleanQuestionComponent implements OnInit, OnDestroy {
     const formArray = this.booleanQuestionForm.controls.answers;
     return formArray.controls;
   }
+
   constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
@@ -56,13 +50,10 @@ export class BooleanQuestionComponent implements OnInit, OnDestroy {
   }
 
   private initForm(): void {
-    this.booleanQuestionForm = this.questionFormHelper.initForm(
-      QUESTION_TYPE.BOOLEAN
-    );
+    const question: Question = {
+      type: QUESTION_TYPE.BOOLEAN
+    };
+    this.booleanQuestionForm = this.questionFormHelper.initForm(question);
     this.saveBooleanFormEvent.emit(this.booleanQuestionForm);
-  }
-
-  ngOnDestroy(): void {
-    this.radioButtonsSubscription.unsubscribe();
   }
 }
