@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
-import { Question } from '../../interfaces/question.interface';
+import { Question } from '../../interfaces/question';
 
 @Component({
   selector: 'quiz-app-question-list',
@@ -24,13 +24,8 @@ export class QuestionListComponent implements OnInit {
     this.displayCreateQuestion = !this.displayCreateQuestion;
   }
 
-  showBooleanCreation(): void {
-    this.isBoolean = true;
-    this.displayCreateQuestion = true;
-  }
-
-  showMultipleCreation(): void {
-    this.isBoolean = false;
+  showQuestionCreation(isMultiple: boolean): void {
+    this.isBoolean = !isMultiple;
     this.displayCreateQuestion = true;
   }
 

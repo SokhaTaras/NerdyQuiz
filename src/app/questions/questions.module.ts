@@ -11,6 +11,7 @@ import { QuestionListComponent } from './components/question-list/question-list.
 import { CreateQuestionComponent } from './components/create-question/create-question.component';
 import { BooleanQuestionComponent } from './components/boolean-question/boolean-question.component';
 import { MultipleQuestionComponent } from './components/multiple-question/multiple-question.component';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 @NgModule({
   declarations: [
@@ -27,12 +28,15 @@ import { MultipleQuestionComponent } from './components/multiple-question/multip
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    NzRadioModule
+    NzRadioModule,
+    NzDropDownModule
   ],
   exports: [
     QuestionListComponent,
     CreateQuestionComponent,
-    QuestionCardComponent
+    QuestionCardComponent,
+    MultipleQuestionComponent,
+    BooleanQuestionComponent
   ]
 })
 export class QuestionsModule {}

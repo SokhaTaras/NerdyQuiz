@@ -1,14 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
-  Validators
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { QuizService } from '../../services/quiz/quiz.service';
-import { InitQuizForm } from '../../../shared/interfaces/forms.interface';
-import { Quiz } from '../../interfaces/quiz.interface';
+import { InitQuizForm } from '../../../shared/interfaces/forms';
+import { Quiz } from '../../interfaces/quiz';
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { ModalRefFacadeService } from '../../../shared/services/modal-ref-facade/modal-ref-facade.service';
 
@@ -55,9 +50,9 @@ export class CreateQuizModalComponent implements OnInit {
 
     const saveMethod = this.getSaveMethod();
 
-    saveMethod(newQuiz);
+    const quizToSave = saveMethod(newQuiz);
 
-    this.close(newQuiz);
+    this.close(quizToSave);
   }
 
   private getSaveMethod(): (quiz: Quiz) => Quiz {
@@ -78,11 +73,11 @@ export class CreateQuizModalComponent implements OnInit {
 
   private initForm(): void {
     this.initQuizForm = this.fb.nonNullable.group<InitQuizForm>({
-      title: new FormControl(this.quiz.title || '', [
+      title: this.fb.control(this.quiz.title || '', [
         Validators.required,
         Validators.minLength(2)
       ]),
-      theme: new FormControl(this.quiz.theme || '', [
+      theme: this.fb.control(this.quiz.theme || '', [
         Validators.required,
         Validators.minLength(2)
       ])

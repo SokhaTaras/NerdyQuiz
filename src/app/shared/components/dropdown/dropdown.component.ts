@@ -5,7 +5,7 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
-import { Translations } from '../../types/translations.type';
+import { Translations } from '../../types/translations';
 
 @Component({
   selector: 'quiz-app-dropdown',
@@ -20,7 +20,7 @@ import { Translations } from '../../types/translations.type';
 })
 export class DropdownComponent implements ControlValueAccessor {
   @Input() list: Translations[];
-  @Input() label: string | boolean;
+  @Input() label: string;
   @Input() control: FormControl = new FormControl();
 
   onChange: any = (): void => {};

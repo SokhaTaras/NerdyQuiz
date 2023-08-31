@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
 
-export type ModalResponseType<T = any> = {
+export type ModalResponse<T = any> = {
   onClose: Subject<T>;
 };
