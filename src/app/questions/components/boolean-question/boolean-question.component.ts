@@ -15,8 +15,8 @@ import { Subscription } from 'rxjs';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { DifficultyList, TypeList } from '../../constants/dropdonws';
-import { AnswersFormType } from '../../../shared/types/forms.type ts';
-import { QuestionForm } from '../../../shared/interfaces/forms.interface';
+import { AnswersFormType } from '../../../shared/types/formsType';
+import { QuestionForm } from '../../../shared/interfaces/forms';
 
 @Component({
   selector: 'quiz-app-boolean-question',

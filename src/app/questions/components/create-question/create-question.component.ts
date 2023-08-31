@@ -8,9 +8,8 @@ import {
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { getNewQuestionId } from '../../../shared/utils/getId';
-import { QuestionForm } from '../../../shared/interfaces/forms.interface';
-import { Answer, Question } from '../../interfaces/question.interface';
+import { QuestionForm } from '../../../shared/interfaces/forms';
+import { Question } from '../../interfaces/question';
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 
 @Component({
@@ -51,36 +50,23 @@ export class CreateQuestionComponent implements OnDestroy {
 
   private mapQuestionToObject(): Question {
     const formData = this.getFormData();
-    const questionId: string = getNewQuestionId();
 
     const question: Question = {
-      title: formData.controls.title.value,
-      type: formData.controls.type.value,
-      difficulty: formData.controls.difficulty.value,
-      answers: this.getAnswers(formData),
-      id: questionId
+      title: formData.title,
+      type: formData.type,
+      difficulty: formData.difficulty,
+      answers: formData.answers
     };
 
     return question;
   }
 
-  private getFormData(): FormGroup<QuestionForm> {
+  private getFormData(): Question {
     if (this.multipleQuestionForm) {
-      return this.multipleQuestionForm;
+      return this.multipleQuestionForm.value as Question;
     } else {
-      return this.booleanQuestionForm;
+      return this.booleanQuestionForm.value as Question;
     }
-  }
-
-  private getAnswers(form: FormGroup<QuestionForm>): Answer[] {
-    const answersArray: Answer[] = form.controls.answers.controls.map(
-      (answerForm) => {
-        const text = answerForm.controls.text.value;
-        const isCorrect = answerForm.controls.isCorrect.value;
-        return { text, isCorrect };
-      }
-    );
-    return answersArray;
   }
 
   private disableButton(formGroup: FormGroup): void {

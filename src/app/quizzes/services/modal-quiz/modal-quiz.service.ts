@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { ModalService } from '../../../shared/services/modal/modal.service';
 import { CreateQuizModalComponent } from '../../components/create-quiz-modal/create-quiz-modal.component';
-import { ModalResponseType } from '../../../shared/types/modalResponse.type';
-import { Quiz } from '../../interfaces/quiz.interface';
+import { ModalResponse } from '../../../shared/types/modalResponse';
+import { Quiz } from '../../interfaces/quiz';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,11 @@ import { Quiz } from '../../interfaces/quiz.interface';
 export class ModalQuizService {
   constructor(private modalService: ModalService) {}
 
-  showInitQuizModal(data: any): ModalResponseType<Quiz> {
+  showInitQuizModal(data: any): ModalResponse<Quiz> {
     return this.modalService.showModal(CreateQuizModalComponent, data);
   }
 
-  confirmDeletionModal(data: any): ModalResponseType<boolean> {
+  confirmDeletionModal(data: any): ModalResponse<boolean> {
     return this.modalService.showConfirmModal(data);
   }
 }

@@ -2,10 +2,10 @@
   <div class="flex content-center justify-center pt-10 text-2xl">
     <div>
       <div class="flex">
-        <div class="mx-3.5 modal-title">
+        <div *ngIf="initialQuiz?.title" class="mx-3.5 modal-title">
           Title: {{ initialQuiz?.title }}
         </div>
-        <div class="mx-3.5 modal-title">
+        <div *ngIf="initialQuiz?.theme" class="mx-3.5 modal-title">
           Theme: {{ initialQuiz?.theme }}
         </div>
       </div>

@@ -5,7 +5,7 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
-import { Translations } from '../../types/translations.type';
+import { Translations } from '../../types/translations';
 
 @Component({
   selector: 'quiz-app-dropdown',

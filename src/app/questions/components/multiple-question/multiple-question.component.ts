@@ -15,9 +15,9 @@ import {
 import { Subscription } from 'rxjs';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { QuestionForm } from '../../../shared/interfaces/forms.interface';
+import { QuestionForm } from '../../../shared/interfaces/forms';
 import { DifficultyList, TypeList } from '../../constants/dropdonws';
-import { AnswersFormType } from '../../../shared/types/forms.type ts';
+import { AnswersFormType } from '../../../shared/types/formsType';
 import { maxQuestions } from '../../constants/max-questions';
 
 @Component({
