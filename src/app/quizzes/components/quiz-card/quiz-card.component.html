@@ -2,9 +2,9 @@
   <div class="card-image">
   </div>
   <div class="card-title">
-    {{quiz?.title}}
+    {{ quiz?.title }}
   </div>
   <div class="card-location">
-    {{'buttons.amount-of-questions' | translateJson}} {{quiz?.questions?.length || 0}}
+    {{ 'BUTTON.AMOUNT_OF_QUESTIONS' | translateJson }} {{ quiz?.questions?.length || 0 }}
   </div>
 </div>

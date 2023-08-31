@@ -20,11 +20,11 @@ export class ErrorMessageComponent implements OnInit, OnDestroy {
 
   setErrorMessage(errorNames: string[]): void {
     if (errorNames.includes('required')) {
-      this.errorMessage = 'errors.required';
+      this.errorMessage = 'ERRORS.REQUIRED';
     } else if (errorNames.includes('minlength')) {
-      this.errorMessage = 'errors.min-length-2';
+      this.errorMessage = 'ERRORS.MIN_LENGTH_2';
     } else {
-      this.errorMessage = 'errors.error';
+      this.errorMessage = 'ERRORS.ERROR';
     }
   }
 

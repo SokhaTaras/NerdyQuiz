@@ -22,12 +22,17 @@
       <ng-container formArrayName="answers" class="py-10">
         <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
           <div class="flex items-center">
-            <quiz-app-input class="m-10 w-full" [label]="(index+1).toString()" [control]="answersControl[index].controls.text"></quiz-app-input>
+            <quiz-app-input [inputIndex]="index" [control]="answersControl[index].controls.text" class="m-10 w-full" label="LABELS.ANSWER"></quiz-app-input>
               <quiz-app-radio-button
                 class="w-1/10 pt-7"
                 [control]="answersControl[index].controls.isCorrect"
                 [id]="index+1">
+                {{ 'LABELS.CORRECT' | translateJson }}
               </quiz-app-radio-button>
+=========
+            <quiz-app-input class="m-10 w-full" [label]="'Answer : ' + (index + 1)" [control]="answersControl[index].controls.text"></quiz-app-input>
+              <quiz-app-radio-button class="w-1/10 pt-7" [control]="answersControl[index].controls.isCorrect" [id]="index+1">Correct</quiz-app-radio-button>
+>>>>>>>>> Temporary merge branch 2
           </div>
         </ng-container>
       </ng-container>
@@ -39,7 +44,7 @@
       class="btn-add btn-pop-up"
       [disabled]="answerLength >= maxQuestionsAmount"
       (click)="addAnswer()">
-      {{'buttons.new-answer' | translateJson}}
+      {{ 'BUTTON.NEW_ANSWER' | translateJson }}
     </button>
   </div>
 </div>
