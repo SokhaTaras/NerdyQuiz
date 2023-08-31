@@ -22,8 +22,8 @@ export class QuizListComponent implements OnDestroy {
 
   openInitPopUp(): void {
     const data: any = {
-      label: 'buttons.create-quiz',
-      buttonText: 'buttons.save'
+      label: 'BUTTON.CREATE_QUIZ',
+      buttonText: 'BUTTON.SAVE'
     };
     this.modalSubscription = this.modalQuizService
       .showInitQuizModal(data)

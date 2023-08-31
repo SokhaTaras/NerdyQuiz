@@ -28,8 +28,8 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
 
   openEditPopUp(): void {
     const data: any = {
-      label: 'buttons.edit-quiz',
-      buttonText: 'buttons.edit',
+      label: 'BUTTON.EDIT_QUIZ',
+      buttonText: 'BUTTON.EDIT',
       quiz: this.initialQuiz
     };
     this.modalQuiz.showInitQuizModal(data);

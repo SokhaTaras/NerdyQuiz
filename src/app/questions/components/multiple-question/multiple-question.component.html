@@ -27,7 +27,7 @@
                 class="w-1/10 pt-7"
                 [control]="answersControl[index].controls.isCorrect"
                 [id]="index+1">
-                {{ 'labels.correct' | translateJson }}
+                {{ 'LABELS.CORRECT' | translateJson }}
               </quiz-app-radio-button>
           </div>
         </ng-container>
@@ -40,7 +40,7 @@
       class="btn-add btn-pop-up"
       [disabled]="answerLength >= maxQuestionsAmount"
       (click)="addAnswer()">
-      {{'buttons.new-answer' | translateJson}}
+      {{ 'BUTTON.NEW_ANSWER' | translateJson }}
     </button>
   </div>
 </div>

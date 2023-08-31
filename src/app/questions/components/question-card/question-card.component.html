@@ -1,16 +1,16 @@
 <div class="flex my-5">
   <div class="flex items-center w-full flex-wrap justify-between p-4 bg-btn-gradient rounded">
     <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 m-1.5 border p-2 bg-primary rounded">
-      <span class="text-lg font-semibold">{{'labels.title' | translateJson}}</span> {{question.title}}
+      <span class="text-lg font-semibold">{{ 'LABELS.TITLE' | translateJson }}: </span> {{question.title}}
     </div>
     <div class="w-full sm:w-1/5 md:w-1/5 lg:w-1/5 xl:w-1/5 m-1.5 border p-2 bg-primary rounded">
-      <span class="text-lg font-semibold">{{'labels.type' | translateJson}}</span> {{question.type}}
+      <span class="text-lg font-semibold">{{ 'LABELS.TYPE' | translateJson }}: </span> {{question.type}}
     </div>
     <div class="w-full sm:w-1/5 md:w-1/5 lg:w-1/5 xl:w-1/5 m-1.5 border p-2 bg-primary rounded">
-      <span class="text-lg font-semibold">{{'labels.difficulty' | translateJson}}</span> {{question.difficulty}}
+      <span class="text-lg font-semibold">{{ 'LABELS.DIFFICULTY' | translateJson }}: </span> {{question.difficulty}}
     </div>
     <div class="w-full font-semibold m-1.5 border bg-primary hover:bg-delete-buttons-hover rounded">
-      <button class="w-full h-full p-2" (click)="deleteQuestionConfirm()">{{'buttons.delete-question' | translateJson}}</button>
+      <button class="w-full h-full p-2" (click)="deleteQuestionConfirm()">{{ 'BUTTON.DELETE_QUESTION' | translateJson }}</button>
     </div>
   </div>
 </div>
