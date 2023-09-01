@@ -3,10 +3,12 @@ import { Component, Input } from '@angular/core';
 import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
 import { Question } from '../../interfaces/question';
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-question-card',
-  templateUrl: './question-card.component.html'
+  templateUrl: './question-card.component.html',
+  providers: [SubscriptionsService]
 })
 export class QuestionCardComponent {
   @Input() question: Question;
@@ -15,7 +17,8 @@ export class QuestionCardComponent {
 
   constructor(
     private modalQuizService: ModalQuizService,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private subscriptionsService: SubscriptionsService
   ) {}
 
   deleteQuestionConfirm(): void {
@@ -25,13 +28,16 @@ export class QuestionCardComponent {
       questionIndex: this.questionIndex,
       quizId: this.quizId
     };
-    this.modalQuizService
-      .confirmDeletionModal(data)
-      .onClose.subscribe((isConfirm) => {
-        if (isConfirm) {
-          this.deleteQuiz();
-        }
-      });
+
+    this.subscriptionsService.addSubscription(
+      this.modalQuizService
+        .confirmDeletionModal(data)
+        .onClose.subscribe((isConfirm) => {
+          if (isConfirm) {
+            this.deleteQuiz();
+          }
+        })
+    );
   }
 
   private deleteQuiz(): void {

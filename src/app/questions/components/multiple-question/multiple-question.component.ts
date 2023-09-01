@@ -6,13 +6,15 @@ import { QuestionForm } from '../../../shared/interfaces/forms';
 import { DifficultyList } from '../../constants/dropdonws';
 import { AnswersFormType } from '../../../shared/types/formsType';
 import { maxQuestions } from '../../constants/max-questions';
-import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
+import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/questionType';
 import { Question } from '../../interfaces/question.interface';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-multiple-question',
-  templateUrl: './multiple-question.component.html'
+  templateUrl: './multiple-question.component.html',
+  providers: [QuestionFormHelperService, SubscriptionsService]
 })
 export class MultipleQuestionComponent implements OnInit {
   @Output() saveMultipleFormEvent: EventEmitter<FormGroup<QuestionForm>> =

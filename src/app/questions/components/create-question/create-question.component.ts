@@ -1,22 +1,17 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { Question } from '../../interfaces/question';
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-create-question',
-  templateUrl: './create-question.component.html'
+  templateUrl: './create-question.component.html',
+  providers: [SubscriptionsService]
 })
-export class CreateQuestionComponent implements OnDestroy {
+export class CreateQuestionComponent {
   @Input() quizId: string | null;
   @Input() isBoolean: boolean;
   @Output() hideCreation: EventEmitter<void> = new EventEmitter();
@@ -24,9 +19,11 @@ export class CreateQuestionComponent implements OnDestroy {
   booleanQuestionForm: FormGroup<QuestionForm>;
   multipleQuestionForm: FormGroup<QuestionForm>;
   isFormNotValid = true;
-  formSubscription: Subscription;
 
-  constructor(private quizService: QuizService) {}
+  constructor(
+    private quizService: QuizService,
+    private subscriptionsService: SubscriptionsService
+  ) {}
 
   getBooleanQuestionForm(event: any): void {
     this.booleanQuestionForm = event;
@@ -70,12 +67,10 @@ export class CreateQuestionComponent implements OnDestroy {
   }
 
   private disableButton(formGroup: FormGroup): void {
-    this.formSubscription = formGroup.valueChanges.subscribe(() => {
-      return (this.isFormNotValid = formGroup.invalid);
-    });
-  }
-
-  ngOnDestroy() {
-    this.formSubscription.unsubscribe();
+    this.subscriptionsService.addSubscription(
+      formGroup.valueChanges.subscribe(() => {
+        return (this.isFormNotValid = formGroup.invalid);
+      })
+    );
   }
 }

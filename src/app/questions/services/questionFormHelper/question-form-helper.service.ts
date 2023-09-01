@@ -1,28 +1,27 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, SkipSelf } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
-import { QuestionForm } from '../../interfaces/forms';
-import { AnswersFormType } from '../../types/formsType';
+import { QuestionForm } from '../../../shared/interfaces/forms';
+import { AnswersFormType } from '../../../shared/types/formsType';
 import {
   questionBooleanObj,
   questionDifficultyObj,
   questionTypeObj
-} from '../../../questions/constants/dropdonws';
-import { Question } from '../../../questions/interfaces/question.interface';
-import { QUESTION_TYPE } from '../../enums/questionType';
+} from '../../constants/dropdonws';
+import { Question } from '../../interfaces/question.interface';
+import { QUESTION_TYPE } from '../../../shared/enums/questionType';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class QuestionFormHelperService implements OnDestroy {
-  radioButtonsSubscription: Subscription[] = [];
-
+@Injectable()
+export class QuestionFormHelperService {
   private readonly typeObj = questionTypeObj;
   private readonly difficultyObj = questionDifficultyObj;
   private readonly booleanObj = questionBooleanObj;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    @SkipSelf() private subscriptionsService: SubscriptionsService
+  ) {}
 
   initForm(question: Question): FormGroup<QuestionForm> {
     const questionFormConfig = this.getFormConfig();
@@ -54,9 +53,10 @@ export class QuestionFormHelperService implements OnDestroy {
     });
   }
 
+  //todo radio buttons group onChange
   initRadioButtons(answersFormArray: FormArray): void {
     answersFormArray.controls.forEach((control, index) => {
-      this.radioButtonsSubscription.push(
+      this.subscriptionsService.addSubscription(
         control.valueChanges.subscribe((checked) => {
           if (checked.isCorrect) {
             answersFormArray.controls.forEach((otherControl, otherIndex) => {
@@ -100,9 +100,5 @@ export class QuestionFormHelperService implements OnDestroy {
         [Validators.required]
       )
     };
-  }
-
-  ngOnDestroy(): void {
-    this.radioButtonsSubscription.forEach((sub) => sub.unsubscribe());
   }
 }
