@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
-import { Quiz } from '../../interfaces/quiz.interface';
+import { Quiz } from '../../interfaces/quiz';
 
 @Component({
   selector: 'quiz-app-quiz-details',
   templateUrl: './quiz-details.component.html'
 })
 export class QuizDetailsComponent implements OnInit, OnDestroy {
-  initialQuiz: Quiz | undefined;
+  initialQuiz: Quiz;
   id: string | null;
   quizSubscription: Subscription;
 
@@ -23,7 +23,7 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCurrentQuizId();
-    this.initialQuiz = this.getCurrentQuiz();
+    this.currentQuizSubscribe();
   }
 
   //TODO change hardcode when json with text will be ready
@@ -40,14 +40,16 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
     this.id = this.route.snapshot.paramMap.get('id');
   }
 
-  private getCurrentQuiz(): Quiz {
-    let currentQuiz: Quiz;
-
-    this.quizSubscription = this.quizService.quizzes$.subscribe((val) => {
-      currentQuiz = val.find((q) => q.id === this.id);
+  private currentQuizSubscribe(): void {
+    this.quizSubscription = this.getCurrentQuiz().subscribe((currentQuiz) => {
+      this.initialQuiz = currentQuiz;
     });
+  }
 
-    return currentQuiz;
+  private getCurrentQuiz(): Observable<Quiz> {
+    return this.quizService.quizzes$.pipe(
+      map((val) => val.find((q) => q.id === this.id))
+    );
   }
 
   ngOnDestroy(): void {

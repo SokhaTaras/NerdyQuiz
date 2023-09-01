@@ -3,8 +3,8 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { DifficultyList } from '../../constants/dropdonws';
-import { AnswersFormType } from '../../../shared/types/forms.type';
-import { QuestionForm } from '../../../shared/interfaces/forms.interface';
+import { AnswersFormType } from '../../../shared/types/formsType';
+import { QuestionForm } from '../../../shared/interfaces/forms';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/questionType';
 import { Question } from '../../interfaces/question.interface';

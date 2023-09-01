@@ -2,8 +2,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { QuestionForm } from '../../interfaces/forms.interface';
-import { AnswersFormType } from '../../types/forms.type';
+import { QuestionForm } from '../../interfaces/forms';
+import { AnswersFormType } from '../../types/formsType';
 import {
   questionBooleanObj,
   questionDifficultyObj,

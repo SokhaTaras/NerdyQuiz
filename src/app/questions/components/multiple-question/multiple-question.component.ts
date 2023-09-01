@@ -2,9 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { QuestionForm } from '../../../shared/interfaces/forms.interface';
+import { QuestionForm } from '../../../shared/interfaces/forms';
 import { DifficultyList } from '../../constants/dropdonws';
-import { AnswersFormType } from '../../../shared/types/forms.type';
+import { AnswersFormType } from '../../../shared/types/formsType';
 import { maxQuestions } from '../../constants/max-questions';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/questionType';
