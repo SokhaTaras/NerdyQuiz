@@ -5,7 +5,7 @@ import { map, Observable, Subscription } from 'rxjs';
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { Quiz } from '../../interfaces/quiz';
-import { NavigateToService } from '../../../shared/services/navigate-to.service';
+import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({

@@ -23,7 +23,7 @@ export class ButtonComponent implements OnInit {
     this.whenClicked.emit();
   }
 
-  private getType() {
+  private getType(): void {
     switch (this.type) {
       case BUTTON_TYPE.PRIMARY:
         this.dynamicClass = 'btn-primary';
@@ -34,8 +34,6 @@ export class ButtonComponent implements OnInit {
       case BUTTON_TYPE.ERROR:
         this.dynamicClass = 'btn-error';
         break;
-      default:
-        console.log('default');
     }
   }
 }

@@ -11,7 +11,7 @@ module.exports = {
         primary: "var(--color-primary)",
         buttons: "var(--color-button)",
         "buttons-hover": "var(--color-buttons-hover)",
-        "error-message": "var(--color-error-message)",
+        error: "var(--color-error)",
         "delete-buttons-hover": "#FFB6C1"
       }
     }
