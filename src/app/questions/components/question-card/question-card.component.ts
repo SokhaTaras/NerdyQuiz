@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
-import { Question } from '../../interfaces/question.interface';
+import { Question } from '../../interfaces/question';
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 

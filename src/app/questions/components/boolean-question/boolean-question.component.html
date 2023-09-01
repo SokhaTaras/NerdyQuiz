@@ -19,15 +19,20 @@
       </div>
     </div>
     <div class="flex justify-center items-center h-20 text-xl">
-      <div class="flex justify-center w-3/5">
+      <div class="flex justify-center w-full">
         <div class="flex justify-center items-center w-3/5">
-          <p class="m-2.5">{{'labels.correct-answer' | translateJson}} </p>
-          <quiz-app-dropdown
-            class="m-1"
-            [label]="correctBooleanAnswer.value"
-            [control]="correctBooleanAnswer"
-            [list]="booleanList">
-          </quiz-app-dropdown>
+          <div class="py-3">
+            <div formArrayName="answers" class="flex space-x-4">
+              <div *ngFor="let answer of answersControl; let index = index" class="flex items-center p-2.5">
+                {{ answer.controls.text.value }}
+                <quiz-app-radio-button
+                  class="w-1/10 pl-1.5"
+                  [control]="answersControl[index].controls.isCorrect"
+                  [id]="index + 1">
+                </quiz-app-radio-button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
