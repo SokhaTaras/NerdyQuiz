@@ -1,9 +1,9 @@
 <button
-    class="{{dynamicClass}} rounded w-full h-full disabled:disabled-button relative"
+    class="{{ dynamicClass }} rounded w-full h-full relative disabled:disabled-button"
     [disabled]="isDisabled"
     (click)="emitClick()">
     <ng-content></ng-content>
   <span
-    class="{{dynamicClass}} absolute inset-0 bg-black/5 opacity-0 hover:opacity-100 transition-opacity duration-300"
+    class="rounded absolute inset-0 bg-black/5 opacity-0 hover:opacity-100 transition-opacity duration-300"
   ></span>
 </button>

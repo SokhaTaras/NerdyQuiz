@@ -75,11 +75,11 @@ button {
   }
 
   .btn-primary {
-    @apply bg-amber-500/5
+    @apply bg-primary;
   }
 
   .btn-secondary {
-    @apply bg-transparent border border-primary
+    @apply bg-transparent border-2 border-primary
   }
 
   .btn-error {
