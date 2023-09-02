@@ -16,7 +16,6 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.getType();
-    console.log(this.dynamicClass);
   }
 
   emitClick(): void {

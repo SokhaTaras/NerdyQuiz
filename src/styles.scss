@@ -40,7 +40,6 @@ button {
   padding: 4px 8px;
 }
 
-
 @layer components {
   .btn-pop-up {
     @apply flex justify-center items-center w-1/2 bg-buttons hover:bg-buttons-hover rounded disabled:opacity-70 disabled:cursor-not-allowed;
