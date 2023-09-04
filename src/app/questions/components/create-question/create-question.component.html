@@ -16,13 +16,13 @@
       <quiz-app-button class="w-1/2 rounded"
                        [type]="BUTTON_TYPE.SECONDARY"
                        (whenClicked)="cancelQuestion()">
-        {{'buttons.cancel' | translateJson}}
+        {{ 'BUTTON.CANCEL' | translateJson }}
       </quiz-app-button>
       <quiz-app-button class="w-1/2 rounded"
                        [type]="BUTTON_TYPE.PRIMARY"
                        [isDisabled]="this.isFormNotValid"
                        (whenClicked)="saveQuestion()">
-        {{'buttons.save' | translateJson}}
+        {{ 'BUTTON.SAVE' | translateJson }}
       </quiz-app-button>
     </div>
   </div>

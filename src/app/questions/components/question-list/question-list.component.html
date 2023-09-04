@@ -1,12 +1,12 @@
 <div class="container mx-auto mt-16 max-w-screen-xl">
   <div class="flex justify-center items-center h-8 mb-2">
     <quiz-app-button class="w-1/3" [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="showQuestionCreation(true)">
-      {{ 'buttons.new-multiple-question' | translateJson }}
+      {{ 'BUTTON.NEW_MULTIPLE_QUESTION' | translateJson }}
     </quiz-app-button>
   </div>
   <div class="flex justify-center items-center h-8 mb-2">
     <quiz-app-button class="w-1/3" [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="showQuestionCreation(false)">
-      {{ 'buttons.new-boolean-question' | translateJson }}
+      {{ 'BUTTON.NEW_BOOLEAN_QUESTION' | translateJson }}
     </quiz-app-button>
   </div>
   <div class="question-list flex-col justify-center">

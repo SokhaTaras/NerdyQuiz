@@ -3,14 +3,14 @@
     <div>
       <div class="flex">
         <div *ngIf="initialQuiz?.title" class="mx-3.5 modal-title">
-        {{'labels.title' | translateJson}} {{ initialQuiz?.title }}
+        {{ 'LABELS.TITLE' | translateJson }}: {{ initialQuiz?.title }}
         </div>
         <div *ngIf="initialQuiz?.theme" class="mx-3.5 modal-title">
-          {{'labels.theme' | translateJson}} {{ initialQuiz?.theme }}
+          {{ 'LABELS.THEME' | translateJson }}: {{ initialQuiz?.theme }}
         </div>
       </div>
       <div class="flex content-center justify-center mt-10">
-        <quiz-app-button [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="openEditPopUp()">{{'buttons.edit-title' | translateJson}}</quiz-app-button>
+        <quiz-app-button [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="openEditPopUp()">{{ 'BUTTON.EDIT_TITLE' | translateJson }}</quiz-app-button>
       </div>
       <div class="flex items-center justify-center my-2">
         <quiz-app-button class="items-center justify-center w-[104px]" [type]="BUTTON_TYPE.SECONDARY" (whenClicked)="goHome()">

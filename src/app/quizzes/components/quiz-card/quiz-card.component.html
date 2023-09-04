@@ -1,11 +1,11 @@
 <div class="container rounded bg-white shadow py-4">
   <div class="card-title">
-    {{quiz?.title}}
+    {{ quiz?.title }}
   </div>
   <div>
     {{'Difficulty'}}
   </div>
   <div class="card-location">
-    {{'buttons.amount-of-questions' | translateJson}} {{quiz?.questions?.length || 0}}
+    {{ 'BUTTON.AMOUNT_OF_QUESTIONS' | translateJson }} {{ quiz?.questions?.length || 0 }}
   </div>
 </div>

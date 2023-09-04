@@ -33,7 +33,7 @@
                   class="mt-8 justify-center items-center"
                   [id]="index"
                   [control]="answersControl[index].controls.isCorrect">
-                  Correct</quiz-app-radio-button>
+                  {{ 'LABELS.CORRECT' | translateJson }}</quiz-app-radio-button>
               </fieldset>
             </form>
           </div>
@@ -47,7 +47,7 @@
       [type]="BUTTON_TYPE.PRIMARY"
       [isDisabled]="answerLength >= 4"
       (whenClicked)="addAnswer()">
-      {{'buttons.new-answer' | translateJson}}
+      {{ 'BUTTON.NEW_ANSWER' | translateJson }}
     </quiz-app-button>
   </div>
 </div>

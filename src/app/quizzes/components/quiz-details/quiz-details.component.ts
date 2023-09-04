@@ -32,8 +32,8 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
   //TODO change hardcode when json with text will be ready
   openEditPopUp(): void {
     const data: any = {
-      label: 'buttons.edit-quiz',
-      buttonText: 'buttons.edit',
+      label: 'BUTTON.EDIT_QUIZ',
+      buttonText: 'BUTTON.EDIT',
       quiz: this.initialQuiz
     };
     this.modalQuiz.showInitQuizModal(data);
