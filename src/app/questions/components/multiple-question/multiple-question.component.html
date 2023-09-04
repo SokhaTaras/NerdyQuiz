@@ -1,4 +1,7 @@
 <div>
+    <div class="flex justify-center items-center py-6 labels">
+      <p class="">{{ 'labels.type' | translateJson }}: {{ 'labels.MULTIPLE' | translateJson }}</p>
+    </div>
   <form [formGroup]="multipleQuestionForm">
     <div class="modal-title">
       <quiz-app-input
@@ -19,15 +22,15 @@
       </div>
     </div>
     <div>
-      <ng-container formArrayName="answers" class="py-10">
+      <ng-container formArrayName="answers" class="py-12">
         <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
           <div class="flex items-center">
-            <span class="text-3xl items-center justify-center">{{ index + 1 }}</span>
-            <quiz-app-input class="m-10 w-full" [control]="answersControl[index].controls.text"></quiz-app-input>
+            <span class="flex text-3xl items-center justify-center mt-2">{{ index + 1 }}</span>
+            <quiz-app-input class="m-8 w-full" [control]="answersControl[index].controls.text"></quiz-app-input>
             <form>
               <fieldset>
                 <quiz-app-radio-button
-                  class="mt-9 justify-center items-center"
+                  class="mt-8 justify-center items-center"
                   [id]="index"
                   [control]="answersControl[index].controls.isCorrect">
                   Correct</quiz-app-radio-button>
@@ -38,7 +41,7 @@
       </ng-container>
     </div>
   </form>
-  <div class="flex justify-center items-center h-8 my-10">
+  <div class="flex justify-center items-center h-8 my-8">
     <quiz-app-button
       class="w-1/3"
       [type]="BUTTON_TYPE.PRIMARY"

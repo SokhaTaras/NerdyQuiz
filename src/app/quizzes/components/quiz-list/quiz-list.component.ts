@@ -15,6 +15,8 @@ export class QuizListComponent implements OnDestroy {
   allQuizzes$ = this.quizService.quizzes$;
   modalSubscription: Subscription;
 
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+
   constructor(
     private quizService: QuizService,
     private modalQuizService: ModalQuizService,
@@ -34,8 +36,6 @@ export class QuizListComponent implements OnDestroy {
         }
       });
   }
-
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
   ngOnDestroy(): void {
     this.modalSubscription.unsubscribe();

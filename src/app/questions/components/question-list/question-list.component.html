@@ -10,10 +10,10 @@
     </quiz-app-button>
   </div>
   <div class="question-list flex-col justify-center">
-    <div class="m-2.5 p-2.5" *ngIf="displayCreateQuestion">
+    <div class="m-2 p-2" *ngIf="displayCreateQuestion">
       <quiz-app-create-question [quizId]="quizId" [isBoolean]="isBoolean" (hideCreation)="toggleQuestionCreation()"></quiz-app-create-question>
     </div>
-    <div class="m-2.5 p-2.5">
+    <div class="m-2 p-2">
       <quiz-app-question-card [quizId]="quizId" [questionIndex]="index" [question]="question" *ngFor="let question of allQuestions; let index = index"></quiz-app-question-card>
     </div>
   </div>

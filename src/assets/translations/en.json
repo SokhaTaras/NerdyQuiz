@@ -2,7 +2,9 @@
   "labels": {
     "title": "Title: ",
     "theme": "Theme: ",
-    "type": "Type: ",
+    "type": "Type",
+    "BOOLEAN": "Boolean",
+    "MULTIPLE": "Multiple",
     "difficulty": "Difficulty: ",
     "correct-answer": "Correct answer: ",
     "correct": "Correct"

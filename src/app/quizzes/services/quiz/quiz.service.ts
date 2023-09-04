@@ -64,6 +64,17 @@ export class QuizService {
       throw new StorageError(STORAGE_ERROR_MESSAGE.PARSE);
     }
   }
+  //todo finish
+
+  // getAverageQuizDifficulty(): void {
+  //   this.quizzes$.subscribe((quizzes) => {
+  //     console.log(quizzes);
+  //     quizzes.forEach((quiz) => {
+  //       const diff = quiz.questions.map((q) => q.difficulty);
+  //       diff.
+  //     });
+  //   });
+  // }
 
   addQuestion(quizId: string | null, question: Question): void {
     if (this.quizzes$.value) {

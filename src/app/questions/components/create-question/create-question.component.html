@@ -1,4 +1,4 @@
-<div class="flex-col py-3.5">
+<div class="flex-col py-4 border-2 border-primary rounded p-8 shadow">
   <form class="flex-auto">
     <div class="variants" *ngIf="!isBoolean">
       <quiz-app-multiple-question
@@ -11,7 +11,7 @@
      </quiz-app-boolean-question>
     </div>
   </form>
-  <div class="footer flex justify-center mt-3.5 mb-2 h-10">
+  <div class="footer flex justify-center mt-4 mb-2 h-10">
     <div class="flex space-x-4 w-1/3">
       <quiz-app-button class="w-1/2 rounded"
                        [type]="BUTTON_TYPE.SECONDARY"
