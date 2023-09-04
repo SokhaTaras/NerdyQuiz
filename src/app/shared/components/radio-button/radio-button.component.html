@@ -1,1 +1,11 @@
-<label nz-radio [formControl]="control" (click)="selectItem(isSelected)"><ng-content></ng-content></label>
+<label class="w-full">
+  <input
+    type="radio"
+    name="radio"
+    class="h-[18px] w-[18px]"
+    [id]="id"
+    [formControl]="control"
+    [checked]="control.value"
+    (click)="selectItem(isSelected)">
+  <ng-content></ng-content>
+</label>

@@ -22,12 +22,17 @@
       <ng-container formArrayName="answers" class="py-10">
         <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
           <div class="flex items-center">
-            <quiz-app-input class="m-10 w-full" [label]="(index+1).toString()" [control]="answersControl[index].controls.text"></quiz-app-input>
-              <quiz-app-radio-button
-                class="w-1/10 pt-7"
-                [control]="answersControl[index].controls.isCorrect"
-                [id]="index+1">
-              Correct</quiz-app-radio-button>
+            <span class="text-3xl items-center justify-center">{{ index + 1 }}</span>
+            <quiz-app-input class="m-10 w-full" [control]="answersControl[index].controls.text"></quiz-app-input>
+            <form>
+              <fieldset>
+                <quiz-app-radio-button
+                  class="mt-9 justify-center items-center"
+                  [id]="index"
+                  [control]="answersControl[index].controls.isCorrect">
+                  Correct</quiz-app-radio-button>
+              </fieldset>
+            </form>
           </div>
         </ng-container>
       </ng-container>
@@ -37,7 +42,7 @@
     <quiz-app-button
       class="w-1/3"
       [type]="BUTTON_TYPE.PRIMARY"
-      [isDisabled]="answerLength > 4"
+      [isDisabled]="answerLength >= 4"
       (whenClicked)="addAnswer()">
       {{'buttons.new-answer' | translateJson}}
     </quiz-app-button>

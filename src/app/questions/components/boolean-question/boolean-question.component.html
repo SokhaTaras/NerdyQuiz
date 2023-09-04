@@ -26,7 +26,7 @@
               <div *ngFor="let answer of answersControl; let index = index" class="flex items-center p-2.5">
                 {{ answer.controls.text.value }}
                 <quiz-app-radio-button
-                  class="w-1/10 pl-1.5"
+                  class="flex w-1/10 pl-1.5 pt-1"
                   [control]="answersControl[index].controls.isCorrect"
                   [id]="index + 1">
                 </quiz-app-radio-button>

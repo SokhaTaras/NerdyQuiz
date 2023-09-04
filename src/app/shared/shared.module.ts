@@ -17,6 +17,7 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { TranslateJsonPipe } from './pipes/translate-json/translate-json.pipe';
 import { ButtonComponent } from './components/button/button.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ButtonComponent } from './components/button/button.component';
     BrowserModule,
     BrowserAnimationsModule,
     NzDropDownModule,
-    NzRadioModule
+    NzRadioModule,
+    NzIconModule
   ],
   exports: [
     InputComponent,
