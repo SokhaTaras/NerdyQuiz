@@ -1,5 +1,7 @@
 <div class="flex flex-col" >
-    <label class="labels">{{ label | translateJson }}</label>
+    <label class="labels">{{ label | translateJson }}
+        <ng-container *ngIf="inputIndex !== undefined">{{ inputIndex + 1 }}</ng-container>
+    </label>
     <input
             type="text"
             class="input"
