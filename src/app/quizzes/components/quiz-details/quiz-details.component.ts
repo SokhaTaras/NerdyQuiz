@@ -28,11 +28,10 @@ export class QuizDetailsComponent implements OnInit {
     this.currentQuizSubscribe();
   }
 
-  //TODO change hardcode when json with text will be ready
   openEditPopUp(): void {
     const data: any = {
-      label: 'Edit quiz',
-      buttonText: 'Edit',
+      label: 'BUTTON.EDIT_QUIZ',
+      buttonText: 'BUTTON.EDIT',
       quiz: this.initialQuiz
     };
     this.modalQuiz.showInitQuizModal(data);
