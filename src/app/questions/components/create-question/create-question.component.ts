@@ -27,6 +27,8 @@ export class CreateQuestionComponent implements OnDestroy {
   isFormNotValid = true;
   formSubscription: Subscription;
 
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+
   constructor(private quizService: QuizService) {}
 
   getBooleanQuestionForm(event: any): void {
@@ -79,6 +81,4 @@ export class CreateQuestionComponent implements OnDestroy {
   ngOnDestroy() {
     this.formSubscription.unsubscribe();
   }
-
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

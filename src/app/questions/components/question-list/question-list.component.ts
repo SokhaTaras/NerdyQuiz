@@ -15,6 +15,8 @@ export class QuestionListComponent implements OnInit {
   isBoolean: boolean;
   allQuestions: Question[];
 
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+
   constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
@@ -37,6 +39,4 @@ export class QuestionListComponent implements OnInit {
       ));
     });
   }
-
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

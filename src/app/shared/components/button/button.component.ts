@@ -15,14 +15,14 @@ export class ButtonComponent implements OnInit {
   dynamicClass: string;
 
   ngOnInit(): void {
-    this.getType();
+    this.setType();
   }
 
   emitClick(): void {
     this.whenClicked.emit();
   }
 
-  private getType(): void {
+  private setType(): void {
     switch (this.type) {
       case BUTTON_TYPE.PRIMARY:
         this.dynamicClass = 'btn-primary';

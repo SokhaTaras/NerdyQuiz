@@ -14,6 +14,8 @@ export class QuestionCardComponent {
   @Input() questionIndex: number;
   @Input() quizId: string | null;
 
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+
   constructor(
     private modalQuizService: ModalQuizService,
     private quizService: QuizService
@@ -38,6 +40,4 @@ export class QuestionCardComponent {
   private deleteQuiz(): void {
     this.quizService.deleteQuestion(this.quizId, this.questionIndex);
   }
-
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

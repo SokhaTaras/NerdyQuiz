@@ -36,6 +36,7 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
   protected readonly difficultyList = DifficultyList;
   protected readonly typeList = TypeList;
   protected readonly maxQuestionsAmount = maxQuestions;
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
   get title(): FormControl {
     return this.multipleQuestionForm.controls.title;
@@ -116,9 +117,6 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
       isCorrect: this.fb.control(isCorrect)
     });
   }
-
-  protected readonly toString = toString;
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
   ngOnDestroy() {
     this.radioButtonsSubscription.unsubscribe();
