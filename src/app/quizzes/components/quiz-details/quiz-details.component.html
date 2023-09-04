@@ -12,6 +12,11 @@
       <div class="flex content-center justify-center mt-10">
         <button (click)="openEditPopUp()">{{ 'BUTTON.EDIT_TITLE' | translateJson }}</button>
       </div>
+      <div class="flex items-center justify-center my-2">
+        <button class="items-center justify-center w-[104px]" (click)="goHome()">
+          {{ 'BUTTON.HOME' | translateJson }}
+        </button>
+      </div>
     </div>
   </div>
   <quiz-app-question-list [quizId]="id"></quiz-app-question-list>
