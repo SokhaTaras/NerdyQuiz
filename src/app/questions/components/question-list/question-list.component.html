@@ -1,12 +1,12 @@
 <div class="container mx-auto mt-16 max-w-screen-xl">
   <div class="flex justify-center items-center h-8 mb-2">
     <button class="btn-add" (click)="showQuestionCreation(true)">
-      Add multiple question
+      {{ 'BUTTON.NEW_MULTIPLE_QUESTION' | translateJson }}
     </button>
   </div>
   <div class="flex justify-center items-center h-8 mb-2">
     <button class="btn-add" (click)="showQuestionCreation(false)">
-      Add boolean question
+      {{ 'BUTTON.NEW_BOOLEAN_QUESTION' | translateJson }}
     </button>
   </div>
   <div class="question-list flex-col justify-center">

@@ -18,14 +18,13 @@ export class ErrorMessageComponent implements OnInit, OnDestroy {
     this.subscribeToControlStatusChanges();
   }
 
-  // TODO remake it when translations will be ready
   setErrorMessage(errorNames: string[]): void {
     if (errorNames.includes('required')) {
-      this.errorMessage = 'This field is required.';
+      this.errorMessage = 'ERRORS.REQUIRED';
     } else if (errorNames.includes('minlength')) {
-      this.errorMessage = 'This field must have at least 2 characters.';
+      this.errorMessage = 'ERRORS.MIN_LENGTH_2';
     } else {
-      this.errorMessage = '';
+      this.errorMessage = 'ERRORS.ERROR';
     }
   }
 
