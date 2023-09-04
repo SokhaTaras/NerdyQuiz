@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { BUTTON_TYPE } from '../../enums/buttonType';
 
 @Component({
