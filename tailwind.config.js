@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "var(--color-primary)",
+        "back-ground": "var(--color-back-ground)",
         buttons: "var(--color-button)",
         "buttons-hover": "var(--color-buttons-hover)",
         error: "var(--color-error)",

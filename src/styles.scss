@@ -11,7 +11,7 @@ body {
 
 .ant-modal-content {
   border-radius: var(--border-radius);
-  background-color: var(--color-primary);
+  background-color: var(--color-back-ground);
 }
 
 .ant-modal-confirm-btns {
@@ -20,6 +20,18 @@ body {
 
 .anticon-question-circle {
   display: none;
+}
+
+.ant-modal-close-x{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-modal-close{
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
@@ -31,7 +43,6 @@ button {
   min-width: 100px;
   padding: 4px 8px;
 }
-
 
 @layer components {
   .btn-pop-up {
@@ -87,14 +98,12 @@ button {
 @layer base {
   :root {
     --color-primary: #e6e6ff;
-    --color-back-ground: rgba(240, 240, 255);
+    --color-back-ground: rgb(240, 240, 255);
     --color-button: #E5E7EB;
     --color-buttons-hover: rgba(0, 0, 0, 0.05);
     --color-error: #D10000;
     --primary-font-color: #333333;
     --primary-font-family: system-ui;
-    --background-image: linear-gradient(to bottom, #dcdcff, #c7c7ff);
-    --background-image-hover: linear-gradient(to bottom, #c7c7ff, #b3b3ff);
     --border-radius: 10px;
   }
 }

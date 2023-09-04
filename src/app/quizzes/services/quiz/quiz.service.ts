@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { Quiz } from '../../interfaces/quiz';
 import { StorageError } from '../../../shared/classes/storageError/storage-error';
@@ -8,12 +8,15 @@ import { Question } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../../../shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '../../../shared/utils/getId';
 import { StorageKey } from '../../../shared/enums/storageKey';
+import { Difficulties } from '../../../shared/types/formsType';
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuizService {
+export class QuizService implements OnDestroy {
   public quizzes$ = new BehaviorSubject<Quiz[]>([]);
+
+  subscription: Subscription;
 
   constructor(private localStorageService: LocalStorageService) {}
 
@@ -64,17 +67,58 @@ export class QuizService {
       throw new StorageError(STORAGE_ERROR_MESSAGE.PARSE);
     }
   }
-  //todo finish
 
-  // getAverageQuizDifficulty(): void {
-  //   this.quizzes$.subscribe((quizzes) => {
-  //     console.log(quizzes);
-  //     quizzes.forEach((quiz) => {
-  //       const diff = quiz.questions.map((q) => q.difficulty);
-  //       diff.
-  //     });
-  //   });
-  // }
+  //todo add subscription service when it will be merged (delete this FN)
+  getAverageQuizDifficulty(): void {
+    this.subscription = this.quizzes$.subscribe((quizzes) => {
+      return quizzes.forEach((quiz) => {
+        const difficulties = quiz?.questions?.map((q) => q.difficulty);
+        const difficultiesObj = this.getWhichTypeIsMostUsed(difficulties);
+        const result = this.getDifficultyCounts(difficultiesObj);
+        console.log(result);
+        return result;
+      });
+    });
+  }
+
+  getWhichTypeIsMostUsed(difficulties: string[]): Difficulties {
+    const difficultyCounts = { Easy: 0, Medium: 0, Hard: 0 };
+
+    difficulties.forEach((val) => {
+      switch (val) {
+        case 'Easy':
+          difficultyCounts.Easy++;
+          break;
+        case 'Medium':
+          difficultyCounts.Medium++;
+          break;
+        case 'Hard':
+          difficultyCounts.Hard++;
+          break;
+        default:
+          break;
+      }
+    });
+
+    return difficultyCounts;
+  }
+
+  getDifficultyCounts(difficultiesObj: Difficulties): string {
+    let maxCount = Math.max(
+      difficultiesObj.Easy,
+      difficultiesObj.Medium,
+      difficultiesObj.Hard
+    );
+
+    if (maxCount === difficultiesObj.Easy) {
+      return 'Easy';
+    } else if (maxCount === difficultiesObj.Medium) {
+      return 'Medium';
+    } else if (maxCount === difficultiesObj.Hard) {
+      return 'Hard';
+    }
+    return '';
+  }
 
   addQuestion(quizId: string | null, question: Question): void {
     if (this.quizzes$.value) {
@@ -123,5 +167,9 @@ export class QuizService {
         this.quizzes$.value
       );
     }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
