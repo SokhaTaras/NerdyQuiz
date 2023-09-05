@@ -18,7 +18,7 @@ import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { DifficultyList, TypeList } from '../../constants/dropdonws';
 import { AnswersFormType } from '../../../shared/types/formsType';
-import { maxQuestions } from '../../constants/max-questions';
+import { maxQuestionsAmount } from '../../constants/questions-info';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
@@ -35,7 +35,7 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly difficultyList = DifficultyList;
   protected readonly typeList = TypeList;
-  protected readonly maxQuestionsAmount = maxQuestions;
+  protected readonly maxQuestionsAmount = maxQuestionsAmount;
   protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
   get title(): FormControl {

@@ -1,6 +1,6 @@
 <div>
     <div class="flex justify-center items-center py-6 labels">
-      <p class="">{{ 'labels.type' | translateJson }}: {{ 'labels.MULTIPLE' | translateJson }}</p>
+      <p class="">{{ 'LABELS.TYPE' | translateJson }}: {{ 'LABELS.MULTIPLE' | translateJson }}</p>
     </div>
   <form [formGroup]="multipleQuestionForm">
     <div class="modal-title">
@@ -45,7 +45,7 @@
     <quiz-app-button
       class="w-1/3"
       [type]="BUTTON_TYPE.PRIMARY"
-      [isDisabled]="answerLength >= 4"
+      [isDisabled]="answerLength >= maxQuestionsAmount"
       (whenClicked)="addAnswer()">
       {{ 'BUTTON.NEW_ANSWER' | translateJson }}
     </quiz-app-button>

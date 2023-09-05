@@ -2,8 +2,8 @@
   <div class="card-title">
     {{ quiz?.title }}
   </div>
-  <div>
-    {{'Difficulty'}}
+  <div *ngIf="quizDifficulty">
+    {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ quizDifficulty }}
   </div>
   <div class="card-location">
     {{ 'BUTTON.AMOUNT_OF_QUESTIONS' | translateJson }} {{ quiz?.questions?.length || 0 }}

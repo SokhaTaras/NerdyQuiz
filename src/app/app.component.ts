@@ -15,6 +15,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.quizService.initAllQuizzes(StorageKey.QUIZZES);
-    this.quizService.getAverageQuizDifficulty();
   }
 }
