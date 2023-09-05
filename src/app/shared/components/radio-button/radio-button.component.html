@@ -1,11 +1,10 @@
-<label class="w-full">
+<label class="w-full flex items-center justify-center radio">
   <input
-    type="radio"
-    name="radio"
-    class="h-[18px] w-[18px]"
-    [id]="id"
-    [formControl]="control"
+    name="radioGroup"
     [checked]="control.value"
-    (click)="selectItem(isSelected)">
+    (change)="selectItem(!control.value)"
+    type="radio"
+  >
+  <span></span>
   <ng-content></ng-content>
 </label>

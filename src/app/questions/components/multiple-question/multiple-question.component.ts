@@ -118,7 +118,7 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.radioButtonsSubscription.unsubscribe();
   }
 }

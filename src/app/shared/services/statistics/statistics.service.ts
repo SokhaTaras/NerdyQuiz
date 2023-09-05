@@ -17,7 +17,7 @@ export class StatisticsService {
     return this.calculateAverageDifficulty(difficulties);
   }
 
-  calculateAverageDifficulty(difficulties: string[]): string {
+  private calculateAverageDifficulty(difficulties: string[]): string {
     if (!difficulties || difficulties.length === 0) {
       return '';
     }
@@ -43,7 +43,7 @@ export class StatisticsService {
     return difficulty;
   }
 
-  getWeightOfQuestions(updatedCounts: Difficulties): number {
+  private getWeightOfQuestions(updatedCounts: Difficulties): number {
     return (
       updatedCounts.Easy * DifficultyPoints.Easy +
       updatedCounts.Medium * DifficultyPoints.Medium +
@@ -51,7 +51,7 @@ export class StatisticsService {
     );
   }
 
-  countDifficultyOccurrences(
+  private countDifficultyOccurrences(
     difficulties: string[],
     counts: Difficulties
   ): Difficulties {
@@ -74,7 +74,7 @@ export class StatisticsService {
     return counts;
   }
 
-  getDifficulty(averageDifficulty: number): string {
+  private getDifficulty(averageDifficulty: number): string {
     if (
       averageDifficulty >= DifficultyRanges.Easy.min &&
       averageDifficulty <= DifficultyRanges.Easy.max

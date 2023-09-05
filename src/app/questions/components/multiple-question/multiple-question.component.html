@@ -24,18 +24,15 @@
     <div>
       <ng-container formArrayName="answers" class="py-12">
         <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
-          <div class="flex items-center">
+          <div class="flex items-center justify-center">
             <span class="flex text-3xl items-center justify-center mt-2">{{ index + 1 }}</span>
             <quiz-app-input class="m-8 w-full" [control]="answersControl[index].controls.text"></quiz-app-input>
-            <form>
-              <fieldset>
                 <quiz-app-radio-button
-                  class="mt-8 justify-center items-center"
+                  class="mt-4 justify-center items-center"
                   [id]="index"
                   [control]="answersControl[index].controls.isCorrect">
-                  {{ 'LABELS.CORRECT' | translateJson }}</quiz-app-radio-button>
-              </fieldset>
-            </form>
+                  {{ 'LABELS.CORRECT' | translateJson }}
+                </quiz-app-radio-button>
           </div>
         </ng-container>
       </ng-container>
