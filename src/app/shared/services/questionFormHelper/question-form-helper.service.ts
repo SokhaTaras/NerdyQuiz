@@ -1,50 +1,63 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { QuestionForm } from '../../interfaces/forms';
 import { AnswersFormType } from '../../types/formsType';
-import {
-  questionBooleanObj,
-  questionDifficultyObj,
-  questionTypeObj
-} from '../../../questions/constants/dropdonws';
 import { Question } from '../../../questions/interfaces/question.interface';
-import { QUESTION_TYPE } from '../../enums/questionType';
+import { QUESTION_TYPE } from '../../enums/question-info';
+import {
+  AnswerBooleanList,
+  AnswerDifficultyList,
+  AnswerTypeList
+} from '../../../questions/constants/dropdonws';
 
-@Injectable({
-  providedIn: 'root'
-})
+export const defaultForm: QuestionForm = {
+  title: new FormControl(''),
+  type: new FormControl(AnswerTypeList[0].value),
+  difficulty: new FormControl(AnswerDifficultyList[0].value),
+  answers: new FormArray([])
+};
+
+@Injectable()
 export class QuestionFormHelperService implements OnDestroy {
   radioButtonsSubscription: Subscription[] = [];
-
-  private readonly typeObj = questionTypeObj;
-  private readonly difficultyObj = questionDifficultyObj;
-  private readonly booleanObj = questionBooleanObj;
+  currentForm: FormGroup = new FormGroup({});
 
   constructor(private fb: FormBuilder) {}
 
-  initForm(question: Question): FormGroup<QuestionForm> {
-    const questionFormConfig = this.getFormConfig();
-    const defaultAnswers = this.generateDefaultAnswers(question.type);
-    const questionType =
-      question.type === QUESTION_TYPE.MULTIPLE
-        ? this.typeObj.multiple[0].text
-        : this.typeObj.boolean[0].text;
-
-    if (question.type === QUESTION_TYPE.MULTIPLE) {
-      questionFormConfig.type.setValue(questionType);
-      questionFormConfig.answers = this.fb.array(defaultAnswers, [
-        Validators.required
-      ]);
-    } else if (question.type === QUESTION_TYPE.BOOLEAN) {
-      questionFormConfig.type.setValue(questionType);
-      questionFormConfig.answers = this.fb.array(defaultAnswers, [
-        Validators.required
-      ]);
+  initForm(question: Question): void {
+    let currentAnswers: AnswersFormType[] = [];
+    if (question.answers) {
+      currentAnswers = this.mapCurrentAnswers(question);
     }
+    const defaultAnswers = this.generateDefaultAnswers(question.type);
 
-    return this.fb.group<QuestionForm>(questionFormConfig);
+    const initForm: QuestionForm = {
+      title: this.fb.control(defaultForm.title.value || question.title, [
+        Validators.required
+      ]),
+      type: this.fb.control(defaultForm.type.value || question.type, [
+        Validators.required
+      ]),
+      difficulty: this.fb.control(
+        defaultForm.difficulty.value || question.difficulty,
+        [Validators.required]
+      ),
+      answers: this.fb.array(defaultAnswers || currentAnswers, [
+        Validators.required
+      ])
+    };
+
+    this.currentForm = this.fb.group<QuestionForm>(initForm);
+
+    console.log(this.currentForm);
   }
 
   generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
@@ -70,6 +83,18 @@ export class QuestionFormHelperService implements OnDestroy {
     });
   }
 
+  mapCurrentAnswers(question: Question): AnswersFormType[] {
+    if (question) {
+      const answers = question.answers.map((a) => {
+        return this.generateNewAnswer(a.text, a.isCorrect);
+      });
+      console.log(answers);
+      return answers;
+    } else {
+      return [];
+    }
+  }
+
   private generateDefaultAnswers(answerType: string): AnswersFormType[] {
     if (answerType === QUESTION_TYPE.MULTIPLE) {
       const answers = [
@@ -79,8 +104,8 @@ export class QuestionFormHelperService implements OnDestroy {
       return answers;
     } else if (answerType === QUESTION_TYPE.MULTIPLE) {
       const answers = [
-        this.generateNewAnswer(this.booleanObj.true[0].text, true),
-        this.generateNewAnswer(this.booleanObj.false[0].text, false)
+        this.generateNewAnswer(AnswerBooleanList[0].value, true),
+        this.generateNewAnswer(AnswerBooleanList[1].value, false)
       ];
       return answers;
     } else {
@@ -88,19 +113,19 @@ export class QuestionFormHelperService implements OnDestroy {
     }
   }
 
-  private getFormConfig(): QuestionForm {
-    return {
-      title: this.fb.control('', [Validators.required]),
-      type: this.fb.control('', [Validators.required]),
-      difficulty: this.fb.control(this.difficultyObj.easy[0].text, [
-        Validators.required
-      ]),
-      answers: this.fb.array(
-        [this.generateNewAnswer('', true)],
-        [Validators.required]
-      )
-    };
-  }
+  // private getFormConfig(): QuestionForm {
+  //   return {
+  //     title: this.fb.control('', [Validators.required]),
+  //     type: this.fb.control('', [Validators.required]),
+  //     difficulty: this.fb.control(AnswerDifficultyList[0].value, [
+  //       Validators.required
+  //     ]),
+  //     answers: this.fb.array(
+  //       [this.generateNewAnswer('', true)],
+  //       [Validators.required]
+  //     )
+  //   };
+  // }
 
   ngOnDestroy(): void {
     this.radioButtonsSubscription.forEach((sub) => sub.unsubscribe());

@@ -7,12 +7,13 @@ import { DifficultyList } from '../../constants/dropdonws';
 import { AnswersFormType } from '../../../shared/types/formsType';
 import { maxQuestions } from '../../constants/max-questions';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
-import { QUESTION_TYPE } from '../../../shared/enums/questionType';
+import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'quiz-app-multiple-question',
-  templateUrl: './multiple-question.component.html'
+  templateUrl: './multiple-question.component.html',
+  providers: [QuestionFormHelperService]
 })
 export class MultipleQuestionComponent implements OnInit {
   @Output() saveMultipleFormEvent: EventEmitter<FormGroup<QuestionForm>> =
@@ -71,8 +72,8 @@ export class MultipleQuestionComponent implements OnInit {
     const question: Question = {
       type: QUESTION_TYPE.MULTIPLE
     };
-    this.multipleQuestionForm = this.questionFormHelper.initForm(question);
-
+    this.questionFormHelper.initForm(question);
+    this.multipleQuestionForm = this.questionFormHelper.currentForm;
     this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
   }
 }

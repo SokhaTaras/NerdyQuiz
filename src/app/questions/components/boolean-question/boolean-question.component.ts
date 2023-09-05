@@ -6,12 +6,13 @@ import { DifficultyList } from '../../constants/dropdonws';
 import { AnswersFormType } from '../../../shared/types/formsType';
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
-import { QUESTION_TYPE } from '../../../shared/enums/questionType';
+import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'quiz-app-boolean-question',
-  templateUrl: './boolean-question.component.html'
+  templateUrl: './boolean-question.component.html',
+  providers: [QuestionFormHelperService]
 })
 export class BooleanQuestionComponent implements OnInit {
   @Output() saveBooleanFormEvent: EventEmitter<FormGroup<QuestionForm>> =
@@ -53,7 +54,8 @@ export class BooleanQuestionComponent implements OnInit {
     const question: Question = {
       type: QUESTION_TYPE.BOOLEAN
     };
-    this.booleanQuestionForm = this.questionFormHelper.initForm(question);
+    this.questionFormHelper.initForm(question);
+    this.booleanQuestionForm = this.questionFormHelper.currentForm;
     this.saveBooleanFormEvent.emit(this.booleanQuestionForm);
   }
 }

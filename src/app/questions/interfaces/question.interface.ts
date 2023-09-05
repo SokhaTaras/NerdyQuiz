@@ -1,3 +1,5 @@
+import { QUESTION_BOOLEAN } from '../../shared/enums/question-info';
+
 export interface Question {
   title?: string;
   type?: string;
@@ -11,23 +13,12 @@ export interface Answer {
   isCorrect: boolean;
 }
 
-export interface QuestionEntry {
+export interface AnswerEntry {
   lang: string;
   text: string;
 }
 
-export interface QuestionTypeObject {
-  multiple: QuestionEntry[];
-  boolean: QuestionEntry[];
-}
-
-export interface QuestionDifficultyObject {
-  easy: QuestionEntry[];
-  medium: QuestionEntry[];
-  hard: QuestionEntry[];
-}
-
-export interface QuestionBooleanObject {
-  true: QuestionEntry[];
-  false: QuestionEntry[];
+export interface AnswerList {
+  value: string;
+  translations: { lang: string; text: string }[];
 }
