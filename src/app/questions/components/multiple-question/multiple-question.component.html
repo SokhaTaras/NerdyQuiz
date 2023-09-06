@@ -2,7 +2,7 @@
   <form [formGroup]="multipleQuestionForm">
     <div class="modal-title">
       <quiz-app-input
-        [control]="title"
+        [control]="formData.titleControl"
         label="Title"
         [placeHolder]="PlaceHolder.title | translateJson">
       </quiz-app-input>
@@ -11,21 +11,21 @@
       <div class="flex justify-center w-3/5 overflow-hidden">
         <div class="flex justify-center w-1/2 p-2">
           <quiz-app-dropdown
-            [control]="difficulty"
+            [control]="formData.difficultyControl"
             [list]="difficultyList"
-            [label]="difficulty.value">
+            [label]="formData.difficultyControl.value">
           </quiz-app-dropdown>
         </div>
       </div>
     </div>
     <div>
       <ng-container formArrayName="answers" class="py-10">
-        <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
+        <ng-container class="flex" *ngFor="let answer of formData.answersFormArray.controls; let index = index">
           <div class="flex items-center">
-            <quiz-app-input [inputIndex]="index" [control]="answersControl[index].controls.text" class="m-10 w-full" label="LABELS.ANSWER"></quiz-app-input>
+            <quiz-app-input [inputIndex]="index" [control]="formData.answersControl[index].controls.text" class="m-10 w-full" label="LABELS.ANSWER"></quiz-app-input>
               <quiz-app-radio-button
                 class="w-1/10 pt-7"
-                [control]="answersControl[index].controls.isCorrect"
+                [control]="formData.answersControl[index].controls.isCorrect"
                 [id]="index+1">
                 {{ 'LABELS.CORRECT' | translateJson }}
               </quiz-app-radio-button>
@@ -38,7 +38,7 @@
     <button
       type="button"
       class="btn-add btn-pop-up"
-      [disabled]="answerLength >= maxQuestionsAmount"
+      [disabled]="formData.answerLength >= maxQuestionsAmount"
       (click)="addAnswer()">
       {{ 'BUTTON.NEW_ANSWER' | translateJson }}
     </button>

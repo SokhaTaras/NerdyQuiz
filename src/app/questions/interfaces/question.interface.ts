@@ -1,4 +1,6 @@
-import { QUESTION_BOOLEAN } from '../../shared/enums/question-info';
+import { FormArray, FormControl } from '@angular/forms';
+
+import { AnswersFormType } from '../../shared/types/formsType';
 
 export interface Question {
   title?: string;
@@ -13,12 +15,16 @@ export interface Answer {
   isCorrect: boolean;
 }
 
-export interface AnswerEntry {
-  lang: string;
-  text: string;
-}
-
 export interface AnswerList {
   value: string;
   translations: { lang: string; text: string }[];
+}
+
+export interface CommonProperties {
+  answersControl: AnswersFormType[];
+  titleControl: FormControl;
+  typeControl: FormControl;
+  difficultyControl: FormControl;
+  answersFormArray: FormArray;
+  answerLength?: number;
 }
