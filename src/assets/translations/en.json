@@ -25,7 +25,8 @@
     "DELETE_QUESTION": "Delete question",
     "EDIT_TITLE": "Edit title",
     "CANCEL": "Cancel",
-    "SAVE": "Save"
+    "SAVE": "Save",
+    "HOME": "Home"
   },
 
   "ERRORS": {

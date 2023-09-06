@@ -16,4 +16,8 @@ export class NavigateToService {
       NavigationRoutes.DETAILS
     ]);
   }
+
+  navigateHome(): void {
+    this.router.navigate([NavigationRoutes.HOME]);
+  }
 }
