@@ -25,10 +25,10 @@ export class ButtonComponent implements OnInit {
   private setType(): void {
     switch (this.type) {
       case BUTTON_TYPE.PRIMARY:
-        this.dynamicClass = 'bg-primary';
+        this.dynamicClass = 'btn-primary';
         break;
       case BUTTON_TYPE.SECONDARY:
-        this.dynamicClass = 'bg-secondary';
+        this.dynamicClass = 'btn-secondary';
         break;
       case BUTTON_TYPE.ERROR:
         this.dynamicClass = 'btn-error';

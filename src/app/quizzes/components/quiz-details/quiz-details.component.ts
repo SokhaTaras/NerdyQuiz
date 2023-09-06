@@ -17,6 +17,8 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
   id: string | null;
   quizSubscription: Subscription;
 
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+
   constructor(
     private quizService: QuizService,
     private route: ActivatedRoute,
@@ -61,6 +63,4 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.quizSubscription.unsubscribe();
   }
-
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }

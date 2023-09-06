@@ -12,10 +12,8 @@ import { StorageKey } from '../../../shared/enums/storageKey';
 @Injectable({
   providedIn: 'root'
 })
-export class QuizService implements OnDestroy {
+export class QuizService {
   public quizzes$ = new BehaviorSubject<Quiz[]>([]);
-
-  subscription: Subscription;
 
   constructor(private localStorageService: LocalStorageService) {}
 
@@ -114,9 +112,5 @@ export class QuizService implements OnDestroy {
         this.quizzes$.value
       );
     }
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }
