@@ -10,10 +10,7 @@ import { Subscription } from 'rxjs';
 
 import { QuestionForm } from '../../interfaces/forms';
 import { AnswersFormType } from '../../types/formsType';
-import {
-  CommonProperties,
-  Question
-} from '../../../questions/interfaces/question.interface';
+import { Question } from '../../../questions/interfaces/question.interface';
 import { QUESTION_TYPE } from '../../enums/question-info';
 import {
   AnswerBooleanList,
@@ -30,13 +27,8 @@ export const defaultForm: QuestionForm = {
 
 @Injectable()
 export class QuestionFormHelperService implements OnDestroy {
-  radioButtonsSubscription: Subscription[] = [];
+  radioButtonsSubscription: Subscription;
   currentForm: FormGroup<QuestionForm>;
-
-  get answersControl(): AnswersFormType[] {
-    const formArray = this.currentForm.controls.answers;
-    return formArray.controls;
-  }
 
   get title(): FormControl {
     return this.currentForm.controls.title;
@@ -45,16 +37,9 @@ export class QuestionFormHelperService implements OnDestroy {
   get type(): FormControl {
     return this.currentForm.controls.type;
   }
-  get difficulty(): FormControl {
-    return this.currentForm.controls.difficulty;
-  }
 
   get answersFormArray(): FormArray {
     return this.currentForm.controls.answers;
-  }
-
-  get answerLength(): number {
-    return this.currentForm.controls.answers.length;
   }
 
   constructor(private fb: FormBuilder) {}
@@ -93,9 +78,13 @@ export class QuestionFormHelperService implements OnDestroy {
   }
 
   initRadioButtons(): void {
+    if (this.radioButtonsSubscription) {
+      this.radioButtonsSubscription.unsubscribe();
+    }
+
     this.answersFormArray.controls.forEach((control, index) => {
-      this.radioButtonsSubscription.push(
-        control.valueChanges.subscribe((checked) => {
+      this.radioButtonsSubscription = control.valueChanges.subscribe(
+        (checked) => {
           if (checked.isCorrect) {
             this.answersFormArray.controls.forEach(
               (otherControl, otherIndex) => {
@@ -105,9 +94,15 @@ export class QuestionFormHelperService implements OnDestroy {
               }
             );
           }
-        })
+        }
       );
     });
+  }
+
+  addAnswer(): void {
+    const answer: AnswersFormType = this.generateNewAnswer('', false);
+    this.answersFormArray.push(answer);
+    this.initRadioButtons();
   }
 
   mapCurrentAnswers(question: Question): AnswersFormType[] {
@@ -119,17 +114,6 @@ export class QuestionFormHelperService implements OnDestroy {
     } else {
       return [];
     }
-  }
-
-  getControls(): CommonProperties {
-    return {
-      answersControl: this.answersControl,
-      titleControl: this.title,
-      typeControl: this.type,
-      difficultyControl: this.difficulty,
-      answersFormArray: this.answersFormArray,
-      answerLength: this.answerLength
-    };
   }
 
   private generateDefaultAnswers(answerType: string): AnswersFormType[] {
@@ -151,6 +135,6 @@ export class QuestionFormHelperService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.radioButtonsSubscription.forEach((sub) => sub.unsubscribe());
+    this.radioButtonsSubscription.unsubscribe();
   }
 }

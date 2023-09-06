@@ -5,7 +5,7 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
-import { Translations } from '../../types/translations';
+import { AnswerList } from '../../../questions/interfaces/question.interface';
 
 @Component({
   selector: 'quiz-app-dropdown',
@@ -19,7 +19,7 @@ import { Translations } from '../../types/translations';
   ]
 })
 export class DropdownComponent implements ControlValueAccessor {
-  @Input() list: Translations[];
+  @Input() list: AnswerList[];
   @Input() label: string;
   @Input() control: FormControl = new FormControl();
 

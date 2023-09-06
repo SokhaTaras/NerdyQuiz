@@ -2,30 +2,31 @@
   <form [formGroup]="multipleQuestionForm">
     <div class="modal-title">
       <quiz-app-input
-        [control]="formData.titleControl"
+        [control]="titleControl"
         label="Title"
         [placeHolder]="PlaceHolder.title | translateJson">
       </quiz-app-input>
     </div>
     <div class="flex justify-center items-center h-20 labels">
       <div class="flex justify-center w-3/5 overflow-hidden">
-        <div class="flex justify-center w-1/2 p-2">
+        <div class="flex justify-center p-2">
           <quiz-app-dropdown
-            [control]="formData.difficultyControl"
-            [list]="difficultyList"
-            [label]="formData.difficultyControl.value">
+            [control]="difficultyControl"
+            [list]="AnswerDifficultyList"
+            [label]="'LABELS.DIFFICULTY' | translateJson"
+          >
           </quiz-app-dropdown>
         </div>
       </div>
     </div>
     <div>
       <ng-container formArrayName="answers" class="py-10">
-        <ng-container class="flex" *ngFor="let answer of formData.answersFormArray.controls; let index = index">
+        <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
           <div class="flex items-center">
-            <quiz-app-input [inputIndex]="index" [control]="formData.answersControl[index].controls.text" class="m-10 w-full" label="LABELS.ANSWER"></quiz-app-input>
+            <quiz-app-input [inputIndex]="index" [control]="answerControl[index].controls.text" class="m-10 w-full" label="LABELS.ANSWER"></quiz-app-input>
               <quiz-app-radio-button
                 class="w-1/10 pt-7"
-                [control]="formData.answersControl[index].controls.isCorrect"
+                [control]="answerControl[index].controls.isCorrect"
                 [id]="index+1">
                 {{ 'LABELS.CORRECT' | translateJson }}
               </quiz-app-radio-button>
@@ -38,7 +39,7 @@
     <button
       type="button"
       class="btn-add btn-pop-up"
-      [disabled]="formData.answerLength >= maxQuestionsAmount"
+      [disabled]="answerLength >= maxQuestionsAmount"
       (click)="addAnswer()">
       {{ 'BUTTON.NEW_ANSWER' | translateJson }}
     </button>

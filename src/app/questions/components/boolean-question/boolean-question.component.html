@@ -2,18 +2,19 @@
   <form [formGroup]="booleanQuestionForm">
     <div class="modal-title">
       <quiz-app-input
-        [control]="formData.titleControl"
+        [control]="titleControl"
         label="Title"
-        [placeHolder]="PlaceHolder.title">
+        [placeHolder]="PlaceHolder.title | translateJson">
       </quiz-app-input>
     </div>
     <div class="flex justify-center items-center h-20 labels">
       <div class="flex justify-center w-3/5 overflow-hidden">
-        <div class="flex justify-center w-1/2 p-2">
+        <div class="flex justify-center p-2">
           <quiz-app-dropdown
-            [control]="formData.difficultyControl"
-            [list]="difficultyList"
-            [label]="formData.difficultyControl.value">
+            [control]="difficultyControl"
+            [list]="AnswerDifficultyList"
+            [label]="'LABELS.DIFFICULTY' | translateJson"
+          >
           </quiz-app-dropdown>
         </div>
       </div>
@@ -23,11 +24,11 @@
         <div class="flex justify-center items-center w-3/5">
           <div class="py-3">
             <div formArrayName="answers" class="flex space-x-4">
-              <div *ngFor="let answer of formData.answersControl; let index = index" class="flex items-center p-2.5">
+              <div *ngFor="let answer of answerControl; let index = index" class="flex items-center p-2.5">
                 {{ answer.controls.text.value }}
                 <quiz-app-radio-button
                   class="w-1/10 pl-1.5"
-                  [control]="formData.answersControl[index].controls.isCorrect"
+                  [control]="answerControl[index].controls.isCorrect"
                   [id]="index + 1">
                 </quiz-app-radio-button>
               </div>

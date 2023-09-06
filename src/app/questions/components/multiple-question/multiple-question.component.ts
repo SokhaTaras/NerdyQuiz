@@ -1,17 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { QuestionForm } from '../../../shared/interfaces/forms';
-import { DifficultyList } from '../../constants/dropdonws';
+import { AnswerDifficultyList } from '../../constants/dropdonws';
 import { AnswersFormType } from '../../../shared/types/formsType';
 import { maxQuestions } from '../../constants/max-questions';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/question-info';
-import {
-  CommonProperties,
-  Question
-} from '../../interfaces/question.interface';
+import { Question } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'quiz-app-multiple-question',
@@ -23,42 +20,53 @@ export class MultipleQuestionComponent implements OnInit {
     new EventEmitter<FormGroup<QuestionForm>>();
 
   public multipleQuestionForm: FormGroup<QuestionForm>;
-  public formData: CommonProperties;
 
   protected readonly PlaceHolder = PlaceHolder;
-  protected readonly difficultyList = DifficultyList;
   protected readonly maxQuestionsAmount = maxQuestions;
+  protected readonly AnswerDifficultyList = AnswerDifficultyList;
+
+  get form(): FormGroup<QuestionForm> {
+    return this.questionFormHelper.currentForm;
+  }
+
+  get titleControl(): FormControl<string> {
+    return this.form.controls.title;
+  }
+
+  get difficultyControl(): FormControl<string> {
+    return this.form.controls.difficulty;
+  }
+
+  get answerControl(): AnswersFormType[] {
+    return this.form.controls.answers.controls;
+  }
+
+  get answersFormArray(): FormArray {
+    return this.form.controls.answers;
+  }
+
+  get answerLength(): number {
+    return this.form.controls.answers.length;
+  }
 
   constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.initControls();
     this.questionFormHelper.initRadioButtons();
   }
 
   addAnswer(): void {
-    const answer: AnswersFormType = this.questionFormHelper.generateNewAnswer(
-      '',
-      false
-    );
-
-    this.formData.answersControl.push(answer);
-    this.formData.answerLength = this.questionFormHelper.answerLength;
-    this.questionFormHelper.initRadioButtons();
-    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
+    this.questionFormHelper.addAnswer();
   }
 
   private initForm(): void {
     const question: Question = {
       type: QUESTION_TYPE.MULTIPLE
     };
-    this.questionFormHelper.initForm(question);
-    this.multipleQuestionForm = this.questionFormHelper.currentForm;
-    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
-  }
 
-  private initControls(): void {
-    this.formData = this.questionFormHelper.getControls();
+    this.questionFormHelper.initForm(question);
+    this.multipleQuestionForm = this.form;
+    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
   }
 }

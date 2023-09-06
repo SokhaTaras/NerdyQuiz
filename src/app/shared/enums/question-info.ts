@@ -1,15 +1,15 @@
 export enum QUESTION_TYPE {
-  BOOLEAN = 'Boolean',
-  MULTIPLE = 'Multiple'
+  BOOLEAN = 'boolean',
+  MULTIPLE = 'multiple'
 }
 
 export enum QUESTION_DIFFICULTY {
-  EASY = 'Easy',
-  MEDIUM = 'Medium',
-  HARD = 'Hard'
+  EASY = 'easy',
+  MEDIUM = 'medium',
+  HARD = 'hard'
 }
 
 export enum QUESTION_BOOLEAN {
-  TRUE = 'True',
-  FALSE = 'False'
+  TRUE = 'true',
+  FALSE = 'false'
 }
