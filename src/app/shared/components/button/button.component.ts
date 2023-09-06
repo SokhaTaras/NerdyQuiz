@@ -28,7 +28,7 @@ export class ButtonComponent implements OnInit {
         this.dynamicClass = 'bg-primary';
         break;
       case BUTTON_TYPE.SECONDARY:
-        this.dynamicClass = 'bg-black border-2 border-primary';
+        this.dynamicClass = 'bg-secondary';
         break;
       case BUTTON_TYPE.ERROR:
         this.dynamicClass = 'btn-error';

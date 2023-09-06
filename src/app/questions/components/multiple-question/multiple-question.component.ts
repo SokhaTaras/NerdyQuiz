@@ -18,7 +18,10 @@ import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { DifficultyList, TypeList } from '../../constants/dropdonws';
 import { AnswersFormType } from '../../../shared/types/formsType';
-import { maxQuestionsAmount } from '../../constants/questions-info';
+import {
+  maxQuestionsAmount,
+  minQuestionsAmount
+} from '../../constants/questions-info';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
@@ -36,6 +39,7 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
   protected readonly difficultyList = DifficultyList;
   protected readonly typeList = TypeList;
   protected readonly maxQuestionsAmount = maxQuestionsAmount;
+  protected readonly minQuestionsAmount = minQuestionsAmount;
   protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
   get title(): FormControl {
@@ -75,6 +79,10 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
     this.answersControl.push(answer);
     this.initRadioButtons();
     this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
+  }
+
+  deleteAnswer(answerIndex: number): void {
+    this.answersControl.splice(answerIndex, 1);
   }
 
   private initRadioButtons(): void {

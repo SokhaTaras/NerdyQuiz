@@ -1,11 +1,8 @@
-<label
-  class="w-full flex items-center justify-center radio">
-  <input
-    name="radioGroup"
-    [checked]="control.value"
-    (change)="selectItem(!control.value)"
-    type="radio"
-  >
-  <span></span>
-  <ng-content></ng-content>
-</label>
+<div class="flex items-center ">
+  <input [id]="id" [checked]="control.value" (change)="selectItem(!control.value)" type="radio" name="radioGroup" class="hidden"/>
+  <label [for]="id" class="flex items-center cursor-pointer">
+    <span class="w-[18px] h-[18px] inline-block mr-1 rounded-full border border-secondary"></span>
+    <ng-content></ng-content>
+  </label>
+</div>
+

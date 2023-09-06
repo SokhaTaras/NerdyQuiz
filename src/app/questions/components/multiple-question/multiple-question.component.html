@@ -23,16 +23,26 @@
     </div>
     <div>
       <ng-container formArrayName="answers" class="py-12">
-        <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
+        <ng-container class="flex items-center justify-center" *ngFor="let answer of answersFormArray.controls; let index = index">
           <div class="flex items-center justify-center">
             <span class="flex text-3xl items-center justify-center mt-2">{{ index + 1 }}</span>
             <quiz-app-input class="m-8 w-full" [control]="answersControl[index].controls.text"></quiz-app-input>
-                <quiz-app-radio-button
-                  class="mt-4 justify-center items-center"
-                  [id]="index"
-                  [control]="answersControl[index].controls.isCorrect">
-                  {{ 'LABELS.CORRECT' | translateJson }}
-                </quiz-app-radio-button>
+            <div class="flex justify-center items-center pt-4 w-1/4">
+              <quiz-app-radio-button
+              class="flex justify-center items-center pr-4"
+              [id]="index"
+              [control]="answersControl[index].controls.isCorrect">
+              {{ 'LABELS.CORRECT' | translateJson }}
+            </quiz-app-radio-button>
+              <div class="w-1/2 h-1/2">
+                <quiz-app-button
+                  [type]="BUTTON_TYPE.SECONDARY"
+                  [isDisabled]="answerLength <= minQuestionsAmount"
+                  (whenClicked)="deleteAnswer(index)">
+                  {{ 'LABELS.DELETE' | translateJson }}
+                </quiz-app-button>
+              </div>
+            </div>
           </div>
         </ng-container>
       </ng-container>

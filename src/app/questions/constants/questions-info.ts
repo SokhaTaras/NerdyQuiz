@@ -2,6 +2,7 @@ import { Difficulties } from '../../shared/types/formsType';
 import { DifficultyRange } from '../interfaces/question';
 
 export const maxQuestionsAmount = 4;
+export const minQuestionsAmount = 2;
 
 export const DifficultyPoints: Difficulties = {
   Easy: 10,
