@@ -7,6 +7,7 @@ import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { Quiz } from '../../interfaces/quiz';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -29,7 +30,6 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
     this.currentQuizSubscribe();
   }
 
-  //TODO change hardcode when json with text will be ready
   openEditPopUp(): void {
     const data: any = {
       label: 'BUTTON.EDIT_QUIZ',

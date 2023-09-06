@@ -11,6 +11,7 @@ import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { CreateQuizModalComponent } from './components/create-quiz-modal/create-quiz-modal.component';
 import { HomeComponent } from '../home/components/home/home.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { IntroductionComponent } from './components/introduction/introduction.co
     SharedModule,
     QuestionsModule,
     QuizzesRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzIconModule
   ]
 })
 export class QuizzesModule {}
