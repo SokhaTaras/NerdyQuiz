@@ -6,7 +6,3 @@
   background-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-secondary) inset;
 }
-
-[type="radio"]:checked + label {
-  color: var(--color-secondary);
-}
