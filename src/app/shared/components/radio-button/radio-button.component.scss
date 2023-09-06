@@ -1,18 +1,12 @@
-input[type="radio"] + label span {
-  transition: background .2s,
-  transform .2s;
-}
-
-input[type="radio"] + label span:hover,
-input[type="radio"] + label:hover span{
+.cursor-pointer:hover span {
   transform: scale(1.1);
 }
 
-input[type="radio"]:checked + label span {
+[type="radio"]:checked + label span {
   background-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-secondary) inset;
 }
 
-input[type="radio"]:checked + label{
+[type="radio"]:checked + label {
   color: var(--color-secondary);
 }
