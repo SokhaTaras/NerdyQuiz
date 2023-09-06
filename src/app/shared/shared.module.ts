@@ -17,6 +17,7 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { TranslateJsonPipe } from './pipes/translate-json/translate-json.pipe';
 import { ButtonComponent } from './components/button/button.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ButtonComponent } from './components/button/button.component';
     ConfirmModalComponent,
     RadioButtonComponent,
     TranslateJsonPipe,
-    ButtonComponent
+    ButtonComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { ButtonComponent } from './components/button/button.component';
     DropdownComponent,
     RadioButtonComponent,
     TranslateJsonPipe,
-    ButtonComponent
+    ButtonComponent,
+    LoaderComponent
   ]
 })
 export class SharedModule {}

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, SkipSelf } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { Quiz } from '../../interfaces/quiz';
@@ -8,6 +8,7 @@ import { Question } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../../../shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '../../../shared/utils/getId';
 import { StorageKey } from '../../../shared/enums/storageKey';
+import { LoaderService } from '../../../shared/services/loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,11 @@ import { StorageKey } from '../../../shared/enums/storageKey';
 export class QuizService {
   public quizzes$ = new BehaviorSubject<Quiz[]>([]);
 
-  constructor(private localStorageService: LocalStorageService) {}
+  //todo delete loaderService
+  constructor(
+    private localStorageService: LocalStorageService,
+    @SkipSelf() private loaderService: LoaderService
+  ) {}
 
   addQuiz(quiz: Quiz): Quiz {
     if (quiz) {
