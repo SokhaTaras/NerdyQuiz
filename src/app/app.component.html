@@ -1,2 +1,2 @@
-<quiz-app-loader *ngIf="isLoading"></quiz-app-loader>
+<quiz-app-loader *ngIf="(isLoading$ | async)"></quiz-app-loader>
 <router-outlet></router-outlet>
