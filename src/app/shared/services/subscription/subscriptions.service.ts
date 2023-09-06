@@ -13,7 +13,7 @@ export class SubscriptionsService implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.removeSubscription();
   }
 }
