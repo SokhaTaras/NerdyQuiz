@@ -5,6 +5,7 @@ import { map, Observable, Subscription } from 'rxjs';
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { Quiz } from '../../interfaces/quiz';
+import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -18,7 +19,8 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private quizService: QuizService,
     private route: ActivatedRoute,
-    private modalQuiz: ModalQuizService
+    private modalQuiz: ModalQuizService,
+    private navigateTo: NavigateToService
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,10 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
       quiz: this.initialQuiz
     };
     this.modalQuiz.showInitQuizModal(data);
+  }
+
+  goHome(): void {
+    this.navigateTo.navigateHome();
   }
 
   private getCurrentQuizId(): void {
