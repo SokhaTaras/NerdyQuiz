@@ -9,20 +9,14 @@ import {
 
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { AnswersFormType } from '../../../shared/types/formsType';
-import { Question } from '../../../questions/interfaces/question.interface';
-import { QUESTION_TYPE } from '../../enums/question-info';
+import { Question } from '../../interfaces/question.interface';
+import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import {
   AnswerBooleanList,
   AnswerDifficultyList,
   AnswerTypeList
-} from '../../../questions/constants/dropdonws';
-
-export const defaultForm: QuestionForm = {
-  title: new FormControl(''),
-  type: new FormControl(AnswerTypeList[0].value),
-  difficulty: new FormControl(AnswerDifficultyList[0].value),
-  answers: new FormArray([])
-};
+} from '../../constants/dropdonws';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 export const defaultForm: QuestionForm = {
   title: new FormControl(''),
@@ -32,8 +26,7 @@ export const defaultForm: QuestionForm = {
 };
 
 @Injectable()
-export class QuestionFormHelperService implements OnDestroy {
-  radioButtonsSubscription: Subscription;
+export class QuestionFormHelperService {
   currentForm: FormGroup<QuestionForm>;
 
   get title(): FormControl {
@@ -77,6 +70,7 @@ export class QuestionFormHelperService implements OnDestroy {
     };
 
     this.currentForm = this.fb.group<QuestionForm>(initForm);
+    this.initRadioButtons();
   }
 
   generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
@@ -87,11 +81,8 @@ export class QuestionFormHelperService implements OnDestroy {
   }
 
   //todo radio buttons group onChange
-  initRadioButtons(answersFormArray: FormArray): void {
-    if (this.radioButtonsSubscription) {
-      this.radioButtonsSubscription.unsubscribe();
-    }
-    answersFormArray.controls.forEach((control, index) => {
+  initRadioButtons(): void {
+    this.answersFormArray.controls.forEach((control, index) => {
       this.subscriptionsService.addSubscription(
         control.valueChanges.subscribe((checked) => {
           if (checked.isCorrect) {
@@ -103,7 +94,7 @@ export class QuestionFormHelperService implements OnDestroy {
               }
             );
           }
-        }
+        })
       );
     });
   }
@@ -141,9 +132,5 @@ export class QuestionFormHelperService implements OnDestroy {
     } else {
       return [];
     }
-  }
-
-  ngOnDestroy(): void {
-    this.radioButtonsSubscription.unsubscribe();
   }
 }
