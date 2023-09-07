@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { QuizService } from './quizzes/services/quiz/quiz.service';
 import { StorageKey } from './shared/enums/storageKey';
-import { LoaderService } from './shared/services/loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +9,18 @@ import { LoaderService } from './shared/services/loader/loader.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public title = 'nerdyQuiz-app';
-  public isLoading$ = this.loaderService.isLoading;
+  title = 'nerdyQuiz-app';
+  isLoading: boolean;
 
-  constructor(
-    private quizService: QuizService,
-    private loaderService: LoaderService
-  ) {}
+  constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
+    this.initQuizzes();
+  }
+
+  initQuizzes(): void {
+    this.isLoading = true;
     this.quizService.initAllQuizzes(StorageKey.QUIZZES);
+    this.isLoading = false;
   }
 }
