@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -18,10 +18,16 @@ import { AnswerList } from '../../../questions/interfaces/question.interface';
     }
   ]
 })
-export class DropdownComponent implements ControlValueAccessor {
+export class DropdownComponent implements ControlValueAccessor, OnInit {
   @Input() list: AnswerList[];
   @Input() label: string;
   @Input() control: FormControl = new FormControl();
+
+  selectedItemText: string;
+
+  ngOnInit(): void {
+    this.selectedItemText = this.list[0].text;
+  }
 
   onChange: any = (): void => {};
   onTouched: any = (): void => {};
@@ -38,8 +44,9 @@ export class DropdownComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  selectItem(item: string): void {
-    this.control.setValue(item);
+  selectItem(item: AnswerList): void {
+    this.control.setValue(item.value);
+    this.selectedItemText = item.text;
     this.onChange(item);
     this.onTouched();
   }

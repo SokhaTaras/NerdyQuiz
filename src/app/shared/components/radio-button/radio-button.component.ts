@@ -11,11 +11,11 @@ export class RadioButtonComponent implements OnInit {
 
   isSelected: boolean;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isSelected = this.control.value;
   }
 
-  selectItem(item: boolean) {
+  selectItem(item: boolean): void {
     this.control.setValue(item);
   }
 }

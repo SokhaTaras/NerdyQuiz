@@ -13,10 +13,5 @@ export interface Answer {
 
 export interface AnswerList {
   value: string;
-  translations: { lang: string; text: string }[];
-}
-
-export interface test {
-  value: string;
   text: string;
 }

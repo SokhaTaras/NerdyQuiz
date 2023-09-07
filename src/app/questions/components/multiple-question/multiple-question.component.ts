@@ -3,7 +3,10 @@ import { FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { QuestionForm } from '../../../shared/interfaces/forms';
-import { AnswerDifficultyList } from '../../constants/dropdonws';
+import {
+  AnswerBooleanList,
+  AnswerDifficultyList
+} from '../../constants/dropdonws';
 import { maxQuestions } from '../../constants/max-questions';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/question-info';

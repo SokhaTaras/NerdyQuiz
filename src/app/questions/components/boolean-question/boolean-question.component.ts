@@ -2,7 +2,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { AnswerDifficultyList } from '../../constants/dropdonws';
+import {
+  AnswerBooleanList,
+  AnswerDifficultyList
+} from '../../constants/dropdonws';
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/question-info';
@@ -19,6 +22,7 @@ export class BooleanQuestionComponent implements OnInit {
 
   protected readonly PlaceHolder = PlaceHolder;
   protected readonly AnswerDifficultyList = AnswerDifficultyList;
+  protected readonly AnswerBooleanList = AnswerBooleanList;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
