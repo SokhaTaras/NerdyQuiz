@@ -1,14 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { DifficultyList } from '../../constants/dropdonws';
-import { AnswersFormType } from '../../../shared/types/formsType';
+import { AnswerDifficultyList } from '../../constants/dropdonws';
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
-import { QUESTION_TYPE } from '../../../shared/enums/questionType';
+import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question.interface';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { AnswersFormType } from '../../../shared/types/formsType';
 
 @Component({
   selector: 'quiz-app-boolean-question',
@@ -19,43 +19,40 @@ export class BooleanQuestionComponent implements OnInit {
   @Output() saveBooleanFormEvent: EventEmitter<FormGroup<QuestionForm>> =
     new EventEmitter<FormGroup<QuestionForm>>();
 
-  booleanQuestionForm: FormGroup<QuestionForm>;
+  public booleanQuestionForm: FormGroup<QuestionForm>;
 
   protected readonly PlaceHolder = PlaceHolder;
-  protected readonly difficultyList = DifficultyList;
+  protected readonly AnswerDifficultyList = AnswerDifficultyList;
 
-  get title(): FormControl {
-    return this.booleanQuestionForm.controls.title;
+  get form(): FormGroup<QuestionForm> {
+    return this.questionFormHelper.currentForm;
   }
 
-  get type(): FormControl {
-    return this.booleanQuestionForm.controls.type;
-  }
-  get difficulty(): FormControl {
-    return this.booleanQuestionForm.controls.difficulty;
+  get titleControl(): FormControl<string> {
+    return this.form.controls.title;
   }
 
-  get answersFormArray(): FormArray {
-    return this.booleanQuestionForm.controls.answers;
+  get difficultyControl(): FormControl<string> {
+    return this.form.controls.difficulty;
   }
 
   get answersControl(): AnswersFormType[] {
-    const formArray = this.booleanQuestionForm.controls.answers;
-    return formArray.controls;
+    return this.form.controls.answers.controls;
   }
 
   constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.questionFormHelper.initRadioButtons(this.answersFormArray);
+    this.questionFormHelper.initRadioButtons();
   }
 
   private initForm(): void {
     const question: Question = {
       type: QUESTION_TYPE.BOOLEAN
     };
-    this.booleanQuestionForm = this.questionFormHelper.initForm(question);
+    this.questionFormHelper.initForm(question);
+    this.booleanQuestionForm = this.form;
     this.saveBooleanFormEvent.emit(this.booleanQuestionForm);
   }
 }

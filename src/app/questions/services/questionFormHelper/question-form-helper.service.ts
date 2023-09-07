@@ -1,49 +1,82 @@
 import { Injectable, SkipSelf } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { AnswersFormType } from '../../../shared/types/formsType';
+import { Question } from '../../../questions/interfaces/question.interface';
+import { QUESTION_TYPE } from '../../enums/question-info';
 import {
-  questionBooleanObj,
-  questionDifficultyObj,
-  questionTypeObj
-} from '../../constants/dropdonws';
-import { Question } from '../../interfaces/question.interface';
-import { QUESTION_TYPE } from '../../../shared/enums/questionType';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+  AnswerBooleanList,
+  AnswerDifficultyList,
+  AnswerTypeList
+} from '../../../questions/constants/dropdonws';
+
+export const defaultForm: QuestionForm = {
+  title: new FormControl(''),
+  type: new FormControl(AnswerTypeList[0].value),
+  difficulty: new FormControl(AnswerDifficultyList[0].value),
+  answers: new FormArray([])
+};
+
+export const defaultForm: QuestionForm = {
+  title: new FormControl(''),
+  type: new FormControl(AnswerTypeList[0].value),
+  difficulty: new FormControl(AnswerDifficultyList[0].value),
+  answers: new FormArray([])
+};
 
 @Injectable()
-export class QuestionFormHelperService {
-  private readonly typeObj = questionTypeObj;
-  private readonly difficultyObj = questionDifficultyObj;
-  private readonly booleanObj = questionBooleanObj;
+export class QuestionFormHelperService implements OnDestroy {
+  radioButtonsSubscription: Subscription;
+  currentForm: FormGroup<QuestionForm>;
+
+  get title(): FormControl {
+    return this.currentForm.controls.title;
+  }
+
+  get type(): FormControl {
+    return this.currentForm.controls.type;
+  }
+
+  get answersFormArray(): FormArray {
+    return this.currentForm.controls.answers;
+  }
 
   constructor(
     private fb: FormBuilder,
     @SkipSelf() private subscriptionsService: SubscriptionsService
   ) {}
 
-  initForm(question: Question): FormGroup<QuestionForm> {
-    const questionFormConfig = this.getFormConfig();
-    const defaultAnswers = this.generateDefaultAnswers(question.type);
-    const questionType =
-      question.type === QUESTION_TYPE.MULTIPLE
-        ? this.typeObj.multiple[0].text
-        : this.typeObj.boolean[0].text;
+  initForm(question: Question): void {
+    let currentAnswers: AnswersFormType[] = [];
 
-    if (question.type === QUESTION_TYPE.MULTIPLE) {
-      questionFormConfig.type.setValue(questionType);
-      questionFormConfig.answers = this.fb.array(defaultAnswers, [
-        Validators.required
-      ]);
-    } else if (question.type === QUESTION_TYPE.BOOLEAN) {
-      questionFormConfig.type.setValue(questionType);
-      questionFormConfig.answers = this.fb.array(defaultAnswers, [
-        Validators.required
-      ]);
+    if (question.answers) {
+      currentAnswers = this.mapCurrentAnswers(question);
     }
 
-    return this.fb.group<QuestionForm>(questionFormConfig);
+    const defaultAnswers = this.generateDefaultAnswers(question.type);
+
+    const initForm: QuestionForm = {
+      title: this.fb.control(defaultForm.title.value || question.title, [
+        Validators.required
+      ]),
+      type: this.fb.control(question.type, [Validators.required]),
+      difficulty: this.fb.control(
+        defaultForm.difficulty.value || question.difficulty,
+        [Validators.required]
+      ),
+      answers: this.fb.array(defaultAnswers || currentAnswers, [
+        Validators.required
+      ])
+    };
+
+    this.currentForm = this.fb.group<QuestionForm>(initForm);
   }
 
   generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
@@ -55,19 +88,41 @@ export class QuestionFormHelperService {
 
   //todo radio buttons group onChange
   initRadioButtons(answersFormArray: FormArray): void {
+    if (this.radioButtonsSubscription) {
+      this.radioButtonsSubscription.unsubscribe();
+    }
     answersFormArray.controls.forEach((control, index) => {
       this.subscriptionsService.addSubscription(
         control.valueChanges.subscribe((checked) => {
           if (checked.isCorrect) {
-            answersFormArray.controls.forEach((otherControl, otherIndex) => {
-              if (otherIndex !== index) {
-                otherControl.get('isCorrect')?.setValue(false);
+            this.answersFormArray.controls.forEach(
+              (otherControl, otherIndex) => {
+                if (otherIndex !== index) {
+                  otherControl.get('isCorrect')?.setValue(false);
+                }
               }
-            });
+            );
           }
-        })
+        }
       );
     });
+  }
+
+  addAnswer(): void {
+    const answer: AnswersFormType = this.generateNewAnswer('', false);
+    this.answersFormArray.push(answer);
+    this.initRadioButtons();
+  }
+
+  mapCurrentAnswers(question: Question): AnswersFormType[] {
+    if (question) {
+      const answers = question.answers.map((a) => {
+        return this.generateNewAnswer(a.text, a.isCorrect);
+      });
+      return answers;
+    } else {
+      return [];
+    }
   }
 
   private generateDefaultAnswers(answerType: string): AnswersFormType[] {
@@ -77,10 +132,10 @@ export class QuestionFormHelperService {
         this.generateNewAnswer('', false)
       ];
       return answers;
-    } else if (answerType === QUESTION_TYPE.MULTIPLE) {
+    } else if (answerType === QUESTION_TYPE.BOOLEAN) {
       const answers = [
-        this.generateNewAnswer(this.booleanObj.true[0].text, true),
-        this.generateNewAnswer(this.booleanObj.false[0].text, false)
+        this.generateNewAnswer(AnswerBooleanList[0].value, true),
+        this.generateNewAnswer(AnswerBooleanList[1].value, false)
       ];
       return answers;
     } else {
@@ -88,17 +143,7 @@ export class QuestionFormHelperService {
     }
   }
 
-  private getFormConfig(): QuestionForm {
-    return {
-      title: this.fb.control('', [Validators.required]),
-      type: this.fb.control('', [Validators.required]),
-      difficulty: this.fb.control(this.difficultyObj.easy[0].text, [
-        Validators.required
-      ]),
-      answers: this.fb.array(
-        [this.generateNewAnswer('', true)],
-        [Validators.required]
-      )
-    };
+  ngOnDestroy(): void {
+    this.radioButtonsSubscription.unsubscribe();
   }
 }

@@ -1,3 +1,7 @@
+import { FormArray, FormControl } from '@angular/forms';
+
+import { AnswersFormType } from '../../shared/types/formsType';
+
 export interface Question {
   title?: string;
   type?: string;
@@ -11,23 +15,16 @@ export interface Answer {
   isCorrect: boolean;
 }
 
-export interface QuestionEntry {
-  lang: string;
-  text: string;
+export interface AnswerList {
+  value: string;
+  translations: { lang: string; text: string }[];
 }
 
-export interface QuestionTypeObject {
-  multiple: QuestionEntry[];
-  boolean: QuestionEntry[];
-}
-
-export interface QuestionDifficultyObject {
-  easy: QuestionEntry[];
-  medium: QuestionEntry[];
-  hard: QuestionEntry[];
-}
-
-export interface QuestionBooleanObject {
-  true: QuestionEntry[];
-  false: QuestionEntry[];
+export interface CommonProperties {
+  answersControl: AnswersFormType[];
+  titleControl: FormControl;
+  typeControl: FormControl;
+  difficultyControl: FormControl;
+  answersFormArray: FormArray;
+  answerLength?: number;
 }

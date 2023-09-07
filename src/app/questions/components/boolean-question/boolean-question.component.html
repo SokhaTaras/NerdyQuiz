@@ -2,18 +2,19 @@
   <form [formGroup]="booleanQuestionForm">
     <div class="modal-title">
       <quiz-app-input
-        [control]="title"
+        [control]="titleControl"
         label="Title"
-        [placeHolder]="PlaceHolder.title">
+        [placeHolder]="PlaceHolder.title | translateJson">
       </quiz-app-input>
     </div>
     <div class="flex justify-center items-center h-20 labels">
       <div class="flex justify-center w-3/5 overflow-hidden">
-        <div class="flex justify-center w-1/2 p-2">
+        <div class="flex justify-center p-2">
           <quiz-app-dropdown
-            [control]="difficulty"
-            [list]="difficultyList"
-            [label]="difficulty.value">
+            [control]="difficultyControl"
+            [list]="AnswerDifficultyList"
+            [label]="'LABELS.DIFFICULTY' | translateJson"
+          >
           </quiz-app-dropdown>
         </div>
       </div>
