@@ -3,15 +3,16 @@
       <p class="">{{ 'LABELS.TYPE' | translateJson }}: {{ 'LABELS.MULTIPLE' | translateJson }}</p>
     </div>
   <form [formGroup]="multipleQuestionForm">
-    <div class="modal-title">
+    <div class="modal-title flex justify-center items-center">
       <quiz-app-input
         [control]="title"
         label="Title"
-        [placeHolder]="PlaceHolder.title | translateJson">
+        [placeHolder]="PlaceHolder.title | translateJson"
+        class="w-full">
       </quiz-app-input>
     </div>
     <div class="flex justify-center items-center h-20 labels">
-      <div class="flex justify-center w-3/5 overflow-hidden">
+      <div class="flex justify-center w-full overflow-hidden">
         <div class="flex justify-center w-1/2 p-2">
           <quiz-app-dropdown
             [control]="difficulty"
@@ -21,10 +22,10 @@
         </div>
       </div>
     </div>
-    <div>
-      <ng-container formArrayName="answers" class="py-12">
+    <div class="flex-col justify-center">
+      <ng-container formArrayName="answers" class="py-12 flex-col justify-center">
         <ng-container class="flex items-center justify-center" *ngFor="let answer of answersFormArray.controls; let index = index">
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center w-full">
             <span class="flex text-3xl items-center justify-center mt-2">{{ index + 1 }}</span>
             <quiz-app-input class="m-8 w-full" [control]="answersControl[index].controls.text"></quiz-app-input>
             <div class="flex justify-center items-center pt-4 w-1/4">
