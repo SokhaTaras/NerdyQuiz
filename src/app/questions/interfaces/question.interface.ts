@@ -1,7 +1,3 @@
-import { FormArray, FormControl } from '@angular/forms';
-
-import { AnswersFormType } from '../../shared/types/formsType';
-
 export interface Question {
   title?: string;
   type?: string;
@@ -20,11 +16,7 @@ export interface AnswerList {
   translations: { lang: string; text: string }[];
 }
 
-export interface CommonProperties {
-  answersControl: AnswersFormType[];
-  titleControl: FormControl;
-  typeControl: FormControl;
-  difficultyControl: FormControl;
-  answersFormArray: FormArray;
-  answerLength?: number;
+export interface test {
+  value: string;
+  text: string;
 }

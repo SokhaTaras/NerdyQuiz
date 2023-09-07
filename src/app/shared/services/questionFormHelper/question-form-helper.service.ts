@@ -30,16 +30,30 @@ export class QuestionFormHelperService implements OnDestroy {
   radioButtonsSubscription: Subscription;
   currentForm: FormGroup<QuestionForm>;
 
-  get title(): FormControl {
-    return this.currentForm.controls.title;
+  get title(): FormControl | null {
+    return this.currentForm ? this.currentForm.controls.title : null;
   }
 
-  get type(): FormControl {
-    return this.currentForm.controls.type;
+  get difficulty(): FormControl | null {
+    return this.currentForm ? this.currentForm.controls.difficulty : null;
   }
 
-  get answersFormArray(): FormArray {
-    return this.currentForm.controls.answers;
+  get type(): FormControl | null {
+    return this.currentForm ? this.currentForm.controls.type : null;
+  }
+
+  get answersFormArray(): FormArray | null {
+    return this.currentForm ? this.currentForm.controls.answers : null;
+  }
+
+  get answersControl(): AnswersFormType[] | null {
+    return this.answersFormArray
+      ? (this.answersFormArray.controls as AnswersFormType[])
+      : null;
+  }
+
+  get answerLength(): number | null {
+    return this.currentForm ? this.currentForm.controls.answers.length : null;
   }
 
   constructor(private fb: FormBuilder) {}
@@ -68,6 +82,7 @@ export class QuestionFormHelperService implements OnDestroy {
     };
 
     this.currentForm = this.fb.group<QuestionForm>(initForm);
+    this.initRadioButtons();
   }
 
   generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {

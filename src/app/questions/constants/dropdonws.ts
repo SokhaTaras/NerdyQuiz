@@ -1,4 +1,4 @@
-import { AnswerList } from '../interfaces/question.interface';
+import { AnswerList, test } from '../interfaces/question.interface';
 import {
   QUESTION_BOOLEAN,
   QUESTION_DIFFICULTY,
@@ -60,5 +60,17 @@ export const AnswerDifficultyList: AnswerList[] = [
       { lang: 'en', text: 'Hard' },
       { lang: 'ua', text: 'Важко' }
     ]
+  }
+];
+
+//todo wait for Daniil's verification
+export const testType: test[] = [
+  {
+    value: QUESTION_TYPE.MULTIPLE,
+    text: 'DROPDOWNS.TYPE.MULTIPLE'
+  },
+  {
+    value: QUESTION_TYPE.BOOLEAN,
+    text: 'DROPDOWNS.TYPE.BOOLEAN'
   }
 ];
