@@ -35,7 +35,7 @@ export class BooleanQuestionComponent implements OnInit {
     return this.form.controls.difficulty;
   }
 
-  get answerControl(): AnswersFormType[] {
+  get answersControl(): AnswersFormType[] {
     return this.form.controls.answers.controls;
   }
 
