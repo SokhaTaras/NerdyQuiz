@@ -26,6 +26,7 @@ export class CreateQuestionComponent implements OnDestroy {
   multipleQuestionForm: FormGroup<QuestionForm>;
   isFormNotValid = true;
   formSubscription: Subscription;
+  addQuestSubscription: Subscription;
 
   protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
@@ -43,7 +44,9 @@ export class CreateQuestionComponent implements OnDestroy {
 
   saveQuestion(): void {
     const question: Question = this.mapQuestionToObject();
-    this.quizService.addQuestion(this.quizId, question);
+    this.addQuestSubscription = this.quizService
+      .addQuestion(this.quizId, question)
+      .subscribe();
     this.hideCreation.emit();
   }
 
@@ -78,7 +81,8 @@ export class CreateQuestionComponent implements OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.formSubscription.unsubscribe();
+    this.addQuestSubscription.unsubscribe();
   }
 }

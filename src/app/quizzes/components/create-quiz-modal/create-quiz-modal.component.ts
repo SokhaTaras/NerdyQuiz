@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { InitQuizForm } from '../../../shared/interfaces/forms';
@@ -12,13 +13,14 @@ import { ModalRefFacadeService } from '../../../shared/services/modal-ref-facade
   templateUrl: './create-quiz-modal.component.html',
   providers: [ModalRefFacadeService]
 })
-export class CreateQuizModalComponent implements OnInit {
+export class CreateQuizModalComponent implements OnInit, OnDestroy {
   @Input() quizId: string;
   @Input() quiz: Quiz = {};
   @Input() label: string;
   @Input() buttonText: string;
 
-  public initQuizForm: FormGroup<InitQuizForm>;
+  initQuizForm: FormGroup<InitQuizForm>;
+  methodSubscription: Subscription;
 
   protected readonly PlaceHolder = PlaceHolder;
 
@@ -50,12 +52,17 @@ export class CreateQuizModalComponent implements OnInit {
 
     const saveMethod = this.getSaveMethod();
 
-    const quizToSave = saveMethod(newQuiz);
-
-    this.close(quizToSave);
+    this.methodSubscription = saveMethod(newQuiz).subscribe({
+      next: (savedQuiz: Quiz) => {
+        this.close(savedQuiz);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
-  private getSaveMethod(): (quiz: Quiz) => Quiz {
+  private getSaveMethod(): (quiz: Quiz) => Observable<Quiz> {
     if (!this.quiz.id) {
       return this.addQuiz.bind(this);
     } else {
@@ -63,11 +70,11 @@ export class CreateQuizModalComponent implements OnInit {
     }
   }
 
-  private editQuiz(newQuiz: Quiz): Quiz {
+  private editQuiz(newQuiz: Quiz): Observable<Quiz> {
     return this.quizService.editQuiz(this.quiz.id, newQuiz);
   }
 
-  private addQuiz(newQuiz: Quiz): Quiz {
+  private addQuiz(newQuiz: Quiz): Observable<Quiz> {
     return this.quizService.addQuiz(newQuiz);
   }
 
@@ -92,5 +99,9 @@ export class CreateQuizModalComponent implements OnInit {
     };
 
     return quiz;
+  }
+
+  ngOnDestroy(): void {
+    this.methodSubscription.unsubscribe();
   }
 }

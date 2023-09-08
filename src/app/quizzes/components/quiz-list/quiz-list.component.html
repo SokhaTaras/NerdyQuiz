@@ -1,11 +1,13 @@
-<div class="container">
-  <div class="flex justify-center items-center h-8 mb-2">
-    <quiz-app-button class="w-1/3" [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="openInitPopUp()">{{ 'BUTTON.NEW_QUIZ' | translateJson }}
-    </quiz-app-button>
-  </div>
-  <div class="quiz-list">
-    <div class="quiz-list-item" *ngFor="let quiz of (allQuizzes$ | async)">
-      <quiz-app-quiz-card [quiz]="quiz"></quiz-app-quiz-card>
+<quiz-app-loader [isLoading]="isLoading">
+  <div class="container">
+    <div class="flex justify-center items-center h-8 mb-2">
+      <quiz-app-button class="w-1/3" [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="openInitPopUp()">{{ 'BUTTON.NEW_QUIZ' | translateJson }}
+      </quiz-app-button>
+    </div>
+    <div class="quiz-list">
+      <div class="quiz-list-item" *ngFor="let quiz of allQuizzes ">
+        <quiz-app-quiz-card [quiz]="quiz"></quiz-app-quiz-card>
+      </div>
     </div>
   </div>
-</div>
+</quiz-app-loader>

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { Question } from '../../interfaces/question';
@@ -8,12 +9,13 @@ import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
   selector: 'quiz-app-question-list',
   templateUrl: './question-list.component.html'
 })
-export class QuestionListComponent implements OnInit {
+export class QuestionListComponent implements OnInit, OnDestroy {
   @Input() quizId: string | null;
 
   displayCreateQuestion = false;
   isBoolean: boolean;
   allQuestions: Question[];
+  subscription: Subscription;
 
   protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
@@ -33,10 +35,16 @@ export class QuestionListComponent implements OnInit {
   }
 
   private initQuestions(): void {
-    this.quizService.quizzes$.subscribe((): Question[] => {
-      return (this.allQuestions = this.quizService.getQuizQuestions(
-        this.quizId
-      ));
+    this.subscription = this.quizService.quizzes$.subscribe(() => {
+      return this.quizService
+        .getQuizQuestions(this.quizId)
+        .subscribe((questions) => {
+          this.allQuestions = questions;
+        });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

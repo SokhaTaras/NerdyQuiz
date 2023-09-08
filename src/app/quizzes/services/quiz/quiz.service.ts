@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import { Quiz } from '../../interfaces/quiz';
-import { StorageError } from '../../../shared/classes/storageError/storage-error';
-import { STORAGE_ERROR_MESSAGE } from '../../../shared/enums/storageErrorMessage';
 import { Question } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../../../shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '../../../shared/utils/getId';
@@ -17,103 +15,125 @@ export class QuizService {
 
   constructor(private localStorageService: LocalStorageService) {}
 
-  addQuiz(quiz: Quiz): Quiz {
-    if (quiz) {
-      quiz.id = getNewQuizId();
-      this.quizzes$.next([...this.quizzes$.value, quiz]);
-      this.localStorageService.updateLocalStorage(
-        StorageKey.QUIZZES,
-        this.quizzes$.value
-      );
-      return quiz;
-    }
-    return null;
-  }
-
-  editQuiz(quizId: string | undefined, data: Quiz): Quiz {
-    const currentQuizzes = [...this.quizzes$.value];
-    const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
-
-    if (quizIndex !== -1) {
-      currentQuizzes[quizIndex].title = data.title;
-      currentQuizzes[quizIndex].theme = data.theme;
-      this.quizzes$.next(currentQuizzes);
-      this.localStorageService.updateLocalStorage(
-        StorageKey.QUIZZES,
-        this.quizzes$.value
-      );
-
-      return data;
-    }
-    return data;
-  }
-
-  getQuizById(id: string): Quiz | undefined {
-    return this.quizzes$.value.find((q) => q.id == id);
-  }
-
-  //TODO delete setTimeout
-  //This setTimeout added just to emulate delay
-
-  initAllQuizzes(key: string): void {
-    try {
-      let allQuizzes: string =
-        this.localStorageService.getLocalStorageData(key);
-      if (allQuizzes !== null) {
-        this.localStorageService.setLocalStorageData(key, allQuizzes);
-        this.quizzes$.next(JSON.parse(allQuizzes));
+  addQuiz(quiz: Quiz): Observable<Quiz> {
+    return new Observable<Quiz>((subscriber) => {
+      if (quiz) {
+        quiz.id = getNewQuizId();
+        this.quizzes$.next([...this.quizzes$.value, quiz]);
+        this.localStorageService.updateLocalStorage(
+          StorageKey.QUIZZES,
+          this.quizzes$.value
+        );
+        subscriber.next(quiz);
+      } else {
+        subscriber.error();
       }
-    } catch (error) {
-      throw new StorageError(STORAGE_ERROR_MESSAGE.PARSE);
-    }
+      subscriber.complete();
+    });
   }
 
-  addQuestion(quizId: string | null, question: Question): void {
-    if (this.quizzes$.value) {
+  editQuiz(quizId: string | undefined, data: Quiz): Observable<Quiz> {
+    return new Observable<Quiz>((subscriber) => {
       const currentQuizzes = [...this.quizzes$.value];
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
 
       if (quizIndex !== -1) {
-        question.id = getNewQuestionId();
-        currentQuizzes[quizIndex].questions.push(question);
+        currentQuizzes[quizIndex].title = data.title;
+        currentQuizzes[quizIndex].theme = data.theme;
         this.quizzes$.next(currentQuizzes);
         this.localStorageService.updateLocalStorage(
           StorageKey.QUIZZES,
           this.quizzes$.value
         );
+        subscriber.next(currentQuizzes[quizIndex]);
+      } else {
+        subscriber.error();
       }
-    }
+      subscriber.complete();
+    });
   }
 
-  getQuizQuestions(quizId: string | null): Question[] {
-    const currentQuiz = this.getQuizById(quizId);
+  getQuizById(id: string): Observable<Quiz> {
+    return new Observable<Quiz>((subscriber) => {
+      this.quizzes$.subscribe((quizzes) => {
+        const quiz = quizzes.find((q) => q.id == id);
+        subscriber.next(quiz);
+        subscriber.complete();
+      });
+    });
+  }
 
-    if (!currentQuiz || !currentQuiz.questions) {
-      return [];
+  initAllQuizzes(key: string): Observable<Quiz[]> {
+    let allQuizzes: string = this.localStorageService.getLocalStorageData(key);
+
+    if (allQuizzes !== null) {
+      this.localStorageService.setLocalStorageData(key, allQuizzes);
+      this.quizzes$.next(JSON.parse(allQuizzes));
     }
 
-    return [...currentQuiz.questions];
+    return new Observable<Quiz[]>((subscriber) => {
+      subscriber.next(JSON.parse(allQuizzes));
+      subscriber.complete();
+    }).pipe(delay(1000));
+  }
+
+  addQuestion(quizId: string | null, question: Question): Observable<Question> {
+    return new Observable<Question>((subscriber) => {
+      if (this.quizzes$.value) {
+        const currentQuizzes = [...this.quizzes$.value];
+        const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
+
+        if (quizIndex !== -1) {
+          question.id = getNewQuestionId();
+          currentQuizzes[quizIndex].questions.push(question);
+          this.quizzes$.next(currentQuizzes);
+          this.localStorageService.updateLocalStorage(
+            StorageKey.QUIZZES,
+            this.quizzes$.value
+          );
+          subscriber.next(question);
+        }
+      } else {
+        subscriber.error();
+      }
+      subscriber.complete();
+    });
+  }
+
+  getQuizQuestions(quizId: string | null): Observable<Question[]> {
+    return this.getQuizById(quizId).pipe(
+      map((quiz) => {
+        if (!quiz || !quiz.questions) {
+          return [];
+        }
+        return [...quiz.questions];
+      })
+    );
   }
 
   deleteQuestion(
     quizId: string | undefined,
     questionIndex: number | undefined
-  ): void {
-    const currentQuizzes = this.quizzes$.value;
-    const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
-    const currentQuiz = currentQuizzes[quizIndex];
+  ): Observable<Question> {
+    return new Observable<Question>((subscriber) => {
+      const currentQuizzes = this.quizzes$.value;
+      const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
+      const currentQuiz = currentQuizzes[quizIndex];
 
-    if (quizIndex !== -1) {
-      const updatedQuestions = [...currentQuiz.questions];
-      updatedQuestions.splice(questionIndex, 1);
-
-      currentQuiz.questions = updatedQuestions;
-
-      this.quizzes$.next(currentQuizzes);
-      this.localStorageService.updateLocalStorage(
-        StorageKey.QUIZZES,
-        this.quizzes$.value
-      );
-    }
+      if (quizIndex !== -1) {
+        const updatedQuestions = [...currentQuiz.questions];
+        updatedQuestions.splice(questionIndex, 1);
+        currentQuiz.questions = updatedQuestions;
+        this.quizzes$.next(currentQuizzes);
+        this.localStorageService.updateLocalStorage(
+          StorageKey.QUIZZES,
+          this.quizzes$.value
+        );
+        subscriber.next(updatedQuestions[questionIndex]);
+      } else {
+        subscriber.error();
+      }
+      subscriber.complete();
+    });
   }
 }
