@@ -1,8 +1,9 @@
-<div class="container">
-  <div class="card-image">
-  </div>
+<div class="container rounded bg-white shadow py-4 flex items-center justify-center">
   <div class="card-title">
     {{ quiz?.title }}
+  </div>
+  <div *ngIf="quizDifficulty">
+    {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ quizDifficulty }}
   </div>
   <div class="card-location">
     {{ 'BUTTON.AMOUNT_OF_QUESTIONS' | translateJson }} {{ quiz?.questions?.length || 0 }}

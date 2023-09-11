@@ -20,6 +20,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BaseQuizComponent } from './components/base-quiz/base-quiz.component';
 // import { BaseQuizPageComponent } from './components/BaseQuizPageComponent/base-quiz-page.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { BaseQuizComponent } from './components/base-quiz/base-quiz.component';
     BrowserModule,
     BrowserAnimationsModule,
     NzDropDownModule,
-    NzRadioModule
+    NzRadioModule,
+    NzIconModule
   ],
   exports: [
     InputComponent,

@@ -1,8 +1,10 @@
 <div class="flex items-center justify-start my-2">
-  <button class="flex items-center justify-center p-2" (click)="goHome()">
-    <span class="flex items-center w-6 h-6 pr-2" nz-icon nzType="left" nzTheme="outline"></span>
-    {{ 'BUTTON.HOME' | translateJson }}
-  </button>
+  <quiz-app-button [type]="BUTTON_TYPE.SECONDARY" class="flex items-center justify-center p-2" (click)="goHome()">
+    <div class="flex justify-center items-center">
+      <span class="flex items-center w-6 h-6 pr-2" nz-icon nzType="left" nzTheme="outline"></span>
+      {{ 'BUTTON.HOME' | translateJson }}
+    </div>
+  </quiz-app-button>
 </div>
 <div>
   <div class="flex content-center justify-center pt-10 text-2xl">

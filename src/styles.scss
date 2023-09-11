@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,19 +6,12 @@ body {
   background-color: var(--color-back-ground);
   color: var(--primary-font-color);
   font-family: var(--primary-font-family);
+  font-size: var(--text-base);
 }
 
 .ant-modal-content {
   border-radius: var(--border-radius);
-  background-image: var(--background-image);
-}
-
-.bg-btn-gradient {
-  background-image: var(--background-image);
-}
-
-.bg-btn-gradient-hover {
-  background-image: var(--background-image-hover);
+  background-color: var(--color-back-ground);
 }
 
 .ant-modal-confirm-btns {
@@ -28,6 +20,18 @@ body {
 
 .anticon-question-circle {
   display: none;
+}
+
+.ant-modal-close-x{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-modal-close{
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
@@ -93,15 +97,15 @@ button {
 
 @layer base {
   :root {
-    --color-primary: #e6e6ff;
-    --color-back-ground: #f0f0ff;
-    --color-button: #E5E7EB;
+    --color-primary: rgb(230, 230, 255);
+    --color-secondary: rgb(179, 179, 255);
+    --color-back-ground: rgb(240, 240, 255);
+    --color-button: rgb(229, 231, 235);
     --color-buttons-hover: rgba(0, 0, 0, 0.05);
-    --color-error: #D10000;
+    --color-error: rgb(209, 0, 0);
     --primary-font-color: #333333;
     --primary-font-family: system-ui;
-    --background-image: linear-gradient(to bottom, #dcdcff, #c7c7ff);
-    --background-image-hover: linear-gradient(to bottom, #c7c7ff, #b3b3ff);
     --border-radius: 10px;
+    --text-base: 16px;
   }
 }

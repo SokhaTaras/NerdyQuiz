@@ -24,8 +24,6 @@ export class QuizDetailsComponent
     super(quizService, route, navigateTo);
   }
 
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
-
   openEditPopUp(): void {
     const data: any = {
       label: 'BUTTON.EDIT_QUIZ',

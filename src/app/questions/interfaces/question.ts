@@ -12,3 +12,9 @@ export interface Answer {
   text: string;
   isCorrect: boolean;
 }
+
+export interface DifficultyRange {
+  Easy: { min: number; max: number };
+  Medium: { min: number; max: number };
+  Hard: { min: number; max: number };
+}

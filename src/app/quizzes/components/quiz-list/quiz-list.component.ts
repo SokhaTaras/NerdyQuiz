@@ -20,11 +20,12 @@ export class QuizListComponent implements OnDestroy, OnInit {
   initQuizSubscription: Subscription;
   isLoading: boolean;
 
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   ngOnInit(): void {
     this.initQuizzes();
   }
+
 
   constructor(
     private quizService: QuizService,

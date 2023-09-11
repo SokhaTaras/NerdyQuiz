@@ -30,6 +30,8 @@ export class CreateQuestionComponent implements OnDestroy {
 
   protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+
   constructor(private quizService: QuizService) {}
 
   getBooleanQuestionForm(event: any): void {

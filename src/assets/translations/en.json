@@ -3,10 +3,13 @@
     "TITLE": "Title",
     "THEME": "Theme",
     "TYPE": "Type",
+    "BOOLEAN": "Boolean",
+    "MULTIPLE": "Multiple",
     "DIFFICULTY": "Difficulty",
     "CORRECT_ANSWER": "Correct answer",
     "CORRECT": "Correct",
-    "ANSWER": "Answer"
+    "ANSWER": "Answer",
+    "DELETE": "Delete"
   },
 
   "TITLES": {
@@ -33,7 +36,8 @@
   "ERRORS": {
     "ERROR": "error",
     "REQUIRED": "This field is required.",
-    "MIN_LENGTH_2": "This field must have at least 2 characters."
+    "MIN_LENGTH_2": "This field must have at least 2 characters.",
+    "NO_QUESTIONS": "This quiz has no questions."
   },
 
   "INTRODUCTION": {

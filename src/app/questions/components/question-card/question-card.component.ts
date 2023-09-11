@@ -17,7 +17,7 @@ export class QuestionCardComponent implements OnDestroy {
 
   deleteQuestionSubscription: Subscription;
 
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private modalQuizService: ModalQuizService,
