@@ -15,7 +15,7 @@ export class QuizCardComponent {
 
   constructor(private navigateTo: NavigateToService) {}
 
-  goToIntermediate(): void {
-    this.navigateTo.navigateIntermediate(this.quiz.id);
+  goPlay(): void {
+    this.navigateTo.navigatePlay(this.quiz);
   }
 }

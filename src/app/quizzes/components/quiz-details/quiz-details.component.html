@@ -8,11 +8,11 @@
   <div class="flex content-center justify-center pt-10 text-2xl">
     <div>
       <div class="flex">
-        <div *ngIf="initialQuiz?.title" class="mx-3.5 modal-title">
-        {{ 'LABELS.TITLE' | translateJson }}: {{ initialQuiz?.title }}
+        <div *ngIf="currentQuiz?.title" class="mx-3.5 modal-title">
+        {{ 'LABELS.TITLE' | translateJson }}: {{ currentQuiz?.title }}
         </div>
-        <div *ngIf="initialQuiz?.theme" class="mx-3.5 modal-title">
-          {{ 'LABELS.THEME' | translateJson }}: {{ initialQuiz?.theme }}
+        <div *ngIf="currentQuiz?.theme" class="mx-3.5 modal-title">
+          {{ 'LABELS.THEME' | translateJson }}: {{ currentQuiz?.theme }}
         </div>
       </div>
       <div class="flex content-center justify-center mt-10">

@@ -1,0 +1,15 @@
+<div>
+  <div class="flex justify-center items-center">
+    <p class="text-6xl">{{currentQuiz?.title}}</p>
+    <p class="text-5xl">{{currentQuiz?.theme}}</p>
+  </div>
+  <div *ngFor="let quest of currentQuiz?.questions" class="flex">
+    <span></span>
+    <p>{{quest?.title}}</p>
+    <p>{{quest?.answers.length}}</p>
+    <p>{{quest?.difficulty}}</p>
+    <p>{{quest?.type}}</p>
+  </div>
+</div>
+
+

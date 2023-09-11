@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { NavigationRoutes } from '../../enums/navigationRoutes';
+import { Quiz } from '../../../quizzes/interfaces/quiz';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,11 @@ export class NavigateToService {
     this.router.navigate([NavigationRoutes.HOME]);
   }
 
-  navigateIntermediate(quizId: string): void {
+  navigatePlay(quiz: Quiz): void {
     this.router.navigate([
       NavigationRoutes.QUIZ,
       NavigationRoutes.PLAY,
-      `${quizId}`
+      `${quiz.id}`
     ]);
   }
 }
