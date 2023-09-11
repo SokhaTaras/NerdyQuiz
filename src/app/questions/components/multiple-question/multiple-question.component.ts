@@ -35,13 +35,12 @@ export class MultipleQuestionComponent implements OnInit, OnDestroy {
   multipleQuestionForm: FormGroup<QuestionForm>;
   radioButtonsSubscription: Subscription;
 
-  protected readonly PlaceHolder = PlaceHolder;
-  protected readonly difficultyList = DifficultyList;
-  protected readonly typeList = TypeList;
-  protected readonly maxQuestionsAmount = maxQuestionsAmount;
-  protected readonly minQuestionsAmount = minQuestionsAmount;
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly PlaceHolder = PlaceHolder;
+  readonly difficultyList = DifficultyList;
+  readonly typeList = TypeList;
+  readonly maxQuestionsAmount = maxQuestionsAmount;
+  readonly minQuestionsAmount = minQuestionsAmount;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   get title(): FormControl {
     return this.multipleQuestionForm.controls.title;

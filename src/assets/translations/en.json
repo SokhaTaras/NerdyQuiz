@@ -24,13 +24,14 @@
     "CREATE_QUIZ": "Create quiz",
     "EDIT": "Edit",
     "EDIT_QUIZ": "Edit quiz",
-    "AMOUNT_OF_QUESTIONS": "Amount of question: ",
+    "QUESTION_AMOUNT": "Question amount",
     "DELETE_QUESTION": "Delete question",
     "EDIT_TITLE": "Edit title",
     "CANCEL": "Cancel",
     "SAVE": "Save",
     "HOME": "Home",
-    "QUIZ": "Quiz"
+    "QUIZ": "Quiz",
+    "PLAY": "Play"
   },
 
   "ERRORS": {

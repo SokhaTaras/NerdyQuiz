@@ -6,6 +6,7 @@ import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { BaseQuizComponent } from '../../../shared/components/base-quiz/base-quiz.component';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -15,13 +16,16 @@ export class QuizDetailsComponent
   extends BaseQuizComponent
   implements OnInit, OnDestroy
 {
+  readonly BUTTON_TYPE = BUTTON_TYPE;
+
   constructor(
     private modalQuizService: ModalQuizService,
     quizService: QuizService,
     route: ActivatedRoute,
-    navigateTo: NavigateToService
+    navigateTo: NavigateToService,
+    statisticsService: StatisticsService
   ) {
-    super(quizService, route, navigateTo);
+    super(statisticsService, quizService, route, navigateTo);
   }
 
   openEditPopUp(): void {

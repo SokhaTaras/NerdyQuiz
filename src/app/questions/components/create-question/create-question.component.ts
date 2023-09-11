@@ -28,9 +28,7 @@ export class CreateQuestionComponent implements OnDestroy {
   formSubscription: Subscription;
   addQuestSubscription: Subscription;
 
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
-
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(private quizService: QuizService) {}
 

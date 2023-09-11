@@ -19,7 +19,6 @@ import { TranslateJsonPipe } from './pipes/translate-json/translate-json.pipe';
 import { ButtonComponent } from './components/button/button.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BaseQuizComponent } from './components/base-quiz/base-quiz.component';
-// import { BaseQuizPageComponent } from './components/BaseQuizPageComponent/base-quiz-page.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
@@ -34,7 +33,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     ButtonComponent,
     LoaderComponent,
     BaseQuizComponent
-    // BaseQuizPageComponent
   ],
   imports: [
     CommonModule,
@@ -61,55 +59,3 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   ]
 })
 export class SharedModule {}
-
-//import { Component, OnDestroy, OnInit } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-// import { Subscription } from 'rxjs';
-//
-// import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
-// import { Quiz } from '../../../quizzes/interfaces/quiz';
-// import { NavigateToService } from '../../services/navigate-to/navigate-to.service';
-// import { BUTTON_TYPE } from '../../enums/buttonType';
-//
-// @Component({
-//   selector: 'quiz-app-quiz-details',
-//   template: ''
-// })
-// export class BaseQuizPageComponent implements OnInit, OnDestroy {
-//   initialQuiz: Quiz;
-//   id: string | null;
-//   quizSubscription: Subscription;
-//
-//   protected readonly BUTTON_TYPE = BUTTON_TYPE;
-//
-//   constructor(
-//     private quizService: QuizService,
-//     private route: ActivatedRoute,
-//     private navigateTo: NavigateToService
-//   ) {}
-//
-//   ngOnInit(): void {
-//     this.getCurrentQuizId();
-//     this.currentQuizSubscribe();
-//   }
-//
-//   goHome(): void {
-//     this.navigateTo.navigateHome();
-//   }
-//
-//   private getCurrentQuizId(): void {
-//     this.id = this.route.snapshot.paramMap.get('id');
-//   }
-//
-//   private currentQuizSubscribe(): void {
-//     this.quizSubscription = this.quizService
-//       .getQuizById(this.id)
-//       .subscribe((currentQuiz) => {
-//         this.initialQuiz = currentQuiz;
-//       });
-//   }
-//
-//   ngOnDestroy(): void {
-//     this.quizSubscription.unsubscribe();
-//   }
-// }

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { Quiz } from '../../../quizzes/interfaces/quiz';
 import { NavigateToService } from '../../services/navigate-to/navigate-to.service';
+import { StatisticsService } from '../../services/statistics/statistics.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -13,9 +14,12 @@ import { NavigateToService } from '../../services/navigate-to/navigate-to.servic
 export class BaseQuizComponent implements OnInit, OnDestroy {
   currentQuiz: Quiz;
   id: string | null;
+  quizDifficulty: string;
+
   quizSubscription: Subscription;
 
   constructor(
+    private statisticsService: StatisticsService,
     private quizService: QuizService,
     private route: ActivatedRoute,
     private navigateTo: NavigateToService
@@ -24,6 +28,7 @@ export class BaseQuizComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getCurrentQuizId();
     this.currentQuizSubscribe();
+    this.getAverageQuizDifficulty();
   }
 
   goHome(): void {
@@ -40,6 +45,12 @@ export class BaseQuizComponent implements OnInit, OnDestroy {
       .subscribe((currentQuiz) => {
         this.currentQuiz = currentQuiz;
       });
+  }
+
+  private getAverageQuizDifficulty(): void {
+    this.quizDifficulty = this.statisticsService.getAverageQuizDifficulty(
+      this.currentQuiz
+    );
   }
 
   ngOnDestroy(): void {
