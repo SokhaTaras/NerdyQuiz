@@ -32,6 +32,22 @@
     "HOME": "Home"
   },
 
+  "DROPDOWN": {
+    "TYPE": {
+      "MULTIPLE": "Multiple",
+      "BOOLEAN": "Boolean"
+    },
+    "DIFFICULTY": {
+      "EASY": "Easy",
+      "MEDIUM": "Medium",
+      "HARD": "Hard"
+    },
+    "BOOLEAN": {
+      "TRUE": "True",
+      "FALSE": "False"
+    }
+  },
+
   "ERRORS": {
     "ERROR": "error",
     "REQUIRED": "This field is required.",

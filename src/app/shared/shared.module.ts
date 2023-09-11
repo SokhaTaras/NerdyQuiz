@@ -18,6 +18,7 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
 import { TranslateJsonPipe } from './pipes/translate-json/translate-json.pipe';
 import { ButtonComponent } from './components/button/button.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { FormControlPipe } from './pipes/form-control/form-control.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     ConfirmModalComponent,
     RadioButtonComponent,
     TranslateJsonPipe,
-    ButtonComponent
+    ButtonComponent,
+    TranslateJsonPipe,
+    FormControlPipe
   ],
   imports: [
     CommonModule,
@@ -50,7 +53,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     DropdownComponent,
     RadioButtonComponent,
     TranslateJsonPipe,
-    ButtonComponent
+    ButtonComponent,
+    TranslateJsonPipe,
+    FormControlPipe
   ]
 })
 export class SharedModule {}

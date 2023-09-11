@@ -1,18 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output
-} from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { QuestionForm } from '../../../shared/interfaces/forms';
@@ -23,110 +10,58 @@ import {
   minQuestionsAmount
 } from '../../constants/questions-info';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { AnswerDifficultyList } from '../../constants/dropdonws';
+import { maxQuestions } from '../../constants/max-questions';
+import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
+import {
+  ANSWER_PROPERTIES,
+  QUESTION_TYPE
+} from '../../../shared/enums/question-info';
+import { Question } from '../../interfaces/question';
 
 @Component({
   selector: 'quiz-app-multiple-question',
-  templateUrl: './multiple-question.component.html'
+  templateUrl: './multiple-question.component.html',
+  providers: [QuestionFormHelperService]
 })
-export class MultipleQuestionComponent implements OnInit, OnDestroy {
+export class MultipleQuestionComponent implements OnInit {
   @Output() saveMultipleFormEvent: EventEmitter<FormGroup<QuestionForm>> =
     new EventEmitter<FormGroup<QuestionForm>>();
 
-  multipleQuestionForm: FormGroup<QuestionForm>;
-  radioButtonsSubscription: Subscription;
-
-  protected readonly PlaceHolder = PlaceHolder;
-  protected readonly difficultyList = DifficultyList;
-  protected readonly typeList = TypeList;
+  readonly PlaceHolder = PlaceHolder;
+  readonly maxQuestionsAmount = maxQuestions;
+  readonly AnswerDifficultyList = AnswerDifficultyList;
+  readonly ANSWER_PROPERTIES = ANSWER_PROPERTIES;
   protected readonly maxQuestionsAmount = maxQuestionsAmount;
   protected readonly minQuestionsAmount = minQuestionsAmount;
   protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  get title(): FormControl {
-    return this.multipleQuestionForm.controls.title;
+  get form(): FormGroup<QuestionForm> {
+    return this.questionFormHelper?.currentForm;
   }
 
-  get type(): FormControl {
-    return this.multipleQuestionForm.controls.type;
-  }
-
-  get difficulty(): FormControl {
-    return this.multipleQuestionForm.controls.difficulty;
-  }
-
-  get answerLength(): number {
-    return this.multipleQuestionForm.controls.answers.length;
-  }
-
-  get answersFormArray(): FormArray {
-    return this.multipleQuestionForm.controls.answers;
-  }
-
-  get answersControl(): AnswersFormType[] {
-    const formArray = this.multipleQuestionForm.controls.answers;
-    return formArray.controls;
-  }
-
-  constructor(private fb: FormBuilder) {}
+  constructor(public questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.initRadioButtons();
   }
 
   addAnswer(): void {
-    const answer: AnswersFormType = this.generateNewAnswer('', false);
-    this.answersControl.push(answer);
-    this.initRadioButtons();
-    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
+    if (maxQuestions > this.questionFormHelper.answersCount) {
+      this.questionFormHelper.addAnswer();
+    }
   }
 
   deleteAnswer(answerIndex: number): void {
     this.answersControl.splice(answerIndex, 1);
   }
 
-  private initRadioButtons(): void {
-    this.answersFormArray.controls.forEach((control, index) => {
-      this.radioButtonsSubscription = control.valueChanges.subscribe(
-        (checked) => {
-          if (checked.isCorrect) {
-            this.answersFormArray.controls.forEach(
-              (otherControl, otherIndex) => {
-                if (otherIndex !== index) {
-                  otherControl.get('isCorrect')?.setValue(false);
-                }
-              }
-            );
-          }
-        }
-      );
-    });
-  }
-
   private initForm(): void {
-    this.multipleQuestionForm = this.fb.group<QuestionForm>({
-      title: this.fb.control('', [Validators.required]),
-      type: this.fb.control(this.typeList[0][0].text, [Validators.required]),
-      difficulty: this.fb.control(this.difficultyList[0][0].text, [
-        Validators.required
-      ]),
-      answers: this.fb.array(
-        [this.generateNewAnswer('', true), this.generateNewAnswer('', false)],
-        [Validators.required]
-      )
-    });
+    const question: Question = {
+      type: QUESTION_TYPE.MULTIPLE
+    };
 
-    this.saveMultipleFormEvent.emit(this.multipleQuestionForm);
-  }
-
-  private generateNewAnswer(text: string, isCorrect: boolean): AnswersFormType {
-    return this.fb.group({
-      text: this.fb.control(text, [Validators.required]),
-      isCorrect: this.fb.control(isCorrect)
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.radioButtonsSubscription.unsubscribe();
+    this.questionFormHelper.initForm(question);
+    this.saveMultipleFormEvent.emit(this.form);
   }
 }
