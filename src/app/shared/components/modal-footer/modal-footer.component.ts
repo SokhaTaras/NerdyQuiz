@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { BUTTON_TYPE } from '../../enums/buttonType';
 
 @Component({
@@ -12,6 +13,8 @@ export class ModalFooterComponent {
   @Output() whenConfirm: EventEmitter<void> = new EventEmitter();
   @Output() whenCancel: EventEmitter<void> = new EventEmitter();
 
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+
   handleSubmit(): void {
     this.whenConfirm.emit();
   }
@@ -19,6 +22,4 @@ export class ModalFooterComponent {
   handleCancel(): void {
     this.whenCancel.emit();
   }
-
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
 }
