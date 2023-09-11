@@ -9,8 +9,7 @@ import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-pre-play',
-  templateUrl: './pre-play.component.html',
-  styleUrls: ['./pre-play.component.scss']
+  templateUrl: './pre-play.component.html'
 })
 export class PrePlayComponent
   extends BaseQuizComponent
