@@ -2,5 +2,6 @@ export enum NavigationRoutes {
   HOME = 'home',
   LOGIN = 'login',
   QUIZ = 'quiz',
-  DETAILS = 'details'
+  DETAILS = 'details',
+  INTERMEDIATE = 'intermediate'
 }

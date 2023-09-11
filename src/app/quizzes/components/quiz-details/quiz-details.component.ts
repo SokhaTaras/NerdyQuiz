@@ -44,6 +44,10 @@ export class QuizDetailsComponent implements OnInit, OnDestroy {
     this.navigateTo.navigateHome();
   }
 
+  goToIntermediate(): void {
+    this.navigateTo.navigateIntermediate(this.initialQuiz.id);
+  }
+
   private getCurrentQuizId(): void {
     this.id = this.route.snapshot.paramMap.get('id');
   }
