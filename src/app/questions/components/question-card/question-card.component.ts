@@ -47,6 +47,8 @@ export class QuestionCardComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.deleteQuestionSubscription.unsubscribe();
+    if (this.deleteQuestionSubscription) {
+      this.deleteQuestionSubscription.unsubscribe();
+    }
   }
 }

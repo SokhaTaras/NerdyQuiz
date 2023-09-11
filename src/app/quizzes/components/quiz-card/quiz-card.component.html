@@ -7,4 +7,7 @@
   <div class="card-location">
     {{ 'BUTTON.AMOUNT_OF_QUESTIONS' | translateJson }} {{ quiz?.questions?.length || 0 }}
   </div>
+  <div class="flex content-center justify-center w-full">
+    <quiz-app-button class="w-full mb-0" [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="goToIntermediate()">{{ 'BUTTON.QUIZ' | translateJson }}</quiz-app-button>
+  </div>
 </div>

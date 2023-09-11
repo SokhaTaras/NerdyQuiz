@@ -12,8 +12,8 @@ export class NavigateToService {
   navigateToQuizDetailsPage(quizId: string): void {
     this.router.navigate([
       NavigationRoutes.QUIZ,
-      `${quizId}`,
-      NavigationRoutes.DETAILS
+      NavigationRoutes.DETAILS,
+      `${quizId}`
     ]);
   }
 
@@ -24,9 +24,8 @@ export class NavigateToService {
   navigateIntermediate(quizId: string): void {
     this.router.navigate([
       NavigationRoutes.QUIZ,
-      `${quizId}`,
-      NavigationRoutes.DETAILS,
-      NavigationRoutes.INTERMEDIATE
+      NavigationRoutes.PLAY,
+      `${quizId}`
     ]);
   }
 }

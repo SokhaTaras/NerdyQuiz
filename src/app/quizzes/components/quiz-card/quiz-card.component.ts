@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 import { Quiz } from '../../interfaces/quiz';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 
 @Component({
   selector: 'quiz-app-quiz-card',
@@ -9,4 +11,11 @@ import { Quiz } from '../../interfaces/quiz';
 })
 export class QuizCardComponent {
   @Input() quiz: Quiz;
+  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+
+  constructor(private navigateTo: NavigateToService) {}
+
+  goToIntermediate(): void {
+    this.navigateTo.navigateIntermediate(this.quiz.id);
+  }
 }

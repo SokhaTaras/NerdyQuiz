@@ -57,7 +57,9 @@ export class QuizListComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
-    this.modalSubscription.unsubscribe();
+    if (this.modalSubscription) {
+      this.modalSubscription.unsubscribe();
+    }
     this.initQuizSubscription.unsubscribe();
   }
 }

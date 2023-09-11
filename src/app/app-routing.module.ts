@@ -16,7 +16,7 @@ const routes: Routes = [
           import('./home/home-routing.module').then((m) => m.HomeRoutingModule)
       },
       {
-        path: 'quiz/:id',
+        path: 'quiz',
         loadChildren: () =>
           import('./quizzes/quizzes-routing.module').then(
             (m) => m.QuizzesRoutingModule

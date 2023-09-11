@@ -12,7 +12,7 @@ import { CreateQuizModalComponent } from './components/create-quiz-modal/create-
 import { HomeComponent } from '../home/components/home/home.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { IntermediateComponent } from './components/intermediate/intermediate.component';
+import { PrePlayComponent } from './components/pre-play/pre-play.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { IntermediateComponent } from './components/intermediate/intermediate.co
     CreateQuizModalComponent,
     HomeComponent,
     IntroductionComponent,
-    IntermediateComponent
+    PrePlayComponent
   ],
   imports: [
     CommonModule,
