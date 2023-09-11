@@ -15,3 +15,8 @@ export interface Answer {
   text: string;
   isCorrect: boolean;
 }
+
+export interface AnswerList {
+  value: string;
+  text: string;
+}

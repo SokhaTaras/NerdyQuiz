@@ -29,7 +29,7 @@
     "HOME": "Home"
   },
 
-  "DROPDOWNS": {
+  "DROPDOWN": {
     "TYPE": {
       "MULTIPLE": "Multiple",
       "BOOLEAN": "Boolean"

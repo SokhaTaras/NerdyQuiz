@@ -1,4 +1,4 @@
-import { AnswerList } from '../interfaces/question.interface';
+import { AnswerList } from '../interfaces/question';
 import {
   QUESTION_BOOLEAN,
   QUESTION_DIFFICULTY,
@@ -8,36 +8,36 @@ import {
 export const AnswerBooleanList: AnswerList[] = [
   {
     value: QUESTION_BOOLEAN.TRUE,
-    text: 'DROPDOWNS.BOOLEAN.TRUE'
+    text: 'DROPDOWN.BOOLEAN.TRUE'
   },
   {
     value: QUESTION_BOOLEAN.FALSE,
-    text: 'DROPDOWNS.BOOLEAN.FALSE'
+    text: 'DROPDOWN.BOOLEAN.FALSE'
   }
 ];
 
 export const AnswerTypeList: AnswerList[] = [
   {
     value: QUESTION_TYPE.MULTIPLE,
-    text: 'DROPDOWNS.TYPE.MULTIPLE'
+    text: 'DROPDOWN.TYPE.MULTIPLE'
   },
   {
     value: QUESTION_TYPE.BOOLEAN,
-    text: 'DROPDOWNS.TYPE.BOOLEAN'
+    text: 'DROPDOWN.TYPE.BOOLEAN'
   }
 ];
 
 export const AnswerDifficultyList: AnswerList[] = [
   {
     value: QUESTION_DIFFICULTY.EASY,
-    text: 'DROPDOWNS.DIFFICULTY.EASY'
+    text: 'DROPDOWN.DIFFICULTY.EASY'
   },
   {
     value: QUESTION_DIFFICULTY.MEDIUM,
-    text: 'DROPDOWNS.DIFFICULTY.MEDIUM'
+    text: 'DROPDOWN.DIFFICULTY.MEDIUM'
   },
   {
     value: QUESTION_DIFFICULTY.HARD,
-    text: 'DROPDOWNS.DIFFICULTY.HARD'
+    text: 'DROPDOWN.DIFFICULTY.HARD'
   }
 ];

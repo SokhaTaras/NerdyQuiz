@@ -21,15 +21,15 @@
     </div>
     <div>
       <ng-container formArrayName="answers" class="py-10">
-        <ng-container class="flex" *ngFor="let answer of questionFormHelper?.answersFormArray.controls; let index = index">
+        <ng-container class="flex" *ngFor="let answer of questionFormHelper.answersFormArray.controls; let index = index">
           <div class="flex items-center">
-            <quiz-app-input [inputIndex]="index" [control]="questionFormHelper?.answersControl[index].controls.text" class="m-10 w-full" label="LABELS.ANSWER"></quiz-app-input>
-              <quiz-app-radio-button
-                class="w-1/10 pt-7"
-                [control]="questionFormHelper?.answersControl[index].controls.isCorrect"
-                [id]="index+1">
-                {{ 'LABELS.CORRECT' | translateJson }}
-              </quiz-app-radio-button>
+            <quiz-app-input [inputIndex]="index" [control]="answer.get(ANSWER_PROPERTIES.TEXT) | formControl" class="m-10 w-full" label="LABELS.ANSWER"></quiz-app-input>
+            <quiz-app-radio-button
+              class="w-1/10 pt-7"
+              [control]="answer.get(ANSWER_PROPERTIES.IS_CORRECT) | formControl"
+              [id]="index + 1">
+              {{ 'LABELS.CORRECT' | translateJson }}
+            </quiz-app-radio-button>
           </div>
         </ng-container>
       </ng-container>
@@ -39,7 +39,7 @@
     <button
       type="button"
       class="btn-add btn-pop-up"
-      [disabled]="questionFormHelper?.answerLength >= maxQuestionsAmount"
+      [disabled]="questionFormHelper?.answersCount >= maxQuestionsAmount"
       (click)="addAnswer()">
       {{ 'BUTTON.NEW_ANSWER' | translateJson }}
     </button>

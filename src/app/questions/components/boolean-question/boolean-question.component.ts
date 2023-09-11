@@ -8,8 +8,11 @@ import {
 } from '../../constants/dropdonws';
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
-import { QUESTION_TYPE } from '../../../shared/enums/question-info';
-import { Question } from '../../interfaces/question.interface';
+import {
+  ANSWER_PROPERTIES,
+  QUESTION_TYPE
+} from '../../../shared/enums/question-info';
+import { Question } from '../../interfaces/question';
 
 @Component({
   selector: 'quiz-app-boolean-question',
@@ -20,9 +23,10 @@ export class BooleanQuestionComponent implements OnInit {
   @Output() saveBooleanFormEvent: EventEmitter<FormGroup<QuestionForm>> =
     new EventEmitter<FormGroup<QuestionForm>>();
 
-  protected readonly PlaceHolder = PlaceHolder;
-  protected readonly AnswerDifficultyList = AnswerDifficultyList;
-  protected readonly AnswerBooleanList = AnswerBooleanList;
+  readonly PlaceHolder = PlaceHolder;
+  readonly AnswerDifficultyList = AnswerDifficultyList;
+  readonly AnswerBooleanList = AnswerBooleanList;
+  readonly ANSWER_PROPERTIES = ANSWER_PROPERTIES;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
@@ -32,7 +36,6 @@ export class BooleanQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.questionFormHelper.initRadioButtons();
   }
 
   private initForm(): void {

@@ -5,7 +5,7 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
-import { AnswerList } from '../../../questions/interfaces/question.interface';
+import { AnswerList } from '../../../questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-dropdown',
