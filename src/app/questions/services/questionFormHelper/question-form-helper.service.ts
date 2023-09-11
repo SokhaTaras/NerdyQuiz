@@ -9,8 +9,8 @@ import {
 
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { AnswersFormType } from '../../../shared/types/formsType';
-import { Question } from '../../interfaces/question.interface';
-import { QUESTION_TYPE } from '../../../shared/enums/question-info';
+import { Answer, Question } from '../../interfaces/question';
+import { ANSWER_PROPERTIES, QUESTION_TYPE } from '../../../shared/enums/question-info';
 import {
   AnswerBooleanList,
   AnswerDifficultyList,
@@ -18,27 +18,37 @@ import {
 } from '../../constants/dropdonws';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
-export const defaultForm: QuestionForm = {
-  title: new FormControl(''),
-  type: new FormControl(AnswerTypeList[0].value),
-  difficulty: new FormControl(AnswerDifficultyList[0].value),
-  answers: new FormArray([])
+export const defaultFormValues = {
+  title: '',
+  type: AnswerTypeList[0].value,
+  difficulty: AnswerDifficultyList[0].value
 };
 
 @Injectable()
+export class QuestionFormHelperService implements OnDestroy {
 export class QuestionFormHelperService {
   currentForm: FormGroup<QuestionForm>;
 
+  radioButtonsSubscription: Subscription;
+
   get title(): FormControl {
-    return this.currentForm.controls.title;
+    return this.currentForm?.controls?.title;
+  }
+
+  get difficulty(): FormControl {
+    return this.currentForm?.controls?.difficulty;
   }
 
   get type(): FormControl {
-    return this.currentForm.controls.type;
+    return this.currentForm?.controls?.type;
   }
 
   get answersFormArray(): FormArray {
-    return this.currentForm.controls.answers;
+    return this.currentForm?.controls?.answers;
+  }
+
+  get answersCount(): number {
+    return this.currentForm?.controls?.answers?.length;
   }
 
   constructor(
@@ -47,24 +57,24 @@ export class QuestionFormHelperService {
   ) {}
 
   initForm(question: Question): void {
-    let currentAnswers: AnswersFormType[] = [];
+    let currentAnswers: AnswersFormType[];
 
     if (question.answers) {
-      currentAnswers = this.mapCurrentAnswers(question);
+      currentAnswers = this.mapCurrentAnswers(question.answers);
     }
 
     const defaultAnswers = this.generateDefaultAnswers(question.type);
 
     const initForm: QuestionForm = {
-      title: this.fb.control(defaultForm.title.value || question.title, [
+      title: this.fb.control(question.title || defaultFormValues.title, [
         Validators.required
       ]),
       type: this.fb.control(question.type, [Validators.required]),
       difficulty: this.fb.control(
-        defaultForm.difficulty.value || question.difficulty,
+        question.difficulty || defaultFormValues.difficulty,
         [Validators.required]
       ),
-      answers: this.fb.array(defaultAnswers || currentAnswers, [
+      answers: this.fb.array(currentAnswers || defaultAnswers, [
         Validators.required
       ])
     };
@@ -80,8 +90,28 @@ export class QuestionFormHelperService {
     });
   }
 
-  //todo radio buttons group onChange
-  initRadioButtons(): void {
+  addAnswer(): void {
+    const answer: AnswersFormType = this.generateNewAnswer('', false);
+    this.answersFormArray.push(answer);
+    this.initRadioButtons();
+  }
+
+  private mapCurrentAnswers(answers: Answer[]): AnswersFormType[] {
+    if (answers) {
+      const mappedAnswers = answers.map((a) => {
+        return this.generateNewAnswer(a.text, a.isCorrect);
+      });
+      return mappedAnswers;
+    } else {
+      return [];
+    }
+  }
+
+  private initRadioButtons(): void {
+    if (this.radioButtonsSubscription) {
+      this.radioButtonsSubscription.unsubscribe();
+    }
+
     this.answersFormArray.controls.forEach((control, index) => {
       this.subscriptionsService.addSubscription(
         control.valueChanges.subscribe((checked) => {
@@ -89,7 +119,9 @@ export class QuestionFormHelperService {
             this.answersFormArray.controls.forEach(
               (otherControl, otherIndex) => {
                 if (otherIndex !== index) {
-                  otherControl.get('isCorrect')?.setValue(false);
+                  otherControl
+                    .get(ANSWER_PROPERTIES.IS_CORRECT)
+                    ?.setValue(false);
                 }
               }
             );
@@ -97,23 +129,6 @@ export class QuestionFormHelperService {
         })
       );
     });
-  }
-
-  addAnswer(): void {
-    const answer: AnswersFormType = this.generateNewAnswer('', false);
-    this.answersFormArray.push(answer);
-    this.initRadioButtons();
-  }
-
-  mapCurrentAnswers(question: Question): AnswersFormType[] {
-    if (question) {
-      const answers = question.answers.map((a) => {
-        return this.generateNewAnswer(a.text, a.isCorrect);
-      });
-      return answers;
-    } else {
-      return [];
-    }
   }
 
   private generateDefaultAnswers(answerType: string): AnswersFormType[] {

@@ -1,4 +1,4 @@
-import { AnswerList } from '../interfaces/question.interface';
+import { AnswerList } from '../interfaces/question';
 import {
   QUESTION_BOOLEAN,
   QUESTION_DIFFICULTY,
@@ -8,57 +8,36 @@ import {
 export const AnswerBooleanList: AnswerList[] = [
   {
     value: QUESTION_BOOLEAN.TRUE,
-    translations: [
-      { lang: 'en', text: 'True' },
-      { lang: 'ua', text: 'Істина' }
-    ]
+    text: 'DROPDOWN.BOOLEAN.TRUE'
   },
   {
     value: QUESTION_BOOLEAN.FALSE,
-    translations: [
-      { lang: 'en', text: 'False' },
-      { lang: 'ua', text: 'Хибно' }
-    ]
+    text: 'DROPDOWN.BOOLEAN.FALSE'
   }
 ];
 
 export const AnswerTypeList: AnswerList[] = [
   {
     value: QUESTION_TYPE.MULTIPLE,
-    translations: [
-      { lang: 'en', text: 'Multiple' },
-      { lang: 'ua', text: 'Кілька запитань' }
-    ]
+    text: 'DROPDOWN.TYPE.MULTIPLE'
   },
   {
     value: QUESTION_TYPE.BOOLEAN,
-    translations: [
-      { lang: 'en', text: 'Boolean' },
-      { lang: 'ua', text: 'Істинний' }
-    ]
+    text: 'DROPDOWN.TYPE.BOOLEAN'
   }
 ];
 
 export const AnswerDifficultyList: AnswerList[] = [
   {
     value: QUESTION_DIFFICULTY.EASY,
-    translations: [
-      { lang: 'en', text: 'Easy' },
-      { lang: 'ua', text: 'Просто' }
-    ]
+    text: 'DROPDOWN.DIFFICULTY.EASY'
   },
   {
     value: QUESTION_DIFFICULTY.MEDIUM,
-    translations: [
-      { lang: 'en', text: 'Medium' },
-      { lang: 'ua', text: 'Середньо' }
-    ]
+    text: 'DROPDOWN.DIFFICULTY.MEDIUM'
   },
   {
     value: QUESTION_DIFFICULTY.HARD,
-    translations: [
-      { lang: 'en', text: 'Hard' },
-      { lang: 'ua', text: 'Важко' }
-    ]
+    text: 'DROPDOWN.DIFFICULTY.HARD'
   }
 ];
