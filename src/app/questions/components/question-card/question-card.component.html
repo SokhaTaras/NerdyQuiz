@@ -12,9 +12,9 @@
       <span class="text-lg font-semibold">{{ 'LABELS.DIFFICULTY' | translateJson }}:</span>
       <span class="mx-2">{{ question.difficulty }}</span>
     </div>
-    <div class="flex items-center w-full h-full sm:w-1/4 md:w-1/5 lg:w-1/5 xl:w-1/5 font-semibold m-1.5 border">
+    <div class="flex items-center w-full h-full sm:w-1/4 md:w-1/5 lg:w-1/5 xl:w-1/5 font-semibold">
       <quiz-app-button
-        class="w-full h-full"
+        class="w-full h-full border rounded bg-back-ground p-1"
         [type]="BUTTON_TYPE.SECONDARY"
         (whenClicked)="deleteQuestionConfirm()">
         {{ 'BUTTON.DELETE_QUESTION' | translateJson }}
