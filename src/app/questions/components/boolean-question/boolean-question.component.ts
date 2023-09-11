@@ -8,8 +8,7 @@ import {
 } from '../../constants/dropdonws';
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
-import { AnswersFormType } from '../../../shared/types/formsType';
-import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
+import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
 import {
   ANSWER_PROPERTIES,
   QUESTION_TYPE

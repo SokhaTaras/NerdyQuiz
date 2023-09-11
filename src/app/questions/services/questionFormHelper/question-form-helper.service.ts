@@ -6,11 +6,15 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { AnswersFormType } from '../../../shared/types/formsType';
 import { Answer, Question } from '../../interfaces/question';
-import { ANSWER_PROPERTIES, QUESTION_TYPE } from '../../../shared/enums/question-info';
+import {
+  ANSWER_PROPERTIES,
+  QUESTION_TYPE
+} from '../../../shared/enums/question-info';
 import {
   AnswerBooleanList,
   AnswerDifficultyList,
@@ -25,7 +29,6 @@ export const defaultFormValues = {
 };
 
 @Injectable()
-export class QuestionFormHelperService implements OnDestroy {
 export class QuestionFormHelperService {
   currentForm: FormGroup<QuestionForm>;
 
