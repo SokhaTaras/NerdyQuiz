@@ -102,6 +102,8 @@ export class CreateQuizModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.methodSubscription.unsubscribe();
+    if (this.methodSubscription) {
+      this.methodSubscription.unsubscribe();
+    }
   }
 }

@@ -52,7 +52,6 @@ export class QuizListComponent implements OnDestroy, OnInit {
       .initAllQuizzes(StorageKey.QUIZZES)
       .subscribe((quizzes): Quiz[] => {
         this.isLoading = false;
-        console.log('init quizzes: ', quizzes);
         return (this.allQuizzes = quizzes);
       });
   }
