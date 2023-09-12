@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import {
@@ -13,6 +13,7 @@ import {
   QUESTION_TYPE
 } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question';
+import { AnswersFormType } from '../../../shared/types/formsType';
 
 @Component({
   selector: 'quiz-app-boolean-question',
@@ -32,7 +33,19 @@ export class BooleanQuestionComponent implements OnInit {
     return this.questionFormHelper?.currentForm;
   }
 
-  constructor(public questionFormHelper: QuestionFormHelperService) {}
+  get answersControl(): AnswersFormType[] {
+    return this.questionFormHelper.answersControl;
+  }
+
+  get title(): FormControl<string> {
+    return this.questionFormHelper.title;
+  }
+
+  get difficulty(): FormControl<string> {
+    return this.questionFormHelper.difficulty;
+  }
+
+  constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
     this.initForm();
