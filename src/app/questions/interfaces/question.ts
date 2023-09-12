@@ -16,7 +16,7 @@ export interface Answer {
   isCorrect: boolean;
 }
 
-export interface AnswerList {
+export interface DropDownItem {
   value: string;
   text: string;
 }

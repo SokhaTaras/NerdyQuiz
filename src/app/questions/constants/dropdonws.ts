@@ -1,11 +1,11 @@
-import { AnswerList } from '../interfaces/question';
+import { DropDownItem } from '../interfaces/question';
 import {
   QUESTION_BOOLEAN,
   QUESTION_DIFFICULTY,
   QUESTION_TYPE
 } from '../../shared/enums/question-info';
 
-export const AnswerBooleanList: AnswerList[] = [
+export const AnswerBooleanList: DropDownItem[] = [
   {
     value: QUESTION_BOOLEAN.TRUE,
     text: 'DROPDOWN.BOOLEAN.TRUE'
@@ -16,7 +16,7 @@ export const AnswerBooleanList: AnswerList[] = [
   }
 ];
 
-export const AnswerTypeList: AnswerList[] = [
+export const AnswerTypeList: DropDownItem[] = [
   {
     value: QUESTION_TYPE.MULTIPLE,
     text: 'DROPDOWN.TYPE.MULTIPLE'
@@ -27,7 +27,7 @@ export const AnswerTypeList: AnswerList[] = [
   }
 ];
 
-export const AnswerDifficultyList: AnswerList[] = [
+export const AnswerDifficultyList: DropDownItem[] = [
   {
     value: QUESTION_DIFFICULTY.EASY,
     text: 'DROPDOWN.DIFFICULTY.EASY'

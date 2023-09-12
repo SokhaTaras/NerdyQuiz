@@ -26,11 +26,11 @@ export class MultipleQuestionComponent implements OnInit {
     new EventEmitter<FormGroup<QuestionForm>>();
 
   readonly PlaceHolder = PlaceHolder;
+  readonly minQuestionsAmount = minQuestionsAmount;
   readonly maxQuestionsAmount = maxQuestionsAmount;
   readonly AnswerDifficultyList = AnswerDifficultyList;
   readonly ANSWER_PROPERTIES = ANSWER_PROPERTIES;
   readonly BUTTON_TYPE = BUTTON_TYPE;
-  readonly minQuestionsAmount = minQuestionsAmount;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
