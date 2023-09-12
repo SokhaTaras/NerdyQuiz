@@ -2,10 +2,10 @@
   <a nz-dropdown [nzDropdownMenu]="menu">
     {{ label }}
   </a>
+  : {{ selectedItemText | translateJson }}
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu *ngFor="let item of list">
-      <li nz-menu-item (click)="selectItem(item[0].text)">{{ item[0].text }}</li>
+      <li nz-menu-item (click)="selectItem(item)">{{ item.text | translateJson }}</li>
     </ul>
   </nz-dropdown-menu>
 </div>
-

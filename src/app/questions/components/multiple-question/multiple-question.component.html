@@ -1,5 +1,5 @@
 <div>
-  <form [formGroup]="multipleQuestionForm">
+  <form [formGroup]="form" *ngIf="form">
     <div class="modal-title">
       <quiz-app-input
         [control]="title"
@@ -9,26 +9,27 @@
     </div>
     <div class="flex justify-center items-center h-20 labels">
       <div class="flex justify-center w-3/5 overflow-hidden">
-        <div class="flex justify-center w-1/2 p-2">
+        <div class="flex justify-center p-2">
           <quiz-app-dropdown
             [control]="difficulty"
-            [list]="difficultyList"
-            [label]="difficulty.value">
+            [list]="AnswerDifficultyList"
+            [label]="'LABELS.DIFFICULTY' | translateJson"
+          >
           </quiz-app-dropdown>
         </div>
       </div>
     </div>
     <div>
       <ng-container formArrayName="answers" class="py-10">
-        <ng-container class="flex" *ngFor="let answer of answersFormArray.controls; let index = index">
+        <ng-container class="flex" *ngFor="let answer of answersControl; let index = index">
           <div class="flex items-center">
-            <quiz-app-input [inputIndex]="index" [control]="answersControl[index].controls.text" class="m-10 w-full" label="LABELS.ANSWER"></quiz-app-input>
-              <quiz-app-radio-button
-                class="w-1/10 pt-7"
-                [control]="answersControl[index].controls.isCorrect"
-                [id]="index+1">
-                {{ 'LABELS.CORRECT' | translateJson }}
-              </quiz-app-radio-button>
+            <quiz-app-input [inputIndex]="index" [control]="answer.controls.text" class="m-10 w-full" label="LABELS.ANSWER"></quiz-app-input>
+            <quiz-app-radio-button
+              class="w-1/10 pt-7"
+              [control]="answer.controls.isCorrect"
+              [id]="index + 1">
+              {{ 'LABELS.CORRECT' | translateJson }}
+            </quiz-app-radio-button>
           </div>
         </ng-container>
       </ng-container>
@@ -38,7 +39,7 @@
     <button
       type="button"
       class="btn-add btn-pop-up"
-      [disabled]="answerLength >= maxQuestionsAmount"
+      [disabled]="answerCount >= maxQuestionsAmount"
       (click)="addAnswer()">
       {{ 'BUTTON.NEW_ANSWER' | translateJson }}
     </button>
