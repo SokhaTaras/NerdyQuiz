@@ -28,7 +28,6 @@ export class BooleanQuestionComponent implements OnInit {
   readonly PlaceHolder = PlaceHolder;
   readonly AnswerDifficultyList = AnswerDifficultyList;
   readonly AnswerBooleanList = AnswerBooleanList;
-  readonly ANSWER_PROPERTIES = ANSWER_PROPERTIES;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
