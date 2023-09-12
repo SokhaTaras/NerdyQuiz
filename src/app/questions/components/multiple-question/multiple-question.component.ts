@@ -30,7 +30,11 @@ export class MultipleQuestionComponent implements OnInit {
     return this.questionFormHelper?.currentForm;
   }
 
-  constructor(public questionFormHelper: QuestionFormHelperService) {}
+  get questionFormHelperService(): QuestionFormHelperService {
+    return this.questionFormHelper;
+  }
+
+  constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
     this.initForm();
