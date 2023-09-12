@@ -1,21 +1,15 @@
 import { DropDownItem } from '../../questions/interfaces/question';
 
-export function mapArrayToDropDownItems<T extends DropDownItem>(
-  array: T[]
-): DropDownItem[] {
-  return array.map((item: T) => ({
-    value: item.value,
-    text: item.text
-  }));
-}
-
-export function mapArrayToDropDownItems2<T>(
+//not sure with solution (verification is needed)
+export function mapArrayToDropDownItems<T>(
   array: T[],
   valueProperty: keyof T,
   textProperty: keyof T
 ): DropDownItem[] {
-  return array.map((item: T) => ({
-    value: String(item[valueProperty]),
-    text: String(item[textProperty])
-  }));
+  return array.map(
+    (item: T): DropDownItem => ({
+      value: item[valueProperty] as string,
+      text: item[textProperty] as string
+    })
+  );
 }
