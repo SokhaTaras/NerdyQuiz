@@ -2,7 +2,7 @@
   <div class="p-4 flex h-4/5 flex-col items-center place-content-between space-y-10 flex-grow xs:flex-wrap">
     <p class="text-6xl xs:text-2xl"><span class="mx-4 underline">{{ 'LABELS.TITLE' | translateJson }}:</span> {{ currentQuiz?.title }}</p>
     <p class="text-5xl xs:text-2xl"><span class="mx-4 underline">{{ 'LABELS.THEME' | translateJson }}:</span> {{ currentQuiz?.theme }}</p>
-    <p class="text-4xl xs:text-2xl"><span class="mx-4 underline">{{ 'LABELS.DIFFICULTY' | translateJson }}:</span> {{ quizDifficulty }}</p>
+    <p *ngIf="currentQuiz.questions.length" class="text-4xl xs:text-2xl"><span class="mx-4 underline">{{ 'LABELS.DIFFICULTY' | translateJson }}:</span> {{ quizDifficulty }}</p>
     <span class="text-4xl xs:text-2xl"><span class="mx-4 underline">{{ 'BUTTON.QUESTION_AMOUNT' | translateJson }}:</span> {{ currentQuiz.questions.length }}</span>
     <div class="flex space-x-12 justify-center items-center w-1/2">
       <div class="flex items-center justify-center my-2 w-1/2 h-full">
