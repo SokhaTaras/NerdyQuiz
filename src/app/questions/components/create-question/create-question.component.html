@@ -20,7 +20,7 @@
       </quiz-app-button>
       <quiz-app-button class="w-1/2 sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 rounded"
                        [type]="BUTTON_TYPE.PRIMARY"
-                       [isDisabled]="this.isFormNotValid"
+                       [isDisabled]="this.isFormInvalid"
                        (whenClicked)="saveQuestion()">
         {{ 'BUTTON.SAVE' | translateJson }}
       </quiz-app-button>

@@ -20,7 +20,7 @@ export class CreateQuizModalComponent implements OnInit {
 
   public initQuizForm: FormGroup<InitQuizForm>;
 
-  protected readonly PlaceHolder = PlaceHolder;
+  readonly PlaceHolder = PlaceHolder;
 
   get title() {
     return this.initQuizForm.controls.title;
