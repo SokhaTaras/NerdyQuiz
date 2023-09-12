@@ -1,9 +1,9 @@
 <div>
-    <a class="hover:text-black" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+    <a class="hover:text-black mr-2" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
       {{ label }}
-      <span nz-icon nzType="down"></span>
+      <span nz-icon nzType="down" class="text-9xl h-full"></span>
     </a>
-   {{ selectedItemText | translateJson }}
+  <span>{{ selectedItemText | translateJson }}</span>
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu *ngFor="let item of list">
       <li nz-menu-item (click)="selectItem(item)" class="hover:bg-primary/30">{{ item.text | translateJson }}</li>
