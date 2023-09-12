@@ -10,6 +10,7 @@ import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 import { AnswersFormType } from '../../../shared/types/formsType';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-multiple-question',
@@ -23,6 +24,7 @@ export class MultipleQuestionComponent implements OnInit {
   readonly PlaceHolder = PlaceHolder;
   readonly maxQuestionsAmount = maxQuestions;
   readonly AnswerDifficultyList = AnswerDifficultyList;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;

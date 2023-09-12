@@ -36,12 +36,11 @@
     </div>
   </form>
   <div class="flex justify-center items-center h-8 my-10">
-    <button
-      type="button"
-      class="btn-add btn-pop-up"
-      [disabled]="answerCount >= maxQuestionsAmount"
-      (click)="addAnswer()">
+    <quiz-app-button
+      [type]="BUTTON_TYPE.PRIMARY"
+      [isDisabled]="answerCount >= maxQuestionsAmount"
+      (whenClicked)="addAnswer()">
       {{ 'BUTTON.NEW_ANSWER' | translateJson }}
-    </button>
+    </quiz-app-button>
   </div>
 </div>
