@@ -18,21 +18,21 @@ export class CreateQuestionComponent {
 
   booleanQuestionForm: FormGroup<QuestionForm>;
   multipleQuestionForm: FormGroup<QuestionForm>;
-  isFormNotValid = true;
+  isFormInvalid = true;
 
   constructor(
     private quizService: QuizService,
     private subscriptionsService: SubscriptionsService
   ) {}
 
-  getBooleanQuestionForm(event: any): void {
+  getBooleanQuestionForm(event: FormGroup<QuestionForm>): void {
     this.booleanQuestionForm = event;
-    this.disableButton(this.booleanQuestionForm);
+    this.subscribeOnFormChange(this.booleanQuestionForm);
   }
 
-  getMultipleQuestionForm(event: any): void {
+  getMultipleQuestionForm(event: FormGroup<QuestionForm>): void {
     this.multipleQuestionForm = event;
-    this.disableButton(this.multipleQuestionForm);
+    this.subscribeOnFormChange(this.multipleQuestionForm);
   }
 
   saveQuestion(): void {
@@ -66,10 +66,10 @@ export class CreateQuestionComponent {
     }
   }
 
-  private disableButton(formGroup: FormGroup): void {
+  private subscribeOnFormChange(formGroup: FormGroup): void {
     this.subscriptionsService.addSubscription(
       formGroup.valueChanges.subscribe(() => {
-        return (this.isFormNotValid = formGroup.invalid);
+        this.isFormInvalid = formGroup.invalid;
       })
     );
   }

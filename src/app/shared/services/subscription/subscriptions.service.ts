@@ -9,11 +9,7 @@ export class SubscriptionsService implements OnDestroy {
     this.subscription.add(sub);
   }
 
-  private removeSubscription(): void {
-    this.subscription.unsubscribe();
-  }
-
   ngOnDestroy(): void {
-    this.removeSubscription();
+    this.subscription.unsubscribe();
   }
 }
