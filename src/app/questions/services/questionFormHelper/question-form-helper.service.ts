@@ -13,7 +13,7 @@ import { AnswersFormType } from '../../../shared/types/formsType';
 import { Answer, Question } from '../../interfaces/question';
 import {
   ANSWER_PROPERTIES,
-  QUESTION_TYPE
+ QUESTION_DIFFICULTY, QUESTION_TYPE
 } from '../../../shared/enums/question-info';
 import {
   AnswerBooleanList,
@@ -25,7 +25,7 @@ import { SubscriptionsService } from '../../../shared/services/subscription/subs
 export const defaultFormValues = {
   title: '',
   type: AnswerTypeList[0].value,
-  difficulty: AnswerDifficultyList[0].value
+  difficulty: AnswerDifficultyList[0].value as QUESTION_DIFFICULTY
 };
 
 @Injectable()
@@ -48,6 +48,10 @@ export class QuestionFormHelperService {
 
   get answersFormArray(): FormArray {
     return this.currentForm?.controls?.answers;
+  }
+
+  get answersControl(): AnswersFormType[] {
+    return this.currentForm?.controls?.answers.controls;
   }
 
   get answersCount(): number {
