@@ -18,7 +18,7 @@ export class QuizDetailsComponent implements OnInit {
   initialQuiz: Quiz;
   id: string | null;
 
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private quizService: QuizService,
