@@ -5,16 +5,16 @@ import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { AnswerDifficultyList } from '../../constants/dropdonws';
 import { maxQuestions } from '../../constants/max-questions';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
-import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
+import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 import { AnswersFormType } from '../../../shared/types/formsType';
 
 @Component({
   selector: 'quiz-app-multiple-question',
   templateUrl: './multiple-question.component.html',
-  providers: [QuestionFormHelperService]
+  providers: [QuestionFormHelperService, SubscriptionsService]
 })
 export class MultipleQuestionComponent implements OnInit {
   @Output() saveMultipleFormEvent: EventEmitter<FormGroup<QuestionForm>> =

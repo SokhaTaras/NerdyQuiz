@@ -7,7 +7,8 @@ import {
   AnswerDifficultyList
 } from '../../constants/dropdonws';
 import { QuestionForm } from '../../../shared/interfaces/forms';
-import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
 import {
   ANSWER_PROPERTIES,
   QUESTION_TYPE
@@ -18,7 +19,7 @@ import { AnswersFormType } from '../../../shared/types/formsType';
 @Component({
   selector: 'quiz-app-boolean-question',
   templateUrl: './boolean-question.component.html',
-  providers: [QuestionFormHelperService]
+  providers: [QuestionFormHelperService, SubscriptionsService]
 })
 export class BooleanQuestionComponent implements OnInit {
   @Output() saveBooleanFormEvent: EventEmitter<FormGroup<QuestionForm>> =
@@ -27,7 +28,6 @@ export class BooleanQuestionComponent implements OnInit {
   readonly PlaceHolder = PlaceHolder;
   readonly AnswerDifficultyList = AnswerDifficultyList;
   readonly AnswerBooleanList = AnswerBooleanList;
-  readonly ANSWER_PROPERTIES = ANSWER_PROPERTIES;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;

@@ -1,26 +1,27 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-quiz-list',
   templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.scss']
+  styleUrls: ['./quiz-list.component.scss'],
+  providers: [SubscriptionsService]
 })
-export class QuizListComponent implements OnDestroy {
+export class QuizListComponent {
   allQuizzes$ = this.quizService.quizzes$;
-  modalSubscription: Subscription;
 
   protected readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private quizService: QuizService,
     private modalQuizService: ModalQuizService,
-    private navigateTo: NavigateToService
+    private navigateTo: NavigateToService,
+    private subscriptionsService: SubscriptionsService
   ) {}
 
   openInitPopUp(): void {
@@ -28,16 +29,14 @@ export class QuizListComponent implements OnDestroy {
       label: 'BUTTON.CREATE_QUIZ',
       buttonText: 'BUTTON.SAVE'
     };
-    this.modalSubscription = this.modalQuizService
-      .showInitQuizModal(data)
-      .onClose.subscribe((quiz) => {
-        if (quiz) {
-          this.navigateTo.navigateToQuizDetailsPage(quiz.id);
-        }
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.modalSubscription.unsubscribe();
+    this.subscriptionsService.addSubscription(
+      this.modalQuizService
+        .showInitQuizModal(data)
+        .onClose.subscribe((quiz) => {
+          if (quiz) {
+            this.navigateTo.navigateToQuizDetailsPage(quiz.id);
+          }
+        })
+    );
   }
 }
