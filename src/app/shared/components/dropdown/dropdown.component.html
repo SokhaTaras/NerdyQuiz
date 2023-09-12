@@ -3,10 +3,10 @@
       {{ label }}
       <span nz-icon nzType="down"></span>
     </a>
+  : {{ selectedItemText | translateJson }}
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu *ngFor="let item of list">
-      <li nz-menu-item (click)="selectItem(item[0].text)" class="hover:bg-primary/30">{{ item[0].text }}</li>
+      <li nz-menu-item (click)="selectItem(item)" class="hover:bg-primary/30">{{ item.text | translateJson }}</li>
     </ul>
   </nz-dropdown-menu>
 </div>
-

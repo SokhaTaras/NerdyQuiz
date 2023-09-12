@@ -20,6 +20,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BaseQuizComponent } from './components/base-quiz/base-quiz.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { FormControlPipe } from './pipes/form-control/form-control.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     TranslateJsonPipe,
     ButtonComponent,
     LoaderComponent,
-    BaseQuizComponent
+    BaseQuizComponent,
+    TranslateJsonPipe,
+    FormControlPipe
   ],
   imports: [
     CommonModule,
@@ -55,7 +58,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     RadioButtonComponent,
     TranslateJsonPipe,
     ButtonComponent,
-    LoaderComponent
+    LoaderComponent,
+    TranslateJsonPipe,
+    FormControlPipe
   ]
 })
 export class SharedModule {}

@@ -1,38 +1,43 @@
-import { Translations } from '../../shared/types/translations';
+import { AnswerList } from '../interfaces/question';
+import {
+  QUESTION_BOOLEAN,
+  QUESTION_DIFFICULTY,
+  QUESTION_TYPE
+} from '../../shared/enums/question-info';
 
-export const TypeList: Translations[] = [
-  [
-    { lang: 'en', text: 'Multiple' },
-    { lang: 'ua', text: 'Кілька запитань' }
-  ],
-  [
-    { lang: 'en', text: 'Boolean' },
-    { lang: 'ua', text: 'Істинний' }
-  ]
+export const AnswerBooleanList: AnswerList[] = [
+  {
+    value: QUESTION_BOOLEAN.TRUE,
+    text: 'DROPDOWN.BOOLEAN.TRUE'
+  },
+  {
+    value: QUESTION_BOOLEAN.FALSE,
+    text: 'DROPDOWN.BOOLEAN.FALSE'
+  }
 ];
 
-export const DifficultyList: Translations[] = [
-  [
-    { lang: 'en', text: 'Easy' },
-    { lang: 'ua', text: 'Просто' }
-  ],
-  [
-    { lang: 'en', text: 'Medium' },
-    { lang: 'ua', text: 'Середньо' }
-  ],
-  [
-    { lang: 'en', text: 'Hard' },
-    { lang: 'ua', text: 'Важко' }
-  ]
+export const AnswerTypeList: AnswerList[] = [
+  {
+    value: QUESTION_TYPE.MULTIPLE,
+    text: 'DROPDOWN.TYPE.MULTIPLE'
+  },
+  {
+    value: QUESTION_TYPE.BOOLEAN,
+    text: 'DROPDOWN.TYPE.BOOLEAN'
+  }
 ];
 
-export const BooleanList: Translations[] = [
-  [
-    { lang: 'en', text: 'True' },
-    { lang: 'ua', text: 'Істина' }
-  ],
-  [
-    { lang: 'en', text: 'False' },
-    { lang: 'ua', text: 'Хибно' }
-  ]
+export const AnswerDifficultyList: AnswerList[] = [
+  {
+    value: QUESTION_DIFFICULTY.EASY,
+    text: 'DROPDOWN.DIFFICULTY.EASY'
+  },
+  {
+    value: QUESTION_DIFFICULTY.MEDIUM,
+    text: 'DROPDOWN.DIFFICULTY.MEDIUM'
+  },
+  {
+    value: QUESTION_DIFFICULTY.HARD,
+    text: 'DROPDOWN.DIFFICULTY.HARD'
+  }
 ];
