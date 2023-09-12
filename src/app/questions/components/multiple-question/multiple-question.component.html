@@ -39,7 +39,7 @@
               <div class="w-1/2 h-1/2">
                 <quiz-app-button
                   [type]="BUTTON_TYPE.SECONDARY"
-                  [isDisabled]="questionFormHelper.answersCount <= minQuestionsAmount"
+                  [isDisabled]="answerCount <= minQuestionsAmount"
                   (whenClicked)="deleteAnswer(index )">
                   {{ 'LABELS.DELETE' | translateJson }}
                 </quiz-app-button>

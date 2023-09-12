@@ -9,18 +9,11 @@ import {
 } from '../../constants/questions-info';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 import { AnswerDifficultyList } from '../../constants/dropdonws';
-import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
-import {
-  ANSWER_PROPERTIES,
-  QUESTION_TYPE
-} from '../../../shared/enums/question-info';
-import { maxQuestions } from '../../constants/max-questions';
-import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 import { AnswersFormType } from '../../../shared/types/formsType';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
 
 @Component({
   selector: 'quiz-app-multiple-question',
@@ -33,7 +26,6 @@ export class MultipleQuestionComponent implements OnInit {
 
   readonly PlaceHolder = PlaceHolder;
   readonly AnswerDifficultyList = AnswerDifficultyList;
-  readonly ANSWER_PROPERTIES = ANSWER_PROPERTIES;
   readonly maxQuestionsAmount = maxQuestionsAmount;
   readonly minQuestionsAmount = minQuestionsAmount;
   readonly BUTTON_TYPE = BUTTON_TYPE;
