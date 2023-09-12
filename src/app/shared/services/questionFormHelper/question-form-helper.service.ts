@@ -11,7 +11,11 @@ import { Subscription } from 'rxjs';
 import { QuestionForm } from '../../interfaces/forms';
 import { AnswersFormType } from '../../types/formsType';
 import { Answer, Question } from '../../../questions/interfaces/question';
-import { ANSWER_PROPERTIES, QUESTION_TYPE } from '../../enums/question-info';
+import {
+  ANSWER_PROPERTIES,
+  QUESTION_DIFFICULTY,
+  QUESTION_TYPE
+} from '../../enums/question-info';
 import {
   AnswerBooleanList,
   AnswerDifficultyList,
@@ -21,7 +25,7 @@ import {
 export const defaultFormValues = {
   title: '',
   type: AnswerTypeList[0].value,
-  difficulty: AnswerDifficultyList[0].value
+  difficulty: AnswerDifficultyList[0].value as QUESTION_DIFFICULTY
 };
 
 @Injectable()
@@ -44,6 +48,10 @@ export class QuestionFormHelperService implements OnDestroy {
 
   get answersFormArray(): FormArray {
     return this.currentForm?.controls?.answers;
+  }
+
+  get answersControl(): AnswersFormType[] {
+    return this.currentForm?.controls?.answers.controls;
   }
 
   get answersCount(): number {

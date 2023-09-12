@@ -1,16 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { QuestionForm } from '../../../shared/interfaces/forms';
 import { AnswerDifficultyList } from '../../constants/dropdonws';
 import { maxQuestions } from '../../constants/max-questions';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
-import {
-  ANSWER_PROPERTIES,
-  QUESTION_TYPE
-} from '../../../shared/enums/question-info';
+import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question';
+import { AnswersFormType } from '../../../shared/types/formsType';
 
 @Component({
   selector: 'quiz-app-multiple-question',
@@ -24,14 +22,25 @@ export class MultipleQuestionComponent implements OnInit {
   readonly PlaceHolder = PlaceHolder;
   readonly maxQuestionsAmount = maxQuestions;
   readonly AnswerDifficultyList = AnswerDifficultyList;
-  readonly ANSWER_PROPERTIES = ANSWER_PROPERTIES;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
   }
 
-  get questionFormHelperService(): QuestionFormHelperService {
-    return this.questionFormHelper;
+  get answerCount(): number {
+    return this.questionFormHelper.answersCount;
+  }
+
+  get answersControl(): AnswersFormType[] {
+    return this.questionFormHelper.answersControl;
+  }
+
+  get title(): FormControl<string> {
+    return this.questionFormHelper.title;
+  }
+
+  get difficulty(): FormControl<string> {
+    return this.questionFormHelper.difficulty;
   }
 
   constructor(private questionFormHelper: QuestionFormHelperService) {}
