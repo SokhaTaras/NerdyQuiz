@@ -5,8 +5,6 @@ export type AnswersFormType = FormGroup<{
   isCorrect: FormControl<boolean | null>;
 }>;
 
-export type Difficulties = {
-  Easy: number;
-  Medium: number;
-  Hard: number;
-};
+export interface Difficulties {
+  [key: string]: number;
+}

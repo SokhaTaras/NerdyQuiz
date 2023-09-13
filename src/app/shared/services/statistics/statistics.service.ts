@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { Quiz } from '../../../quizzes/interfaces/quiz';
-import { Difficulties } from '../../types/formsType';
 import { DifficultiesEnum } from '../../enums/questionTypes';
 import {
   DifficultyRanges,
@@ -14,64 +13,31 @@ import {
 export class StatisticsService {
   getAverageQuizDifficulty(quiz: Quiz): string {
     const difficulties = quiz.questions.map((q) => q.difficulty);
-    return this.calculateAverageDifficulty(difficulties);
+    const average = this.calculateAverageDifficulty(difficulties);
+    return average;
   }
 
   private calculateAverageDifficulty(difficulties: string[]): string {
-    if (!difficulties || difficulties.length === 0) {
+    const totalDifficultyCount = difficulties.length;
+
+    if (!difficulties || totalDifficultyCount === 0) {
       return '';
     }
 
-    const difficultyCounts: Difficulties = {
-      Easy: 0,
-      Medium: 0,
-      Hard: 0
-    };
-
-    const updatedCounts = this.countDifficultyOccurrences(
-      difficulties,
-      difficultyCounts
-    );
-
-    const totalDifficultyCount = difficulties.length;
-
-    const weightedSum = this.getWeightOfQuestions(updatedCounts);
+    const weightedSum = this.getQuestionsWeight(difficulties);
 
     const averageDifficulty = weightedSum / totalDifficultyCount;
-
     const difficulty = this.getDifficulty(averageDifficulty);
     return difficulty;
   }
 
-  private getWeightOfQuestions(updatedCounts: Difficulties): number {
-    return (
-      updatedCounts.Easy * DifficultyPoints.Easy +
-      updatedCounts.Medium * DifficultyPoints.Medium +
-      updatedCounts.Hard * DifficultyPoints.Hard
-    );
-  }
+  getQuestionsWeight(difficulties: string[]): number {
+    return difficulties.reduce((sum: number, element: string): number => {
+      const weight = DifficultyPoints[element] || 0;
+      const weightSum = sum + weight;
 
-  private countDifficultyOccurrences(
-    difficulties: string[],
-    counts: Difficulties
-  ): Difficulties {
-    difficulties.forEach((val) => {
-      switch (val) {
-        case DifficultiesEnum.Easy:
-          counts.Easy++;
-          break;
-        case DifficultiesEnum.Medium:
-          counts.Medium++;
-          break;
-        case DifficultiesEnum.Hard:
-          counts.Hard++;
-          break;
-        default:
-          break;
-      }
-    });
-
-    return counts;
+      return weightSum;
+    }, 0);
   }
 
   private getDifficulty(averageDifficulty: number): string {
