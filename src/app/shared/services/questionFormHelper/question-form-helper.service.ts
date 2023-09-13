@@ -8,8 +8,8 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { QuestionForm } from '../../interfaces/forms';
-import { AnswersFormType } from '../../types/formsType';
+import { QuestionForm } from '../../types/forms';
+import { AnswersFormType } from '../../types/forms';
 import { Answer, Question } from '../../../questions/interfaces/question';
 import { ANSWER_PROPERTIES, QUESTION_TYPE } from '../../enums/question-info';
 import {

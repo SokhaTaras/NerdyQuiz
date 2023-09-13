@@ -8,7 +8,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { QuestionForm } from '../../../shared/interfaces/forms';
+import { QuestionForm } from '../../../shared/types/forms';
 import { Question } from '../../interfaces/question';
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';

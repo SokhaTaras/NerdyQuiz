@@ -38,6 +38,19 @@ body {
   margin-left: 0;
 }
 
+.ant-select-single.ant-select-open .ant-select-selection-item {
+  color: var(--primary-font-color);
+}
+
+.ant-select-single.ant-select-show-arrow,
+.ant-select-selection-item,
+.ant-select-single.ant-select-show-arrow,
+.ant-select-selection-placeholder { color: var(--primary-font-color) }
+
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: var(--color-primary);
+}
+
 button {
   background-color: var(--color-primary);
   min-width: 100px;
@@ -103,7 +116,7 @@ button {
     --color-button: rgb(229, 231, 235);
     --color-buttons-hover: rgba(0, 0, 0, 0.05);
     --color-error: rgb(209, 0, 0);
-    --primary-font-color: #333333;
+    --primary-font-color : #333333;
     --primary-font-family: system-ui;
     --border-radius: 10px;
     --text-base: 16px;

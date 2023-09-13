@@ -6,7 +6,7 @@ import {
   AnswerBooleanList,
   AnswerDifficultyList
 } from '../../constants/dropdonws';
-import { QuestionForm } from '../../../shared/interfaces/forms';
+import { QuestionForm } from '../../../shared/types/forms';
 import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
 import {
   ANSWER_PROPERTIES,

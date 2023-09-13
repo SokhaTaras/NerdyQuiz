@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { QuestionForm } from '../../../shared/interfaces/forms';
+import { QuestionForm } from '../../../shared/types/forms';
 import { AnswerDifficultyList } from '../../constants/dropdonws';
 import {
   maxQuestionsAmount,

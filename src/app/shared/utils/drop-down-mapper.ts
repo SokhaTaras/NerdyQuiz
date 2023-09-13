@@ -1,6 +1,5 @@
 import { DropDownItem } from '../../questions/interfaces/question';
 
-//not sure with solution (verification is needed)
 export function mapArrayToDropDownItems<T>(
   array: T[],
   valueProperty: keyof T,
@@ -8,8 +7,8 @@ export function mapArrayToDropDownItems<T>(
 ): DropDownItem[] {
   return array.map(
     (item: T): DropDownItem => ({
-      value: item[valueProperty] as string,
-      text: item[textProperty] as string
+      value: (item[valueProperty] as string) || '',
+      text: (item[textProperty] as string) || ''
     })
   );
 }

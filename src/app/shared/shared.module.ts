@@ -8,11 +8,11 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 import { InputComponent } from './components/input/input.component';
 import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { TranslateJsonPipe } from './pipes/translate-json/translate-json.pipe';
@@ -21,13 +21,13 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { BaseQuizComponent } from './components/base-quiz/base-quiz.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormControlPipe } from './pipes/form-control/form-control.pipe';
+import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
   declarations: [
     InputComponent,
     ModalFooterComponent,
     ErrorMessageComponent,
-    DropdownComponent,
     ConfirmModalComponent,
     RadioButtonComponent,
     TranslateJsonPipe,
@@ -35,7 +35,8 @@ import { FormControlPipe } from './pipes/form-control/form-control.pipe';
     LoaderComponent,
     BaseQuizComponent,
     TranslateJsonPipe,
-    FormControlPipe
+    FormControlPipe,
+    SelectComponent
   ],
   imports: [
     CommonModule,
@@ -48,19 +49,20 @@ import { FormControlPipe } from './pipes/form-control/form-control.pipe';
     BrowserAnimationsModule,
     NzDropDownModule,
     NzRadioModule,
-    NzIconModule
+    NzIconModule,
+    NzSelectModule
   ],
   exports: [
     InputComponent,
     ModalFooterComponent,
     ErrorMessageComponent,
-    DropdownComponent,
     RadioButtonComponent,
     TranslateJsonPipe,
     ButtonComponent,
     LoaderComponent,
     TranslateJsonPipe,
-    FormControlPipe
+    FormControlPipe,
+    SelectComponent
   ]
 })
 export class SharedModule {}

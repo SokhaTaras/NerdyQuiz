@@ -12,14 +12,15 @@
       </quiz-app-input>
     </div>
     <div class="flex justify-center items-center h-20 labels">
-      <div class="flex justify-center overflow-hidden">
-        <div class="flex justify-center p-2">
-          <quiz-app-dropdown
-            [control]="questionFormHelper?.difficulty"
-            [list]="AnswerDifficultyList"
+      <div class="flex justify-center w-full overflow-hidden">
+        <div class="flex justify-center p-2 w-1/3">
+          <quiz-app-select
+            class="w-full flex justify-center items-center"
             [label]="'LABELS.DIFFICULTY' | translateJson"
-          >
-          </quiz-app-dropdown>
+            [control]="questionFormHelper.difficulty"
+            [list]="AnswerDifficultyList"
+            [placeHolder]="PlaceHolder.Difficulty">
+          </quiz-app-select>
         </div>
       </div>
     </div>
