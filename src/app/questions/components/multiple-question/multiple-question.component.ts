@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { QuestionForm } from '../../../shared/types/forms';
@@ -13,13 +13,19 @@ import {
   ANSWER_PROPERTIES,
   QUESTION_TYPE
 } from '../../../shared/enums/question-info';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { AnswerDifficultyList } from '../../constants/dropdonws';
+import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { AnswersFormType } from '../../../shared/types/forms';
+import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-multiple-question',
   templateUrl: './multiple-question.component.html',
-  providers: [QuestionFormHelperService]
+  providers: [QuestionFormHelperService, SubscriptionsService]
 })
 export class MultipleQuestionComponent implements OnInit {
   @Output() saveMultipleFormEvent: EventEmitter<FormGroup<QuestionForm>> =
@@ -36,7 +42,23 @@ export class MultipleQuestionComponent implements OnInit {
     return this.questionFormHelper?.currentForm;
   }
 
-  constructor(public questionFormHelper: QuestionFormHelperService) {}
+  get answerCount(): number {
+    return this.questionFormHelper.answersCount;
+  }
+
+  get answersControl(): AnswersFormType[] {
+    return this.questionFormHelper.answersControl;
+  }
+
+  get title(): FormControl<string> {
+    return this.questionFormHelper.title;
+  }
+
+  get difficulty(): FormControl<string> {
+    return this.questionFormHelper.difficulty;
+  }
+
+  constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
     this.initForm();

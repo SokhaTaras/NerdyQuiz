@@ -5,7 +5,7 @@
   <form [formGroup]="form" *ngIf="form">
     <div class="modal-title">
       <quiz-app-input
-        [control]="questionFormHelper?.title"
+        [control]="title"
         label="Title"
         [placeHolder]="PlaceHolder.title | translateJson"
       >
@@ -29,11 +29,11 @@
         <div class="flex justify-center items-center w-3/5">
           <div class="py-4">
             <div formArrayName="answers" class="flex space-x-4">
-              <div *ngFor="let answer of questionFormHelper?.answersFormArray.controls; let index = index" class="flex items-center p-2.5">
+              <div *ngFor="let answer of answersControl; let index = index" class="flex items-center p-2.5">
                 {{ AnswerBooleanList[index].text | translateJson }}
                 <quiz-app-radio-button
                   class="flex w-1/10 pl-2 pt-1"
-                  [control]="answer.get(ANSWER_PROPERTIES.IS_CORRECT) | formControl"
+                  [control]="answer.controls.isCorrect"
                   [id]="index + 1">
                 </quiz-app-radio-button>
               </div>

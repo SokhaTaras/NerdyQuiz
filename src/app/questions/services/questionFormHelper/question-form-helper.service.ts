@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, SkipSelf } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -16,16 +16,17 @@ import {
   AnswerBooleanList,
   AnswerDifficultyList,
   AnswerTypeList
-} from '../../../questions/constants/dropdonws';
+} from '../../constants/dropdonws';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 export const defaultFormValues = {
   title: '',
   type: AnswerTypeList[0].value,
-  difficulty: AnswerDifficultyList[0].value
+  difficulty: AnswerDifficultyList[0].value as QUESTION_DIFFICULTY
 };
 
 @Injectable()
-export class QuestionFormHelperService implements OnDestroy {
+export class QuestionFormHelperService {
   currentForm: FormGroup<QuestionForm>;
 
   radioButtonsSubscription: Subscription;
@@ -46,11 +47,18 @@ export class QuestionFormHelperService implements OnDestroy {
     return this.currentForm?.controls?.answers;
   }
 
+  get answersControl(): AnswersFormType[] {
+    return this.currentForm?.controls?.answers.controls;
+  }
+
   get answersCount(): number {
     return this.currentForm?.controls?.answers?.length;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    @SkipSelf() private subscriptionsService: SubscriptionsService
+  ) {}
 
   initForm(question: Question): void {
     let currentAnswers: AnswersFormType[];
@@ -109,8 +117,8 @@ export class QuestionFormHelperService implements OnDestroy {
     }
 
     this.answersFormArray.controls.forEach((control, index) => {
-      this.radioButtonsSubscription = control.valueChanges.subscribe(
-        (checked) => {
+      this.subscriptionsService.addSubscription(
+        control.valueChanges.subscribe((checked) => {
           if (checked.isCorrect) {
             this.answersFormArray.controls.forEach(
               (otherControl, otherIndex) => {
@@ -122,7 +130,7 @@ export class QuestionFormHelperService implements OnDestroy {
               }
             );
           }
-        }
+        })
       );
     });
   }
@@ -143,9 +151,5 @@ export class QuestionFormHelperService implements OnDestroy {
     } else {
       return [];
     }
-  }
-
-  ngOnDestroy(): void {
-    this.radioButtonsSubscription.unsubscribe();
   }
 }

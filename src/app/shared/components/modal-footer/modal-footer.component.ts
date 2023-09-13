@@ -13,7 +13,7 @@ export class ModalFooterComponent {
   @Output() whenConfirm: EventEmitter<void> = new EventEmitter();
   @Output() whenCancel: EventEmitter<void> = new EventEmitter();
 
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   handleSubmit(): void {
     this.whenConfirm.emit();

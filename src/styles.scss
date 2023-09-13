@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: var(--color-back-ground);
+  background-color: var(--color-background);
   color: var(--primary-font-color);
   font-family: var(--primary-font-family);
   font-size: var(--text-base);
@@ -11,7 +11,7 @@ body {
 
 .ant-modal-content {
   border-radius: var(--border-radius);
-  background-color: var(--color-back-ground);
+  background-color: var(--color-background);
 }
 
 .ant-modal-confirm-btns {
@@ -90,18 +90,6 @@ button {
     @apply text-3xl text-center mb-6;
   }
 
-  .btn-primary {
-    @apply bg-primary;
-  }
-
-  .btn-secondary {
-    @apply bg-transparent border-2 border-primary
-  }
-
-  .btn-error {
-    @apply border border-error text-error
-  }
-
   .disabled-button {
     @apply opacity-50 cursor-not-allowed pointer-events-none
   }
@@ -112,7 +100,7 @@ button {
   :root {
     --color-primary: rgb(230, 230, 255);
     --color-secondary: rgb(179, 179, 255);
-    --color-back-ground: rgb(240, 240, 255);
+    --color-background: rgb(240, 240, 255);
     --color-button: rgb(229, 231, 235);
     --color-buttons-hover: rgba(0, 0, 0, 0.05);
     --color-error: rgb(209, 0, 0);

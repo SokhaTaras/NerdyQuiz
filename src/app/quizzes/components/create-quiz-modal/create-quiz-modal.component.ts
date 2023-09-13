@@ -22,7 +22,7 @@ export class CreateQuizModalComponent implements OnInit, OnDestroy {
   initQuizForm: FormGroup<InitQuizForm>;
   methodSubscription: Subscription;
 
-  protected readonly PlaceHolder = PlaceHolder;
+  readonly PlaceHolder = PlaceHolder;
 
   get title() {
     return this.initQuizForm.controls.title;

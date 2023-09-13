@@ -1,16 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map, Observable } from 'rxjs';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { BaseQuizComponent } from '../../../shared/components/base-quiz/base-quiz.component';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',
-  templateUrl: 'quiz-details.component.html'
+  templateUrl: 'quiz-details.component.html',
+  providers: [SubscriptionsService]
 })
 export class QuizDetailsComponent
   extends BaseQuizComponent

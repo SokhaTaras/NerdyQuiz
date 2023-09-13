@@ -1,13 +1,16 @@
 <div class="flex items-center">
   <input
+    type="radio"
+    name="radioGroup"
+    class="hidden"
     [id]="id"
     [checked]="control.value"
     (change)="selectItem(!control.value)"
-    type="radio"
-    name="radioGroup"
-    class="hidden"/>
-  <label [for]="id" class="flex items-center cursor-pointer">
-    <span class="w-[18px] h-[18px] inline-block mr-1 rounded-full border border-secondary transition-transform duration-200"></span>
+   />
+  <label class="flex items-center cursor-pointer" [for]="id">
+    <span class="w-[18px] h-[18px] inline-block mr-1 rounded-full border border-secondary transition-transform duration-200 hover:scale-110"
+          [ngClass]="{'bg-primary shadow-inner' : control.value}">
+    </span>
     <ng-content></ng-content>
   </label>
 </div>

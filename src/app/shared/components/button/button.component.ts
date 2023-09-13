@@ -4,8 +4,7 @@ import { BUTTON_TYPE } from '../../enums/buttonType';
 
 @Component({
   selector: 'quiz-app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  templateUrl: './button.component.html'
 })
 export class ButtonComponent implements OnInit {
   @Input() type: BUTTON_TYPE;
