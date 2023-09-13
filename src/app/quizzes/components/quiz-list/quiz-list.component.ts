@@ -7,11 +7,13 @@ import { NavigateToService } from '../../../shared/services/navigate-to/navigate
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 import { StorageKey } from '../../../shared/enums/storageKey';
 import { Quiz } from '../../interfaces/quiz';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-quiz-list',
   templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.scss']
+  styleUrls: ['./quiz-list.component.scss'],
+  providers: [SubscriptionsService]
 })
 export class QuizListComponent implements OnDestroy, OnInit {
   allQuizzes: Quiz[];
@@ -29,7 +31,8 @@ export class QuizListComponent implements OnDestroy, OnInit {
   constructor(
     private quizService: QuizService,
     private modalQuizService: ModalQuizService,
-    private navigateTo: NavigateToService
+    private navigateTo: NavigateToService,
+    private subscriptionsService: SubscriptionsService
   ) {}
 
   openInitPopUp(): void {
@@ -37,13 +40,15 @@ export class QuizListComponent implements OnDestroy, OnInit {
       label: 'BUTTON.CREATE_QUIZ',
       buttonText: 'BUTTON.SAVE'
     };
-    this.modalSubscription = this.modalQuizService
-      .showInitQuizModal(data)
-      .onClose.subscribe((quiz) => {
-        if (quiz) {
-          this.navigateTo.navigateToQuizDetailsPage(quiz.id);
-        }
-      });
+    this.subscriptionsService.addSubscription(
+      this.modalQuizService
+        .showInitQuizModal(data)
+        .onClose.subscribe((quiz) => {
+          if (quiz) {
+            this.navigateTo.navigateToQuizDetailsPage(quiz.id);
+          }
+        })
+    );
   }
 
   initQuizzes(): void {
