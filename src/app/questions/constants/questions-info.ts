@@ -1,5 +1,5 @@
-import { Difficulties } from '../../shared/types/formsType';
 import { DifficultyRange } from '../interfaces/question';
+import { Difficulties } from '../../shared/types/forms';
 
 export const maxQuestionsAmount = 4;
 export const minQuestionsAmount = 2;

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { QuizService } from '../../services/quiz/quiz.service';
-import { InitQuizForm } from '../../../shared/interfaces/forms';
+import { InitQuizForm } from '../../../shared/types/forms';
 import { Quiz } from '../../interfaces/quiz';
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { ModalRefFacadeService } from '../../../shared/services/modal-ref-facade/modal-ref-facade.service';
