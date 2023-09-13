@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 body {
-  background-color: var(--color-back-ground);
+  background-color: var(--color-background);
   color: var(--primary-font-color);
   font-family: var(--primary-font-family);
 }
@@ -73,18 +73,6 @@ button {
     @apply text-3xl text-center mb-6;
   }
 
-  .btn-primary {
-    @apply bg-primary;
-  }
-
-  .btn-secondary {
-    @apply bg-transparent border-2 border-primary
-  }
-
-  .btn-error {
-    @apply border border-error text-error
-  }
-
   .disabled-button {
     @apply opacity-50 cursor-not-allowed pointer-events-none
   }
@@ -94,7 +82,7 @@ button {
 @layer base {
   :root {
     --color-primary: #e6e6ff;
-    --color-back-ground: #f0f0ff;
+    --color-background: #f0f0ff;
     --color-button: #E5E7EB;
     --color-buttons-hover: rgba(0, 0, 0, 0.05);
     --color-error: #D10000;

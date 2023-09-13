@@ -1,11 +1,11 @@
 <div class="flex-col py-3.5">
   <form class="flex-auto">
-    <div class="variants" *ngIf="!isBoolean">
+    <div *ngIf="!isBoolean">
       <quiz-app-multiple-question
         (saveMultipleFormEvent)="getMultipleQuestionForm($event)">
       </quiz-app-multiple-question>
     </div>
-    <div class="correct" *ngIf="isBoolean">
+    <div *ngIf="isBoolean">
      <quiz-app-boolean-question
        (saveBooleanFormEvent)="getBooleanQuestionForm($event)">
      </quiz-app-boolean-question>
@@ -20,7 +20,7 @@
       </quiz-app-button>
       <quiz-app-button class="w-1/2 rounded"
                        [type]="BUTTON_TYPE.PRIMARY"
-                       [isDisabled]="this.isFormNotValid"
+                       [isDisabled]="this.isFormInvalid"
                        (whenClicked)="saveQuestion()">
         {{ 'BUTTON.SAVE' | translateJson }}
       </quiz-app-button>
