@@ -15,10 +15,7 @@ import { StatisticsService } from '../../../shared/services/statistics/statistic
   templateUrl: 'quiz-details.component.html',
   providers: [SubscriptionsService]
 })
-export class QuizDetailsComponent
-  extends BaseQuizComponent
-  implements OnInit, OnDestroy
-{
+export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(

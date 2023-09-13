@@ -59,7 +59,6 @@ import { SelectComponent } from './components/select/select.component';
     ButtonComponent,
     LoaderComponent,
     TranslateJsonPipe,
-    FormControlPipe,
     SelectComponent
   ]
 })

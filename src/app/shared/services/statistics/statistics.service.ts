@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { Quiz } from '../../../quizzes/interfaces/quiz';
-import { Difficulties } from '../../types/forms';
 import { DifficultiesEnum } from '../../enums/questionTypes';
 import {
   DifficultyRanges,

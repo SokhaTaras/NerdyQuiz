@@ -8,16 +8,19 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { QuestionForm } from '../../types/forms';
-import { AnswersFormType } from '../../types/forms';
-import { Answer, Question } from '../../../questions/interfaces/question';
-import { ANSWER_PROPERTIES, QUESTION_TYPE } from '../../enums/question-info';
 import {
   AnswerBooleanList,
   AnswerDifficultyList,
   AnswerTypeList
 } from '../../constants/dropdonws';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import {
+  ANSWER_PROPERTIES,
+  QUESTION_DIFFICULTY,
+  QUESTION_TYPE
+} from '../../../shared/enums/question-info';
+import { AnswersFormType, QuestionForm } from '../../../shared/types/forms';
+import { Answer, Question } from '../../interfaces/question';
 
 export const defaultFormValues = {
   title: '',

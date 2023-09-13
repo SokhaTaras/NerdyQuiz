@@ -1,5 +1,3 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Component } from '@angular/core';
 
 import { QuizService } from '../../services/quiz/quiz.service';
@@ -17,7 +15,8 @@ import { Quiz } from '../../interfaces/quiz';
   providers: [SubscriptionsService]
 })
 export class QuizListComponent {
-  allQuizzes$ = this.quizService.quizzes$;
+  allQuizzes: Quiz[];
+  isLoading: Boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
@@ -46,5 +45,15 @@ export class QuizListComponent {
           }
         })
     );
+  }
+
+  private initQuizzes(): void {
+    this.isLoading = true;
+    this.quizService
+      .initAllQuizzes(StorageKey.QUIZZES)
+      .subscribe((quizzes): Quiz[] => {
+        this.isLoading = false;
+        return (this.allQuizzes = quizzes);
+      });
   }
 }
