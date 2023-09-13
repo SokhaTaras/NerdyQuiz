@@ -13,6 +13,7 @@ import { HomeComponent } from '../home/components/home/home.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { PrePlayComponent } from './components/pre-play/pre-play.component';
+import { PlayComponent } from './components/play/play.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PrePlayComponent } from './components/pre-play/pre-play.component';
     CreateQuizModalComponent,
     HomeComponent,
     IntroductionComponent,
-    PrePlayComponent
+    PrePlayComponent,
+    PlayComponent
   ],
   imports: [
     CommonModule,

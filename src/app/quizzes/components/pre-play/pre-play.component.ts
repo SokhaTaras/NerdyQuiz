@@ -16,6 +16,7 @@ export class PrePlayComponent
   implements OnInit, OnDestroy
 {
   readonly BUTTON_TYPE = BUTTON_TYPE;
+  playMode: Boolean = false;
 
   constructor(
     quizService: QuizService,
@@ -24,5 +25,9 @@ export class PrePlayComponent
     statisticsService: StatisticsService
   ) {
     super(statisticsService, quizService, route, navigateTo);
+  }
+
+  togglePlayMode() {
+    this.playMode = !this.playMode;
   }
 }

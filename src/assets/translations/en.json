@@ -31,7 +31,10 @@
     "SAVE": "Save",
     "HOME": "Home",
     "QUIZ": "Quiz",
-    "PLAY": "Play"
+    "PLAY": "Play",
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
+    "FINISH": "Finish"
   },
 
   "DROPDOWN": {
@@ -59,5 +62,10 @@
 
   "INTRODUCTION": {
     "WELCOME_TEXT": "Embark on a journey of exploration and engagement as you take control of your learning journey. Our app offers you the unique opportunity to unleash your creativity by creating your very own quizzes, tailored to your interests and expertise. Craft questions that challenge and inspire, and share them with friends, family, or a global audience."
+  },
+
+  "CONFIRM_MODAL_TEXT": {
+    "CANCEL_QUIZ": "Are you sure you want cancel quiz?",
+    "DELETE_QUESTION": "Are you sure you want delete question?"
   }
 }

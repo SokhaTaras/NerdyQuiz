@@ -17,7 +17,7 @@ export class QuestionCardComponent implements OnDestroy {
 
   deleteQuestionSubscription: Subscription;
 
-   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private modalQuizService: ModalQuizService,
@@ -26,8 +26,8 @@ export class QuestionCardComponent implements OnDestroy {
 
   deleteQuestionConfirm(): void {
     const data: any = {
-      text: 'Are you sure you want delete question?',
-      buttonText: 'Confirm',
+      text: 'CONFIRM_MODAL_TEXT.DELETE_QUESTION',
+      buttonText: 'BUTTON.SAVE',
       questionIndex: this.questionIndex,
       quizId: this.quizId
     };

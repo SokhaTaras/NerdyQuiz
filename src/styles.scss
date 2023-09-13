@@ -90,6 +90,10 @@ button {
     @apply text-3xl text-center mb-6;
   }
 
+  .question-info {
+    @apply text-5xl flex justify-center items-center
+  }
+
   .btn-primary {
     @apply bg-primary;
   }
