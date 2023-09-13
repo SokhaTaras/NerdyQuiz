@@ -2,14 +2,12 @@
   <label class="flex justify-center items-center">{{ label | translateJson }}</label>
   <nz-select
     class="min-w-[100px] w-full rounded bg-primary text-black"
-    [ngClass]=""
     nzBorderless
     (ngModelChange)="selectItem($event)"
     [(ngModel)]="selectedValue"
     [nzPlaceHolder]="placeHolder | translateJson"
   >
     <nz-option
-      class=""
       *ngFor="let item of list"
       [ngClass]="{'bg-secondary': selectedValue}"
       [nzValue]="item.value | translateJson"
