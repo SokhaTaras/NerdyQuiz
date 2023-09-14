@@ -11,6 +11,11 @@ export interface Question {
   answers?: Answer[];
 }
 
+export interface QuestionResult extends Question {
+  answer: Answer;
+  timeSpent: number;
+}
+
 export interface Answer {
   text: string;
   isCorrect: boolean;

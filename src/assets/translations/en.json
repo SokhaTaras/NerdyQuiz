@@ -9,7 +9,8 @@
     "CORRECT_ANSWER": "Correct answer",
     "CORRECT": "Correct",
     "ANSWER": "Answer",
-    "DELETE": "Delete"
+    "DELETE": "Delete",
+    "STEP": "Step"
   },
 
   "TITLES": {
@@ -34,7 +35,8 @@
     "PLAY": "Play",
     "PREVIOUS": "Previous",
     "NEXT": "Next",
-    "FINISH": "Finish"
+    "FINISH": "Finish",
+    "CONFIRM": "Confirm"
   },
 
   "DROPDOWN": {

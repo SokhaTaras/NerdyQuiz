@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { QuizService } from '../../services/quiz/quiz.service';
-import { ActivatedRoute } from '@angular/router';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { BaseQuizComponent } from '../../../shared/components/base-quiz/base-quiz.component';
 import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
@@ -16,6 +16,7 @@ export class PrePlayComponent
   implements OnInit, OnDestroy
 {
   readonly BUTTON_TYPE = BUTTON_TYPE;
+
   playMode: Boolean = false;
 
   constructor(
