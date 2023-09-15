@@ -1,4 +1,4 @@
-import { Injectable, SkipSelf } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import { Quiz } from '../../interfaces/quiz';
@@ -6,7 +6,6 @@ import { Question } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../../../shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '../../../shared/utils/getId';
 import { StorageKey } from '../../../shared/enums/storageKey';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +13,7 @@ import { SubscriptionsService } from '../../../shared/services/subscription/subs
 export class QuizService {
   quizzes$ = new BehaviorSubject<Quiz[]>([]);
 
-  constructor(
-    private localStorageService: LocalStorageService,
-    @SkipSelf() private subscriptionService: SubscriptionsService
-  ) {}
+  constructor(private localStorageService: LocalStorageService) {}
 
   addQuiz(quiz: Quiz): Observable<Quiz> {
     return new Observable<Quiz>((subscriber) => {
@@ -59,13 +55,11 @@ export class QuizService {
 
   getQuizById(id: string): Observable<Quiz> {
     return new Observable<Quiz>((subscriber) => {
-      this.subscriptionService.addSubscription(
-        this.quizzes$.subscribe((quizzes) => {
-          const quiz = quizzes.find((q) => q.id == id);
-          subscriber.next(quiz);
-          subscriber.complete();
-        })
-      );
+      this.quizzes$.subscribe((quizzes) => {
+        const quiz = quizzes.find((q) => q.id == id);
+        subscriber.next(quiz);
+        subscriber.complete();
+      });
     });
   }
 
