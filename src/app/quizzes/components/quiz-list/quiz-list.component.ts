@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
@@ -15,12 +14,10 @@ import { Quiz } from '../../interfaces/quiz';
   styleUrls: ['./quiz-list.component.scss'],
   providers: [SubscriptionsService]
 })
-export class QuizListComponent implements OnDestroy, OnInit {
+export class QuizListComponent implements OnInit {
   allQuizzes: Quiz[];
 
-
   isLoading: boolean;
-  allQuizzes$ = this.quizService.quizzes$;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
@@ -53,11 +50,13 @@ export class QuizListComponent implements OnDestroy, OnInit {
 
   initQuizzes(): void {
     this.isLoading = true;
-    this.initQuizSubscription = this.quizService
-      .initAllQuizzes(StorageKey.QUIZZES)
-      .subscribe((quizzes): Quiz[] => {
-        this.isLoading = false;
-        return (this.allQuizzes = quizzes);
-      });
+    this.subscriptionsService.addSubscription(
+      this.quizService
+        .initAllQuizzes(StorageKey.QUIZZES)
+        .subscribe((quizzes): Quiz[] => {
+          this.isLoading = false;
+          return (this.allQuizzes = quizzes);
+        })
+    );
   }
 }
