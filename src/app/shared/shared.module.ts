@@ -8,6 +8,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { InputComponent } from './components/input/input.component';
 import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
@@ -18,7 +19,6 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
 import { TranslateJsonPipe } from './pipes/translate-json/translate-json.pipe';
 import { ButtonComponent } from './components/button/button.component';
 import { LoaderComponent } from './components/loader/loader.component';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     RadioButtonComponent,
     TranslateJsonPipe,
     ButtonComponent,
-    LoaderComponent
+    LoaderComponent,
     ButtonComponent,
     TranslateJsonPipe
   ]
