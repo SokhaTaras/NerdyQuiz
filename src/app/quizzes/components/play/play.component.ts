@@ -36,8 +36,7 @@ export class PlayComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentQuestion = this.questions[this.currentPosition];
-    this.quizService.questionsResults = [];
+    this.initQuestions();
     this.startTimer();
   }
 
@@ -97,6 +96,11 @@ export class PlayComponent implements OnInit {
       this.quizService.setQuizResult().subscribe()
     );
     this.navigateTo.navigateHome();
+  }
+
+  private initQuestions(): void {
+    this.currentQuestion = this.questions[this.currentPosition];
+    this.quizService.questionsResults = [];
   }
 
   private startTimer(): void {

@@ -1,8 +1,8 @@
 <div class="flex-col justify-center items-center h-screen w-full">
   <div class="flex justify-center items-center h-1/2 w-full sm:h-1/3">
     <div class="w-4/5">
-      <p class="question-info">{{ questions[currentPosition]?.title }}</p>
-      <p class="question-info text-4xl"><span class="highlighted-text">{{ 'LABELS.DIFFICULTY' | translateJson }}: </span>{{ questions[currentPosition]?.difficulty }}</p>
+      <p class="question-info">{{ currentQuestion?.title }}</p>
+      <p class="question-info text-4xl"><span class="highlighted-text">{{ 'LABELS.DIFFICULTY' | translateJson }}: </span>{{ currentQuestion?.difficulty }}</p>
       <p class="question-info text-3xl"><span class="highlighted-text">{{ 'LABELS.STEP' | translateJson }}: </span>{{ currentPosition + 1 + '/' + questions?.length }}</p>
       <p class="question-info text-3xl"><span class="highlighted-text">{{ 'LABELS.TIME' | translateJson }}: </span>{{ timer$ | async }}</p>
     </div>
@@ -11,8 +11,8 @@
     <div class="w-1/2 h-full flex items-center justify-evenly xs:w-full xs:flex-col xs:items-center sm:w-4/5 sm:h-1/3">
       <div
         class="w-1/6 h-1/4 xs:w-4/5 xs:h-1/5 sm:h-1/3 sm:w-1/5"
-        [ngClass]="{ 'border border-secondary rounded': answer === selectedAnswer }"
-        *ngFor="let answer of questions[currentPosition]?.answers">
+        [ngClass]="{ 'button-selected': answer === selectedAnswer }"
+        *ngFor="let answer of currentQuestion.answers">
         <quiz-app-button
           [type]="BUTTON_TYPE.PRIMARY"
           (click)="selectAnswer(answer)">

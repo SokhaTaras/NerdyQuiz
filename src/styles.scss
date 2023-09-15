@@ -94,6 +94,10 @@ button {
     @apply text-5xl flex justify-center items-center mb-8
   }
 
+  .button-selected {
+    @apply border border-secondary rounded
+  }
+
   .highlighted-text {
     @apply mx-4 underline
   }

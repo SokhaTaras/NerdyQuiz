@@ -44,8 +44,10 @@ export class QuestionCardComponent {
   }
 
   private deleteQuiz(): void {
-    this.quizService
-      .deleteQuestion(this.quizId, this.questionIndex)
-      .subscribe();
+    this.subscriptionsService.addSubscription(
+      this.quizService
+        .deleteQuestion(this.quizId, this.questionIndex)
+        .subscribe()
+    );
   }
 }
