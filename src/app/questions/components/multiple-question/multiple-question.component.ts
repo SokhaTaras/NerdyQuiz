@@ -2,15 +2,18 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { QuestionForm } from '../../../shared/interfaces/forms';
+import { QuestionForm } from '../../../shared/types/forms';
+import {
+  maxQuestionsAmount,
+  minQuestionsAmount
+} from '../../constants/questions-info';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 import { AnswerDifficultyList } from '../../constants/dropdonws';
-import { maxQuestions } from '../../constants/max-questions';
-import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
 import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
-import { AnswersFormType } from '../../../shared/types/formsType';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { AnswersFormType } from '../../../shared/types/forms';
+import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
 
 @Component({
   selector: 'quiz-app-multiple-question',
@@ -22,8 +25,9 @@ export class MultipleQuestionComponent implements OnInit {
     new EventEmitter<FormGroup<QuestionForm>>();
 
   readonly PlaceHolder = PlaceHolder;
-  readonly maxQuestionsAmount = maxQuestions;
   readonly AnswerDifficultyList = AnswerDifficultyList;
+  readonly maxQuestionsAmount = maxQuestionsAmount;
+  readonly minQuestionsAmount = minQuestionsAmount;
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   get form(): FormGroup<QuestionForm> {
@@ -53,9 +57,13 @@ export class MultipleQuestionComponent implements OnInit {
   }
 
   addAnswer(): void {
-    if (maxQuestions > this.questionFormHelper.answersCount) {
+    if (maxQuestionsAmount > this.questionFormHelper.answersCount) {
       this.questionFormHelper.addAnswer();
     }
+  }
+
+  deleteAnswer(answerIndex: number): void {
+    this.questionFormHelper.answersFormArray.controls.splice(answerIndex, 1);
   }
 
   private initForm(): void {

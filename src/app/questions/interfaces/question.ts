@@ -20,3 +20,9 @@ export interface AnswerList {
   value: string;
   text: string;
 }
+
+export interface DifficultyRange {
+  Easy: { min: number; max: number };
+  Medium: { min: number; max: number };
+  Hard: { min: number; max: number };
+}

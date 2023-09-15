@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { Quiz } from '../../interfaces/quiz';
 import { StorageError } from '../../../shared/classes/storageError/storage-error';

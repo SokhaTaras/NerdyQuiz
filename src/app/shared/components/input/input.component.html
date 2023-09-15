@@ -1,13 +1,10 @@
-<div class="flex flex-col" >
-    <label class="labels">{{ label | translateJson }}
-        <ng-container *ngIf="inputIndex !== undefined">{{ inputIndex + 1 }}</ng-container>
-    </label>
-    <input
-            type="text"
-            class="input"
-            [placeholder]="placeHolder | translateJson"
-            [formControl]="control"
-            (blur)="onTouched()"
-    >
+<div class="flex flex-col">
+  <label class="labels pb-4">{{ label | translateJson }}</label>
+  <input
+    type="text"
+    class="input"
+    [placeholder]="placeHolder | translateJson"
+    [formControl]="control"
+    (blur)="onTouched()">
 </div>
-    <quiz-app-error-message [control]="control"></quiz-app-error-message>
+<quiz-app-error-message [control]="control"></quiz-app-error-message>

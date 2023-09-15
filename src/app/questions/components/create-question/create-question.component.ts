@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { QuestionForm } from '../../../shared/interfaces/forms';
+import { QuestionForm } from '../../../shared/types/forms';
 import { Question } from '../../interfaces/question';
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';

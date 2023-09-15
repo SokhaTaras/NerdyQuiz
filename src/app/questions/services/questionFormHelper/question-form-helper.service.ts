@@ -8,12 +8,13 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { QuestionForm } from '../../../shared/interfaces/forms';
-import { AnswersFormType } from '../../../shared/types/formsType';
+import { QuestionForm } from '../../../shared/types/forms';
+import { AnswersFormType } from '../../../shared/types/forms';
 import { Answer, Question } from '../../interfaces/question';
 import {
   ANSWER_PROPERTIES,
- QUESTION_DIFFICULTY, QUESTION_TYPE
+  QUESTION_DIFFICULTY,
+  QUESTION_TYPE
 } from '../../../shared/enums/question-info';
 import {
   AnswerBooleanList,
