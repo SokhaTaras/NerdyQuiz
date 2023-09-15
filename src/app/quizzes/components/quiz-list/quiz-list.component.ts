@@ -5,22 +5,24 @@ import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 import { StorageKey } from '../../../shared/enums/storageKey';
 import { Quiz } from '../../interfaces/quiz';
 
 @Component({
   selector: 'quiz-app-quiz-list',
   templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.scss']
+  styleUrls: ['./quiz-list.component.scss'],
+  providers: [SubscriptionsService]
 })
 export class QuizListComponent implements OnDestroy, OnInit {
   allQuizzes: Quiz[];
 
-  modalSubscription: Subscription;
-  initQuizSubscription: Subscription;
-  isLoading: boolean;
 
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+  isLoading: boolean;
+  allQuizzes$ = this.quizService.quizzes$;
+
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   ngOnInit(): void {
     this.initQuizzes();
@@ -29,7 +31,8 @@ export class QuizListComponent implements OnDestroy, OnInit {
   constructor(
     private quizService: QuizService,
     private modalQuizService: ModalQuizService,
-    private navigateTo: NavigateToService
+    private navigateTo: NavigateToService,
+    private subscriptionsService: SubscriptionsService
   ) {}
 
   openInitPopUp(): void {
@@ -37,13 +40,15 @@ export class QuizListComponent implements OnDestroy, OnInit {
       label: 'BUTTON.CREATE_QUIZ',
       buttonText: 'BUTTON.SAVE'
     };
-    this.modalSubscription = this.modalQuizService
-      .showInitQuizModal(data)
-      .onClose.subscribe((quiz) => {
-        if (quiz) {
-          this.navigateTo.navigateToQuizDetailsPage(quiz.id);
-        }
-      });
+    this.subscriptionsService.addSubscription(
+      this.modalQuizService
+        .showInitQuizModal(data)
+        .onClose.subscribe((quiz) => {
+          if (quiz) {
+            this.navigateTo.navigateToQuizDetailsPage(quiz.id);
+          }
+        })
+    );
   }
 
   initQuizzes(): void {
@@ -54,10 +59,5 @@ export class QuizListComponent implements OnDestroy, OnInit {
         this.isLoading = false;
         return (this.allQuizzes = quizzes);
       });
-  }
-
-  ngOnDestroy(): void {
-    this.modalSubscription.unsubscribe();
-    this.initQuizSubscription.unsubscribe();
   }
 }
