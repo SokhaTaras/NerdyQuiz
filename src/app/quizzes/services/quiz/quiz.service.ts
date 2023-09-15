@@ -16,7 +16,8 @@ import { StorageKey } from '../../../shared/enums/storageKey';
 })
 export class QuizService {
   quizzes$ = new BehaviorSubject<Quiz[]>([]);
-  questionsResults$ = new BehaviorSubject<QuestionResult[]>([]);
+
+  questionsResults: QuestionResult[];
 
   constructor(private localStorageService: LocalStorageService) {}
 
@@ -142,12 +143,13 @@ export class QuizService {
     });
   }
 
-  setQuizResult(): Observable<void> {
+  setQuizResult(): Observable<QuestionResult[]> {
     return new Observable((subscriber) => {
       this.localStorageService.updateLocalStorage(
         StorageKey.QUIZ_RESULT,
-        this.questionsResults$.value
+        this.questionsResults
       );
+      subscriber.next(this.questionsResults);
       subscriber.complete();
     });
   }
@@ -158,20 +160,18 @@ export class QuizService {
     timeSpent: number
   ): Observable<QuestionResult[]> {
     return new Observable<QuestionResult[]>((subscriber) => {
-      this.questionsResults$.next(
-        this.questionsResults$.value.concat([
-          { ...question, answer, timeSpent }
-        ])
-      );
+      this.questionsResults = this.questionsResults.concat([
+        { ...question, answer, timeSpent }
+      ]);
 
-      subscriber.next(this.questionsResults$.value);
+      subscriber.next(this.questionsResults);
       subscriber.complete();
     });
   }
 
   removeLastQuestionResult(index: number): Observable<QuestionResult> {
     return new Observable<QuestionResult>((subscriber) => {
-      const deletedItem = this.questionsResults$.value.slice(index, index + 1);
+      const deletedItem = this.questionsResults.slice(index, index + 1);
       subscriber.next(deletedItem[0]);
       subscriber.complete();
     });

@@ -37,7 +37,7 @@ export class PlayComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentQuestion = this.questions[this.currentPosition];
-    this.quizService.questionsResults$.next([]);
+    this.quizService.questionsResults = [];
     this.startTimer();
   }
 
