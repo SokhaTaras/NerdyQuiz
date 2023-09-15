@@ -16,7 +16,7 @@ export class QuestionCardComponent {
   @Input() questionIndex: number;
   @Input() quizId: string | null;
 
-  readonly BUTTON_TYPE = BUTTON_TYPE;
+   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private modalQuizService: ModalQuizService,
