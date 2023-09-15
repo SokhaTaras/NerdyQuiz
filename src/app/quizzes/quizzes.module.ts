@@ -12,6 +12,8 @@ import { CreateQuizModalComponent } from './components/create-quiz-modal/create-
 import { HomeComponent } from '../home/components/home/home.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { SubscriptionsService } from '../shared/services/subscription/subscriptions.service';
+import { QuizService } from './services/quiz/quiz.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     QuizzesRoutingModule,
     ReactiveFormsModule,
     NzIconModule
-  ]
+  ],
+
+  //todo get confirmation for solution
+  providers: [SubscriptionsService, QuizService]
 })
 export class QuizzesModule {}

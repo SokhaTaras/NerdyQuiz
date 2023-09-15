@@ -6,6 +6,7 @@ import { Question } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../../../shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '../../../shared/utils/getId';
 import { StorageKey } from '../../../shared/enums/storageKey';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ import { StorageKey } from '../../../shared/enums/storageKey';
 export class QuizService {
   quizzes$ = new BehaviorSubject<Quiz[]>([]);
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(
+    private localStorageService: LocalStorageService,
+    private subscriptionsService: SubscriptionsService
+  ) {}
 
   addQuiz(quiz: Quiz): Observable<Quiz> {
     return new Observable<Quiz>((subscriber) => {
@@ -55,11 +59,13 @@ export class QuizService {
 
   getQuizById(id: string): Observable<Quiz> {
     return new Observable<Quiz>((subscriber) => {
-      this.quizzes$.subscribe((quizzes) => {
-        const quiz = quizzes.find((q) => q.id == id);
-        subscriber.next(quiz);
-        subscriber.complete();
-      });
+      this.subscriptionsService.addSubscription(
+        this.quizzes$.subscribe((quizzes) => {
+          const quiz = quizzes.find((q) => q.id == id);
+          subscriber.next(quiz);
+          subscriber.complete();
+        })
+      );
     });
   }
 

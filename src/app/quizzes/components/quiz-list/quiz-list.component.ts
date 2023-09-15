@@ -48,7 +48,7 @@ export class QuizListComponent implements OnInit {
     );
   }
 
-  initQuizzes(): void {
+  private initQuizzes(): void {
     this.isLoading = true;
     this.subscriptionsService.addSubscription(
       this.quizService
