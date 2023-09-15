@@ -171,7 +171,8 @@ export class QuizService {
 
   removeLastQuestionResult(index: number): Observable<QuestionResult> {
     return new Observable<QuestionResult>((subscriber) => {
-      const deletedItem = this.questionsResults.slice(index, index + 1);
+      const deletedItem = this.questionsResults.splice(index, 1);
+
       subscriber.next(deletedItem[0]);
       subscriber.complete();
     });

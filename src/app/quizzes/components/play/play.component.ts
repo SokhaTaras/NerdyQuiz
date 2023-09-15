@@ -11,7 +11,6 @@ import { SubscriptionsService } from '../../../shared/services/subscription/subs
 @Component({
   selector: 'quiz-app-play',
   templateUrl: './play.component.html',
-  styleUrls: ['./play.component.scss'],
   providers: [SubscriptionsService]
 })
 export class PlayComponent implements OnInit {
@@ -58,17 +57,18 @@ export class PlayComponent implements OnInit {
   }
 
   nextQuestion(question: Question): void {
-    this.addQuestionResult(question);
     this.currentPosition += 1;
+    this.addQuestionResult(question);
   }
 
   previousQuestion(): void {
+    this.currentPosition -= 1;
     this.subscriptions.addSubscription(
       this.quizService
         .removeLastQuestionResult(this.currentPosition)
         .subscribe()
     );
-    this.currentPosition -= 1;
+    this.currentQuestion = this.questions[this.currentPosition];
   }
 
   selectAnswer(answer: Answer): void {

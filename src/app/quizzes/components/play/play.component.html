@@ -12,7 +12,7 @@
       <div
         class="w-1/6 h-1/4 xs:w-4/5 xs:h-1/5 sm:h-1/3 sm:w-1/5"
         [ngClass]="{ 'button-selected': answer === selectedAnswer }"
-        *ngFor="let answer of currentQuestion.answers">
+        *ngFor="let answer of currentQuestion?.answers">
         <quiz-app-button
           [type]="BUTTON_TYPE.PRIMARY"
           (click)="selectAnswer(answer)">
