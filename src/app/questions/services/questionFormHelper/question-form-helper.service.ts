@@ -21,7 +21,6 @@ import {
 } from '../../../shared/enums/question-info';
 import { AnswersFormType, QuestionForm } from '../../../shared/types/forms';
 import { Answer, Question } from '../../interfaces/question';
-} from '../../constants/dropdonws';
 
 export const defaultFormValues = {
   title: '',

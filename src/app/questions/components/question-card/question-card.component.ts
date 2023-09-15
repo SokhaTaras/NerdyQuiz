@@ -16,7 +16,7 @@ export class QuestionCardComponent {
   @Input() questionIndex: number;
   @Input() quizId: string | null;
 
-   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private modalQuizService: ModalQuizService,
@@ -27,7 +27,7 @@ export class QuestionCardComponent {
   deleteQuestionConfirm(): void {
     const data: any = {
       text: 'CONFIRM_MODAL_TEXT.DELETE_QUESTION',
-      buttonText: 'BUTTON.SAVE',
+      buttonText: 'LABELS.DELETE',
       questionIndex: this.questionIndex,
       quizId: this.quizId
     };
