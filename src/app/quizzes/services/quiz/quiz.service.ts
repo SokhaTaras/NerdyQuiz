@@ -1,5 +1,5 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { Quiz } from '../../interfaces/quiz';
 import { StorageError } from '../../../shared/classes/storageError/storage-error';
@@ -51,9 +51,6 @@ export class QuizService {
   getQuizById(id: string): Quiz | undefined {
     return this.quizzes$.value.find((q) => q.id == id);
   }
-
-  //TODO delete setTimeout
-  //This setTimeout added just to emulate delay
 
   initAllQuizzes(key: string): void {
     try {

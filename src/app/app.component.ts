@@ -10,7 +10,6 @@ import { StorageKey } from './shared/enums/storageKey';
 })
 export class AppComponent implements OnInit {
   title = 'nerdyQuiz-app';
-  isLoading: boolean;
 
   constructor(private quizService: QuizService) {}
 
@@ -19,8 +18,6 @@ export class AppComponent implements OnInit {
   }
 
   initQuizzes(): void {
-    this.isLoading = true;
     this.quizService.initAllQuizzes(StorageKey.QUIZZES);
-    this.isLoading = false;
   }
 }
