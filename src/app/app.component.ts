@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     this.initQuizzes();
   }
 
-  initQuizzes(): void {
+  private initQuizzes(): void {
     this.quizService.initAllQuizzes(StorageKey.QUIZZES);
   }
 }
