@@ -23,9 +23,16 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
     quizService: QuizService,
     route: ActivatedRoute,
     navigateTo: NavigateToService,
-    statisticsService: StatisticsService
+    statisticsService: StatisticsService,
+    subscriptionsService: SubscriptionsService
   ) {
-    super(statisticsService, quizService, route, navigateTo);
+    super(
+      statisticsService,
+      quizService,
+      route,
+      navigateTo,
+      subscriptionsService
+    );
   }
 
   openEditPopUp(): void {

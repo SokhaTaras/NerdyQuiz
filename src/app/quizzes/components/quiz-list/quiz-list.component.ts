@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
@@ -14,7 +15,7 @@ import { Quiz } from '../../interfaces/quiz';
   styleUrls: ['./quiz-list.component.scss'],
   providers: [SubscriptionsService]
 })
-export class QuizListComponent {
+export class QuizListComponent implements OnInit {
   allQuizzes: Quiz[];
   isLoading: Boolean;
 
@@ -30,6 +31,10 @@ export class QuizListComponent {
     private navigateTo: NavigateToService,
     private subscriptionsService: SubscriptionsService
   ) {}
+
+  ngOnInit(): void {
+    this.initQuizzes();
+  }
 
   openInitPopUp(): void {
     const data: any = {
@@ -49,11 +54,13 @@ export class QuizListComponent {
 
   private initQuizzes(): void {
     this.isLoading = true;
-    this.quizService
-      .initAllQuizzes(StorageKey.QUIZZES)
-      .subscribe((quizzes): Quiz[] => {
-        this.isLoading = false;
-        return (this.allQuizzes = quizzes);
-      });
+    this.subscriptionsService.addSubscription(
+      this.quizService
+        .initAllQuizzes(StorageKey.QUIZZES)
+        .subscribe((quizzes): Quiz[] => {
+          this.isLoading = false;
+          return (this.allQuizzes = quizzes);
+        })
+    );
   }
 }

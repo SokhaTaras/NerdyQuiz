@@ -1,26 +1,26 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { InitQuizForm } from '../../../shared/types/forms';
 import { Quiz } from '../../interfaces/quiz';
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import { ModalRefFacadeService } from '../../../shared/services/modal-ref-facade/modal-ref-facade.service';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
   templateUrl: './create-quiz-modal.component.html',
-  providers: [ModalRefFacadeService]
+  providers: [ModalRefFacadeService, SubscriptionsService]
 })
-export class CreateQuizModalComponent implements OnInit, OnDestroy {
+export class CreateQuizModalComponent implements OnInit {
   @Input() quizId: string;
   @Input() quiz: Quiz = {};
   @Input() label: string;
   @Input() buttonText: string;
 
   initQuizForm: FormGroup<InitQuizForm>;
-  methodSubscription: Subscription;
 
   readonly PlaceHolder = PlaceHolder;
 
@@ -35,7 +35,8 @@ export class CreateQuizModalComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private quizService: QuizService,
-    private modalRefFacadeService: ModalRefFacadeService<Quiz>
+    private modalRefFacadeService: ModalRefFacadeService<Quiz>,
+    private subscriptionsService: SubscriptionsService
   ) {}
 
   ngOnInit(): void {
@@ -52,14 +53,16 @@ export class CreateQuizModalComponent implements OnInit, OnDestroy {
 
     const saveMethod = this.getSaveMethod();
 
-    this.methodSubscription = saveMethod(newQuiz).subscribe({
-      next: (savedQuiz: Quiz) => {
-        this.close(savedQuiz);
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
+    this.subscriptionsService.addSubscription(
+      saveMethod(newQuiz).subscribe({
+        next: (savedQuiz: Quiz) => {
+          this.close(savedQuiz);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+    );
   }
 
   private getSaveMethod(): (quiz: Quiz) => Observable<Quiz> {
@@ -99,11 +102,5 @@ export class CreateQuizModalComponent implements OnInit, OnDestroy {
     };
 
     return quiz;
-  }
-
-  ngOnDestroy(): void {
-    if (this.methodSubscription) {
-      this.methodSubscription.unsubscribe();
-    }
   }
 }
