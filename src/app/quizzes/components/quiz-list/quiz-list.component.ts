@@ -11,7 +11,8 @@ import { Quiz } from '../../interfaces/quiz';
 @Component({
   selector: 'quiz-app-quiz-list',
   templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.scss']
+  styleUrls: ['./quiz-list.component.scss'],
+  providers: [SubscriptionsService]
 })
 export class QuizListComponent implements OnInit {
   allQuizzes: Quiz[];
@@ -20,15 +21,16 @@ export class QuizListComponent implements OnInit {
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  ngOnInit(): void {
-    this.initQuizzes();
-  }
-
   constructor(
     private quizService: QuizService,
     private modalQuizService: ModalQuizService,
-    private navigateTo: NavigateToService
+    private navigateTo: NavigateToService,
+    private subscriptionsService: SubscriptionsService
   ) {}
+
+  ngOnInit(): void {
+    this.initQuizzes();
+  }
 
   openInitPopUp(): void {
     const data: any = {
