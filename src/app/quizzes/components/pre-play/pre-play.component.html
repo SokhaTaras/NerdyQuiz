@@ -27,5 +27,5 @@
 </div>
 
 <div *ngIf="playMode">
-  <quiz-app-play (whenCancel)="togglePlayMode()" [questions]="currentQuiz.questions"></quiz-app-play>
+  <quiz-app-play (whenCancel)="togglePlayMode()" [quiz]="currentQuiz"></quiz-app-play>
 </div>

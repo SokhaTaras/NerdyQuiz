@@ -29,4 +29,12 @@ export class NavigateToService {
       `${quiz.id}`
     ]);
   }
+
+  navigateResult(quiz: Quiz): void {
+    this.router.navigate([
+      NavigationRoutes.QUIZ,
+      NavigationRoutes.RESULT,
+      `${quiz.id}`
+    ]);
+  }
 }

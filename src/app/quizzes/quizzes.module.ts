@@ -14,6 +14,7 @@ import { IntroductionComponent } from './components/introduction/introduction.co
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { PrePlayComponent } from './components/pre-play/pre-play.component';
 import { PlayComponent } from './components/play/play.component';
+import { ResultComponent } from './components/result/result.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PlayComponent } from './components/play/play.component';
     HomeComponent,
     IntroductionComponent,
     PrePlayComponent,
-    PlayComponent
+    PlayComponent,
+    ResultComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { QuizService } from '../../services/quiz/quiz.service';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { Quiz } from '../../interfaces/quiz';
 
 @Component({
   selector: 'quiz-app-play',
@@ -14,7 +15,7 @@ import { SubscriptionsService } from '../../../shared/services/subscription/subs
   providers: [SubscriptionsService]
 })
 export class PlayComponent implements OnInit {
-  @Input() questions: Question[];
+  @Input() quiz: Quiz;
   @Output() whenCancel: EventEmitter<void> = new EventEmitter();
 
   timer$: Observable<number>;
@@ -68,7 +69,7 @@ export class PlayComponent implements OnInit {
         .removeLastQuestionResult(this.currentPosition)
         .subscribe()
     );
-    this.currentQuestion = this.questions[this.currentPosition];
+    this.currentQuestion = this.quiz.questions[this.currentPosition];
   }
 
   selectAnswer(answer: Answer): void {
@@ -76,7 +77,7 @@ export class PlayComponent implements OnInit {
   }
 
   addQuestionResult(question: Question): void {
-    const maxPosition = this.questions?.length;
+    const maxPosition = this.quiz.questions?.length;
     this.subscriptions.addSubscription(
       this.quizService
         .addQuestionResult(question, this.selectedAnswer, this.secondsCounter)
@@ -84,7 +85,7 @@ export class PlayComponent implements OnInit {
     );
 
     if (this.currentPosition < maxPosition) {
-      this.currentQuestion = this.questions[this.currentPosition];
+      this.currentQuestion = this.quiz.questions[this.currentPosition];
       this.selectedAnswer = null;
     }
   }
@@ -95,11 +96,11 @@ export class PlayComponent implements OnInit {
     this.subscriptions.addSubscription(
       this.quizService.setQuizResult().subscribe()
     );
-    this.navigateTo.navigateHome();
+    this.navigateTo.navigateResult(this.quiz);
   }
 
   private initQuestions(): void {
-    this.currentQuestion = this.questions[this.currentPosition];
+    this.currentQuestion = this.quiz.questions[this.currentPosition];
     this.quizService.questionsResults = [];
   }
 
