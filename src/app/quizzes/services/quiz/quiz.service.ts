@@ -54,14 +54,9 @@ export class QuizService {
   }
 
   getQuizById(id: string): Observable<Quiz> {
-    return new Observable<Quiz>((subscriber) => {
-      const subscription = this.quizzes$.subscribe((quizzes) => {
-        const quiz = quizzes.find((q) => q.id == id);
-        subscriber.next(quiz);
-        subscriber.complete();
-      });
-      subscription.unsubscribe();
-    });
+    return this.quizzes$.pipe(
+      map((quizzes) => quizzes.find((q) => q.id == id))
+    );
   }
 
   initAllQuizzes(key: string): Observable<Quiz[]> {

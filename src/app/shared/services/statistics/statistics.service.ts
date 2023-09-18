@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Quiz } from '../../../quizzes/interfaces/quiz';
 import { DifficultiesEnum } from '../../enums/questionTypes';
 import {
-  DifficultyRanges,
-  DifficultyPoints
+  DifficultyPoints,
+  DifficultyRanges
 } from '../../../questions/constants/questions-info';
 
 @Injectable({
