@@ -16,7 +16,6 @@ import { StorageKey } from '../../../shared/enums/storageKey';
 })
 export class QuizService {
   quizzes$ = new BehaviorSubject<Quiz[]>([]);
-
   questionsResults = new BehaviorSubject<QuestionResult[]>([]);
 
   constructor(private localStorageService: LocalStorageService) {}
@@ -70,7 +69,7 @@ export class QuizService {
   }
 
   initAllQuizzes(key: string): Observable<Quiz[]> {
-    let allQuizzes: string = this.localStorageService.getLocalStorageData(key);
+    let allQuizzes: string = this.localStorageService.getStringifiedData(key);
 
     if (allQuizzes !== null) {
       this.localStorageService.setLocalStorageData(key, allQuizzes);

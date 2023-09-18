@@ -90,7 +90,6 @@ export class PlayComponent implements OnInit {
     }
   }
 
-  //todo redirect to result page on finish, when that page will be ready
   finishQuiz(lastQuestion: Question): void {
     this.addQuestionResult(lastQuestion);
     this.subscriptions.addSubscription(
@@ -102,7 +101,6 @@ export class PlayComponent implements OnInit {
   private initQuestions(): void {
     this.currentQuestion = this.quiz.questions[this.currentPosition];
     this.quizService.questionsResults.next([]);
-    console.log('lol');
   }
 
   private startTimer(): void {

@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 
 import { Quiz } from '../../../quizzes/interfaces/quiz';
-import { DifficultiesEnum } from '../../enums/questionTypes';
 import {
   DifficultyRanges,
   DifficultyPoints
 } from '../../../questions/constants/questions-info';
 import { QuestionResult } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../local-storage/local-storage.service';
+import { StorageKey } from '../../enums/storageKey';
+import { DifficultiesEnum } from '../../enums/question-info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatisticsService {
+  constructor(private localStorageService: LocalStorageService) {}
   getAverageQuizDifficulty(quiz: Quiz): string {
     const difficulties = quiz.questions.map((q) => q.difficulty);
     const average = this.calculateAverageDifficulty(difficulties);
@@ -42,10 +44,14 @@ export class StatisticsService {
     }, 0);
   }
 
-  getRating(questionResults: QuestionResult[]): string {
-    const correctnessArray = this.extractCorrectnessArray(questionResults);
+  getRating(): number {
+    let data: QuestionResult[] = this.localStorageService.getParsedData(
+      StorageKey.QUIZ_RESULT
+    );
+
+    const correctnessArray = this.extractCorrectnessArray(data);
     const rating = this.calculateRating(correctnessArray);
-    return `${rating}%`;
+    return rating;
   }
 
   private extractCorrectnessArray(

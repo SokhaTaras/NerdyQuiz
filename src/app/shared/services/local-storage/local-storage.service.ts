@@ -15,12 +15,17 @@ export class LocalStorageService {
     }
   }
 
-  getLocalStorageData(key: string): string {
+  getStringifiedData(key: string): string {
     try {
       return localStorage.getItem(key);
     } catch (error) {
       throw new StorageError(STORAGE_ERROR_MESSAGE.GET_DATA);
     }
+  }
+
+  getParsedData(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
   }
 
   setLocalStorageData(key: string, value: string): void {

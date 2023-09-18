@@ -1,3 +1,9 @@
+export enum DifficultiesEnum {
+  Easy = 'Easy',
+  Medium = 'Medium',
+  Hard = 'Hard'
+}
+
 export enum QUESTION_TYPE {
   BOOLEAN = 'boolean',
   MULTIPLE = 'multiple'
