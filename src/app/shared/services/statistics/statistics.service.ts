@@ -6,6 +6,8 @@ import {
   DifficultyRanges,
   DifficultyPoints
 } from '../../../questions/constants/questions-info';
+import { QuestionResult } from '../../../questions/interfaces/question';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +40,33 @@ export class StatisticsService {
 
       return weightSum;
     }, 0);
+  }
+
+  getRating(questionResults: QuestionResult[]): string {
+    const correctnessArray = this.extractCorrectnessArray(questionResults);
+    const rating = this.calculateRating(correctnessArray);
+    return `${rating}%`;
+  }
+
+  private extractCorrectnessArray(
+    questionResults: QuestionResult[]
+  ): boolean[] {
+    return questionResults.map((result) => result.answer.isCorrect);
+  }
+
+  private calculateRating(correctnessArray: boolean[]): number {
+    if (correctnessArray.length === 0) {
+      return 0;
+    }
+
+    const correctAnswersCount = this.countCorrectAnswers(correctnessArray);
+    const totalAnswers = correctnessArray.length;
+    const percentage = (correctAnswersCount / totalAnswers) * 100;
+    return Math.round(percentage);
+  }
+
+  private countCorrectAnswers(correctnessArray: boolean[]): number {
+    return correctnessArray.filter((isCorrect) => isCorrect).length;
   }
 
   private getDifficulty(averageDifficulty: number): string {

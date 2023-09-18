@@ -102,6 +102,7 @@ export class PlayComponent implements OnInit {
   private initQuestions(): void {
     this.currentQuestion = this.quiz.questions[this.currentPosition];
     this.quizService.questionsResults = [];
+    console.log('lol');
   }
 
   private startTimer(): void {
