@@ -1,5 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
 
 import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
 import { Question } from '../../interfaces/question';
@@ -12,12 +11,12 @@ import { SubscriptionsService } from '../../../shared/services/subscription/subs
   templateUrl: './question-card.component.html',
   providers: [SubscriptionsService]
 })
-export class QuestionCardComponent implements OnDestroy {
+export class QuestionCardComponent {
   @Input() question: Question;
   @Input() questionIndex: number;
   @Input() quizId: string | null;
 
-   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private modalQuizService: ModalQuizService,
@@ -45,10 +44,10 @@ export class QuestionCardComponent implements OnDestroy {
   }
 
   private deleteQuiz(): void {
-    this.deleteQuestionSubscription = this.quizService
-      .deleteQuestion(this.quizId, this.questionIndex)
-      .subscribe();
+    this.subscriptionsService.addSubscription(
+      this.quizService
+        .deleteQuestion(this.quizId, this.questionIndex)
+        .subscribe()
+    );
   }
-
-
 }

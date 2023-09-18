@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
@@ -15,10 +14,7 @@ import { StatisticsService } from '../../../shared/services/statistics/statistic
   templateUrl: 'quiz-details.component.html',
   providers: [SubscriptionsService]
 })
-export class QuizDetailsComponent
-  extends BaseQuizComponent
-  implements OnInit
-{
+export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
@@ -26,9 +22,16 @@ export class QuizDetailsComponent
     quizService: QuizService,
     route: ActivatedRoute,
     navigateTo: NavigateToService,
-    statisticsService: StatisticsService
+    statisticsService: StatisticsService,
+    subscriptionsService: SubscriptionsService
   ) {
-    super(statisticsService, quizService, route, navigateTo);
+    super(
+      statisticsService,
+      quizService,
+      route,
+      navigateTo,
+      subscriptionsService
+    );
   }
 
   openEditPopUp(): void {

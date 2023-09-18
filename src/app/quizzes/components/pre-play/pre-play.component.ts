@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { ActivatedRoute } from '@angular/router';
@@ -6,23 +6,29 @@ import { NavigateToService } from '../../../shared/services/navigate-to/navigate
 import { BaseQuizComponent } from '../../../shared/components/base-quiz/base-quiz.component';
 import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-pre-play',
-  templateUrl: './pre-play.component.html'
+  templateUrl: './pre-play.component.html',
+  providers: [SubscriptionsService]
 })
-export class PrePlayComponent
-  extends BaseQuizComponent
-  implements OnInit, OnDestroy
-{
+export class PrePlayComponent extends BaseQuizComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     quizService: QuizService,
     route: ActivatedRoute,
     navigateTo: NavigateToService,
-    statisticsService: StatisticsService
+    statisticsService: StatisticsService,
+    subscriptionsService: SubscriptionsService
   ) {
-    super(statisticsService, quizService, route, navigateTo);
+    super(
+      statisticsService,
+      quizService,
+      route,
+      navigateTo,
+      subscriptionsService
+    );
   }
 }
