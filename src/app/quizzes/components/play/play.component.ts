@@ -101,7 +101,7 @@ export class PlayComponent implements OnInit {
 
   private initQuestions(): void {
     this.currentQuestion = this.quiz.questions[this.currentPosition];
-    this.quizService.questionsResults = [];
+    this.quizService.questionsResults.next([]);
     console.log('lol');
   }
 
