@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 import { QuizService } from '../../services/quiz/quiz.service';
@@ -20,10 +19,6 @@ export class QuizListComponent implements OnInit {
   isLoading: Boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
-
-  ngOnInit(): void {
-    this.initQuizzes();
-  }
 
   constructor(
     private quizService: QuizService,
