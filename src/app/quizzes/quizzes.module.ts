@@ -13,7 +13,6 @@ import { HomeComponent } from '../home/components/home/home.component';
 import { IntroductionComponent } from './components/introduction/introduction.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { SubscriptionsService } from '../shared/services/subscription/subscriptions.service';
-import { QuizService } from './services/quiz/quiz.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +33,6 @@ import { QuizService } from './services/quiz/quiz.service';
   ],
 
   //todo get confirmation for solution
-  providers: [SubscriptionsService, QuizService]
+  providers: [SubscriptionsService]
 })
 export class QuizzesModule {}
