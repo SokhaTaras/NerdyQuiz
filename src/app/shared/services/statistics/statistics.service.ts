@@ -15,6 +15,7 @@ import { DifficultiesEnum } from '../../enums/question-info';
 })
 export class StatisticsService {
   constructor(private localStorageService: LocalStorageService) {}
+
   getAverageQuizDifficulty(quiz: Quiz): string {
     const difficulties = quiz.questions.map((q) => q.difficulty);
     const average = this.calculateAverageDifficulty(difficulties);
@@ -44,19 +45,18 @@ export class StatisticsService {
     }, 0);
   }
 
-  getRating(): number {
-    let data: QuestionResult[] = this.localStorageService.getParsedData(
-      StorageKey.QUIZ_RESULT
-    );
+  getQuestionResults(): QuestionResult[] {
+    return this.localStorageService.getParsedData(StorageKey.QUIZ_RESULT);
+  }
 
-    const correctnessArray = this.extractCorrectnessArray(data);
+  getRating(): number {
+    const questionResults = this.getQuestionResults();
+    const correctnessArray = this.extractCorrectnessArray(questionResults);
     const rating = this.calculateRating(correctnessArray);
     return rating;
   }
 
-  private extractCorrectnessArray(
-    questionResults: QuestionResult[]
-  ): boolean[] {
+  extractCorrectnessArray(questionResults: QuestionResult[]): boolean[] {
     return questionResults.map((result) => result.answer.isCorrect);
   }
 
@@ -71,7 +71,7 @@ export class StatisticsService {
     return Math.round(percentage);
   }
 
-  private countCorrectAnswers(correctnessArray: boolean[]): number {
+  countCorrectAnswers(correctnessArray: boolean[]): number {
     return correctnessArray.filter((isCorrect) => isCorrect).length;
   }
 

@@ -4,6 +4,7 @@ import { QuizService } from '../../services/quiz/quiz.service';
 import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
 import { Result } from '../../../shared/enums/result';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { QuestionResult } from '../../../questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-result',
@@ -11,8 +12,10 @@ import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 })
 export class ResultComponent implements OnInit {
   rating: number;
+  spentTime: number;
+  correctAnswersCount: number;
   resultText: string;
-  progressBarWidth: string;
+  questionResult: QuestionResult[];
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
@@ -22,8 +25,11 @@ export class ResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.questionResult = this.getQuestionResult();
     this.rating = this.getRating();
-    this.setResultProperties();
+    this.setSpentTime();
+    this.setResultText();
+    this.correctAnswersCount = this.calculateCorrectAnswersCount();
   }
 
   private getRating(): number {
@@ -33,22 +39,49 @@ export class ResultComponent implements OnInit {
     return 0;
   }
 
-  private setResultProperties(): void {
+  private getQuestionResult(): QuestionResult[] {
+    return this.statisticsService.getQuestionResults();
+  }
+
+  private setSpentTime(): void {
+    this.spentTime =
+      this.questionResult[this?.questionResult?.length - 1]?.timeSpent;
+  }
+
+  private calculateCorrectAnswersCount(): number {
+    const correctnessArray = this.statisticsService.extractCorrectnessArray(
+      this.questionResult
+    );
+    return this.statisticsService.countCorrectAnswers(correctnessArray);
+  }
+
+  private setResultText(): void {
     if (this.rating === Result.EXCELLENT) {
       this.resultText = 'RESULT_QUOTES.EXCELLENT';
-      this.progressBarWidth = 'w-full';
     } else if (this.rating >= Result.TRY_HARDER) {
       this.resultText = 'RESULT_QUOTES.PASSED_QUIZ';
-      this.progressBarWidth = 'w-10/12';
     } else if (
       this.rating < Result.TRY_HARDER &&
       this.rating > Result.LEARN_MORE
     ) {
       this.resultText = 'RESULT_QUOTES.TRY_HARDER';
-      this.progressBarWidth = 'w-8/12';
     } else {
       this.resultText = 'RESULT_QUOTES.LEARN_MORE';
-      this.progressBarWidth = 'w-0';
     }
   }
+
+  // private setResultText(): void {
+  //     this.resultText = this.getResultTextBasedOnRating();
+  //   }
+  //
+  //   private getResultTextBasedOnRating(): string {
+  //     if (this.rating === Result.EXCELLENT) {
+  //       return 'RESULT_QUOTES.EXCELLENT';
+  //     }
+  //     return this.rating >= Result.TRY_HARDER
+  //       ? 'RESULT_QUOTES.PASSED_QUIZ'
+  //       : this.rating > Result.LEARN_MORE
+  //       ? 'RESULT_QUOTES.TRY_HARDER'
+  //       : 'RESULT_QUOTES.LEARN_MORE';
+  //   }
 }
