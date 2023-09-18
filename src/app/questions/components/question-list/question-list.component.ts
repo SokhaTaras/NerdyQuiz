@@ -1,25 +1,28 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { Question } from '../../interfaces/question';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-question-list',
-  templateUrl: './question-list.component.html'
+  templateUrl: './question-list.component.html',
+  providers: [SubscriptionsService]
 })
-export class QuestionListComponent implements OnInit, OnDestroy {
+export class QuestionListComponent implements OnInit {
   @Input() quizId: string | null;
 
   displayCreateQuestion = false;
   isBoolean: boolean;
   allQuestions: Question[];
-  subscription: Subscription;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  constructor(private quizService: QuizService) {}
+  constructor(
+    private quizService: QuizService,
+    private subscriptionService: SubscriptionsService
+  ) {}
 
   ngOnInit(): void {
     this.initQuestions();
@@ -35,16 +38,14 @@ export class QuestionListComponent implements OnInit, OnDestroy {
   }
 
   private initQuestions(): void {
-    this.subscription = this.quizService.quizzes$.subscribe(() => {
-      return this.quizService
-        .getQuizQuestions(this.quizId)
-        .subscribe((questions) => {
-          this.allQuestions = questions;
-        });
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptionService.addSubscription(
+      this.quizService.quizzes$.subscribe(() => {
+        return this.quizService
+          .getQuizQuestions(this.quizId)
+          .subscribe((questions) => {
+            this.allQuestions = questions;
+          });
+      })
+    );
   }
 }
