@@ -100,7 +100,7 @@ export class PlayComponent implements OnInit {
 
   private initQuestions(): void {
     this.currentQuestion = this.questions[this.currentPosition];
-    this.quizService.questionsResults = [];
+    this.quizService.questionsResults.next([]);
   }
 
   private startTimer(): void {
