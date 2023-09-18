@@ -5,23 +5,24 @@ import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-qui
 import { Question } from '../../interfaces/question';
 import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-question-card',
-  templateUrl: './question-card.component.html'
+  templateUrl: './question-card.component.html',
+  providers: [SubscriptionsService]
 })
 export class QuestionCardComponent implements OnDestroy {
   @Input() question: Question;
   @Input() questionIndex: number;
   @Input() quizId: string | null;
 
-  deleteQuestionSubscription: Subscription;
-
    readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private modalQuizService: ModalQuizService,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private subscriptionsService: SubscriptionsService
   ) {}
 
   deleteQuestionConfirm(): void {
@@ -31,13 +32,16 @@ export class QuestionCardComponent implements OnDestroy {
       questionIndex: this.questionIndex,
       quizId: this.quizId
     };
-    this.modalQuizService
-      .confirmDeletionModal(data)
-      .onClose.subscribe((isConfirm) => {
-        if (isConfirm) {
-          this.deleteQuiz();
-        }
-      });
+
+    this.subscriptionsService.addSubscription(
+      this.modalQuizService
+        .confirmDeletionModal(data)
+        .onClose.subscribe((isConfirm) => {
+          if (isConfirm) {
+            this.deleteQuiz();
+          }
+        })
+    );
   }
 
   private deleteQuiz(): void {
@@ -46,9 +50,5 @@ export class QuestionCardComponent implements OnDestroy {
       .subscribe();
   }
 
-  ngOnDestroy(): void {
-    if (this.deleteQuestionSubscription) {
-      this.deleteQuestionSubscription.unsubscribe();
-    }
-  }
+
 }

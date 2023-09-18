@@ -17,7 +17,7 @@ export class QuestionListComponent implements OnInit, OnDestroy {
   allQuestions: Question[];
   subscription: Subscription;
 
-  protected readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(private quizService: QuizService) {}
 

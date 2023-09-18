@@ -5,7 +5,7 @@
   <form [formGroup]="form" *ngIf="form">
     <div class="modal-title flex justify-center items-center">
       <quiz-app-input
-        [control]="questionFormHelper?.title"
+        [control]="title"
         label="Title"
         [placeHolder]="PlaceHolder.title | translateJson"
         class="w-full">
@@ -15,7 +15,7 @@
       <div class="flex justify-center w-full overflow-hidden">
         <div class="flex justify-center p-2">
           <quiz-app-dropdown
-            [control]="questionFormHelper?.difficulty"
+            [control]="difficulty"
             [list]="AnswerDifficultyList"
             [label]="'LABELS.DIFFICULTY' | translateJson"
           >
@@ -25,22 +25,24 @@
     </div>
     <div class="flex-col justify-center">
       <ng-container formArrayName="answers" class="py-12 flex-col justify-center">
-        <ng-container class="flex items-center justify-center" *ngFor="let answer of questionFormHelper.answersFormArray.controls; let index = index">
-          <div class="flex items-center justify-center w-full">
-            <span class="flex text-3xl items-center justify-center mt-2">{{ index + 1 }}</span>
-            <quiz-app-input class="m-8 w-full" [control]="answer.get(ANSWER_PROPERTIES.TEXT) | formControl"></quiz-app-input>
-            <div class="flex justify-center items-center pt-4 w-1/4">
+        <ng-container class="flex items-center justify-center" *ngFor="let answer of answersControl; let index = index">
+          <div class="xs:flex-wrap flex items-center justify-center w-full">
+            <div class="w-full flex">
+              <span class="flex text-3xl items-center justify-center mt-2">{{ index + 1 }}</span>
+              <quiz-app-input class="m-8 w-full" [control]="answer.controls.text"></quiz-app-input>
+            </div>
+            <div class="flex justify-center items-center pt-4 w-1/4 xs:w-4/5 xs:space-x-1">
               <quiz-app-radio-button
               class="flex justify-center items-center pr-4"
               [id]="index"
-              [control]="answer.get(ANSWER_PROPERTIES.IS_CORRECT) | formControl">
+              [control]="answer.controls.isCorrect">
               {{ 'LABELS.CORRECT' | translateJson }}
-            </quiz-app-radio-button>
+              </quiz-app-radio-button>
               <div class="w-1/2 h-1/2">
                 <quiz-app-button
-                  [type]="BUTTON_TYPE.SECONDARY"
-                  [isDisabled]="questionFormHelper.answersCount <= minQuestionsAmount"
-                  (whenClicked)="deleteAnswer(index )">
+                  [type]="BUTTON_TYPE.ERROR"
+                  [isDisabled]="answerCount <= minQuestionsAmount"
+                  (whenClicked)="deleteAnswer(index)">
                   {{ 'LABELS.DELETE' | translateJson }}
                 </quiz-app-button>
               </div>
@@ -52,9 +54,9 @@
   </form>
   <div class="flex justify-center items-center h-8 my-8">
     <quiz-app-button
-      class="w-1/3"
+      class="w-1/3 xs:w-4/5"
       [type]="BUTTON_TYPE.PRIMARY"
-      [isDisabled]="questionFormHelper?.answersCount >= maxQuestionsAmount"
+      [isDisabled]="answerCount >= maxQuestionsAmount"
       (whenClicked)="addAnswer()">
       {{ 'BUTTON.NEW_ANSWER' | translateJson }}
     </quiz-app-button>

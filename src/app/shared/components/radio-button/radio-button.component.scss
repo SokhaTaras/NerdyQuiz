@@ -1,8 +1,0 @@
-.cursor-pointer:hover span {
-  transform: scale(1.1);
-}
-
-[type="radio"]:checked + label span {
-  background-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-secondary) inset;
-}

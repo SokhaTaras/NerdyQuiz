@@ -1,23 +1,22 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
 import {
   AnswerBooleanList,
   AnswerDifficultyList
 } from '../../constants/dropdonws';
-import { QuestionForm } from '../../../shared/interfaces/forms';
-import { QuestionFormHelperService } from '../../../shared/services/questionFormHelper/question-form-helper.service';
-import {
-  ANSWER_PROPERTIES,
-  QUESTION_TYPE
-} from '../../../shared/enums/question-info';
+import { QuestionForm } from '../../../shared/types/forms';
+import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
+import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question';
+import { AnswersFormType } from '../../../shared/types/forms';
 
 @Component({
   selector: 'quiz-app-boolean-question',
   templateUrl: './boolean-question.component.html',
-  providers: [QuestionFormHelperService]
+  providers: [QuestionFormHelperService, SubscriptionsService]
 })
 export class BooleanQuestionComponent implements OnInit {
   @Output() saveBooleanFormEvent: EventEmitter<FormGroup<QuestionForm>> =
@@ -26,13 +25,24 @@ export class BooleanQuestionComponent implements OnInit {
   readonly PlaceHolder = PlaceHolder;
   readonly AnswerDifficultyList = AnswerDifficultyList;
   readonly AnswerBooleanList = AnswerBooleanList;
-  readonly ANSWER_PROPERTIES = ANSWER_PROPERTIES;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
   }
 
-  constructor(public questionFormHelper: QuestionFormHelperService) {}
+  get answersControl(): AnswersFormType[] {
+    return this.questionFormHelper.answersControl;
+  }
+
+  get title(): FormControl<string> {
+    return this.questionFormHelper.title;
+  }
+
+  get difficulty(): FormControl<string> {
+    return this.questionFormHelper.difficulty;
+  }
+
+  constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {
     this.initForm();
