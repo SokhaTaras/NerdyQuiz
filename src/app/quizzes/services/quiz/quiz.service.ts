@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import { Quiz } from '../../interfaces/quiz';
