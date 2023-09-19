@@ -14,6 +14,10 @@ export class AppComponent implements OnInit {
   constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
+    this.initQuizzes();
+  }
+
+  private initQuizzes(): void {
     this.quizService.initAllQuizzes(StorageKey.QUIZZES);
   }
 }

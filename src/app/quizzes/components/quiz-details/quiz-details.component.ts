@@ -12,7 +12,7 @@ import { StatisticsService } from '../../../shared/services/statistics/statistic
 
 @Component({
   selector: 'quiz-app-quiz-details',
-  templateUrl: './quiz-details.component.html',
+  templateUrl: 'quiz-details.component.html',
   providers: [SubscriptionsService]
 })
 export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
@@ -23,7 +23,8 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
     quizService: QuizService,
     route: ActivatedRoute,
     navigateTo: NavigateToService,
-    statisticsService: StatisticsService
+    statisticsService: StatisticsService,
+    subscriptionsService: SubscriptionsService
   ) {
     super(statisticsService, quizService, route, navigateTo);
   }

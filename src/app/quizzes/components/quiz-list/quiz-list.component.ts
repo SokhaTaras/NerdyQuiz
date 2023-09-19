@@ -15,18 +15,12 @@ import { SubscriptionsService } from '../../../shared/services/subscription/subs
   styleUrls: ['./quiz-list.component.scss'],
   providers: [SubscriptionsService]
 })
-export class QuizListComponent implements OnDestroy, OnInit {
+export class QuizListComponent implements OnInit {
   allQuizzes: Quiz[];
 
-  modalSubscription: Subscription;
-  initQuizSubscription: Subscription;
   isLoading: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
-
-  ngOnInit(): void {
-    this.initQuizzes();
-  }
 
   constructor(
     private quizService: QuizService,
@@ -34,6 +28,10 @@ export class QuizListComponent implements OnDestroy, OnInit {
     private navigateTo: NavigateToService,
     private subscriptionsService: SubscriptionsService
   ) {}
+
+  ngOnInit(): void {
+    this.initQuizzes();
+  }
 
   openInitPopUp(): void {
     const data: any = {
@@ -51,20 +49,15 @@ export class QuizListComponent implements OnDestroy, OnInit {
     );
   }
 
-  initQuizzes(): void {
+  private initQuizzes(): void {
     this.isLoading = true;
-    this.initQuizSubscription = this.quizService
-      .initAllQuizzes(StorageKey.QUIZZES)
-      .subscribe((quizzes): Quiz[] => {
-        this.isLoading = false;
-        return (this.allQuizzes = quizzes);
-      });
-  }
-
-  ngOnDestroy(): void {
-    if (this.modalSubscription) {
-      this.modalSubscription.unsubscribe();
-    }
-    this.initQuizSubscription.unsubscribe();
+    this.subscriptionsService.addSubscription(
+      this.quizService
+        .initAllQuizzes(StorageKey.QUIZZES)
+        .subscribe((quizzes): Quiz[] => {
+          this.isLoading = false;
+          return (this.allQuizzes = quizzes);
+        })
+    );
   }
 }

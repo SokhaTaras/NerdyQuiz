@@ -9,6 +9,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { InputComponent } from './components/input/input.component';
 import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
@@ -19,7 +20,6 @@ import { TranslateJsonPipe } from './pipes/translate-json/translate-json.pipe';
 import { ButtonComponent } from './components/button/button.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BaseQuizComponent } from './components/base-quiz/base-quiz.component';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
