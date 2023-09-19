@@ -15,9 +15,9 @@ export class PrePlayComponent
   extends BaseQuizComponent
   implements OnInit, OnDestroy
 {
-  readonly BUTTON_TYPE = BUTTON_TYPE;
-
   playMode: Boolean = false;
+
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     quizService: QuizService,

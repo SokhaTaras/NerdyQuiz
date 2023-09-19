@@ -4,7 +4,7 @@
     <p class="text-5xl xs:text-2xl w-full flex justify-center"><span class="highlighted-text">{{ 'LABELS.THEME' | translateJson }}:</span> {{ currentQuiz?.theme }}</p>
     <p *ngIf="currentQuiz.questions.length" class="text-4xl xs:text-2xl w-full flex justify-center"><span class="mx-4 underline">{{ 'LABELS.DIFFICULTY' | translateJson }}:</span> {{ quizDifficulty }}</p>
     <span class="text-4xl xs:text-2xl w-full flex justify-center"><span class="highlighted-text">{{ 'BUTTON.QUESTION_AMOUNT' | translateJson }}:</span> {{ currentQuiz.questions.length }}</span>
-    <div class="flex space-x-12 justify-center items-center w-1/2 xs:w-full">
+    <div class="flex text-2xl space-x-12 justify-center items-center w-1/2 xs:w-full xs:flex-col xs:space-x-0">
       <div class="flex items-center justify-center my-2 w-1/2 h-full xs:w-full">
         <quiz-app-button
           class="items-center justify-center h-full w-full"
