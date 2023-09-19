@@ -27,6 +27,28 @@ export class PlayComponent implements OnInit {
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
+  get cancelHandler(): void {
+    return this.currentPosition === 0
+      ? this.cancelQuizConfirm()
+      : this.previousQuestion();
+  }
+
+  get confirmHandler(): void {
+    return this.currentPosition !== this.questions.length - 1
+      ? this.nextQuestion(this.currentQuestion)
+      : this.finishQuiz(this.currentQuestion);
+  }
+
+  get cancelText(): string {
+    return this.currentPosition === 0 ? 'BUTTON.CANCEL' : 'BUTTON.PREVIOUS';
+  }
+
+  get confirmText(): string {
+    const isNotLastQuestion =
+      this.currentPosition !== this.questions.length - 1;
+    return isNotLastQuestion ? 'BUTTON.NEXT' : 'BUTTON.FINISH';
+  }
+
   constructor(
     private modalQuizService: ModalQuizService,
     private quizService: QuizService,
@@ -37,6 +59,10 @@ export class PlayComponent implements OnInit {
   ngOnInit(): void {
     this.initQuestions();
     this.startTimer();
+  }
+
+  selectAnswer(answer: Answer): void {
+    this.selectedAnswer = answer;
   }
 
   cancelQuizConfirm(): void {
@@ -69,10 +95,6 @@ export class PlayComponent implements OnInit {
         .subscribe()
     );
     this.currentQuestion = this.questions[this.currentPosition];
-  }
-
-  selectAnswer(answer: Answer): void {
-    this.selectedAnswer = answer;
   }
 
   addQuestionResult(question: Question): void {
