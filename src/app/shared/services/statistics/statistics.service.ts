@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Quiz } from '../../../quizzes/interfaces/quiz';
 import {
-  DifficultyRanges,
-  DifficultyPoints
+  DifficultyPoints,
+  DifficultyRanges
 } from '../../../questions/constants/questions-info';
 import { QuestionResult } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../local-storage/local-storage.service';

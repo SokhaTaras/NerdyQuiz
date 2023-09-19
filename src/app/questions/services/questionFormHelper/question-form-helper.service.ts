@@ -6,7 +6,6 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { Subscription } from 'rxjs';
 
 import {
   AnswerBooleanList,
@@ -31,8 +30,6 @@ export const defaultFormValues = {
 @Injectable()
 export class QuestionFormHelperService {
   currentForm: FormGroup<QuestionForm>;
-
-  radioButtonsSubscription: Subscription;
 
   get title(): FormControl {
     return this.currentForm?.controls?.title;
@@ -115,10 +112,6 @@ export class QuestionFormHelperService {
   }
 
   private initRadioButtons(): void {
-    if (this.radioButtonsSubscription) {
-      this.radioButtonsSubscription.unsubscribe();
-    }
-
     this.answersFormArray.controls.forEach((control, index) => {
       this.subscriptionsService.addSubscription(
         control.valueChanges.subscribe((checked) => {
