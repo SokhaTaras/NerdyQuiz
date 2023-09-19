@@ -1,6 +1,9 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
-import { QUESTION_DIFFICULTY, QUESTION_TYPE } from '../enums/question-info';
+import {
+  QUESTION_DIFFICULTY,
+  QUESTION_TYPE
+} from '@a-shared/enums/question-info';
 
 export interface InitQuizForm {
   title: FormControl<string>;

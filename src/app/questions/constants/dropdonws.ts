@@ -1,9 +1,9 @@
-import { DropDownItem } from '../interfaces/question';
+import { DropDownItem } from '@a-questions/interfaces/question';
 import {
   QUESTION_BOOLEAN,
   QUESTION_DIFFICULTY,
   QUESTION_TYPE
-} from '../../shared/enums/question-info';
+} from '@a-shared/enums/question-info';
 
 export const AnswerBooleanList: DropDownItem[] = [
   {

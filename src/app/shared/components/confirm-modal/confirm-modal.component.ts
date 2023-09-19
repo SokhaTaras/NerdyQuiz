@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ModalRefFacadeService } from '../../services/modal-ref-facade/modal-ref-facade.service';
+import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 
 @Component({
   selector: 'quiz-app-confirm-modal',

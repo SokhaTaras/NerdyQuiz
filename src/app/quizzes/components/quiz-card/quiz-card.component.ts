@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Quiz } from '../../interfaces/quiz';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
-import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
-import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
+import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
+import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
 
 @Component({
   selector: 'quiz-app-quiz-card',
@@ -17,7 +17,10 @@ export class QuizCardComponent implements OnInit {
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  constructor(private statisticsService: StatisticsService, private navigateTo: NavigateToService) {}
+  constructor(
+    private statisticsService: StatisticsService,
+    private navigateTo: NavigateToService
+  ) {}
 
   ngOnInit(): void {
     this.getAverageQuizDifficulty();

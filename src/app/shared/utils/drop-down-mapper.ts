@@ -1,4 +1,4 @@
-import { DropDownItem } from '../../questions/interfaces/question';
+import { DropDownItem } from '@a-questions/interfaces/question';
 
 export function mapArrayToDropDownItems<T>(
   array: T[],

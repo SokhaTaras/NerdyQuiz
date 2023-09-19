@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { BUTTON_TYPE } from '../../enums/buttonType';
+import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-button',

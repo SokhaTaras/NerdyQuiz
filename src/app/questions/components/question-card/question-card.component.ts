@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
-import { ModalQuizService } from '../../../quizzes/services/modal-quiz/modal-quiz.service';
-import { Question } from '../../interfaces/question';
-import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
+import { Question } from '@a-questions/interfaces/question';
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-question-card',

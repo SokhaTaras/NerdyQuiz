@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { Quiz } from '../../../quizzes/interfaces/quiz';
+import { LocalStorageService } from '@a-shared/services/local-storage/local-storage.service';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 import {
   DifficultyPoints,
   DifficultyRanges
-} from '../../../questions/constants/questions-info';
-import { QuestionResult } from '../../../questions/interfaces/question';
-import { LocalStorageService } from '../local-storage/local-storage.service';
-import { StorageKey } from '../../enums/storageKey';
-import { DifficultiesEnum } from '../../enums/question-info';
+} from '@a-questions/constants/questions-info';
+import { QuestionResult } from '@a-questions/interfaces/question';
+import { StorageKey } from '@a-shared/enums/storageKey';
+import { DifficultiesEnum } from '@a-shared/enums/question-info';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,4 @@
-import { Question } from '../../questions/interfaces/question';
+import { Question } from '@a-questions/interfaces/question';
 
 export interface Quiz {
   title?: string;

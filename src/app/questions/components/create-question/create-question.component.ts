@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { QuestionForm } from '../../../shared/types/forms';
-import { Question } from '../../interfaces/question';
-import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { QuestionForm } from '@a-shared/types/forms';
+import { Question } from '@a-questions/interfaces/question';
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-create-question',

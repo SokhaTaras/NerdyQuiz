@@ -11,15 +11,15 @@ import {
   AnswerBooleanList,
   AnswerDifficultyList,
   AnswerTypeList
-} from '../../constants/dropdonws';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+} from '@a-questions/constants/dropdonws';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import {
   ANSWER_PROPERTIES,
   QUESTION_DIFFICULTY,
   QUESTION_TYPE
-} from '../../../shared/enums/question-info';
-import { AnswersFormType, QuestionForm } from '../../../shared/types/forms';
-import { Answer, Question } from '../../interfaces/question';
+} from '@a-shared/enums/question-info';
+import { AnswersFormType, QuestionForm } from '@a-shared/types/forms';
+import { Answer, Question } from '@a-questions/interfaces/question';
 
 export const defaultFormValues = {
   title: '',

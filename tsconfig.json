@@ -25,7 +25,12 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@a-shared/*": ["src/app/shared/*"],
+      "@a-questions/*": ["src/app/questions/*"],
+      "@a-quizzes/*": ["src/app/quizzes/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

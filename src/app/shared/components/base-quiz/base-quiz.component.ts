@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { QuizService } from '../../../quizzes/services/quiz/quiz.service';
-import { Quiz } from '../../../quizzes/interfaces/quiz';
-import { NavigateToService } from '../../services/navigate-to/navigate-to.service';
-import { StatisticsService } from '../../services/statistics/statistics.service';
-import { SubscriptionsService } from '../../services/subscription/subscriptions.service';
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
+import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',

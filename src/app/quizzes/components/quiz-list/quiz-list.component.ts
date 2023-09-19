@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 
-import { QuizService } from '../../services/quiz/quiz.service';
-import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
-import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
-import { StorageKey } from '../../../shared/enums/storageKey';
-import { Quiz } from '../../interfaces/quiz';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
+import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
+import { StorageKey } from '@a-shared/enums/storageKey';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 
 @Component({
   selector: 'quiz-app-quiz-list',

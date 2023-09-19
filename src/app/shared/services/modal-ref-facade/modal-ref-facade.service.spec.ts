@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ModalRefFacadeService } from './modal-ref-facade.service';
+import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 
 describe('ModalRefFacadeService', () => {
   let service: ModalRefFacadeService;

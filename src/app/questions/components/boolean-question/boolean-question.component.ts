@@ -1,17 +1,17 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { PlaceHolder } from '../../../shared/enums/placeHolder';
+import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import {
   AnswerBooleanList,
   AnswerDifficultyList
-} from '../../constants/dropdonws';
-import { QuestionForm } from '../../../shared/types/forms';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
-import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
-import { QUESTION_TYPE } from '../../../shared/enums/question-info';
-import { Question } from '../../interfaces/question';
-import { AnswersFormType } from '../../../shared/types/forms';
+} from '@a-questions/constants/dropdonws';
+import { QuestionForm } from '@a-shared/types/forms';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { QuestionFormHelperService } from '@a-questions/services/questionFormHelper/question-form-helper.service';
+import { QUESTION_TYPE } from '@a-shared/enums/question-info';
+import { Question } from '@a-questions/interfaces/question';
+import { AnswersFormType } from '@a-shared/types/forms';
 
 @Component({
   selector: 'quiz-app-boolean-question',

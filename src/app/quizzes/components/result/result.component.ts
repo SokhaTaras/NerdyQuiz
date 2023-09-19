@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { QuizService } from '../../services/quiz/quiz.service';
-import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
-import { Result } from '../../../shared/enums/result';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
-import { QuestionResult } from '../../../questions/interfaces/question';
-import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
-import { Quiz } from '../../interfaces/quiz';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
+import { Result } from '@a-shared/enums/result';
+import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
+import { QuestionResult } from '@a-questions/interfaces/question';
+import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 
 @Component({
   selector: 'quiz-app-result',

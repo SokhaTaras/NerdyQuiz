@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
-import { FORM_STATUS } from '../../enums/formStatus';
-import { SubscriptionsService } from '../../services/subscription/subscriptions.service';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { FORM_STATUS } from '@a-shared/enums/formStatus';
 
 @Component({
   selector: 'quiz-app-error-message',

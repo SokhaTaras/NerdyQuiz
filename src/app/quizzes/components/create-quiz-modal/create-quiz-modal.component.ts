@@ -2,12 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { QuizService } from '../../services/quiz/quiz.service';
-import { InitQuizForm } from '../../../shared/types/forms';
-import { Quiz } from '../../interfaces/quiz';
-import { PlaceHolder } from '../../../shared/enums/placeHolder';
-import { ModalRefFacadeService } from '../../../shared/services/modal-ref-facade/modal-ref-facade.service';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { InitQuizForm } from '@a-shared/types/forms';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { PlaceHolder } from '@a-shared/enums/placeHolder';
+import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',

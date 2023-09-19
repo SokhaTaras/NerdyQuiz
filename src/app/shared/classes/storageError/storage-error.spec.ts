@@ -1,4 +1,4 @@
-import { StorageError } from './storage-error';
+import { StorageError } from '@a-shared/classes/storageError/storage-error';
 
 describe('StorageError', () => {
   it('should create an instance', () => {

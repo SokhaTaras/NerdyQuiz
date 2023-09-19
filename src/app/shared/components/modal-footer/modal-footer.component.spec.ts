@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalFooterComponent } from './modal-footer.component';
+import { ModalFooterComponent } from '@a-shared/components/modal-footer/modal-footer.component';
 
 describe('ModalFooterComponent', () => {
   let component: ModalFooterComponent;

@@ -1,5 +1,5 @@
-import { TranslateJsonPipe } from './translate-json.pipe';
-import { TranslationsService } from '../../services/translation/translations.service';
+import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json.pipe';
+import { TranslationsService } from '@a-shared/services/translation/translations.service';
 
 describe('TranslateJsonPipe', () => {
   it('create an instance', () => {

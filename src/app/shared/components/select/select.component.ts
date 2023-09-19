@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { DropDownItem } from '../../../questions/interfaces/question';
 import { FormControl } from '@angular/forms';
+
+import { DropDownItem } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-select',

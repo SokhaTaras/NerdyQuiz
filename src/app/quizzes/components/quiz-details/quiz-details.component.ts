@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
 
-import { QuizService } from '../../services/quiz/quiz.service';
-import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
-import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
-import { BaseQuizComponent } from '../../../shared/components/base-quiz/base-quiz.component';
-import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
-import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
+import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
+import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
+import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
+import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',

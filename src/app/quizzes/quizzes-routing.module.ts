@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
-import { PrePlayComponent } from './components/pre-play/pre-play.component';
-import { ResultComponent } from './components/result/result.component';
+import { QuizDetailsComponent } from '@a-quizzes/components/quiz-details/quiz-details.component';
+import { PrePlayComponent } from '@a-quizzes/components/pre-play/pre-play.component';
+import { ResultComponent } from '@a-quizzes/components/result/result.component';
 
 const routes: Routes = [
   {

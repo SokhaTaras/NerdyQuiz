@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { StorageError } from '../../classes/storageError/storage-error';
-import { STORAGE_ERROR_MESSAGE } from '../../enums/storageErrorMessage';
+import { STORAGE_ERROR_MESSAGE } from '@a-shared/enums/storageErrorMessage';
+import { StorageError } from '@a-shared/classes/storageError/storage-error';
 
 @Injectable({
   providedIn: 'root'

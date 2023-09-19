@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
-import { Quiz } from '../../interfaces/quiz';
 import {
   Answer,
   Question,
   QuestionResult
-} from '../../../questions/interfaces/question';
-import { LocalStorageService } from '../../../shared/services/local-storage/local-storage.service';
-import { getNewQuestionId, getNewQuizId } from '../../../shared/utils/getId';
-import { StorageKey } from '../../../shared/enums/storageKey';
+} from '@a-questions/interfaces/question';
+import { LocalStorageService } from '@a-shared/services/local-storage/local-storage.service';
+import { getNewQuestionId, getNewQuizId } from '@a-shared/utils/getId';
+import { StorageKey } from '@a-shared/enums/storageKey';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import {
   QUESTION_DIFFICULTY,
   QUESTION_TYPE
-} from '../../shared/enums/question-info';
+} from '@a-shared/enums/question-info';
 
 export interface Question {
   title?: string;
