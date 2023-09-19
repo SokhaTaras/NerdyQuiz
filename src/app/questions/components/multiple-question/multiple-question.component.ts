@@ -2,17 +2,18 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '../../../shared/enums/placeHolder';
+import { QuestionForm } from '../../../shared/types/forms';
 import {
   maxQuestionsAmount,
   minQuestionsAmount
 } from '../../constants/questions-info';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 import { AnswerDifficultyList } from '../../constants/dropdonws';
 import { QUESTION_TYPE } from '../../../shared/enums/question-info';
 import { Question } from '../../interfaces/question';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
-import { AnswersFormType, QuestionForm } from '../../../shared/types/forms';
+import { AnswersFormType } from '../../../shared/types/forms';
 import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-multiple-question',
