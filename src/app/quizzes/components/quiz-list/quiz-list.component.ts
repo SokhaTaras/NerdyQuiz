@@ -16,7 +16,7 @@ import { Quiz } from '../../interfaces/quiz';
 })
 export class QuizListComponent implements OnInit {
   allQuizzes: Quiz[];
-  isLoading: Boolean;
+  isLoading: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
