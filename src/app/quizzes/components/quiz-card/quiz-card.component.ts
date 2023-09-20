@@ -49,5 +49,9 @@ export class QuizCardComponent {
     );
   }
 
-  private deleteQuiz(): void {}
+  private deleteQuiz(): void {
+    this.subscriptionsService.addSubscription(
+      this.quizService.deleteQuiz(this.quiz).subscribe()
+    );
+  }
 }

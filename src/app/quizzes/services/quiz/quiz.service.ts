@@ -59,6 +59,26 @@ export class QuizService {
     });
   }
 
+  deleteQuiz(quiz: Quiz): Observable<Quiz> {
+    return new Observable<Quiz>((subscriber) => {
+      const currentQuizzes = [...this.quizzes$.value];
+      const quizIndex = currentQuizzes.findIndex((q) => q.id === quiz.id);
+
+      if (quizIndex !== -1) {
+        const deletedQuiz = currentQuizzes.splice(quizIndex, 1);
+        this.quizzes$.next(currentQuizzes);
+        this.localStorageService.updateLocalStorage(
+          StorageKey.QUIZZES,
+          this.quizzes$.value
+        );
+        subscriber.next(deletedQuiz[0]);
+      } else {
+        subscriber.error();
+      }
+      subscriber.complete();
+    });
+  }
+
   getQuizById(id: string): Observable<Quiz> {
     return this.quizzes$.pipe(
       map((quizzes) => quizzes.find((q) => q.id == id))

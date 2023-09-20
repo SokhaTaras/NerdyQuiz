@@ -1,23 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
-import { StorageKey } from '@a-shared/enums/storageKey';
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'nerdyQuiz-app';
-
-  constructor(private quizService: QuizService) {}
-
-  ngOnInit(): void {
-    this.initQuizzes();
-  }
-
-  private initQuizzes(): void {
-    this.quizService.initAllQuizzes(StorageKey.QUIZZES);
-  }
 }

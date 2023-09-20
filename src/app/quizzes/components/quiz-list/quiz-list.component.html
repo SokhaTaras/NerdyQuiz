@@ -5,7 +5,7 @@
       </quiz-app-button>
     </div>
     <div class="quiz-list">
-      <div class="quiz-list-item" *ngFor="let quiz of allQuizzes ">
+      <div class="quiz-list-item" *ngFor="let quiz of allQuizzes$ | async ">
         <quiz-app-quiz-card [quiz]="quiz" class="flex justify-center items-center"></quiz-app-quiz-card>
       </div>
     </div>

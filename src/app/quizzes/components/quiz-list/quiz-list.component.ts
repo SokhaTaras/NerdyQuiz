@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
@@ -15,7 +16,8 @@ import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.serv
   providers: [SubscriptionsService]
 })
 export class QuizListComponent implements OnInit {
-  allQuizzes: Quiz[];
+  allQuizzes$ = new BehaviorSubject<Quiz[]>([]);
+
   isLoading: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
@@ -49,13 +51,13 @@ export class QuizListComponent implements OnInit {
 
   private initQuizzes(): void {
     this.isLoading = true;
+
     this.subscriptionsService.addSubscription(
-      this.quizService
-        .initAllQuizzes(StorageKey.QUIZZES)
-        .subscribe((quizzes): Quiz[] => {
-          this.isLoading = false;
-          return (this.allQuizzes = quizzes);
-        })
+      this.quizService.initAllQuizzes(StorageKey.QUIZZES).subscribe(() => {
+        this.isLoading = false;
+      })
     );
+
+    this.allQuizzes$ = this.quizService.quizzes$;
   }
 }

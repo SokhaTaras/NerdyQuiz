@@ -27,9 +27,7 @@ export class QuestionCardComponent {
   deleteQuestionConfirm(): void {
     const data: any = {
       text: 'CONFIRM_MODAL_TEXT.DELETE_QUESTION',
-      buttonText: 'LABELS.DELETE',
-      questionIndex: this.questionIndex,
-      quizId: this.quizId
+      buttonText: 'LABELS.DELETE'
     };
 
     this.subscriptionsService.addSubscription(
@@ -37,13 +35,13 @@ export class QuestionCardComponent {
         .confirmDeletionModal(data)
         .onClose.subscribe((isConfirm) => {
           if (isConfirm) {
-            this.deleteQuiz();
+            this.deleteQuestion();
           }
         })
     );
   }
 
-  private deleteQuiz(): void {
+  private deleteQuestion(): void {
     this.subscriptionsService.addSubscription(
       this.quizService
         .deleteQuestion(this.quizId, this.questionIndex)

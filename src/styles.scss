@@ -103,11 +103,11 @@ button {
   }
 
   .popover-default-item {
-    @apply flex justify-center items-center hover:bg-black/5 rounded h-8 w-full
+    @apply flex justify-center items-center hover:bg-black/5 rounded h-8 w-full hover:cursor-pointer
   }
 
   .popover-remove-item {
-    @apply flex justify-center items-center hover:bg-black/5 rounded h-8 w-full text-error
+    @apply flex justify-center items-center hover:bg-black/5 rounded h-8 w-full text-error hover:cursor-pointer
   }
 
   .disabled-button {
