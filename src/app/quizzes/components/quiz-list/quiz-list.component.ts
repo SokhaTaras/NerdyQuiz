@@ -16,7 +16,6 @@ import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.serv
 })
 export class QuizListComponent implements OnInit {
   allQuizzes: Quiz[];
-
   isLoading: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;

@@ -6,13 +6,13 @@ import {
   maxQuestionsAmount,
   minQuestionsAmount
 } from '@a-questions/constants/questions-info';
+import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 import { AnswerDifficultyList } from '../../constants/dropdonws';
 import { QUESTION_TYPE } from '@a-shared/enums/question-info';
 import { Question } from '@a-questions/interfaces/question';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { AnswersFormType, QuestionForm } from '@a-shared/types/forms';
 import { QuestionFormHelperService } from '@a-questions/services/questionFormHelper/question-form-helper.service';
-import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
 
 @Component({
   selector: 'quiz-app-multiple-question',
