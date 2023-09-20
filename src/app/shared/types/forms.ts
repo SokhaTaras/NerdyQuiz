@@ -4,10 +4,12 @@ import {
   QUESTION_DIFFICULTY,
   QUESTION_TYPE
 } from '@a-shared/enums/question-info';
+import { QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 
 export interface InitQuizForm {
   title: FormControl<string>;
   theme: FormControl<string>;
+  difficulty: FormControl<QUIZ_DIFFICULTY>;
 }
 
 export interface QuestionForm {

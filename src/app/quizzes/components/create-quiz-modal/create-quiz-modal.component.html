@@ -1,9 +1,24 @@
 <div class="container p-6">
   <h1 class="modal-title">{{ label | translateJson }}</h1>
-  <form class="flex justify-center" [formGroup]="initQuizForm">
+  <form class="flex justify-center mb-4" [formGroup]="initQuizForm">
     <div class="flex flex-col space-y-4 w-1/2">
-      <quiz-app-input [control]="title" label="Title" [placeHolder]="PlaceHolder.title | translateJson"></quiz-app-input>
-      <quiz-app-input [control]="theme" label="Theme" [placeHolder]="PlaceHolder.theme | translateJson"></quiz-app-input>
+      <quiz-app-input
+        [control]="title"
+        [label]="'LABELS.TITLE' | translateJson"
+        [placeHolder]="PlaceHolder.title | translateJson">
+      </quiz-app-input>
+      <quiz-app-input
+        [control]="theme"
+        [label]="'LABELS.THEME' | translateJson"
+        [placeHolder]="PlaceHolder.theme | translateJson">
+      </quiz-app-input>
+      <quiz-app-select
+        class="w-full flex justify-center items-center"
+        [control]="difficulty"
+        [label]="'LABELS.DIFFICULTY' | translateJson"
+        [list]="AnswerDifficultyList"
+        [placeHolder]="selectedDifficultyItem.text | translateJson">
+      </quiz-app-select>
     </div>
   </form>
  <quiz-app-modal-footer

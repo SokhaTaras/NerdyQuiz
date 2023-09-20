@@ -45,6 +45,7 @@ export class QuizService {
       if (quizIndex !== -1) {
         currentQuizzes[quizIndex].title = data.title;
         currentQuizzes[quizIndex].theme = data.theme;
+        currentQuizzes[quizIndex].difficulty = data.difficulty;
         this.quizzes$.next(currentQuizzes);
         this.localStorageService.updateLocalStorage(
           StorageKey.QUIZZES,

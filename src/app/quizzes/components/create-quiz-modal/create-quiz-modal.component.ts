@@ -1,13 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { InitQuizForm } from '@a-shared/types/forms';
-import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { AnswerDifficultyList } from '@a-questions/constants/dropdonws';
+import { DropDownItem } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -23,13 +30,24 @@ export class CreateQuizModalComponent implements OnInit {
   initQuizForm: FormGroup<InitQuizForm>;
 
   readonly PlaceHolder = PlaceHolder;
+  readonly AnswerDifficultyList = AnswerDifficultyList;
 
-  get title() {
+  get title(): FormControl<string> {
     return this.initQuizForm.controls.title;
   }
 
-  get theme() {
+  get theme(): FormControl<string> {
     return this.initQuizForm.controls.theme;
+  }
+
+  get difficulty(): FormControl<QUIZ_DIFFICULTY> {
+    return this.initQuizForm.controls.difficulty;
+  }
+
+  get selectedDifficultyItem(): DropDownItem {
+    return this.AnswerDifficultyList.find(
+      (item) => item.value === this.difficulty.value
+    );
   }
 
   constructor(
@@ -90,14 +108,16 @@ export class CreateQuizModalComponent implements OnInit {
       theme: this.fb.control(this.quiz.theme || '', [
         Validators.required,
         Validators.minLength(2)
-      ])
+      ]),
+      difficulty: this.fb.control(this.quiz.difficulty || QUIZ_DIFFICULTY.EASY)
     });
   }
 
   private getFormData(): Quiz {
     const quiz: Quiz = {
-      title: this.initQuizForm.controls.title.value,
-      theme: this.initQuizForm.controls.theme.value,
+      title: this.title.value,
+      theme: this.theme.value,
+      difficulty: this.difficulty.value,
       questions: []
     };
 
