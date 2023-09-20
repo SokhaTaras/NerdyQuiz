@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
-import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
 import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 
@@ -15,22 +14,16 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
 })
 export class PrePlayComponent extends BaseQuizComponent implements OnInit {
   playMode: Boolean = false;
+
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     quizService: QuizService,
     route: ActivatedRoute,
     navigateTo: NavigateToService,
-    statisticsService: StatisticsService,
     subscriptionsService: SubscriptionsService
   ) {
-    super(
-      statisticsService,
-      quizService,
-      route,
-      navigateTo,
-      subscriptionsService
-    );
+    super(quizService, route, navigateTo, subscriptionsService);
   }
 
   togglePlayMode() {

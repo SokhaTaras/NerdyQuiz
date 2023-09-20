@@ -6,7 +6,6 @@ import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.se
 import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
-import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 
 @Component({
@@ -22,16 +21,9 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
     quizService: QuizService,
     route: ActivatedRoute,
     navigateTo: NavigateToService,
-    statisticsService: StatisticsService,
     subscriptionsService: SubscriptionsService
   ) {
-    super(
-      statisticsService,
-      quizService,
-      route,
-      navigateTo,
-      subscriptionsService
-    );
+    super(quizService, route, navigateTo, subscriptionsService);
   }
 
   openEditPopUp(): void {

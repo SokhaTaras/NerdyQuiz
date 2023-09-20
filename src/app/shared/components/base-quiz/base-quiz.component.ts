@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
-import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 
@@ -17,7 +16,6 @@ export class BaseQuizComponent implements OnInit {
   quizDifficulty: string;
 
   constructor(
-    private statisticsService: StatisticsService,
     private quizService: QuizService,
     private route: ActivatedRoute,
     private navigateTo: NavigateToService,
@@ -27,7 +25,6 @@ export class BaseQuizComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentQuizId();
     this.currentQuizSubscribe();
-    this.getAverageQuizDifficulty();
   }
 
   goHome(): void {
@@ -43,12 +40,6 @@ export class BaseQuizComponent implements OnInit {
       this.quizService.getQuizById(this.id).subscribe((currentQuiz) => {
         this.currentQuiz = currentQuiz;
       })
-    );
-  }
-
-  private getAverageQuizDifficulty(): void {
-    this.quizDifficulty = this.statisticsService.getAverageQuizDifficulty(
-      this.currentQuiz
     );
   }
 }
