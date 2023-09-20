@@ -1,4 +1,4 @@
-<div class="container rounded bg-white shadow pt-4 flex items-center justify-center">
+<div class="container rounded bg-white shadow py-2 flex items-center justify-center">
   <div class="card-title">
     {{ quiz?.title }}
   </div>
@@ -8,12 +8,24 @@
   <div class="card-location">
     {{ 'BUTTON.QUESTION_AMOUNT' | translateJson }} {{ quiz?.questions?.length || 0 }}
   </div>
-  <div class="flex content-center justify-center w-full">
-    <quiz-app-button
-      class="w-full"
-      [type]="BUTTON_TYPE.PRIMARY"
-      (whenClicked)="goPlay()">
-      {{ 'BUTTON.PLAY' | translateJson }}
-    </quiz-app-button>
+  <div class="flex-row flex items-center justify-evenly w-full">
+    <div class="flex-row flex items-center justify-evenly w-4/5">
+      <div class="flex content-center justify-center w-full">
+        <quiz-app-button
+          class="w-3/4"
+          [type]="BUTTON_TYPE.SECONDARY"
+          (whenClicked)="goEdit()">
+          {{ 'BUTTON.EDIT' | translateJson }}
+        </quiz-app-button>
+      </div>
+      <div class="flex content-center justify-center w-full">
+        <quiz-app-button
+          class="w-3/4"
+          [type]="BUTTON_TYPE.PRIMARY"
+          (whenClicked)="goPlay()">
+          {{ 'BUTTON.PLAY' | translateJson }}
+        </quiz-app-button>
+      </div>
+    </div>
   </div>
 </div>

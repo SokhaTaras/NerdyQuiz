@@ -19,4 +19,8 @@ export class QuizCardComponent {
   goPlay(): void {
     this.navigateTo.navigatePlay(this.quiz);
   }
+
+  goEdit(): void {
+    this.navigateTo.navigateToQuizDetailsPage(this.quiz.id);
+  }
 }
