@@ -11,16 +11,16 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-import { InputComponent } from './components/input/input.component';
-import { ModalFooterComponent } from './components/modal-footer/modal-footer.component';
-import { ErrorMessageComponent } from './components/error-message/error-message.component';
-import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
-import { RadioButtonComponent } from './components/radio-button/radio-button.component';
-import { TranslateJsonPipe } from './pipes/translate-json/translate-json.pipe';
-import { ButtonComponent } from './components/button/button.component';
-import { LoaderComponent } from './components/loader/loader.component';
-import { BaseQuizComponent } from './components/base-quiz/base-quiz.component';
-import { SelectComponent } from './components/select/select.component';
+import { SelectComponent } from '@a-shared/components/select/select.component';
+import { InputComponent } from '@a-shared/components/input/input.component';
+import { ModalFooterComponent } from '@a-shared/components/modal-footer/modal-footer.component';
+import { ErrorMessageComponent } from '@a-shared/components/error-message/error-message.component';
+import { ConfirmModalComponent } from '@a-shared/components/confirm-modal/confirm-modal.component';
+import { RadioButtonComponent } from '@a-shared/components/radio-button/radio-button.component';
+import { ButtonComponent } from '@a-shared/components/button/button.component';
+import { LoaderComponent } from '@a-shared/components/loader/loader.component';
+import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
+import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json.pipe';
 
 @NgModule({
   declarations: [
