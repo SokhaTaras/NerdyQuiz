@@ -6,27 +6,12 @@ import {
   Question,
   QuestionResult
 } from '../../../questions/interfaces/question';
-import { StorageKey } from '../../enums/storageKey';
-import { LocalStorageService } from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizHelperService {
   questionsResults = new BehaviorSubject<QuestionResult[]>([]);
-
-  constructor(private localStorageService: LocalStorageService) {}
-
-  setQuizResult(): Observable<QuestionResult[]> {
-    return new Observable((subscriber) => {
-      this.localStorageService.updateLocalStorage(
-        StorageKey.QUIZ_RESULT,
-        this.questionsResults.value
-      );
-      subscriber.next(this.questionsResults.value);
-      subscriber.complete();
-    });
-  }
 
   addQuestionResult(
     question: Question,

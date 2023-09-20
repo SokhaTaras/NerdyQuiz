@@ -135,4 +135,17 @@ export class QuizService {
       subscriber.complete();
     });
   }
+
+  setQuizResult(
+    questionResults: BehaviorSubject<QuestionResult[]>
+  ): Observable<QuestionResult[]> {
+    return new Observable((subscriber) => {
+      this.localStorageService.updateLocalStorage(
+        StorageKey.QUIZ_RESULT,
+        questionResults.value
+      );
+      subscriber.next(questionResults.value);
+      subscriber.complete();
+    });
+  }
 }

@@ -126,9 +126,10 @@ export class PlayComponent implements OnInit {
 
   //todo redirect to result page on finish, when that page will be ready
   finishQuiz(lastQuestion: Question): void {
+    const results = this.quizHelperService.questionsResults;
     this.addQuestionResult(lastQuestion);
     this.subscriptions.addSubscription(
-      this.quizHelperService.setQuizResult().subscribe()
+      this.quizService.setQuizResult(results).subscribe()
     );
     this.navigateTo.navigateHome();
   }
