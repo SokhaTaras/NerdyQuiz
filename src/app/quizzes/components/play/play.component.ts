@@ -44,6 +44,10 @@ export class PlayComponent implements OnInit {
     return this.currentPosition === 0 ? 'BUTTON.CANCEL' : 'BUTTON.PREVIOUS';
   }
 
+  get isDisabled(): boolean {
+    return this.selectedAnswer === null || this.selectedAnswer === undefined;
+  }
+
   get confirmText(): string {
     const isNotLastQuestion =
       this.currentPosition !== this.questions.length - 1;
@@ -86,14 +90,24 @@ export class PlayComponent implements OnInit {
   }
 
   nextQuestion(question: Question): void {
+    const maxPosition = this.questions?.length;
+    const nextQuestionAnswer =
+      this.quizHelperService.questionsResults.value[this.currentPosition + 1]
+        ?.answer;
+
     this.currentPosition += 1;
+    this.currentQuestion = this.questions[this.currentPosition];
     this.addQuestionResult(question);
+
+    if (this.currentPosition < maxPosition) {
+      this.selectAnswer(nextQuestionAnswer);
+    }
   }
 
   previousQuestion(): void {
     const previouslySelectedAnswer =
-      this.quizHelperService.questionsResults.value[this.currentPosition]
-        .answer;
+      this.quizHelperService.questionsResults.value[this.currentPosition - 1]
+        ?.answer;
     this.currentPosition -= 1;
     this.currentQuestion = this.questions[this.currentPosition];
     this.selectAnswer(previouslySelectedAnswer);

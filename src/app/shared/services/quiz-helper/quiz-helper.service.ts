@@ -19,7 +19,6 @@ export class QuizHelperService {
 
   setQuizResult(): Observable<QuestionResult[]> {
     return new Observable((subscriber) => {
-      console.log(this.questionsResults.value);
       this.localStorageService.updateLocalStorage(
         StorageKey.QUIZ_RESULT,
         this.questionsResults.value
