@@ -7,6 +7,7 @@ import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { QuizService } from '../../services/quiz/quiz.service';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { QuizHelperService } from '../../../shared/services/quiz-helper/quiz-helper.service';
 
 @Component({
   selector: 'quiz-app-play',
@@ -52,11 +53,13 @@ export class PlayComponent implements OnInit {
   constructor(
     private modalQuizService: ModalQuizService,
     private quizService: QuizService,
+    private quizHelperService: QuizHelperService,
     private navigateTo: NavigateToService,
     private subscriptions: SubscriptionsService
   ) {}
 
   ngOnInit(): void {
+    this.quizHelperService.questionsResults.next([]);
     this.initQuestions();
     this.startTimer();
   }
@@ -88,19 +91,18 @@ export class PlayComponent implements OnInit {
   }
 
   previousQuestion(): void {
+    const previouslySelectedAnswer =
+      this.quizHelperService.questionsResults.value[this.currentPosition]
+        .answer;
     this.currentPosition -= 1;
-    this.subscriptions.addSubscription(
-      this.quizService
-        .removeLastQuestionResult(this.currentPosition)
-        .subscribe()
-    );
     this.currentQuestion = this.questions[this.currentPosition];
+    this.selectAnswer(previouslySelectedAnswer);
   }
 
   addQuestionResult(question: Question): void {
     const maxPosition = this.questions?.length;
     this.subscriptions.addSubscription(
-      this.quizService
+      this.quizHelperService
         .addQuestionResult(question, this.selectedAnswer, this.secondsCounter)
         .subscribe()
     );
@@ -115,7 +117,7 @@ export class PlayComponent implements OnInit {
   finishQuiz(lastQuestion: Question): void {
     this.addQuestionResult(lastQuestion);
     this.subscriptions.addSubscription(
-      this.quizService.setQuizResult().subscribe()
+      this.quizHelperService.setQuizResult().subscribe()
     );
     this.navigateTo.navigateHome();
   }

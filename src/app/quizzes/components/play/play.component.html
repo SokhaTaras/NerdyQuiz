@@ -7,7 +7,11 @@
       <p class="question-info text-3xl"><span class="highlighted-text">{{ 'LABELS.TIME' | translateJson }}: </span>{{ timer$ | async }}</p>
     </div>
   </div>
-  <quiz-app-answer-selection [currentQuestion]="currentQuestion" (whenSelectAnswer)="selectAnswer($event)"></quiz-app-answer-selection>
+  <quiz-app-answer-selection
+    [currentQuestion]="currentQuestion"
+    [selectedAnswer]="selectedAnswer"
+    (whenSelectAnswer)="selectAnswer($event)">
+  </quiz-app-answer-selection>
   <div class="flex justify-center items-center h-1/4 w-full">
     <div class="w-1/2 h-1/2 flex items-center justify-evenly xs:w-full">
       <quiz-app-button

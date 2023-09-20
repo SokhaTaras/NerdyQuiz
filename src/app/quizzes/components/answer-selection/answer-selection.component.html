@@ -6,7 +6,7 @@
       *ngFor="let answer of currentQuestion?.answers">
       <quiz-app-button
         [type]="BUTTON_TYPE.PRIMARY"
-        (click)="selectAnswer(answer)">
+        (whenClicked)="selectAnswer(answer)">
         {{ answer?.text | translateJson }}
       </quiz-app-button>
     </div>

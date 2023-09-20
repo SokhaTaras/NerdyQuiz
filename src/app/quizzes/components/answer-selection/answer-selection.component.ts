@@ -9,14 +9,12 @@ import { Answer, Question } from '../../../questions/interfaces/question';
 })
 export class AnswerSelectionComponent {
   @Input() currentQuestion: Question;
+  @Input() selectedAnswer: Answer;
   @Output() whenSelectAnswer = new EventEmitter<Answer>();
-
-  selectedAnswer: Answer;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   selectAnswer(answer: Answer): void {
-    this.selectedAnswer = answer;
     this.whenSelectAnswer.emit(answer);
   }
 }
