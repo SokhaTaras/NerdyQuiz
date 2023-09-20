@@ -90,7 +90,6 @@ export class PlayComponent implements OnInit {
   }
 
   nextQuestion(question: Question): void {
-    const maxPosition = this.questions?.length;
     const nextQuestionAnswer =
       this.quizHelperService.questionsResults.value[this.currentPosition + 1]
         ?.answer;
@@ -99,9 +98,7 @@ export class PlayComponent implements OnInit {
     this.currentQuestion = this.questions[this.currentPosition];
     this.addQuestionResult(question);
 
-    if (this.currentPosition < maxPosition) {
-      this.selectAnswer(nextQuestionAnswer);
-    }
+    this.selectAnswer(nextQuestionAnswer);
   }
 
   previousQuestion(): void {
