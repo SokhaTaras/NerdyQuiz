@@ -2,14 +2,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import { Quiz } from '../../interfaces/quiz';
-import {
-  Answer,
-  Question,
-  QuestionResult
-} from '../../../questions/interfaces/question';
+import { Question } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../../../shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '../../../shared/utils/getId';
 import { StorageKey } from '../../../shared/enums/storageKey';
+import { QuestionResult } from '../../../questions/interfaces/question';
 
 @Injectable({
   providedIn: 'root'
@@ -138,37 +135,15 @@ export class QuizService {
     });
   }
 
-  setQuizResult(): Observable<QuestionResult[]> {
+  setQuizResult(
+    questionResults: BehaviorSubject<QuestionResult[]>
+  ): Observable<QuestionResult[]> {
     return new Observable((subscriber) => {
       this.localStorageService.updateLocalStorage(
         StorageKey.QUIZ_RESULT,
-        this.questionsResults.value
+        questionResults.value
       );
-      subscriber.next(this.questionsResults.value);
-      subscriber.complete();
-    });
-  }
-
-  addQuestionResult(
-    question: Question,
-    answer: Answer,
-    timeSpent: number
-  ): Observable<QuestionResult[]> {
-    return new Observable<QuestionResult[]>((subscriber) => {
-      this.questionsResults.next(
-        this.questionsResults.value.concat([{ ...question, answer, timeSpent }])
-      );
-
-      subscriber.next(this.questionsResults.value);
-      subscriber.complete();
-    });
-  }
-
-  removeLastQuestionResult(index: number): Observable<QuestionResult> {
-    return new Observable<QuestionResult>((subscriber) => {
-      const deletedItem = this.questionsResults.value.splice(index, 1);
-
-      subscriber.next(deletedItem[0]);
+      subscriber.next(questionResults.value);
       subscriber.complete();
     });
   }

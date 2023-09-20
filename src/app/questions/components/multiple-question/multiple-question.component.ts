@@ -14,6 +14,7 @@ import { Question } from '../../interfaces/question';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
 import { AnswersFormType } from '../../../shared/types/forms';
 import { QuestionFormHelperService } from '../../services/questionFormHelper/question-form-helper.service';
+
 @Component({
   selector: 'quiz-app-multiple-question',
   templateUrl: './multiple-question.component.html',

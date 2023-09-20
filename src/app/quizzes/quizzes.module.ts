@@ -15,6 +15,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { PrePlayComponent } from './components/pre-play/pre-play.component';
 import { PlayComponent } from './components/play/play.component';
 import { ResultComponent } from './components/result/result.component';
+import { AnswerSelectionComponent } from './components/answer-selection/answer-selection.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { ResultComponent } from './components/result/result.component';
     IntroductionComponent,
     PrePlayComponent,
     PlayComponent,
-    ResultComponent
+    ResultComponent,
+    PlayComponent,
+    AnswerSelectionComponent
   ],
   imports: [
     CommonModule,
