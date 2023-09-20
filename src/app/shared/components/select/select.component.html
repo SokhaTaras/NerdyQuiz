@@ -4,7 +4,7 @@
     class="min-w-[100px] w-full rounded bg-primary text-black"
     nzBorderless
     (ngModelChange)="selectItem($event)"
-    [(ngModel)]="selectedValue"
+    [ngModel]="selectedValue"
     [nzPlaceHolder]="placeHolder | translateJson"
   >
     <nz-option

@@ -17,7 +17,6 @@ import { SubscriptionsService } from '../../../shared/services/subscription/subs
 })
 export class QuizListComponent implements OnInit {
   allQuizzes: Quiz[];
-
   isLoading: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
