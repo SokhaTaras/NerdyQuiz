@@ -102,6 +102,14 @@ button {
     @apply mx-4 underline
   }
 
+  .popover-default-item {
+    @apply flex justify-center items-center hover:bg-black/5 rounded h-8 w-full
+  }
+
+  .popover-remove-item {
+    @apply flex justify-center items-center hover:bg-black/5 rounded h-8 w-full text-error
+  }
+
   .disabled-button {
     @apply opacity-50 cursor-not-allowed pointer-events-none
   }

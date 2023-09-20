@@ -1,4 +1,11 @@
 <div class="container rounded bg-white shadow py-2 flex items-center justify-center">
+  <div class="flex justify-end items-center w-full pr-6">
+    <quiz-app-popover [label]="'POPOVERS.QUIZ_MANAGER' | translateJson" [contentTemplate]="quizManager"></quiz-app-popover>
+  </div>
+  <ng-template #quizManager>
+    <div class="popover-default-item" (click)="goEdit()">{{'BUTTON.EDIT_QUIZ' | translateJson }}</div>
+    <p class="popover-remove-item" (click)="confirmRemoving()">{{'BUTTON.DELETE_QUIZ' | translateJson }}</p>
+  </ng-template>
   <div class="card-title">
     {{ quiz?.title }}
   </div>
@@ -10,14 +17,6 @@
   </div>
   <div class="flex-row flex items-center justify-evenly w-full">
     <div class="flex-row flex items-center justify-evenly w-4/5">
-      <div class="flex content-center justify-center w-full">
-        <quiz-app-button
-          class="w-3/4"
-          [type]="BUTTON_TYPE.SECONDARY"
-          (whenClicked)="goEdit()">
-          {{ 'BUTTON.EDIT' | translateJson }}
-        </quiz-app-button>
-      </div>
       <div class="flex content-center justify-center w-full">
         <quiz-app-button
           class="w-3/4"

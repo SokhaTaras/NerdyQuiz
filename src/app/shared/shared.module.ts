@@ -10,6 +10,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 import { SelectComponent } from '@a-shared/components/select/select.component';
 import { InputComponent } from '@a-shared/components/input/input.component';
@@ -21,6 +22,7 @@ import { ButtonComponent } from '@a-shared/components/button/button.component';
 import { LoaderComponent } from '@a-shared/components/loader/loader.component';
 import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
 import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json.pipe';
+import { PopoverComponent } from './components/popover/popover.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json
     LoaderComponent,
     BaseQuizComponent,
     TranslateJsonPipe,
-    SelectComponent
+    SelectComponent,
+    PopoverComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +51,8 @@ import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json
     NzDropDownModule,
     NzRadioModule,
     NzIconModule,
-    NzSelectModule
+    NzSelectModule,
+    NzPopoverModule
   ],
   exports: [
     InputComponent,
@@ -59,7 +63,8 @@ import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json
     ButtonComponent,
     LoaderComponent,
     TranslateJsonPipe,
-    SelectComponent
+    SelectComponent,
+    PopoverComponent
   ]
 })
 export class SharedModule {}

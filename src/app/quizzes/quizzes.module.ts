@@ -5,6 +5,7 @@ import { SharedModule } from '@a-shared/shared.module';
 import { QuestionsModule } from '@a-questions/questions.module';
 import { QuizzesRoutingModule } from '@a-quizzes/quizzes-routing.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 import { QuizCardComponent } from '@a-quizzes/components/quiz-card/quiz-card.component';
 import { QuizListComponent } from '@a-quizzes/components/quiz-list/quiz-list.component';
@@ -34,7 +35,8 @@ import { ResultComponent } from '@a-quizzes/components/result/result.component';
     QuestionsModule,
     QuizzesRoutingModule,
     ReactiveFormsModule,
-    NzIconModule
+    NzIconModule,
+    NzPopoverModule
   ]
 })
 export class QuizzesModule {}
