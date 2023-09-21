@@ -17,7 +17,6 @@ import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 })
 export class QuizListComponent implements OnInit {
   allQuizzes$ = new BehaviorSubject<Quiz[]>([]);
-
   isLoading: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
