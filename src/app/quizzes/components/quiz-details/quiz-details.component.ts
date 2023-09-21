@@ -5,7 +5,7 @@ import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
+import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 
 @Component({

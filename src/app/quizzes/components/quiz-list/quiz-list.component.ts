@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
-import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
 import { StorageKey } from '@a-shared/enums/storageKey';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
+import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-quiz-list',
@@ -53,11 +53,9 @@ export class QuizListComponent implements OnInit {
     this.isLoading = true;
 
     this.subscriptionsService.addSubscription(
-      this.quizService.initAllQuizzes(StorageKey.QUIZZES).subscribe(() => {
-        this.isLoading = false;
-      })
+      this.quizService.initAllQuizzes(StorageKey.QUIZZES).subscribe()
     );
-
     this.allQuizzes$ = this.quizService.quizzes$;
+    this.isLoading = false;
   }
 }

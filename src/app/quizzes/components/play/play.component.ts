@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 
 import { Answer, Question } from '@a-questions/interfaces/question';
-import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
+import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';

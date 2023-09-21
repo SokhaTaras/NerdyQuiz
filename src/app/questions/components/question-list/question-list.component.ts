@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Question } from '@a-questions/interfaces/question';
-import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
+import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 
 @Component({

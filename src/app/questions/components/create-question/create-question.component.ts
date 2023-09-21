@@ -5,7 +5,7 @@ import { QuestionForm } from '@a-shared/types/forms';
 import { Question } from '@a-questions/interfaces/question';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
+import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-create-question',

@@ -51,6 +51,10 @@ body {
   background-color: var(--color-primary);
 }
 
+.ant-popover-inner {
+  border-radius: var(--border-radius);
+}
+
 button {
   background-color: var(--color-primary);
   min-width: 100px;

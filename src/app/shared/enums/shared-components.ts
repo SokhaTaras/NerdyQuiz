@@ -3,3 +3,8 @@ export enum BUTTON_TYPE {
   SECONDARY,
   ERROR
 }
+
+export enum POPOVER_TYPE {
+  CARD,
+  DETAILS
+}
