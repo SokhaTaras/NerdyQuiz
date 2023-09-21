@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
-import { Answer, Question } from '../../../questions/interfaces/question';
+import { Answer, Question } from '@a-questions/interfaces/question';
+import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-answer-selection',

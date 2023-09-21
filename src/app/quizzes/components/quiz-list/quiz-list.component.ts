@@ -52,9 +52,10 @@ export class QuizListComponent implements OnInit {
     this.isLoading = true;
 
     this.subscriptionsService.addSubscription(
-      this.quizService.initAllQuizzes(StorageKey.QUIZZES).subscribe()
+      this.quizService
+        .initAllQuizzes(StorageKey.QUIZZES)
+        .subscribe(() => (this.isLoading = false))
     );
     this.allQuizzes$ = this.quizService.quizzes$;
-    this.isLoading = false;
   }
 }
