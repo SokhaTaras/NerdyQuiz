@@ -20,8 +20,23 @@
           {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ currentQuiz?.difficulty }}
         </div>
       </div>
-      <div class="flex content-center justify-center mt-10">
-        <quiz-app-button [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="openEditPopUp()">{{ 'BUTTON.EDIT_TITLE' | translateJson }}</quiz-app-button>
+      <div class="w-full">
+        <div class="flex content-center justify-center mt-2">
+          <quiz-app-button
+            class="w-full"
+            [type]="BUTTON_TYPE.PRIMARY"
+            (whenClicked)="openEditPopUp()">
+            {{ 'BUTTON.EDIT_TITLE' | translateJson }}
+          </quiz-app-button>
+        </div>
+        <div class="flex content-center justify-center mt-2">
+          <quiz-app-button
+            class="w-full"
+            [type]="BUTTON_TYPE.ERROR"
+            (whenClicked)="confirmRemoving()">
+            {{ 'BUTTON.DELETE_QUIZ' | translateJson }}
+          </quiz-app-button>
+        </div>
       </div>
     </div>
   </div>

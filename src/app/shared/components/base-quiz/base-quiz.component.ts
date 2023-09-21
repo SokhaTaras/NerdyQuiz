@@ -16,10 +16,10 @@ export class BaseQuizComponent implements OnInit {
   quizDifficulty: string;
 
   constructor(
-    private quizService: QuizService,
+    protected quizService: QuizService,
     private route: ActivatedRoute,
-    private navigateTo: NavigateToService,
-    private subscriptionsService: SubscriptionsService
+    protected navigateTo: NavigateToService,
+    protected subscriptionsService: SubscriptionsService
   ) {}
 
   ngOnInit(): void {

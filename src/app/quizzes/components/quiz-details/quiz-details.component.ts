@@ -17,11 +17,11 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
-    private modalQuizService: ModalQuizService,
     quizService: QuizService,
     route: ActivatedRoute,
     navigateTo: NavigateToService,
-    subscriptionsService: SubscriptionsService
+    subscriptionsService: SubscriptionsService,
+    private modalQuizService: ModalQuizService
   ) {
     super(quizService, route, navigateTo, subscriptionsService);
   }
@@ -33,5 +33,30 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
       quiz: this.currentQuiz
     };
     this.modalQuizService.showInitQuizModal(data);
+  }
+
+  confirmRemoving(): void {
+    const data: any = {
+      text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ',
+      buttonText: 'BUTTON.CONFIRM'
+    };
+
+    this.subscriptionsService.addSubscription(
+      this.modalQuizService
+        .confirmDeletionModal(data)
+        .onClose.subscribe((isConfirm) => {
+          if (isConfirm) {
+            this.deleteQuiz();
+          }
+        })
+    );
+  }
+
+  deleteQuiz(): void {
+    this.subscriptionsService.addSubscription(
+      this.quizService.deleteQuiz(this.currentQuiz).subscribe(() => {
+        this.navigateTo.navigateHome();
+      })
+    );
   }
 }
