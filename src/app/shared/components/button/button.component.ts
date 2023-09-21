@@ -30,7 +30,7 @@ export class ButtonComponent implements OnInit {
         this.dynamicClass = 'bg-transparent border-2 border-primary';
         break;
       case BUTTON_TYPE.ERROR:
-        this.dynamicClass = 'border border-error text-error';
+        this.dynamicClass = 'border border-error text-error bg-white';
         break;
     }
   }

@@ -1,12 +1,12 @@
 <div class="container rounded bg-white shadow py-2 flex items-center justify-center">
   <div class="flex justify-end items-center w-full pr-6">
     <quiz-app-popover
-      [label]="'POPOVER.QUIZ_MANAGER' | translateJson" [contentTemplate]="quizManager">
+      [label]="'POPOVER.QUIZ_MANAGER' | translateJson"
+      [type]="POPOVER_TYPE.CARD"
+      [options]="popoverSetup">
     </quiz-app-popover>
   </div>
-  <ng-template #quizManager>
-    <quiz-app-quiz-update-popover [quiz]="quiz" [type]="POPOVER_TYPE.CARD"></quiz-app-quiz-update-popover>
-  </ng-template>
+
   <div class="card-title">
     {{ quiz?.title }}
   </div>

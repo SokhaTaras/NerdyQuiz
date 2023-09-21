@@ -1,8 +1,20 @@
 <div
   nz-popover
+  class="cursor-pointer"
   nzPopoverTrigger="click"
+  nzPopoverPlacement="bottom"
   [nzPopoverTitle]= label
-  [nzPopoverContent]="contentTemplate">
+  [nzPopoverContent]="content">
   <span class="text-xl">...</span>
 </div>
 
+<ng-template class="h-full" #content>
+  <ul *ngFor="let option of options">
+    <quiz-app-button
+      class="popover-item"
+      [type]="option.type"
+      (whenClicked)="option.method()">
+      {{ option.text | translateJson }}
+    </quiz-app-button>
+  </ul>
+</ng-template>

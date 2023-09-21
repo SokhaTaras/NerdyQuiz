@@ -23,7 +23,6 @@ import { LoaderComponent } from '@a-shared/components/loader/loader.component';
 import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
 import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json.pipe';
 import { PopoverComponent } from './components/popover/popover.component';
-import { QuizUpdatePopoverComponent } from './components/quiz-update-popover/quiz-update-popover.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +37,7 @@ import { QuizUpdatePopoverComponent } from './components/quiz-update-popover/qui
     BaseQuizComponent,
     TranslateJsonPipe,
     SelectComponent,
-    PopoverComponent,
-    QuizUpdatePopoverComponent
+    PopoverComponent
   ],
   imports: [
     CommonModule,
@@ -66,8 +64,7 @@ import { QuizUpdatePopoverComponent } from './components/quiz-update-popover/qui
     LoaderComponent,
     TranslateJsonPipe,
     SelectComponent,
-    PopoverComponent,
-    QuizUpdatePopoverComponent
+    PopoverComponent
   ]
 })
 export class SharedModule {}

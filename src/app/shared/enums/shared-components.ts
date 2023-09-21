@@ -5,6 +5,5 @@ export enum BUTTON_TYPE {
 }
 
 export enum POPOVER_TYPE {
-  CARD,
-  DETAILS
+  CARD
 }
