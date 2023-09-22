@@ -13,11 +13,14 @@ import { StatisticsService } from '../../../shared/services/statistics/statistic
 export class QuizCardComponent implements OnInit {
   @Input() quiz: Quiz;
 
-  quizDifficulty: string;
-
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  constructor(private statisticsService: StatisticsService, private navigateTo: NavigateToService) {}
+  quizDifficulty: string;
+
+  constructor(
+    private statisticsService: StatisticsService,
+    private navigateTo: NavigateToService
+  ) {}
 
   ngOnInit(): void {
     this.getAverageQuizDifficulty();
@@ -30,6 +33,6 @@ export class QuizCardComponent implements OnInit {
   }
 
   goPlay(): void {
-    this.navigateTo.navigatePlay(this.quiz);
+    this.navigateTo.navigatePlay(this.quiz?.id);
   }
 }

@@ -19,6 +19,8 @@ export class PlayComponent implements OnInit {
   @Input() quiz: Quiz;
   @Output() whenCancel: EventEmitter<void> = new EventEmitter();
 
+  readonly BUTTON_TYPE = BUTTON_TYPE;
+
   timer$: Observable<number>;
 
   currentQuestion: Question;
@@ -26,8 +28,6 @@ export class PlayComponent implements OnInit {
 
   currentPosition = 0;
   secondsCounter = 0;
-
-  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   get cancelHandler(): void {
     return this.currentPosition === 0
@@ -131,7 +131,7 @@ export class PlayComponent implements OnInit {
     this.subscriptions.addSubscription(
       this.quizService.setQuizResult(results).subscribe()
     );
-    this.navigateTo.navigateResult(this.quiz);
+    this.navigateTo.navigateResult(this.quiz?.id);
   }
 
   private initQuestions(): void {

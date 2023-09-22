@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NavigationRoutes } from '../../enums/navigationRoutes';
-import { Quiz } from '../../../quizzes/interfaces/quiz';
 
 @Injectable({
   providedIn: 'root'
@@ -22,19 +21,19 @@ export class NavigateToService {
     this.router.navigate([NavigationRoutes.HOME]);
   }
 
-  navigatePlay(quiz: Quiz): void {
+  navigatePlay(quizId: string): void {
     this.router.navigate([
       NavigationRoutes.QUIZ,
       NavigationRoutes.PLAY,
-      `${quiz.id}`
+      `${quizId}`
     ]);
   }
 
-  navigateResult(quiz: Quiz): void {
+  navigateResult(quizId: string): void {
     this.router.navigate([
       NavigationRoutes.QUIZ,
       NavigationRoutes.RESULT,
-      `${quiz.id}`
+      `${quizId}`
     ]);
   }
 }

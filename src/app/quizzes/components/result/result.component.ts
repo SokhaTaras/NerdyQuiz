@@ -16,6 +16,8 @@ import { SubscriptionsService } from '../../../shared/services/subscription/subs
   providers: [SubscriptionsService]
 })
 export class ResultComponent implements OnInit {
+  readonly BUTTON_TYPE = BUTTON_TYPE;
+
   rating: number;
   spentTime: number;
   correctAnswersCount: number;
@@ -23,8 +25,6 @@ export class ResultComponent implements OnInit {
 
   currentQuiz: Quiz;
   questionResult: QuestionResult[];
-
-  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private quizService: QuizService,
@@ -44,7 +44,7 @@ export class ResultComponent implements OnInit {
   }
 
   playAgain(): void {
-    this.navigateTo.navigatePlay(this.currentQuiz);
+    this.navigateTo.navigatePlay(this.currentQuiz?.id);
   }
 
   goHome(): void {
