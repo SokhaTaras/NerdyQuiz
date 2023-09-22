@@ -23,18 +23,18 @@
       <div class="w-full">
         <div class="flex content-center justify-center mt-2">
           <quiz-app-button
-            class="w-full"
+            class="w-2/3"
             [type]="BUTTON_TYPE.PRIMARY"
             (whenClicked)="openEditPopUp()">
-            {{ 'BUTTON.EDIT_TITLE' | translateJson }}
+            {{ 'BUTTON.EDIT' | translateJson }}
           </quiz-app-button>
         </div>
         <div class="flex content-center justify-center mt-2">
           <quiz-app-button
-            class="w-full"
+            class="w-2/3"
             [type]="BUTTON_TYPE.ERROR"
             (whenClicked)="confirmRemoving()">
-            {{ 'BUTTON.DELETE_QUIZ' | translateJson }}
+            {{ 'LABELS.DELETE' | translateJson }}
           </quiz-app-button>
         </div>
       </div>
