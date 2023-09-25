@@ -21,6 +21,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BaseQuizComponent } from './components/base-quiz/base-quiz.component';
 import { SelectComponent } from './components/select/select.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SelectComponent } from './components/select/select.component';
     LoaderComponent,
     BaseQuizComponent,
     TranslateJsonPipe,
-    SelectComponent
+    SelectComponent,
+    ProgressBarComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { SelectComponent } from './components/select/select.component';
     ButtonComponent,
     LoaderComponent,
     TranslateJsonPipe,
-    SelectComponent
+    SelectComponent,
+    ProgressBarComponent
   ]
 })
 export class SharedModule {}

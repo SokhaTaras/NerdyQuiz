@@ -3,12 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 
 import { QuizService } from '../../services/quiz/quiz.service';
 import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
-import { Result } from '../../../shared/enums/result';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 import { QuestionResult } from '../../../questions/interfaces/question';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { Quiz } from '../../interfaces/quiz';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
+import { setResultText } from '../../../shared/utils/result';
 
 @Component({
   selector: 'quiz-app-result',
@@ -52,16 +52,12 @@ export class ResultComponent implements OnInit {
   }
 
   private currentQuizSubscribe(): void {
-    const id = this.getCurrentQuizId();
+    const id = this.route.snapshot.paramMap.get('id');
     this.subscriptionsService.addSubscription(
       this.quizService.getQuizById(id).subscribe((currentQuiz) => {
         this.currentQuiz = currentQuiz;
       })
     );
-  }
-
-  private getCurrentQuizId(): string {
-    return this.route.snapshot.paramMap.get('id');
   }
 
   private setQuestionResult(): void {
@@ -94,17 +90,6 @@ export class ResultComponent implements OnInit {
   }
 
   private setResultText(): void {
-    if (this.rating === Result.EXCELLENT) {
-      this.resultText = 'RESULT_QUOTES.EXCELLENT';
-    } else if (this.rating >= Result.TRY_HARDER) {
-      this.resultText = 'RESULT_QUOTES.PASSED_QUIZ';
-    } else if (
-      this.rating < Result.TRY_HARDER &&
-      this.rating > Result.LEARN_MORE
-    ) {
-      this.resultText = 'RESULT_QUOTES.TRY_HARDER';
-    } else {
-      this.resultText = 'RESULT_QUOTES.LEARN_MORE';
-    }
+    this.resultText = setResultText(this.rating);
   }
 }

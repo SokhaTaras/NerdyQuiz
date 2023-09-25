@@ -51,8 +51,12 @@ export class PlayComponent implements OnInit {
 
   get confirmText(): string {
     const isNotLastQuestion =
-      this.currentPosition !== this.quiz.questions.length - 1;
+      this.currentPosition !== this.questions.length - 1;
     return isNotLastQuestion ? 'BUTTON.NEXT' : 'BUTTON.FINISH';
+  }
+
+  get questions(): Question[] {
+    return this.quiz.questions;
   }
 
   constructor(
@@ -96,7 +100,7 @@ export class PlayComponent implements OnInit {
         ?.answer;
 
     this.currentPosition += 1;
-    this.currentQuestion = this.quiz.questions[this.currentPosition];
+    this.currentQuestion = this.questions[this.currentPosition];
     this.addQuestionResult(question);
 
     this.selectAnswer(nextQuestionAnswer);
@@ -107,12 +111,12 @@ export class PlayComponent implements OnInit {
       this.quizHelperService.questionsResults.value[this.currentPosition - 1]
         ?.answer;
     this.currentPosition -= 1;
-    this.currentQuestion = this.quiz.questions[this.currentPosition];
+    this.currentQuestion = this.questions[this.currentPosition];
     this.selectAnswer(previouslySelectedAnswer);
   }
 
   addQuestionResult(question: Question): void {
-    const maxPosition = this.quiz.questions?.length;
+    const maxPosition = this.questions?.length;
     this.subscriptions.addSubscription(
       this.quizHelperService
         .addQuestionResult(question, this.selectedAnswer, this.secondsCounter)
@@ -120,7 +124,7 @@ export class PlayComponent implements OnInit {
     );
 
     if (this.currentPosition < maxPosition) {
-      this.currentQuestion = this.quiz.questions[this.currentPosition];
+      this.currentQuestion = this.questions[this.currentPosition];
       this.selectedAnswer = null;
     }
   }
@@ -135,7 +139,7 @@ export class PlayComponent implements OnInit {
   }
 
   private initQuestions(): void {
-    this.currentQuestion = this.quiz.questions[this.currentPosition];
+    this.currentQuestion = this.questions[this.currentPosition];
     this.quizService.questionsResults.next([]);
   }
 
