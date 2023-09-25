@@ -39,18 +39,25 @@ export class QuizService {
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
 
       if (quizIndex !== -1) {
-        currentQuizzes[quizIndex].title = data.title;
-        currentQuizzes[quizIndex].theme = data.theme;
-        currentQuizzes[quizIndex].difficulty = data.difficulty;
+        const updatedQuiz = {
+          ...currentQuizzes[quizIndex],
+          title: data.title,
+          theme: data.theme,
+          difficulty: data.difficulty
+        };
+
+        currentQuizzes[quizIndex] = updatedQuiz;
         this.quizzes$.next(currentQuizzes);
         this.localStorageService.updateLocalStorage(
           StorageKey.QUIZZES,
           this.quizzes$.value
         );
-        subscriber.next(currentQuizzes[quizIndex]);
+
+        subscriber.next(updatedQuiz);
       } else {
         subscriber.error();
       }
+
       subscriber.complete();
     });
   }
