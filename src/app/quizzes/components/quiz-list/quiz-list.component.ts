@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { Quiz, QuizCard } from '@a-quizzes/interfaces/quiz';
+import { QuizCard } from '@a-quizzes/interfaces/quiz';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { AppState } from '@a-store/state/app.state';
@@ -19,6 +19,7 @@ import { GetQuizzes } from '@a-store/actions/quizz.actions';
 })
 export class QuizListComponent implements OnInit {
   quizzes$: Observable<QuizCard[]>;
+
   isLoading: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
