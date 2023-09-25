@@ -36,11 +36,11 @@ export class ResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentQuizSubscribe();
-    this.questionResult = this.getQuestionResult();
-    this.rating = this.getRating();
+    this.setQuestionResult();
+    this.setCorrectAnswersCount();
+    this.setRating();
     this.setSpentTime();
     this.setResultText();
-    this.correctAnswersCount = this.calculateCorrectAnswersCount();
   }
 
   playAgain(): void {
@@ -51,30 +51,46 @@ export class ResultComponent implements OnInit {
     this.navigateTo.navigateHome();
   }
 
-  private getRating(): number {
-    if (this.quizService.questionsResults) {
-      return this.statisticsService.getRating();
-    }
-    return 0;
+  private currentQuizSubscribe(): void {
+    const id = this.getCurrentQuizId();
+    this.subscriptionsService.addSubscription(
+      this.quizService.getQuizById(id).subscribe((currentQuiz) => {
+        this.currentQuiz = currentQuiz;
+      })
+    );
   }
 
-  private getQuestionResult(): QuestionResult[] {
-    return this.statisticsService.getQuestionResults();
+  private getCurrentQuizId(): string {
+    return this.route.snapshot.paramMap.get('id');
+  }
+
+  private setQuestionResult(): void {
+    this.questionResult = this.statisticsService.getQuestionResults();
+  }
+
+  private setCorrectAnswersCount(): void {
+    if (this.questionResult) {
+      const correctnessArray = this.statisticsService.extractCorrectnessArray(
+        this.questionResult
+      );
+      this.correctAnswersCount = correctnessArray?.length;
+    }
+  }
+
+  private setRating(): void {
+    if (this.questionResult) {
+      const totalQuestions = this.questionResult?.length;
+      const percentage = (this.correctAnswersCount / totalQuestions) * 100;
+      const rating = Math.round(percentage);
+      this.rating = rating;
+    }
   }
 
   private setSpentTime(): void {
-    const lastQuestion = this?.questionResult?.length - 1;
-
-    if (this.quizService.questionsResults) {
+    if (this.questionResult) {
+      const lastQuestion = this?.questionResult?.length - 1;
       this.spentTime = this.questionResult[lastQuestion]?.timeSpent;
     }
-  }
-
-  private calculateCorrectAnswersCount(): number {
-    const correctnessArray = this.statisticsService.extractCorrectnessArray(
-      this.questionResult
-    );
-    return this.statisticsService.countCorrectAnswers(correctnessArray);
   }
 
   private setResultText(): void {
@@ -90,18 +106,5 @@ export class ResultComponent implements OnInit {
     } else {
       this.resultText = 'RESULT_QUOTES.LEARN_MORE';
     }
-  }
-
-  private getCurrentQuizId(): string {
-    return this.route.snapshot.paramMap.get('id');
-  }
-
-  private currentQuizSubscribe(): void {
-    const id = this.getCurrentQuizId();
-    this.subscriptionsService.addSubscription(
-      this.quizService.getQuizById(id).subscribe((currentQuiz) => {
-        this.currentQuiz = currentQuiz;
-      })
-    );
   }
 }

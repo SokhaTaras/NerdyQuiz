@@ -8,7 +8,7 @@ import {
 import { QuestionResult } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { StorageKey } from '../../enums/storageKey';
-import { DifficultiesEnum } from '../../enums/question-info';
+import { DifficultiesEnum, QUESTION_BOOLEAN } from '../../enums/question-info';
 
 @Injectable({
   providedIn: 'root'
@@ -35,19 +35,10 @@ export class StatisticsService {
     return this.localStorageService.getParsedData(StorageKey.QUIZ_RESULT);
   }
 
-  getRating(): number {
-    const questionResults = this.getQuestionResults();
-    const correctnessArray = this.extractCorrectnessArray(questionResults);
-    const rating = this.calculateRating(correctnessArray);
-    return rating;
-  }
-
   extractCorrectnessArray(questionResults: QuestionResult[]): boolean[] {
-    return questionResults.map((result) => result.answer.isCorrect);
-  }
-
-  countCorrectAnswers(correctnessArray: boolean[]): number {
-    return correctnessArray.filter((isCorrect) => isCorrect).length;
+    return questionResults
+      .filter((result) => result.answer.isCorrect === true)
+      .map(() => true);
   }
 
   private calculateAverageDifficulty(difficulties: string[]): string {
@@ -62,18 +53,6 @@ export class StatisticsService {
     const averageDifficulty = weightedSum / totalDifficultyCount;
     const difficulty = this.getDifficulty(averageDifficulty);
     return difficulty;
-  }
-
-  private calculateRating(correctnessArray: boolean[]): number {
-    if (correctnessArray.length === 0) {
-      return 0;
-    }
-
-    const correctAnswersCount = this.countCorrectAnswers(correctnessArray);
-    const totalAnswers = correctnessArray.length;
-    const percentage = (correctAnswersCount / totalAnswers) * 100;
-    const rating = Math.round(percentage);
-    return rating;
   }
 
   private getDifficulty(averageDifficulty: number): string {
