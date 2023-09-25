@@ -3,13 +3,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
+import { Quiz, QuizCard } from '@a-quizzes/interfaces/quiz';
 import { StorageKey } from '@a-shared/enums/storageKey';
 import {
   GetQuizSuccess,
   GetQuizzesSuccess,
   QuizActions
 } from '@a-store/actions/quizz.actions';
+import { mapQuizToQuizCard } from '@a-shared/utils/quizzMapper';
 
 @Injectable()
 export class QuizEffects {
@@ -21,22 +22,16 @@ export class QuizEffects {
   getQuizzes$ = createEffect(() =>
     this.actions$.pipe(
       ofType(QuizActions.GetQuizzes),
-      switchMap(
-        (action: {
-          title: string;
-          questionsAmount: number;
-          difficulty: QUIZ_DIFFICULTY;
-        }) =>
-          this.quizService.initAllQuizzes(StorageKey.QUIZZES).pipe(
-            map((quizzes) =>
-              GetQuizzesSuccess({
-                title: action.title,
-                questionsAmount: action.questionsAmount,
-                difficulty: action.difficulty
-              })
-            ),
-            catchError((error) => of(error))
-          )
+      switchMap(() =>
+        this.quizService.initAllQuizzes(StorageKey.QUIZZES).pipe(
+          map((quizzes) => {
+            const quizCards: QuizCard[] = quizzes.map((quiz) =>
+              mapQuizToQuizCard(quiz)
+            );
+            return GetQuizzesSuccess({ cardQuizzes: quizCards });
+          }),
+          catchError((error) => of(error))
+        )
       )
     )
   );

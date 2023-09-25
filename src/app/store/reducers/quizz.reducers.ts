@@ -7,16 +7,9 @@ const initialState: QuizState = initialQuizState;
 
 export const quizReducers = createReducer(
   initialState,
-  on(GetQuizzesSuccess, (state, { title, questionsAmount, difficulty }) => ({
+  on(GetQuizzesSuccess, (state, action) => ({
     ...state,
-    quizzes: [
-      ...state.quizzes,
-      {
-        title,
-        questionsAmount,
-        difficulty
-      }
-    ]
+    quizzes: [...action.cardQuizzes]
   })),
   on(GetQuizSuccess, (state, { quiz }) => ({
     ...state,

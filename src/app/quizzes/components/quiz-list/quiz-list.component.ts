@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
-import { StorageKey } from '@a-shared/enums/storageKey';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { Quiz } from '@a-quizzes/interfaces/quiz';
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { Quiz, QuizCard } from '@a-quizzes/interfaces/quiz';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
+import { AppState } from '@a-store/state/app.state';
+import { selectQuizzesList } from '@a-store/selectors/quiz.selectors';
+import { GetQuizzes } from '@a-store/actions/quizz.actions';
 
 @Component({
   selector: 'quiz-app-quiz-list',
@@ -16,16 +18,16 @@ import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
   providers: [SubscriptionsService]
 })
 export class QuizListComponent implements OnInit {
-  allQuizzes$ = new BehaviorSubject<Quiz[]>([]);
+  quizzes$: Observable<QuizCard[]>;
   isLoading: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
-    private quizService: QuizService,
     private modalQuizService: ModalQuizService,
     private navigateTo: NavigateToService,
-    private subscriptionsService: SubscriptionsService
+    private subscriptionsService: SubscriptionsService,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -50,12 +52,16 @@ export class QuizListComponent implements OnInit {
 
   private initQuizzes(): void {
     this.isLoading = true;
+    this.store.dispatch(GetQuizzes());
 
     this.subscriptionsService.addSubscription(
-      this.quizService
-        .initAllQuizzes(StorageKey.QUIZZES)
-        .subscribe(() => (this.isLoading = false))
+      this.store.pipe(select(selectQuizzesList)).subscribe((quizzes) => {
+        if (quizzes?.length > 0) {
+          this.isLoading = false;
+        }
+
+        this.quizzes$ = this.store.pipe(select(selectQuizzesList));
+      })
     );
-    this.allQuizzes$ = this.quizService.quizzes$;
   }
 }

@@ -37,8 +37,7 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
 
   override ngOnInit() {
     super.ngOnInit();
-    this.store.dispatch(GetQuiz({ quizId: this.currentQuiz.id }));
-    this.selectedQuiz$ = this.store.pipe(select(selectSelectedQuiz));
+    this.initQuiz();
   }
 
   openEditPopUp(): void {
@@ -73,5 +72,10 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
         this.navigateTo.navigateHome();
       })
     );
+  }
+
+  private initQuiz(): void {
+    this.store.dispatch(GetQuiz({ quizId: this.currentQuiz.id }));
+    this.selectedQuiz$ = this.store.pipe(select(selectSelectedQuiz));
   }
 }

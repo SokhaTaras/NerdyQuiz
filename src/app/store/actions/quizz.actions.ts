@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
+import { Quiz, QuizCard } from '@a-quizzes/interfaces/quiz';
 
 export enum QuizActions {
   GetQuizzes = '[Quiz] Get Quizzes',
@@ -13,11 +13,7 @@ export const GetQuizzes = createAction(QuizActions.GetQuizzes);
 
 export const GetQuizzesSuccess = createAction(
   QuizActions.GetQuizzesSuccess,
-  props<{
-    title: string;
-    questionsAmount: number;
-    difficulty: QUIZ_DIFFICULTY;
-  }>()
+  props<{ cardQuizzes: QuizCard[] }>()
 );
 
 export const GetQuiz = createAction(
