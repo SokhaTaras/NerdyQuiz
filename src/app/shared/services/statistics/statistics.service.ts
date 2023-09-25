@@ -8,7 +8,7 @@ import {
 import { QuestionResult } from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { StorageKey } from '../../enums/storageKey';
-import { DifficultiesEnum, QUESTION_BOOLEAN } from '../../enums/question-info';
+import { DifficultiesEnum } from '../../enums/question-info';
 
 @Injectable({
   providedIn: 'root'
