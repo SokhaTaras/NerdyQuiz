@@ -1,6 +1,6 @@
 import { Result } from '../enums/result';
 
-export function setResultText(rating: number): string {
+export function getResultText(rating: number): string {
   if (rating === Result.EXCELLENT) {
     return 'RESULT_QUOTES.EXCELLENT';
   } else if (rating >= Result.TRY_HARDER) {

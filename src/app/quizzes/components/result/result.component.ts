@@ -11,7 +11,7 @@ import {
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { Quiz } from '../../interfaces/quiz';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
-import { setResultText } from '../../../shared/utils/result';
+import { getResultText } from '../../../shared/utils/result';
 
 @Component({
   selector: 'quiz-app-result',
@@ -47,7 +47,7 @@ export class ResultComponent implements OnInit {
     this.setCorrectAnswersCount();
     this.setRating();
     this.setSpentTime();
-    this.getResultText();
+    this.setResultText();
   }
 
   playAgain(): void {
@@ -97,7 +97,7 @@ export class ResultComponent implements OnInit {
     }
   }
 
-  private getResultText(): void {
-    this.resultText = setResultText(this.rating);
+  private setResultText(): void {
+    this.resultText = getResultText(this.rating);
   }
 }
