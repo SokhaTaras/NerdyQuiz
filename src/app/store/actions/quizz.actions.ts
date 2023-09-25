@@ -1,4 +1,5 @@
-import { Action, createAction, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
+
 import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 
 export enum QuizActions {

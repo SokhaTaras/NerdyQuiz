@@ -1,8 +1,6 @@
-import { RouterReducerState } from '@ngrx/router-store';
 import { initialQuizState, QuizState } from './quiz.state';
 
 export interface AppState {
-  router?: RouterReducerState;
   quizzes: QuizState;
 }
 

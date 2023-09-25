@@ -1,5 +1,6 @@
-import { AppState } from '../state/app.state';
 import { createSelector } from '@ngrx/store';
+
+import { AppState } from '../state/app.state';
 import { QuizState } from '../state/quiz.state';
 
 const selectQuizzes = (state: AppState) => state.quizzes;

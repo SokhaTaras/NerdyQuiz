@@ -19,7 +19,7 @@ import { QuizEffects } from './store/effects/quiz.effects';
     QuizzesModule,
     SharedModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot(QuizEffects),
+    EffectsModule.forRoot([QuizEffects]),
     BrowserModule
   ],
   bootstrap: [AppComponent]

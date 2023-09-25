@@ -11,13 +11,13 @@
     <div>
       <div class="flex flex-col">
         <div *ngIf="currentQuiz?.title" class="mx-3.5 modal-title">
-        {{ 'LABELS.TITLE' | translateJson }}: {{ currentQuiz?.title }}
+        {{ 'LABELS.TITLE' | translateJson }}: {{ (selectedQuiz$ | async)?.title }}
         </div>
         <div *ngIf="currentQuiz?.theme" class="mx-3.5 modal-title">
-          {{ 'LABELS.THEME' | translateJson }}: {{ currentQuiz?.theme }}
+          {{ 'LABELS.THEME' | translateJson }}: {{ (selectedQuiz$ | async)?.theme }}
         </div>
         <div *ngIf="currentQuiz?.difficulty" class="mx-3.5 modal-title">
-          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ currentQuiz?.difficulty }}
+          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ (selectedQuiz$ | async)?.difficulty }}
         </div>
       </div>
       <div class="w-full">

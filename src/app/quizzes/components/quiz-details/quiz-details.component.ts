@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
@@ -7,13 +9,10 @@ import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.comp
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
-import { AppState } from '../../../store/state/app.state';
-import { Store } from '@ngrx/store';
-import { GetQuiz } from '../../../store/actions/quizz.actions';
-import { select } from '@ngrx/core';
-import { selectSelectedQuiz } from '../../../store/selectors/quiz.selectors';
-import { Observable } from 'rxjs';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { AppState } from '@a-store/state/app.state';
+import { GetQuiz } from '@a-store/actions/quizz.actions';
+import { selectSelectedQuiz } from '@a-store/selectors/quiz.selectors';
 
 @Component({
   selector: 'quiz-app-quiz-details',

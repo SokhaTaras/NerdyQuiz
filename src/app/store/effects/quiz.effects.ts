@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
+import { StorageKey } from '@a-shared/enums/storageKey';
 import {
   GetQuizSuccess,
   GetQuizzesSuccess,
   QuizActions
-} from '../actions/quizz.actions';
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
-import { StorageKey } from '@a-shared/enums/storageKey';
+} from '@a-store/actions/quizz.actions';
 
 @Injectable()
 export class QuizEffects {
