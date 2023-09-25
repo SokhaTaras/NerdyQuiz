@@ -41,7 +41,7 @@ export class PlayComponent implements OnInit {
   }
 
   get confirmHandler(): void {
-    return this.currentPosition !== this.quiz.questions.length - 1
+    return this.currentPosition !== this.questions.length - 1
       ? this.nextQuestion(this.currentQuestion)
       : this.finishQuiz(this.currentQuestion);
   }

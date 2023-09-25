@@ -47,7 +47,7 @@ export class ResultComponent implements OnInit {
     this.setCorrectAnswersCount();
     this.setRating();
     this.setSpentTime();
-    this.setResultText();
+    this.getResultText();
   }
 
   playAgain(): void {
@@ -97,7 +97,7 @@ export class ResultComponent implements OnInit {
     }
   }
 
-  private setResultText(): void {
+  private getResultText(): void {
     this.resultText = setResultText(this.rating);
   }
 }
