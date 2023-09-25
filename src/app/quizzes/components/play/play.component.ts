@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 
-import { Answer, Question } from '../../../questions/interfaces/question';
+import {
+  Answer,
+  Question,
+  QuizResult
+} from '../../../questions/interfaces/question';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
 import { ModalQuizService } from '../../services/modal-quiz/modal-quiz.service';
 import { QuizService } from '../../services/quiz/quiz.service';
@@ -27,7 +31,8 @@ export class PlayComponent implements OnInit {
   selectedAnswer: Answer | null = null;
 
   currentPosition = 0;
-  secondsCounter = 0;
+  quizTime = 0;
+  timePerQuestion = 0;
 
   get cancelHandler(): void {
     return this.currentPosition === 0
@@ -116,21 +121,27 @@ export class PlayComponent implements OnInit {
   }
 
   addQuestionResult(question: Question): void {
+    const timePerTest = Math.floor((Date.now() - this.timePerQuestion) / 1000);
+
     const maxPosition = this.questions?.length;
     this.subscriptions.addSubscription(
       this.quizHelperService
-        .addQuestionResult(question, this.selectedAnswer, this.secondsCounter)
+        .addQuestionResult(question, this.selectedAnswer, timePerTest)
         .subscribe()
     );
 
     if (this.currentPosition < maxPosition) {
+      this.timePerQuestion = Date.now();
       this.currentQuestion = this.questions[this.currentPosition];
       this.selectedAnswer = null;
     }
   }
 
   finishQuiz(lastQuestion: Question): void {
-    const results = this.quizHelperService.questionsResults;
+    const results: QuizResult = {
+      questionResults: this.quizHelperService.questionsResults.value,
+      quizTime: this.quizTime
+    };
     this.addQuestionResult(lastQuestion);
     this.subscriptions.addSubscription(
       this.quizService.setQuizResult(results).subscribe()
@@ -144,9 +155,10 @@ export class PlayComponent implements OnInit {
   }
 
   private startTimer(): void {
+    this.timePerQuestion = Date.now();
     this.timer$ = timer(0, 1000);
     this.subscriptions.addSubscription(
-      this.timer$.subscribe((time) => (this.secondsCounter = time))
+      this.timer$.subscribe((time) => (this.quizTime = time))
     );
   }
 }

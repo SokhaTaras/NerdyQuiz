@@ -5,7 +5,10 @@ import {
   DifficultyPoints,
   DifficultyRanges
 } from '../../../questions/constants/questions-info';
-import { QuestionResult } from '../../../questions/interfaces/question';
+import {
+  QuestionResult,
+  QuizResult
+} from '../../../questions/interfaces/question';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { StorageKey } from '../../enums/storageKey';
 import { DifficultiesEnum } from '../../enums/question-info';
@@ -31,14 +34,14 @@ export class StatisticsService {
     }, 0);
   }
 
-  getQuestionResults(): QuestionResult[] {
+  getQuizResults(): QuizResult {
     return this.localStorageService.getParsedData(StorageKey.QUIZ_RESULT);
   }
 
-  extractCorrectnessArray(questionResults: QuestionResult[]): boolean[] {
-    return questionResults
-      .filter((result) => result.answer.isCorrect === true)
-      .map(() => true);
+  extractCorrectnessArray(quizResult: QuizResult): QuestionResult[] {
+    return quizResult?.questionResults?.filter(
+      (result) => result.answer.isCorrect === true
+    );
   }
 
   private calculateAverageDifficulty(difficulties: string[]): string {

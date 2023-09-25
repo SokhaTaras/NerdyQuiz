@@ -4,7 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '../../services/quiz/quiz.service';
 import { StatisticsService } from '../../../shared/services/statistics/statistics.service';
 import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
-import { QuestionResult } from '../../../questions/interfaces/question';
+import {
+  QuestionResult,
+  QuizResult
+} from '../../../questions/interfaces/question';
 import { NavigateToService } from '../../../shared/services/navigate-to/navigate-to.service';
 import { Quiz } from '../../interfaces/quiz';
 import { SubscriptionsService } from '../../../shared/services/subscription/subscriptions.service';
@@ -24,7 +27,11 @@ export class ResultComponent implements OnInit {
   resultText: string;
 
   currentQuiz: Quiz;
-  questionResult: QuestionResult[];
+  quizResult: QuizResult;
+
+  get quizQuestionResults(): QuestionResult[] {
+    return this?.quizResult?.questionResults;
+  }
 
   constructor(
     private quizService: QuizService,
@@ -36,7 +43,7 @@ export class ResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentQuizSubscribe();
-    this.setQuestionResult();
+    this.setQuizResults();
     this.setCorrectAnswersCount();
     this.setRating();
     this.setSpentTime();
@@ -60,22 +67,23 @@ export class ResultComponent implements OnInit {
     );
   }
 
-  private setQuestionResult(): void {
-    this.questionResult = this.statisticsService.getQuestionResults();
+  private setQuizResults(): void {
+    this.quizResult = this.statisticsService.getQuizResults();
   }
 
   private setCorrectAnswersCount(): void {
-    if (this.questionResult) {
+    if (this.quizResult) {
       const correctnessArray = this.statisticsService.extractCorrectnessArray(
-        this.questionResult
+        this.quizResult
       );
+
       this.correctAnswersCount = correctnessArray?.length;
     }
   }
 
   private setRating(): void {
-    if (this.questionResult) {
-      const totalQuestions = this.questionResult?.length;
+    if (this.quizResult) {
+      const totalQuestions = this.quizQuestionResults.length;
       const percentage = (this.correctAnswersCount / totalQuestions) * 100;
       const rating = Math.round(percentage);
       this.rating = rating;
@@ -83,9 +91,9 @@ export class ResultComponent implements OnInit {
   }
 
   private setSpentTime(): void {
-    if (this.questionResult) {
-      const lastQuestion = this?.questionResult?.length - 1;
-      this.spentTime = this.questionResult[lastQuestion]?.timeSpent;
+    if (this.quizResult) {
+      const lastQuestion = this.quizQuestionResults.length - 1;
+      this.spentTime = this.quizQuestionResults[lastQuestion]?.questionTime;
     }
   }
 

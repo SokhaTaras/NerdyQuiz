@@ -13,7 +13,12 @@ export interface Question {
 
 export interface QuestionResult extends Question {
   answer: Answer;
-  timeSpent: number;
+  questionTime: number;
+}
+
+export interface QuizResult {
+  questionResults: QuestionResult[];
+  quizTime: number;
 }
 
 export interface Answer {
