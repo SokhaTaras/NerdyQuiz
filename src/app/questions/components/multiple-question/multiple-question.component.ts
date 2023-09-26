@@ -45,10 +45,6 @@ export class MultipleQuestionComponent implements OnInit {
     return this.questionFormHelper.title;
   }
 
-  get difficulty(): FormControl<string> {
-    return this.questionFormHelper.difficulty;
-  }
-
   constructor(private questionFormHelper: QuestionFormHelperService) {}
 
   ngOnInit(): void {

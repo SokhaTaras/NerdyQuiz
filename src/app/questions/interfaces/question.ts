@@ -7,7 +7,6 @@ import { QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 export interface Question {
   title?: string;
   type?: QUESTION_TYPE;
-  difficulty?: QUESTION_DIFFICULTY;
   id?: string;
   answers?: Answer[];
 }

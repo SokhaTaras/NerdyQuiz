@@ -35,10 +35,6 @@ export class QuestionFormHelperService {
     return this.currentForm?.controls?.title;
   }
 
-  get difficulty(): FormControl {
-    return this.currentForm?.controls?.difficulty;
-  }
-
   get type(): FormControl {
     return this.currentForm?.controls?.type;
   }
@@ -74,10 +70,6 @@ export class QuestionFormHelperService {
         Validators.required
       ]),
       type: this.fb.control(question.type, [Validators.required]),
-      difficulty: this.fb.control(
-        question.difficulty || defaultFormValues.difficulty,
-        [Validators.required]
-      ),
       answers: this.fb.array(currentAnswers || defaultAnswers, [
         Validators.required
       ])
