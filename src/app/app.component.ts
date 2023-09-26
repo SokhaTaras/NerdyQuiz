@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { StorageKey } from '@a-shared/enums/storageKey';
+import { Store } from '@ngrx/store';
+
+import { AppState } from '@a-store/state/app.state';
+import { GetQuizzes } from '@a-store/actions/quizz.actions';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +12,13 @@ import { StorageKey } from '@a-shared/enums/storageKey';
 export class AppComponent implements OnInit {
   title = 'nerdyQuiz-app';
 
-  constructor(private quizService: QuizService) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.initQuizzes();
+    this.getQuizzes();
   }
 
-  private initQuizzes(): void {
-    this.quizService.initAllQuizzes(StorageKey.QUIZZES);
+  private getQuizzes(): void {
+    this.store.dispatch(GetQuizzes());
   }
 }
