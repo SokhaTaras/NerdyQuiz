@@ -11,7 +11,7 @@ import {
   AnswerBooleanList,
   AnswerDifficultyList,
   AnswerTypeList
-} from '@a-questions/constants/dropdonws';
+} from '@a-questions/constants/dropdowns';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import {
   ANSWER_PROPERTIES,

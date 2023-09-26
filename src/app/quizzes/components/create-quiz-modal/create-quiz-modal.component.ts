@@ -13,7 +13,7 @@ import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { AnswerDifficultyList } from '@a-questions/constants/dropdonws';
+import { AnswerDifficultyList } from '@a-questions/constants/dropdowns';
 import { DropDownItem } from '@a-questions/interfaces/question';
 
 @Component({
@@ -44,11 +44,11 @@ export class CreateQuizModalComponent implements OnInit {
     return this.initQuizForm.controls.difficulty;
   }
 
-  get selectedDifficultyItem(): DropDownItem {
-    return this.AnswerDifficultyList.find(
-      (item) => item.value === this.difficulty.value
-    );
-  }
+  // get selectedDifficultyItem(): DropDownItem {
+  //   return this.AnswerDifficultyList.find(
+  //     (item) => item.value === this.difficulty.value
+  //   );
+  // }
 
   constructor(
     private fb: FormBuilder,
