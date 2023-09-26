@@ -8,7 +8,7 @@ import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
-import { QuizHelperService } from '../../../shared/services/quiz-helper/quiz-helper.service';
+import { QuizHelperService } from '@a-shared/services/quiz-helper/quiz-helper.service';
 
 @Component({
   selector: 'quiz-app-play',
@@ -37,7 +37,7 @@ export class PlayComponent implements OnInit {
   }
 
   get confirmHandler(): void {
-    return this.currentPosition !== this.questions.length - 1
+    return this.currentPosition !== this.quiz.questions.length - 1
       ? this.nextQuestion(this.currentQuestion)
       : this.finishQuiz(this.currentQuestion);
   }
@@ -52,7 +52,7 @@ export class PlayComponent implements OnInit {
 
   get confirmText(): string {
     const isNotLastQuestion =
-      this.currentPosition !== this.questions.length - 1;
+      this.currentPosition !== this.quiz.questions.length - 1;
     return isNotLastQuestion ? 'BUTTON.NEXT' : 'BUTTON.FINISH';
   }
 
@@ -101,7 +101,7 @@ export class PlayComponent implements OnInit {
         ?.answer;
 
     this.currentPosition += 1;
-    this.currentQuestion = this.questions[this.currentPosition];
+    this.currentQuestion = this.quiz.questions[this.currentPosition];
     this.addQuestionResult(question);
 
     this.selectAnswer(nextQuestionAnswer);
