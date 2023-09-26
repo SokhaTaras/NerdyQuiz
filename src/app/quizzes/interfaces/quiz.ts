@@ -1,10 +1,9 @@
 import { Question } from '@a-questions/interfaces/question';
-import { QuestionCategoryEnum } from '@a-shared/enums/categories';
 
 export interface Quiz {
   title?: string;
   difficulty?: QUIZ_DIFFICULTY;
-  theme?: string;
+  category?: string;
   type?: string;
   id?: string;
   questions?: Question[];
@@ -23,7 +22,7 @@ export interface CategoriesResponse {
 
 export interface Category {
   id: number;
-  name: QuestionCategoryEnum;
+  name: string;
 }
 
 export enum QUIZ_DIFFICULTY {

@@ -42,7 +42,7 @@ export class QuizService {
         const updatedQuiz = {
           ...currentQuizzes[quizIndex],
           title: data.title,
-          theme: data.theme,
+          category: data.category,
           difficulty: data.difficulty
         };
 

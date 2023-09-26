@@ -6,6 +6,7 @@
     "BOOLEAN": "Boolean",
     "MULTIPLE": "Multiple",
     "DIFFICULTY": "Difficulty",
+    "CATEGORY": "Category",
     "CORRECT_ANSWER": "Correct answer",
     "CORRECT": "Correct",
     "ANSWER": "Answer",

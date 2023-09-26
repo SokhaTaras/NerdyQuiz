@@ -1,17 +1,20 @@
+<quiz-app-loader [isLoading]="isLoading">
 <div class="container p-6">
   <h1 class="modal-title">{{ label | translateJson }}</h1>
   <form class="flex justify-center mb-4" [formGroup]="initQuizForm">
-    <div class="flex flex-col space-y-4 w-1/2">
+    <div class="flex flex-col space-y-4 w-3/4">
       <quiz-app-input
         [control]="title"
         [label]="'LABELS.TITLE' | translateJson"
         [placeHolder]="PlaceHolder.title | translateJson">
       </quiz-app-input>
-      <quiz-app-input
-        [control]="theme"
-        [label]="'LABELS.THEME' | translateJson"
-        [placeHolder]="PlaceHolder.theme | translateJson">
-      </quiz-app-input>
+      <quiz-app-select
+        class="w-full flex justify-center items-center"
+        [control]="category"
+        [label]="'LABELS.CATEGORY' | translateJson"
+        [list]="dropDownCategories"
+        [placeHolder]="dropDownCategories[0]?.text | translateJson">
+      </quiz-app-select>
       <quiz-app-select
         class="w-full flex justify-center items-center"
         [control]="difficulty"
@@ -28,3 +31,4 @@
    (whenCancel)="close()">
  </quiz-app-modal-footer>
 </div>
+</quiz-app-loader>

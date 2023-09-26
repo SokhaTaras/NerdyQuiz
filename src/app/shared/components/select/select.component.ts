@@ -16,6 +16,7 @@ export class SelectComponent {
   selectedValue: string;
 
   selectItem(item: string): void {
+    console.log(item);
     this.selectedValue = item;
     this.control.setValue(item);
   }

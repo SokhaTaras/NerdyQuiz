@@ -8,7 +8,7 @@ import { QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 
 export interface InitQuizForm {
   title: FormControl<string>;
-  theme: FormControl<string>;
+  category: FormControl<string>;
   difficulty: FormControl<QUIZ_DIFFICULTY>;
 }
 

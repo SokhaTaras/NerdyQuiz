@@ -13,8 +13,8 @@
         <div *ngIf="currentQuiz?.title" class="mx-3.5 modal-title">
         {{ 'LABELS.TITLE' | translateJson }}: {{ (selectedQuiz$ | async)?.title }}
         </div>
-        <div *ngIf="currentQuiz?.theme" class="mx-3.5 modal-title">
-          {{ 'LABELS.THEME' | translateJson }}: {{ (selectedQuiz$ | async)?.theme }}
+        <div *ngIf="currentQuiz?.category" class="mx-3.5 modal-title">
+          {{ 'LABELS.CATEGORY' | translateJson }}: {{ (selectedQuiz$ | async)?.category }}
         </div>
         <div *ngIf="currentQuiz?.difficulty" class="mx-3.5 modal-title">
           {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ (selectedQuiz$ | async)?.difficulty }}

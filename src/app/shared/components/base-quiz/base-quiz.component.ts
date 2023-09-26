@@ -12,6 +12,7 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
 })
 export class BaseQuizComponent implements OnInit {
   currentQuiz: Quiz;
+
   id: string | null;
   quizDifficulty: string;
 
@@ -25,6 +26,7 @@ export class BaseQuizComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentQuizId();
     this.currentQuizSubscribe();
+    this.quizDifficulty = this.currentQuiz.difficulty;
   }
 
   goHome(): void {
