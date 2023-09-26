@@ -3,7 +3,8 @@ import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import {
   Question,
-  QuestionResult
+  QuestionResult,
+  QuizResult
 } from '@a-questions/interfaces/question';
 import { LocalStorageService } from '@a-shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '@a-shared/utils/getId';

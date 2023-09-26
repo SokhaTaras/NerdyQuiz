@@ -12,7 +12,6 @@ import { ResultComponent } from '@a-quizzes/components/result/result.component';
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 import { CreateQuizModalComponent } from '@a-quizzes/components/create-quiz-modal/create-quiz-modal.component';
-import { IntroductionComponent } from '@a-quizzes/components/introduction/introduction.component';
 import { PrePlayComponent } from '@a-quizzes/components/pre-play/pre-play.component';
 import { QuizListComponent } from '@a-quizzes/components/quiz-list/quiz-list.component';
 import { AnswerSelectionComponent } from '@a-quizzes/components/answer-selection/answer-selection.component';
@@ -24,7 +23,6 @@ import { AnswerSelectionComponent } from '@a-quizzes/components/answer-selection
     QuizDetailsComponent,
     CreateQuizModalComponent,
     HomeComponent,
-    IntroductionComponent,
     PrePlayComponent,
     PlayComponent,
     ResultComponent,

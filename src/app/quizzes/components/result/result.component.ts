@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
-import { Result } from '@a-shared/enums/result';
 import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
-import { QuestionResult } from '@a-questions/interfaces/question';
+import { QuestionResult, QuizResult } from '@a-questions/interfaces/question';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { getResultText } from '@a-shared/utils/result';
 
 @Component({
   selector: 'quiz-app-result',
