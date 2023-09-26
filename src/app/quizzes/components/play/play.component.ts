@@ -28,16 +28,48 @@ export class PlayComponent implements OnInit {
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
+  get cancelHandler(): void {
+    return this.currentPosition === 0
+      ? this.cancelQuizConfirm()
+      : this.previousQuestion();
+  }
+
+  get confirmHandler(): void {
+    return this.currentPosition !== this.questions.length - 1
+      ? this.nextQuestion(this.currentQuestion)
+      : this.finishQuiz(this.currentQuestion);
+  }
+
+  get cancelText(): string {
+    return this.currentPosition === 0 ? 'BUTTON.CANCEL' : 'BUTTON.PREVIOUS';
+  }
+
+  get isDisabled(): boolean {
+    return this.selectedAnswer === null || this.selectedAnswer === undefined;
+  }
+
+  get confirmText(): string {
+    const isNotLastQuestion =
+      this.currentPosition !== this.questions.length - 1;
+    return isNotLastQuestion ? 'BUTTON.NEXT' : 'BUTTON.FINISH';
+  }
+
   constructor(
     private modalQuizService: ModalQuizService,
     private quizService: QuizService,
+    private quizHelperService: QuizHelperService,
     private navigateTo: NavigateToService,
     private subscriptions: SubscriptionsService
   ) {}
 
   ngOnInit(): void {
+    this.quizHelperService.questionsResults.next([]);
     this.initQuestions();
     this.startTimer();
+  }
+
+  selectAnswer(answer: Answer): void {
+    this.selectedAnswer = answer;
   }
 
   cancelQuizConfirm(): void {
@@ -58,28 +90,30 @@ export class PlayComponent implements OnInit {
   }
 
   nextQuestion(question: Question): void {
+    const nextQuestionAnswer =
+      this.quizHelperService.questionsResults.value[this.currentPosition + 1]
+        ?.answer;
+
     this.currentPosition += 1;
+    this.currentQuestion = this.questions[this.currentPosition];
     this.addQuestionResult(question);
+
+    this.selectAnswer(nextQuestionAnswer);
   }
 
   previousQuestion(): void {
+    const previouslySelectedAnswer =
+      this.quizHelperService.questionsResults.value[this.currentPosition - 1]
+        ?.answer;
     this.currentPosition -= 1;
-    this.subscriptions.addSubscription(
-      this.quizService
-        .removeLastQuestionResult(this.currentPosition)
-        .subscribe()
-    );
     this.currentQuestion = this.quiz.questions[this.currentPosition];
-  }
-
-  selectAnswer(answer: Answer): void {
-    this.selectedAnswer = answer;
+    this.selectAnswer(previouslySelectedAnswer);
   }
 
   addQuestionResult(question: Question): void {
     const maxPosition = this.quiz.questions?.length;
     this.subscriptions.addSubscription(
-      this.quizService
+      this.quizHelperService
         .addQuestionResult(question, this.selectedAnswer, this.secondsCounter)
         .subscribe()
     );
@@ -91,9 +125,10 @@ export class PlayComponent implements OnInit {
   }
 
   finishQuiz(lastQuestion: Question): void {
+    const results = this.quizHelperService.questionsResults;
     this.addQuestionResult(lastQuestion);
     this.subscriptions.addSubscription(
-      this.quizService.setQuizResult().subscribe()
+      this.quizService.setQuizResult(results).subscribe()
     );
     this.navigateTo.navigateResult(this.quiz);
   }

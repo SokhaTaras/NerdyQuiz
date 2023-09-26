@@ -6,7 +6,7 @@ import {
   maxQuestionsAmount,
   minQuestionsAmount
 } from '@a-questions/constants/questions-info';
-import { BUTTON_TYPE } from '../../../shared/enums/buttonType';
+import { BUTTON_TYPE } from "@a-shared/enums/buttonType";
 import { AnswerDifficultyList } from '../../constants/dropdonws';
 import { QUESTION_TYPE } from '@a-shared/enums/question-info';
 import { Question } from '@a-questions/interfaces/question';
