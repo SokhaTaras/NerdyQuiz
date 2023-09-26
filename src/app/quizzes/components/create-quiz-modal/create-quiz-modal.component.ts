@@ -15,6 +15,7 @@ import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { AnswerDifficultyList } from '@a-questions/constants/dropdonws';
 import { DropDownItem } from '@a-questions/interfaces/question';
+import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -54,10 +55,12 @@ export class CreateQuizModalComponent implements OnInit {
     private fb: FormBuilder,
     private quizService: QuizService,
     private modalRefFacadeService: ModalRefFacadeService<Quiz>,
-    private subscriptionsService: SubscriptionsService
+    private subscriptionsService: SubscriptionsService,
+    private quizApi: QuizApiService
   ) {}
 
   ngOnInit(): void {
+    this.getCategories();
     this.initForm();
   }
 
@@ -122,5 +125,11 @@ export class CreateQuizModalComponent implements OnInit {
     };
 
     return quiz;
+  }
+
+  private getCategories() {
+    const x = this.quizApi.getCategories().subscribe((val) => {
+      console.log(val);
+    });
   }
 }
