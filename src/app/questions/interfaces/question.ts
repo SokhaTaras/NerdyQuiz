@@ -12,6 +12,20 @@ export interface Question {
   answers?: Answer[];
 }
 
+export interface QuestionResponse {
+  response_code: number;
+  results: FetchedQuestion[];
+}
+
+export interface FetchedQuestion {
+  category: string;
+  correct_answer: string;
+  difficulty: string;
+  incorrect_answer: string[];
+  question: string;
+  type: QUESTION_TYPE;
+}
+
 export interface QuestionResult extends Question {
   answer: Answer;
   timeSpent: number;

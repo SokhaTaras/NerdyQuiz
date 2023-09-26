@@ -27,6 +27,7 @@
   "BUTTON": {
     "NEW_QUIZ": "Add new quiz",
     "NEW_ANSWER": "Add answer",
+    "FETCH_QUESTIONS": "Fetch questions",
     "NEW_MULTIPLE_QUESTION": "Add multiple question",
     "NEW_BOOLEAN_QUESTION": "Add boolean question",
     "CREATE_QUIZ": "Create quiz",

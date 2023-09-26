@@ -13,14 +13,14 @@
         [control]="category"
         [label]="'LABELS.CATEGORY' | translateJson"
         [list]="dropDownCategories"
-        [placeHolder]="firstCategory.text | translateJson">
+        [placeHolder]="firstCategory?.text | translateJson">
       </quiz-app-select>
       <quiz-app-select
         class="w-full flex justify-center items-center"
         [control]="difficulty"
         [label]="'LABELS.DIFFICULTY' | translateJson"
         [list]="AnswerDifficultyList"
-        [placeHolder]="selectedDifficultyItem.text | translateJson">
+        [placeHolder]="selectedDifficultyItem?.text | translateJson">
       </quiz-app-select>
     </div>
   </form>

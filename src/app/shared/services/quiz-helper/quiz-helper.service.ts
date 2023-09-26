@@ -5,7 +5,7 @@ import {
   Answer,
   Question,
   QuestionResult
-} from '../../../questions/interfaces/question';
+} from '@a-questions/interfaces/question';
 
 @Injectable({
   providedIn: 'root'

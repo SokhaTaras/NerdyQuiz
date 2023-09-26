@@ -1,9 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { Question } from '@a-questions/interfaces/question';
+import { FetchedQuestion, Question } from '@a-questions/interfaces/question';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
+
+//todo remove when modal for creating will be implemented
+const DEFAULT_AMOUNT = 10;
 
 @Component({
   selector: 'quiz-app-question-list',
@@ -11,17 +16,18 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
   providers: [SubscriptionsService]
 })
 export class QuestionListComponent implements OnInit {
-  @Input() quizId: string | null;
+  @Input() quiz: Quiz;
 
   displayCreateQuestion = false;
   isBoolean: boolean;
-  allQuestions: Question[];
+  allQuestions: Question[] | FetchedQuestion[];
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private quizService: QuizService,
-    private subscriptionService: SubscriptionsService
+    private subscriptionService: SubscriptionsService,
+    private quizApi: QuizApiService
   ) {}
 
   ngOnInit(): void {
@@ -37,11 +43,19 @@ export class QuestionListComponent implements OnInit {
     this.displayCreateQuestion = true;
   }
 
+  fetchQuestions() {
+    this.quizApi
+      .getQuestions(DEFAULT_AMOUNT, this.quiz.category.value)
+      .subscribe((res) => {
+        this.allQuestions = res.results;
+      });
+  }
+
   private initQuestions(): void {
     this.subscriptionService.addSubscription(
       this.quizService.quizzes$.subscribe(() => {
         return this.quizService
-          .getQuizQuestions(this.quizId)
+          .getQuizQuestions(this.quiz.id)
           .subscribe((questions) => {
             this.allQuestions = questions;
           });
