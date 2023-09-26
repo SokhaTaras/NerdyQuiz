@@ -14,9 +14,12 @@ export class QuizCardComponent {
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  constructor(private navigateTo: NavigateToService) {}
+  quizDifficulty: string;
+
+  constructor(
+    private navigateTo: NavigateToService) {}
 
   goPlay(): void {
-    this.navigateTo.navigatePlay(this.quiz);
+    this.navigateTo.navigatePlay(this.quiz?.id);
   }
 }

@@ -139,17 +139,6 @@ export class QuizService {
     });
   }
 
-  setQuizResult(): Observable<QuestionResult[]> {
-    return new Observable((subscriber) => {
-      this.localStorageService.updateLocalStorage(
-        StorageKey.QUIZ_RESULT,
-        this.questionsResults.value
-      );
-      subscriber.next(this.questionsResults.value);
-      subscriber.complete();
-    });
-  }
-
   addQuestionResult(
     question: Question,
     answer: Answer,
@@ -165,11 +154,13 @@ export class QuizService {
     });
   }
 
-  removeLastQuestionResult(index: number): Observable<QuestionResult> {
-    return new Observable<QuestionResult>((subscriber) => {
-      const deletedItem = this.questionsResults.value.splice(index, 1);
-
-      subscriber.next(deletedItem[0]);
+  setQuizResult(quizResult: QuizResult): Observable<QuizResult> {
+    return new Observable<QuizResult>((subscriber) => {
+      this.localStorageService.updateLocalStorage(
+        StorageKey.QUIZ_RESULT,
+        quizResult
+      );
+      subscriber.next(quizResult);
       subscriber.complete();
     });
   }

@@ -14,19 +14,10 @@ export class StatisticsService {
     return this.localStorageService.getParsedData(StorageKey.QUIZ_RESULT);
   }
 
-  getRating(): number {
-    const questionResults = this.getQuestionResults();
-    const correctnessArray = this.extractCorrectnessArray(questionResults);
-    const rating = this.calculateRating(correctnessArray);
-    return rating;
-  }
-
-  extractCorrectnessArray(questionResults: QuestionResult[]): boolean[] {
-    return questionResults.map((result) => result.answer.isCorrect);
-  }
-
-  countCorrectAnswers(correctnessArray: boolean[]): number {
-    return correctnessArray.filter((isCorrect) => isCorrect).length;
+  extractCorrectnessArray(quizResult: QuizResult): QuestionResult[] {
+    return quizResult?.questionResults?.filter(
+      (result) => result.answer.isCorrect === true
+    );
   }
 
   private calculateRating(correctnessArray: boolean[]): number {

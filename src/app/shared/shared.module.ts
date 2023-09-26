@@ -21,6 +21,7 @@ import { ButtonComponent } from '@a-shared/components/button/button.component';
 import { LoaderComponent } from '@a-shared/components/loader/loader.component';
 import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
 import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json.pipe';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json
     LoaderComponent,
     BaseQuizComponent,
     TranslateJsonPipe,
-    SelectComponent
+    SelectComponent,
+    ProgressBarComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json
     ButtonComponent,
     LoaderComponent,
     TranslateJsonPipe,
-    SelectComponent
+    SelectComponent,
+    ProgressBarComponent
   ]
 })
 export class SharedModule {}

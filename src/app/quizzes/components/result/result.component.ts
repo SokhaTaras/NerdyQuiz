@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
-import { Result } from '@a-shared/enums/result';
 import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
 import { QuestionResult } from '@a-questions/interfaces/question';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
@@ -16,15 +15,19 @@ import { Quiz } from '@a-quizzes/interfaces/quiz';
   providers: [SubscriptionsService]
 })
 export class ResultComponent implements OnInit {
+  readonly BUTTON_TYPE = BUTTON_TYPE;
+
   rating: number;
   spentTime: number;
   correctAnswersCount: number;
   resultText: string;
 
   currentQuiz: Quiz;
-  questionResult: QuestionResult[];
+  quizResult: QuizResult;
 
-  readonly BUTTON_TYPE = BUTTON_TYPE;
+  get quizQuestionResults(): QuestionResult[] {
+    return this?.quizResult?.questionResults;
+  }
 
   constructor(
     private quizService: QuizService,
@@ -36,72 +39,61 @@ export class ResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentQuizSubscribe();
-    this.questionResult = this.getQuestionResult();
-    this.rating = this.getRating();
+    this.setQuizResults();
+    this.setCorrectAnswersCount();
+    this.setRating();
     this.setSpentTime();
     this.setResultText();
-    this.correctAnswersCount = this.calculateCorrectAnswersCount();
   }
 
   playAgain(): void {
-    this.navigateTo.navigatePlay(this.currentQuiz);
+    this.navigateTo.navigatePlay(this.currentQuiz?.id);
   }
 
   goHome(): void {
     this.navigateTo.navigateHome();
   }
 
-  private getRating(): number {
-    if (this.quizService.questionsResults) {
-      return this.statisticsService.getRating();
-    }
-    return 0;
-  }
-
-  private getQuestionResult(): QuestionResult[] {
-    return this.statisticsService.getQuestionResults();
-  }
-
-  private setSpentTime(): void {
-    const lastQuestion = this?.questionResult?.length - 1;
-
-    if (this.quizService.questionsResults) {
-      this.spentTime = this.questionResult[lastQuestion]?.timeSpent;
-    }
-  }
-
-  private calculateCorrectAnswersCount(): number {
-    const correctnessArray = this.statisticsService.extractCorrectnessArray(
-      this.questionResult
-    );
-    return this.statisticsService.countCorrectAnswers(correctnessArray);
-  }
-
-  private setResultText(): void {
-    if (this.rating === Result.EXCELLENT) {
-      this.resultText = 'RESULT_QUOTES.EXCELLENT';
-    } else if (this.rating >= Result.TRY_HARDER) {
-      this.resultText = 'RESULT_QUOTES.PASSED_QUIZ';
-    } else if (
-      this.rating < Result.TRY_HARDER &&
-      this.rating > Result.LEARN_MORE
-    ) {
-      this.resultText = 'RESULT_QUOTES.TRY_HARDER';
-    } else {
-      this.resultText = 'RESULT_QUOTES.LEARN_MORE';
-    }
-  }
-
-  private getCurrentQuizId(): string {
-    return this.route.snapshot.paramMap.get('id');
-  }
-
   private currentQuizSubscribe(): void {
-    const id = this.getCurrentQuizId();
+    const id = this.route.snapshot.paramMap.get('id');
     this.subscriptionsService.addSubscription(
       this.quizService.getQuizById(id).subscribe((currentQuiz) => {
         this.currentQuiz = currentQuiz;
       })
     );
+  }
+
+  private setQuizResults(): void {
+    this.quizResult = this.statisticsService.getQuizResults();
+  }
+
+  private setCorrectAnswersCount(): void {
+    if (this.quizResult) {
+      const correctnessArray = this.statisticsService.extractCorrectnessArray(
+        this.quizResult
+      );
+
+      this.correctAnswersCount = correctnessArray?.length;
+    }
+  }
+
+  private setRating(): void {
+    if (this.quizResult) {
+      const totalQuestions = this.quizQuestionResults.length;
+      const percentage = (this.correctAnswersCount / totalQuestions) * 100;
+      const rating = Math.round(percentage);
+      this.rating = rating;
+    }
+  }
+
+  private setSpentTime(): void {
+    if (this.quizResult) {
+      const lastQuestion = this.quizQuestionResults.length - 1;
+      this.spentTime = this.quizQuestionResults[lastQuestion]?.questionTime;
+    }
+  }
+
+  private setResultText(): void {
+    this.resultText = getResultText(this.rating);
   }
 }

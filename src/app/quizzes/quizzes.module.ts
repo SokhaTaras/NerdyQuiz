@@ -11,10 +11,10 @@ import { QuizListComponent } from '@a-quizzes/components/quiz-list/quiz-list.com
 import { QuizDetailsComponent } from '@a-quizzes/components/quiz-details/quiz-details.component';
 import { CreateQuizModalComponent } from '@a-quizzes/components/create-quiz-modal/create-quiz-modal.component';
 import { HomeComponent } from '../home/components/home/home.component';
-import { IntroductionComponent } from '@a-quizzes/components/introduction/introduction.component';
 import { PrePlayComponent } from '@a-quizzes/components/pre-play/pre-play.component';
 import { PlayComponent } from '@a-quizzes/components/play/play.component';
 import { ResultComponent } from '@a-quizzes/components/result/result.component';
+import { AnswerSelectionComponent } from './components/answer-selection/answer-selection.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +23,10 @@ import { ResultComponent } from '@a-quizzes/components/result/result.component';
     QuizDetailsComponent,
     CreateQuizModalComponent,
     HomeComponent,
-    IntroductionComponent,
     PrePlayComponent,
     PlayComponent,
-    ResultComponent
+    ResultComponent,
+    AnswerSelectionComponent
   ],
   imports: [
     CommonModule,
