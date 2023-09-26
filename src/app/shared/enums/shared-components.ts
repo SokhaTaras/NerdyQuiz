@@ -19,5 +19,5 @@ export const defaultDifficulty: DropDownItem = {
 
 export const defaultCategory: DropDownItem = {
   value: 'category',
-  text: 'Category'
+  text: 'Default'
 };

@@ -58,8 +58,8 @@ export class CreateQuizModalComponent implements OnInit {
     return this.initQuizForm?.controls?.difficulty.value;
   }
 
-  get firstCategory() {
-    return this.dropDownCategories[0];
+  get firstCategory(): DropDownItem {
+    return this?.dropDownCategories[0];
   }
 
   constructor(
@@ -114,6 +114,7 @@ export class CreateQuizModalComponent implements OnInit {
   }
 
   private initForm(): void {
+    this.isLoading = true;
     this.initQuizForm = this.fb.nonNullable.group<InitQuizForm>({
       title: this.fb.control(this.quiz.title || '', [
         Validators.required,
@@ -125,6 +126,7 @@ export class CreateQuizModalComponent implements OnInit {
       ]),
       difficulty: this.fb.control(this.quiz.difficulty || defaultDifficulty)
     });
+    this.isLoading = false;
   }
 
   private getFormData(): Quiz {
@@ -140,10 +142,12 @@ export class CreateQuizModalComponent implements OnInit {
 
   private setCategories(): void {
     this.isLoading = true;
-    this.quizApi.getCategories().subscribe((categories) => {
-      this.mapToDropDownItem(categories);
-      this.isLoading = false;
-    });
+    this.subscriptionsService.addSubscription(
+      this.quizApi.getCategories().subscribe((categories) => {
+        this.mapToDropDownItem(categories);
+        this.isLoading = false;
+      })
+    );
   }
 
   private mapToDropDownItem(fetchedCategories: CategoriesResponse): void {
