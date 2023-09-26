@@ -6,7 +6,10 @@ import {
   DifficultyPoints,
   DifficultyRanges
 } from '@a-questions/constants/questions-info';
-import { QuestionResult } from '@a-questions/interfaces/question';
+import {
+  QuestionResult,
+  QuizResult
+} from '@a-questions/interfaces/question';
 import { StorageKey } from '@a-shared/enums/storageKey';
 import { DifficultiesEnum } from '@a-shared/enums/question-info';
 
@@ -31,23 +34,14 @@ export class StatisticsService {
     }, 0);
   }
 
-  getQuestionResults(): QuestionResult[] {
+  getQuizResults(): QuizResult {
     return this.localStorageService.getParsedData(StorageKey.QUIZ_RESULT);
   }
 
-  getRating(): number {
-    const questionResults = this.getQuestionResults();
-    const correctnessArray = this.extractCorrectnessArray(questionResults);
-    const rating = this.calculateRating(correctnessArray);
-    return rating;
-  }
-
-  extractCorrectnessArray(questionResults: QuestionResult[]): boolean[] {
-    return questionResults.map((result) => result.answer.isCorrect);
-  }
-
-  countCorrectAnswers(correctnessArray: boolean[]): number {
-    return correctnessArray.filter((isCorrect) => isCorrect).length;
+  extractCorrectnessArray(quizResult: QuizResult): QuestionResult[] {
+    return quizResult?.questionResults?.filter(
+      (result) => result.answer.isCorrect === true
+    );
   }
 
   private calculateAverageDifficulty(difficulties: string[]): string {
@@ -62,18 +56,6 @@ export class StatisticsService {
     const averageDifficulty = weightedSum / totalDifficultyCount;
     const difficulty = this.getDifficulty(averageDifficulty);
     return difficulty;
-  }
-
-  private calculateRating(correctnessArray: boolean[]): number {
-    if (correctnessArray.length === 0) {
-      return 0;
-    }
-
-    const correctAnswersCount = this.countCorrectAnswers(correctnessArray);
-    const totalAnswers = correctnessArray.length;
-    const percentage = (correctAnswersCount / totalAnswers) * 100;
-    const rating = Math.round(percentage);
-    return rating;
   }
 
   private getDifficulty(averageDifficulty: number): string {

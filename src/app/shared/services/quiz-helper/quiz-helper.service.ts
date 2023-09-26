@@ -16,7 +16,7 @@ export class QuizHelperService {
   addQuestionResult(
     question: Question,
     answer: Answer,
-    timeSpent: number
+    questionTime: number
   ): Observable<QuestionResult[]> {
     return new Observable<QuestionResult[]>((subscriber) => {
       let currentResults = this.questionsResults.value;
@@ -29,13 +29,13 @@ export class QuizHelperService {
         currentResults[existingResultIndex] = {
           ...currentResults[existingResultIndex],
           answer,
-          timeSpent
+          questionTime
         };
       } else {
         currentResults.push({
           ...question,
           answer,
-          timeSpent
+          questionTime
         });
       }
 

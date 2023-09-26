@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import {
-  Answer,
   Question,
   QuestionResult
 } from '@a-questions/interfaces/question';
@@ -138,15 +137,13 @@ export class QuizService {
     });
   }
 
-  setQuizResult(
-    questionResults: BehaviorSubject<QuestionResult[]>
-  ): Observable<QuestionResult[]> {
-    return new Observable((subscriber) => {
+  setQuizResult(quizResult: QuizResult): Observable<QuizResult> {
+    return new Observable<QuizResult>((subscriber) => {
       this.localStorageService.updateLocalStorage(
         StorageKey.QUIZ_RESULT,
-        questionResults.value
+        quizResult
       );
-      subscriber.next(questionResults.value);
+      subscriber.next(quizResult);
       subscriber.complete();
     });
   }

@@ -13,9 +13,9 @@ import { StatisticsService } from '@a-shared/services/statistics/statistics.serv
 export class QuizCardComponent implements OnInit {
   @Input() quiz: Quiz;
 
-  quizDifficulty: string;
-
   readonly BUTTON_TYPE = BUTTON_TYPE;
+
+  quizDifficulty: string;
 
   constructor(
     private statisticsService: StatisticsService,
@@ -33,6 +33,6 @@ export class QuizCardComponent implements OnInit {
   }
 
   goPlay(): void {
-    this.navigateTo.navigatePlay(this.quiz);
+    this.navigateTo.navigatePlay(this.quiz?.id);
   }
 }
