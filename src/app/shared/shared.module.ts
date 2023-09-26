@@ -21,7 +21,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { BaseQuizComponent } from './components/base-quiz/base-quiz.component';
 import { SelectComponent } from './components/select/select.component';
-import { PercetageProgressComponent } from './components/percetage-progress/percetage-progress.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { PercetageProgressComponent } from './components/percetage-progress/perc
     BaseQuizComponent,
     TranslateJsonPipe,
     SelectComponent,
-    PercetageProgressComponent
+    ProgressBarComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +62,7 @@ import { PercetageProgressComponent } from './components/percetage-progress/perc
     LoaderComponent,
     TranslateJsonPipe,
     SelectComponent,
-    PercetageProgressComponent
+    ProgressBarComponent
   ]
 })
 export class SharedModule {}
