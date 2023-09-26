@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import {
-  Answer,
   Question,
-  QuestionResult
+  QuestionResult,
+  QuizResult
 } from '@a-questions/interfaces/question';
 import { LocalStorageService } from '@a-shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '@a-shared/utils/getId';
@@ -139,20 +139,20 @@ export class QuizService {
     });
   }
 
-  addQuestionResult(
-    question: Question,
-    answer: Answer,
-    timeSpent: number
-  ): Observable<QuestionResult[]> {
-    return new Observable<QuestionResult[]>((subscriber) => {
-      this.questionsResults.next(
-        this.questionsResults.value.concat([{ ...question, answer, timeSpent }])
-      );
-
-      subscriber.next(this.questionsResults.value);
-      subscriber.complete();
-    });
-  }
+  // addQuestionResult(
+  //   question: Question,
+  //   answer: Answer,
+  //   timeSpent: number
+  // ): Observable<QuestionResult[]> {
+  //   return new Observable<QuestionResult[]>((subscriber) => {
+  //     this.questionsResults.next(
+  //       this.questionsResults.value.concat([{ ...question, answer, timeSpent }])
+  //     );
+  //
+  //     subscriber.next(this.questionsResults.value);
+  //     subscriber.complete();
+  //   });
+  // }
 
   setQuizResult(quizResult: QuizResult): Observable<QuizResult> {
     return new Observable<QuizResult>((subscriber) => {

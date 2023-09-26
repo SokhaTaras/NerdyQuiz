@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 
-import {
-  Answer,
-  Question
-} from '@a-questions/interfaces/question';
+import { Answer, Question, QuizResult } from '@a-questions/interfaces/question';
 import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
