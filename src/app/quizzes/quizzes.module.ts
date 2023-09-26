@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+
 import { QuizzesRoutingModule } from '@a-quizzes/quizzes-routing.module';
 import { SharedModule } from '@a-shared/shared.module';
 import { QuestionsModule } from '@a-questions/questions.module';
-
 import { HomeComponent } from '../home/components/home/home.component';
 import { PrePlayComponent } from '@a-quizzes/components/pre-play/pre-play.component';
 import { PlayComponent } from '@a-quizzes/components/play/play.component';
