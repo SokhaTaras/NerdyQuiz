@@ -15,7 +15,6 @@ export interface InitQuizForm {
 export interface QuestionForm {
   title: FormControl<string>;
   type: FormControl<QUESTION_TYPE>;
-  difficulty: FormControl<QUESTION_DIFFICULTY>;
   answers: FormArray<AnswersFormType>;
 }
 

@@ -56,7 +56,6 @@ export class CreateQuestionComponent {
     const question: Question = {
       title: formData.title,
       type: formData.type,
-      difficulty: formData.difficulty,
       answers: formData.answers
     };
 

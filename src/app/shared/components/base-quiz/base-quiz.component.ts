@@ -25,6 +25,7 @@ export class BaseQuizComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentQuizId();
     this.currentQuizSubscribe();
+    this.quizDifficulty = this.currentQuiz.difficulty;
   }
 
   goHome(): void {
