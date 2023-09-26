@@ -8,6 +8,7 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { ButtonConfig, Popover } from '@a-shared/types/popover';
 import { createButtonConfig } from '@a-shared/utils/popover-item-configurator';
+import { DropDownItem } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-quiz-card',
@@ -21,6 +22,10 @@ export class QuizCardComponent implements OnInit {
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
   readonly POPOVER_TYPE = POPOVER_TYPE;
+
+  get quizDifficulty(): DropDownItem {
+    return this?.quiz?.difficulty;
+  }
 
   constructor(
     private navigateTo: NavigateToService,

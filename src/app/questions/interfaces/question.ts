@@ -2,6 +2,7 @@ import {
   QUESTION_DIFFICULTY,
   QUESTION_TYPE
 } from '@a-shared/enums/question-info';
+import { QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 
 export interface Question {
   title?: string;
@@ -23,7 +24,7 @@ export interface Answer {
 
 export interface DropDownItem {
   value: string;
-  text: string;
+  text: string | QUIZ_DIFFICULTY;
 }
 
 export interface AnswerList {

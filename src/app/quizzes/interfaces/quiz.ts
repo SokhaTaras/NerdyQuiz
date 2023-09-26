@@ -1,9 +1,9 @@
-import { Question } from '@a-questions/interfaces/question';
+import { DropDownItem, Question } from '@a-questions/interfaces/question';
 
 export interface Quiz {
   title?: string;
-  difficulty?: QUIZ_DIFFICULTY;
-  category?: string;
+  difficulty?: DropDownItem;
+  category?: DropDownItem;
   type?: string;
   id?: string;
   questions?: Question[];
@@ -12,7 +12,7 @@ export interface Quiz {
 export interface QuizCard {
   title: string;
   questions: Question[];
-  difficulty: QUIZ_DIFFICULTY;
+  difficulty: DropDownItem;
   id: string;
 }
 

@@ -13,7 +13,7 @@
         [control]="category"
         [label]="'LABELS.CATEGORY' | translateJson"
         [list]="dropDownCategories"
-        [placeHolder]="dropDownCategories[0]?.text | translateJson">
+        [placeHolder]="firstCategory.text | translateJson">
       </quiz-app-select>
       <quiz-app-select
         class="w-full flex justify-center items-center"

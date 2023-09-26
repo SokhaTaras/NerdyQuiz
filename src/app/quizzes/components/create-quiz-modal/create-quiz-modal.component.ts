@@ -9,11 +9,7 @@ import { Observable } from 'rxjs';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { InitQuizForm } from '@a-shared/types/forms';
-import {
-  CategoriesResponse,
-  Quiz,
-  QUIZ_DIFFICULTY
-} from '@a-quizzes/interfaces/quiz';
+import { CategoriesResponse, Quiz } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
@@ -21,6 +17,10 @@ import { AnswerDifficultyList } from '@a-questions/constants/dropdonws';
 import { DropDownItem } from '@a-questions/interfaces/question';
 import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 import { mapArrayToDropDownItems } from '@a-shared/utils/drop-down-mapper';
+import {
+  defaultCategory,
+  defaultDifficulty
+} from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -46,18 +46,20 @@ export class CreateQuizModalComponent implements OnInit {
     return this?.initQuizForm?.controls?.title;
   }
 
-  get category(): FormControl<string> {
+  get category(): FormControl<DropDownItem> {
     return this?.initQuizForm?.controls?.category;
   }
 
-  get difficulty(): FormControl<QUIZ_DIFFICULTY> {
+  get difficulty(): FormControl<DropDownItem> {
     return this?.initQuizForm?.controls?.difficulty;
   }
 
   get selectedDifficultyItem(): DropDownItem {
-    return this.AnswerDifficultyList.find(
-      (item) => item?.value === this?.difficulty?.value
-    );
+    return this.initQuizForm?.controls?.difficulty.value;
+  }
+
+  get firstCategory() {
+    return this.dropDownCategories[0];
   }
 
   constructor(
@@ -117,11 +119,11 @@ export class CreateQuizModalComponent implements OnInit {
         Validators.required,
         Validators.minLength(2)
       ]),
-      category: this.fb.control(this.quiz.category || '', [
+      category: this.fb.control(this.quiz.category || defaultCategory, [
         Validators.required,
         Validators.minLength(2)
       ]),
-      difficulty: this.fb.control(this.quiz.difficulty || QUIZ_DIFFICULTY.EASY)
+      difficulty: this.fb.control(this.quiz.difficulty || defaultDifficulty)
     });
   }
 
@@ -141,14 +143,13 @@ export class CreateQuizModalComponent implements OnInit {
     this.quizApi.getCategories().subscribe((categories) => {
       this.mapToDropDownItem(categories);
       this.isLoading = false;
-      console.log(this.dropDownCategories);
     });
   }
 
   private mapToDropDownItem(fetchedCategories: CategoriesResponse): void {
     this.dropDownCategories = mapArrayToDropDownItems(
       fetchedCategories.trivia_categories,
-      'name',
+      'id',
       'name'
     );
   }

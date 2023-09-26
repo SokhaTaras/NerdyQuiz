@@ -14,10 +14,10 @@
         {{ 'LABELS.TITLE' | translateJson }}: {{ (selectedQuiz$ | async)?.title }}
         </div>
         <div *ngIf="currentQuiz?.category" class="mx-3.5 modal-title">
-          {{ 'LABELS.CATEGORY' | translateJson }}: {{ (selectedQuiz$ | async)?.category }}
+          {{ 'LABELS.CATEGORY' | translateJson }}: {{ (selectedQuiz$ | async)?.category?.text }}
         </div>
         <div *ngIf="currentQuiz?.difficulty" class="mx-3.5 modal-title">
-          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ (selectedQuiz$ | async)?.difficulty }}
+          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ (selectedQuiz$ | async)?.difficulty.text | translateJson }}
         </div>
       </div>
       <div class="w-full">

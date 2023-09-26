@@ -10,8 +10,8 @@
     <nz-option
       *ngFor="let item of list"
       [ngClass]="{'bg-secondary': selectedValue}"
-      [nzValue]="item?.value"
-      [nzLabel]="item?.text"
+      [nzValue]="item"
+      [nzLabel]="item?.text | translateJson"
     ></nz-option>
   </nz-select>
 </div>

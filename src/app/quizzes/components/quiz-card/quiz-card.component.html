@@ -9,8 +9,8 @@
   <div class="card-title">
     {{ quiz?.title }}
   </div>
-  <div *ngIf="quiz?.difficulty">
-    {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ quiz?.difficulty }}
+  <div *ngIf="quizDifficulty">
+    {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ quizDifficulty.text | translateJson }}
   </div>
   <div class="card-location">
     {{ 'BUTTON.QUESTION_AMOUNT' | translateJson }} {{ quiz?.questions?.length || 0 }}
