@@ -67,7 +67,6 @@ export class CreateQuizModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCategories();
-    this.initForm();
   }
 
   close(data?: Quiz): void {
@@ -123,10 +122,10 @@ export class CreateQuizModalComponent implements OnInit {
         Validators.required,
         Validators.minLength(2)
       ]),
-      category: this.fb.control(this?.quiz?.category || defaultCategory, [
-        Validators.required,
-        Validators.minLength(2)
-      ]),
+      category: this.fb.control(
+        this?.quiz?.category || this?.dropDownCategories[0],
+        [Validators.required, Validators.minLength(2)]
+      ),
       difficulty: this.fb.control(this?.quiz?.difficulty || defaultDifficulty)
     });
     this.isLoading = false;
@@ -143,11 +142,13 @@ export class CreateQuizModalComponent implements OnInit {
     return quiz;
   }
 
+  //todo is it good experience to call init methods inside setCategories
   private setCategories(): void {
     this.isLoading = true;
     this.subscriptionsService.addSubscription(
       this.quizApi.getCategories().subscribe((categories) => {
         this.mapToDropDownItem(categories);
+        this.initForm();
         this.isLoading = false;
       })
     );

@@ -17,7 +17,7 @@ export interface FetchedQuestion {
   category: string;
   correct_answer: string;
   difficulty: string;
-  incorrect_answer: string[];
+  incorrect_answers: string[];
   question: string;
   type: QUESTION_TYPE;
 }

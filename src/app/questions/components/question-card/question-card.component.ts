@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
-import { FetchedQuestion, Question } from '@a-questions/interfaces/question';
+import { Question } from '@a-questions/interfaces/question';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
@@ -12,7 +12,7 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
   providers: [SubscriptionsService]
 })
 export class QuestionCardComponent {
-  @Input() question: Question | FetchedQuestion;
+  @Input() question: Question;
   @Input() questionIndex: number;
   @Input() quizId: string | null;
 

@@ -147,23 +147,33 @@ export class QuizService {
     questionIndex: number | undefined
   ): Observable<Question> {
     return new Observable<Question>((subscriber) => {
-      const currentQuizzes = this.quizzes$.value;
+      const currentQuizzes = [...this.quizzes$.value];
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
-      const currentQuiz = currentQuizzes[quizIndex];
 
       if (quizIndex !== -1) {
+        const currentQuiz = { ...currentQuizzes[quizIndex] };
         const updatedQuestions = [...currentQuiz.questions];
-        updatedQuestions.splice(questionIndex, 1);
-        currentQuiz.questions = updatedQuestions;
-        this.quizzes$.next(currentQuizzes);
-        this.localStorageService.updateLocalStorage(
-          StorageKey.QUIZZES,
-          this.quizzes$.value
-        );
-        subscriber.next(updatedQuestions[questionIndex]);
+
+        if (questionIndex >= 0 && questionIndex < updatedQuestions.length) {
+          updatedQuestions.splice(questionIndex, 1);
+          currentQuiz.questions = updatedQuestions;
+
+          currentQuizzes[quizIndex] = currentQuiz;
+
+          this.quizzes$.next(currentQuizzes);
+          this.localStorageService.updateLocalStorage(
+            StorageKey.QUIZZES,
+            currentQuizzes
+          );
+
+          subscriber.next(updatedQuestions[questionIndex]);
+        } else {
+          subscriber.error();
+        }
       } else {
         subscriber.error();
       }
+
       subscriber.complete();
     });
   }

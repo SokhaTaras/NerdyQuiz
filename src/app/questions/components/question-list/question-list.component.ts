@@ -1,11 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { FetchedQuestion, Question } from '@a-questions/interfaces/question';
-import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
+import { Question } from '@a-questions/interfaces/question';
+import {
+  BUTTON_TYPE,
+  defaultCategory
+} from '@a-shared/enums/shared-components';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
+import { mapQuestions } from '@a-shared/utils/questionsMapper';
 
 //todo remove when modal for creating will be implemented
 const DEFAULT_AMOUNT = 10;
@@ -20,9 +24,17 @@ export class QuestionListComponent implements OnInit {
 
   displayCreateQuestion = false;
   isBoolean: boolean;
-  allQuestions: Question[] | FetchedQuestion[];
+  allQuestions: Question[];
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
+
+  get categoryValue(): string {
+    return this.quiz.category.value;
+  }
+
+  get isInvalid(): boolean {
+    return this.quiz.category === defaultCategory;
+  }
 
   constructor(
     private quizService: QuizService,
@@ -43,11 +55,12 @@ export class QuestionListComponent implements OnInit {
     this.displayCreateQuestion = true;
   }
 
-  fetchQuestions() {
+  setQuestions(): void {
+    const category = this.categoryValue;
     this.quizApi
-      .getQuestions(DEFAULT_AMOUNT, this.quiz.category.value)
-      .subscribe((res) => {
-        this.allQuestions = res.results;
+      .getQuestions(DEFAULT_AMOUNT, category)
+      .subscribe((questionResponse) => {
+        this.allQuestions = mapQuestions(questionResponse.results);
       });
   }
 
