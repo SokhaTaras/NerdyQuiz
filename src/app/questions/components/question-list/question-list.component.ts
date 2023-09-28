@@ -9,10 +9,7 @@ import {
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
-import { mapQuestions } from '@a-shared/utils/questionsMapper';
-
-//todo remove when modal for creating will be implemented
-const DEFAULT_AMOUNT = 10;
+import { mapQuestion } from '@a-shared/utils/questionsMapper';
 
 @Component({
   selector: 'quiz-app-question-list',
@@ -56,11 +53,13 @@ export class QuestionListComponent implements OnInit {
   }
 
   setQuestions(): void {
-    const category = this.categoryValue;
     this.quizApi
-      .getQuestions(DEFAULT_AMOUNT, category)
+      .getQuestions(this.categoryValue)
       .subscribe((questionResponse) => {
-        this.allQuestions = mapQuestions(questionResponse.results);
+        const mappedQuestion = mapQuestion(questionResponse.results[0]);
+
+        this.allQuestions.push(mappedQuestion);
+        this.quizService.addQuestion(this.quiz.id, mappedQuestion).subscribe();
       });
   }
 

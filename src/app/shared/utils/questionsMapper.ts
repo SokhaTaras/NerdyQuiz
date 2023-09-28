@@ -4,24 +4,17 @@ import {
   Question
 } from '@a-questions/interfaces/question';
 
-export function mapQuestions(fetchedQuestions: FetchedQuestion[]): Question[] {
-  console.log('all questions: ', fetchedQuestions);
-  console.log('first question: ', fetchedQuestions[0]);
+export function mapQuestion(fetchedQuestions: FetchedQuestion): Question {
+  const mappedQuestion: Question = {
+    title: fetchedQuestions?.question,
+    type: fetchedQuestions?.type,
+    answers: mapAnswers(
+      fetchedQuestions?.correct_answer,
+      fetchedQuestions?.incorrect_answers
+    )
+  };
 
-  console.log(
-    'first question incorrect answers: ',
-    fetchedQuestions[0].correct_answer
-  );
-  return fetchedQuestions.map((fetchedQuestion) => {
-    const title = fetchedQuestion?.question;
-    const type = fetchedQuestion?.type;
-    const answers = mapAnswers(
-      fetchedQuestion?.correct_answer,
-      fetchedQuestion?.incorrect_answers
-    );
-
-    return { title, type, answers };
-  });
+  return mappedQuestion;
 }
 
 function mapAnswers(

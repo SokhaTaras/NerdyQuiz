@@ -16,7 +16,7 @@ export class QuizApiService {
     return this.http.get<CategoriesResponse>(`${TRIVIA_API}/api_category.php`);
   }
 
-  getQuestions(amount: number, category: string): Observable<QuestionResponse> {
+  getQuestions(category: string, amount = 1): Observable<QuestionResponse> {
     const params = new HttpParams()
       .set('amount', amount)
       .set('category', category);

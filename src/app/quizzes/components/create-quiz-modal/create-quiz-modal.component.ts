@@ -17,10 +17,7 @@ import { AnswerDifficultyList } from '@a-questions/constants/dropdowns';
 import { DropDownItem } from '@a-questions/interfaces/question';
 import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 import { mapArrayToDropDownItems } from '@a-shared/utils/drop-down-mapper';
-import {
-  defaultCategory,
-  defaultDifficulty
-} from '@a-shared/enums/shared-components';
+import { defaultDifficulty } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
