@@ -1,5 +1,6 @@
 import { DropDownItem } from '@a-questions/interfaces/question';
 import {
+  DifficultiesEnum,
   QUESTION_BOOLEAN,
   QUESTION_DIFFICULTY,
   QUESTION_TYPE
@@ -41,3 +42,8 @@ export const AnswerDifficultyList: DropDownItem[] = [
     text: 'DROPDOWN.DIFFICULTY.HARD'
   }
 ];
+
+export const defaultDifficulty: DropDownItem = {
+  value: DifficultiesEnum.Easy,
+  text: AnswerDifficultyList[0].text
+};

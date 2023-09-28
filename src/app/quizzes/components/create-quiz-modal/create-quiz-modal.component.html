@@ -17,7 +17,9 @@
         [control]="difficulty"
         [label]="'LABELS.DIFFICULTY' | translateJson"
         [list]="AnswerDifficultyList"
-        [placeHolder]="AnswerDifficultyList[0].text">
+        [selectedValue]="difficulty.value || easyDifficulty"
+        (whenSelected)="setDifficulty($event)"
+      >
       </quiz-app-select>
     </div>
   </form>

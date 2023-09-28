@@ -1,7 +1,4 @@
-import {
-  QUESTION_DIFFICULTY,
-  QUESTION_TYPE
-} from '@a-shared/enums/question-info';
+import { QUESTION_TYPE } from '@a-shared/enums/question-info';
 
 export interface Question {
   title?: string;
