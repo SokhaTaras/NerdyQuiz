@@ -139,21 +139,6 @@ export class QuizService {
     });
   }
 
-  // addQuestionResult(
-  //   question: Question,
-  //   answer: Answer,
-  //   timeSpent: number
-  // ): Observable<QuestionResult[]> {
-  //   return new Observable<QuestionResult[]>((subscriber) => {
-  //     this.questionsResults.next(
-  //       this.questionsResults.value.concat([{ ...question, answer, timeSpent }])
-  //     );
-  //
-  //     subscriber.next(this.questionsResults.value);
-  //     subscriber.complete();
-  //   });
-  // }
-
   setQuizResult(quizResult: QuizResult): Observable<QuizResult> {
     return new Observable<QuizResult>((subscriber) => {
       this.localStorageService.updateLocalStorage(
