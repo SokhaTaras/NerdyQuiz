@@ -5,6 +5,7 @@ import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { Question } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -14,7 +15,22 @@ export class BaseQuizComponent implements OnInit {
   currentQuiz: Quiz;
 
   id: string | null;
-  quizDifficulty: string;
+
+  get quizTitle(): string {
+    return this?.currentQuiz?.title;
+  }
+
+  get quizCategory(): string {
+    return this?.currentQuiz?.category.text;
+  }
+
+  get quizDifficulty(): string {
+    return this?.currentQuiz?.difficulty.text;
+  }
+
+  get quizQuestions(): Question[] {
+    return this?.currentQuiz?.questions;
+  }
 
   constructor(
     protected quizService: QuizService,
@@ -26,7 +42,6 @@ export class BaseQuizComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentQuizId();
     this.currentQuizSubscribe();
-    this.quizDifficulty = this.currentQuiz.difficulty.text;
   }
 
   goHome(): void {

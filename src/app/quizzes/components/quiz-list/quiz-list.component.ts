@@ -56,12 +56,9 @@ export class QuizListComponent implements OnInit {
     this.store.dispatch(GetQuizzes());
 
     this.subscriptionsService.addSubscription(
-      this.store.pipe(select(selectQuizzesList)).subscribe((quizzes) => {
-        if (quizzes?.length > 0) {
-          this.isLoading = false;
-        }
-
+      this.store.pipe(select(selectQuizzesList)).subscribe(() => {
         this.quizzes$ = this.store.pipe(select(selectQuizzesList));
+        this.isLoading = false;
       })
     );
   }

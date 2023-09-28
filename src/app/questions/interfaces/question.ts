@@ -1,7 +1,4 @@
-import {
-  QUESTION_DIFFICULTY,
-  QUESTION_TYPE
-} from '@a-shared/enums/question-info';
+import { QUESTION_TYPE } from '@a-shared/enums/question-info';
 import { QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 
 export interface Question {
@@ -27,7 +24,12 @@ export interface FetchedQuestion {
 
 export interface QuestionResult extends Question {
   answer: Answer;
-  timeSpent: number;
+  questionTime: number;
+}
+
+export interface QuizResult {
+  questionResults: QuestionResult[];
+  quizTime: number;
 }
 
 export interface Answer {
@@ -37,7 +39,7 @@ export interface Answer {
 
 export interface DropDownItem {
   value: string;
-  text: string | QUIZ_DIFFICULTY;
+  text: string;
 }
 
 export interface AnswerList {

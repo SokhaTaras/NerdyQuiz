@@ -1,9 +1,6 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
-import {
-  QUESTION_DIFFICULTY,
-  QUESTION_TYPE
-} from '@a-shared/enums/question-info';
+import { QUESTION_TYPE } from '@a-shared/enums/question-info';
 import { DropDownItem } from '@a-questions/interfaces/question';
 
 export interface InitQuizForm {
