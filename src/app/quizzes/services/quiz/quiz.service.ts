@@ -108,6 +108,7 @@ export class QuizService {
     }).pipe(delay(1000));
   }
 
+  //todo remove bug
   addQuestion(quizId: string | null, question: Question): Observable<Question> {
     return new Observable<Question>((subscriber) => {
       if (this.quizzes$.value) {
@@ -116,8 +117,9 @@ export class QuizService {
 
         if (quizIndex !== -1) {
           question.id = getNewQuestionId();
-          currentQuizzes[quizIndex].questions.push(question);
-          this.quizzes$.next(currentQuizzes);
+          const copy: Quiz[] = JSON.parse(JSON.stringify(currentQuizzes));
+          copy[quizIndex].questions.push(question);
+          this.quizzes$.next(copy);
           this.localStorageService.updateLocalStorage(
             StorageKey.QUIZZES,
             this.quizzes$.value
