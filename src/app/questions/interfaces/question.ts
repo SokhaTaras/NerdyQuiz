@@ -25,7 +25,7 @@ export interface Answer {
 
 export interface DropDownItem {
   value: string;
-  text: string | QUIZ_DIFFICULTY;
+  text: string;
 }
 
 export interface AnswerList {

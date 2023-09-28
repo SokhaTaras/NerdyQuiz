@@ -15,7 +15,7 @@ export class SelectComponent {
   @Output() whenSelected: EventEmitter<DropDownItem> = new EventEmitter();
 
   selectItem(item: DropDownItem): void {
-    this.selectedValue = item.text;
+    this.selectedValue = item;
     this.whenSelected.emit(this.selectedValue);
   }
 }

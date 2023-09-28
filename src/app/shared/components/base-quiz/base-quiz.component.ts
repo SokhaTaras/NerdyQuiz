@@ -20,8 +20,8 @@ export class BaseQuizComponent implements OnInit {
     return this?.currentQuiz?.title;
   }
 
-  get quizTheme(): string {
-    return this?.currentQuiz?.theme;
+  get quizCategory(): string {
+    return this?.currentQuiz?.category.text;
   }
 
   get quizDifficulty(): string {
@@ -42,7 +42,6 @@ export class BaseQuizComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentQuizId();
     this.currentQuizSubscribe();
-    this.quizDifficulty = this.currentQuiz.difficulty.text;
   }
 
   goHome(): void {

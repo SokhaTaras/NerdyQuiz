@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 
 import { Answer, Question, QuizResult } from '@a-questions/interfaces/question';
-import { BUTTON_TYPE } from '@a-shared/enums/buttonType';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizHelperService } from '@a-shared/services/quiz-helper/quiz-helper.service';
+import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-play',

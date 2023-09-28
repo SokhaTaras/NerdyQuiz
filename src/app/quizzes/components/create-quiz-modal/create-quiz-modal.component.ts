@@ -13,10 +13,7 @@ import { CategoriesResponse, Quiz } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import {
-  AnswerDifficultyList,
-  defaultDifficulty
-} from '@a-questions/constants/dropdowns';
+import { AnswerDifficultyList } from '@a-questions/constants/dropdowns';
 import { DropDownItem } from '@a-questions/interfaces/question';
 import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 import { mapArrayToDropDownItems } from '@a-shared/utils/drop-down-mapper';
@@ -54,10 +51,6 @@ export class CreateQuizModalComponent implements OnInit {
 
   get difficulty(): FormControl<DropDownItem> {
     return this?.initQuizForm?.controls?.difficulty;
-  }
-
-  get easyDifficulty(): DropDownItem {
-    return AnswerDifficultyList[0];
   }
 
   get quizId(): string {
@@ -99,8 +92,12 @@ export class CreateQuizModalComponent implements OnInit {
     );
   }
 
-  setDifficulty(item: DropDownItem) {
+  setDifficulty(item: DropDownItem): void {
     this?.initQuizForm?.controls?.difficulty?.setValue(item);
+  }
+
+  setCategory(item: DropDownItem): void {
+    this?.initQuizForm?.controls?.category?.setValue(item);
   }
 
   private getSaveMethod(): (quiz: Quiz) => Observable<Quiz> {
