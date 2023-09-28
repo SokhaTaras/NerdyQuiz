@@ -13,7 +13,10 @@ import { CategoriesResponse, Quiz } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { AnswerDifficultyList } from '@a-questions/constants/dropdonws';
+import {
+  AnswerDifficultyList,
+  defaultDifficulty
+} from '@a-questions/constants/dropdowns';
 import { DropDownItem } from '@a-questions/interfaces/question';
 import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 import { mapArrayToDropDownItems } from '@a-shared/utils/drop-down-mapper';
@@ -28,7 +31,6 @@ import {
   providers: [ModalRefFacadeService, SubscriptionsService]
 })
 export class CreateQuizModalComponent implements OnInit {
-  @Input() quizId: string;
   @Input() quiz: Quiz = {};
   @Input() label: string;
   @Input() buttonText: string;
@@ -54,12 +56,12 @@ export class CreateQuizModalComponent implements OnInit {
     return this?.initQuizForm?.controls?.difficulty;
   }
 
-  get selectedDifficultyItem(): DropDownItem {
-    return this.initQuizForm?.controls?.difficulty.value;
+  get easyDifficulty(): DropDownItem {
+    return AnswerDifficultyList[0];
   }
 
-  get firstCategory(): DropDownItem {
-    return this?.dropDownCategories[0];
+  get quizId(): string {
+    return this?.quiz?.id;
   }
 
   constructor(
@@ -97,8 +99,12 @@ export class CreateQuizModalComponent implements OnInit {
     );
   }
 
+  setDifficulty(item: DropDownItem) {
+    this?.initQuizForm?.controls?.difficulty?.setValue(item);
+  }
+
   private getSaveMethod(): (quiz: Quiz) => Observable<Quiz> {
-    if (!this.quiz.id) {
+    if (!this.quizId) {
       return this.addQuiz.bind(this);
     } else {
       return this.editQuiz.bind(this);
@@ -106,7 +112,7 @@ export class CreateQuizModalComponent implements OnInit {
   }
 
   private editQuiz(newQuiz: Quiz): Observable<Quiz> {
-    return this.quizService.editQuiz(this.quiz.id, newQuiz);
+    return this.quizService.editQuiz(this.quizId, newQuiz);
   }
 
   private addQuiz(newQuiz: Quiz): Observable<Quiz> {
@@ -116,24 +122,24 @@ export class CreateQuizModalComponent implements OnInit {
   private initForm(): void {
     this.isLoading = true;
     this.initQuizForm = this.fb.nonNullable.group<InitQuizForm>({
-      title: this.fb.control(this.quiz.title || '', [
+      title: this.fb.control(this?.quiz?.title || '', [
         Validators.required,
         Validators.minLength(2)
       ]),
-      category: this.fb.control(this.quiz.category || defaultCategory, [
+      category: this.fb.control(this?.quiz?.category || defaultCategory, [
         Validators.required,
         Validators.minLength(2)
       ]),
-      difficulty: this.fb.control(this.quiz.difficulty || defaultDifficulty)
+      difficulty: this.fb.control(this?.quiz?.difficulty || defaultDifficulty)
     });
     this.isLoading = false;
   }
 
   private getFormData(): Quiz {
     const quiz: Quiz = {
-      title: this.title.value,
-      category: this.category.value,
-      difficulty: this.difficulty.value,
+      title: this.title?.value,
+      category: this.category?.value,
+      difficulty: this.difficulty?.value,
       questions: []
     };
 

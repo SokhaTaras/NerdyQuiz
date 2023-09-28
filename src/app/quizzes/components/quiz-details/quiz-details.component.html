@@ -10,14 +10,14 @@
   <div class="flex content-center justify-center pt-10 text-2xl">
     <div>
       <div class="flex flex-col">
-        <div *ngIf="currentQuiz?.title" class="mx-3.5 modal-title">
-        {{ 'LABELS.TITLE' | translateJson }}: {{ (selectedQuiz$ | async)?.title }}
+        <div *ngIf="quizTitle" class="mx-3.5 modal-title">
+        {{ 'LABELS.TITLE' | translateJson }}: {{ quizTitle }}
         </div>
-        <div *ngIf="currentQuiz?.category" class="mx-3.5 modal-title">
-          {{ 'LABELS.CATEGORY' | translateJson }}: {{ (selectedQuiz$ | async)?.category?.text }}
+        <div *ngIf="quizTheme" class="mx-3.5 modal-title">
+          {{ 'LABELS.THEME' | translateJson }}: {{ quizTheme }}
         </div>
-        <div *ngIf="currentQuiz?.difficulty" class="mx-3.5 modal-title">
-          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ (selectedQuiz$ | async)?.difficulty.text | translateJson }}
+        <div *ngIf="quizDifficulty" class="mx-3.5 modal-title">
+          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ quizDifficulty | translateJson }}
         </div>
       </div>
       <div class="w-full">

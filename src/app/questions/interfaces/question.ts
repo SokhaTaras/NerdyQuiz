@@ -1,20 +1,21 @@
-import {
-  QUESTION_DIFFICULTY,
-  QUESTION_TYPE
-} from '@a-shared/enums/question-info';
+import { QUESTION_TYPE } from '@a-shared/enums/question-info';
 import { QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 
 export interface Question {
   title?: string;
   type?: QUESTION_TYPE;
-  difficulty?: QUESTION_DIFFICULTY;
   id?: string;
   answers?: Answer[];
 }
 
 export interface QuestionResult extends Question {
   answer: Answer;
-  timeSpent: number;
+  questionTime: number;
+}
+
+export interface QuizResult {
+  questionResults: QuestionResult[];
+  quizTime: number;
 }
 
 export interface Answer {

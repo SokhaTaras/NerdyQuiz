@@ -5,7 +5,7 @@
     nzBorderless
     (ngModelChange)="selectItem($event)"
     [ngModel]="selectedValue"
-    [nzPlaceHolder]="placeHolder | translateJson"
+    [nzPlaceHolder]="selectedValue?.text | translateJson"
   >
     <nz-option
       *ngFor="let item of list"

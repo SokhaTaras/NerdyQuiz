@@ -7,7 +7,7 @@ import {
   minQuestionsAmount
 } from '@a-questions/constants/questions-info';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
-import { AnswerDifficultyList } from '../../constants/dropdonws';
+import { AnswerDifficultyList } from '../../constants/dropdowns';
 import { QUESTION_TYPE } from '@a-shared/enums/question-info';
 import { Question } from '@a-questions/interfaces/question';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
@@ -43,10 +43,6 @@ export class MultipleQuestionComponent implements OnInit {
 
   get title(): FormControl<string> {
     return this.questionFormHelper.title;
-  }
-
-  get difficulty(): FormControl<string> {
-    return this.questionFormHelper.difficulty;
   }
 
   constructor(private questionFormHelper: QuestionFormHelperService) {}
