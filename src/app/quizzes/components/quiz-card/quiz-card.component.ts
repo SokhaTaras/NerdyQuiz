@@ -17,10 +17,10 @@ import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
 export class QuizCardComponent implements OnInit {
   @Input() quiz: Quiz;
 
-  popoverSetup: PopoverItem[] = [];
-
   readonly BUTTON_TYPE = BUTTON_TYPE;
   readonly POPOVER_TYPE = POPOVER_TYPE;
+
+  popoverSetup: PopoverItem[] = [];
 
   constructor(
     private navigateTo: NavigateToService,
