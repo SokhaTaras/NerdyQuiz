@@ -5,6 +5,7 @@ import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { Question } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -24,6 +25,10 @@ export class BaseQuizComponent implements OnInit {
 
   get quizDifficulty(): QUIZ_DIFFICULTY {
     return this?.currentQuiz?.difficulty;
+  }
+
+  get quizQuestions(): Question[] {
+    return this?.currentQuiz?.questions;
   }
 
   constructor(
