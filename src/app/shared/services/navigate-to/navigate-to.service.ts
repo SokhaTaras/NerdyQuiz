@@ -22,19 +22,19 @@ export class NavigateToService {
     this.router.navigate([NavigationRoutes.HOME]);
   }
 
-  navigatePlay(quiz: Quiz): void {
+  navigatePlay(quizId: string): void {
     this.router.navigate([
       NavigationRoutes.QUIZ,
       NavigationRoutes.PLAY,
-      `${quiz.id}`
+      `${quizId}`
     ]);
   }
 
-  navigateResult(quiz: Quiz): void {
+  navigateResult(quizId: string): void {
     this.router.navigate([
       NavigationRoutes.QUIZ,
       NavigationRoutes.RESULT,
-      `${quiz.id}`
+      `${quizId}`
     ]);
   }
 }

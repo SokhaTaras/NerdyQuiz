@@ -22,6 +22,8 @@ export class QuizCardComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
   readonly POPOVER_TYPE = POPOVER_TYPE;
 
+  quizDifficulty: string;
+
   constructor(
     private navigateTo: NavigateToService,
     private modalQuizService: ModalQuizService,
@@ -72,7 +74,7 @@ export class QuizCardComponent implements OnInit {
   }
 
   goPlay(): void {
-    this.navigateTo.navigatePlay(this.quiz);
+    this.navigateTo.navigatePlay(this.quiz?.id);
   }
 
   deleteQuiz(): void {

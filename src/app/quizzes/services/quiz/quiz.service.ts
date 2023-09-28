@@ -3,7 +3,8 @@ import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import {
   Question,
-  QuestionResult
+  QuestionResult,
+  QuizResult
 } from '@a-questions/interfaces/question';
 import { LocalStorageService } from '@a-shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '@a-shared/utils/getId';
@@ -158,15 +159,13 @@ export class QuizService {
     });
   }
 
-  setQuizResult(
-    questionResults: BehaviorSubject<QuestionResult[]>
-  ): Observable<QuestionResult[]> {
-    return new Observable((subscriber) => {
+  setQuizResult(quizResult: QuizResult): Observable<QuizResult> {
+    return new Observable<QuizResult>((subscriber) => {
       this.localStorageService.updateLocalStorage(
         StorageKey.QUIZ_RESULT,
-        questionResults.value
+        quizResult
       );
-      subscriber.next(questionResults.value);
+      subscriber.next(quizResult);
       subscriber.complete();
     });
   }

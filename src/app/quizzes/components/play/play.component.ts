@@ -19,15 +19,16 @@ export class PlayComponent implements OnInit {
   @Input() quiz: Quiz;
   @Output() whenCancel: EventEmitter<void> = new EventEmitter();
 
+  readonly BUTTON_TYPE = BUTTON_TYPE;
+
   timer$: Observable<number>;
 
   currentQuestion: Question;
   selectedAnswer: Answer | null = null;
 
   currentPosition = 0;
-  secondsCounter = 0;
-
-  readonly BUTTON_TYPE = BUTTON_TYPE;
+  quizTime = 0;
+  timePerQuestion = 0;
 
   get cancelHandler(): void {
     return this.currentPosition === 0
@@ -53,6 +54,10 @@ export class PlayComponent implements OnInit {
     const isNotLastQuestion =
       this.currentPosition !== this.quiz.questions.length - 1;
     return isNotLastQuestion ? 'BUTTON.NEXT' : 'BUTTON.FINISH';
+  }
+
+  get questions(): Question[] {
+    return this.quiz.questions;
   }
 
   constructor(
@@ -112,37 +117,44 @@ export class PlayComponent implements OnInit {
   }
 
   addQuestionResult(question: Question): void {
-    const maxPosition = this.quiz.questions?.length;
+    const timePerTest = Math.floor((Date.now() - this.timePerQuestion) / 1000);
+
+    const maxPosition = this.questions?.length;
     this.subscriptions.addSubscription(
       this.quizHelperService
-        .addQuestionResult(question, this.selectedAnswer, this.secondsCounter)
+        .addQuestionResult(question, this.selectedAnswer, timePerTest)
         .subscribe()
     );
 
     if (this.currentPosition < maxPosition) {
-      this.currentQuestion = this.quiz.questions[this.currentPosition];
+      this.timePerQuestion = Date.now();
+      this.currentQuestion = this.questions[this.currentPosition];
       this.selectedAnswer = null;
     }
   }
 
   finishQuiz(lastQuestion: Question): void {
-    const results = this.quizHelperService.questionsResults;
+    const results: QuizResult = {
+      questionResults: this.quizHelperService.questionsResults.value,
+      quizTime: this.quizTime
+    };
     this.addQuestionResult(lastQuestion);
     this.subscriptions.addSubscription(
       this.quizService.setQuizResult(results).subscribe()
     );
-    this.navigateTo.navigateResult(this.quiz);
+    this.navigateTo.navigateResult(this.quiz?.id);
   }
 
   private initQuestions(): void {
-    this.currentQuestion = this.quiz.questions[this.currentPosition];
+    this.currentQuestion = this.questions[this.currentPosition];
     this.quizService.questionsResults.next([]);
   }
 
   private startTimer(): void {
+    this.timePerQuestion = Date.now();
     this.timer$ = timer(0, 1000);
     this.subscriptions.addSubscription(
-      this.timer$.subscribe((time) => (this.secondsCounter = time))
+      this.timer$.subscribe((time) => (this.quizTime = time))
     );
   }
 }
