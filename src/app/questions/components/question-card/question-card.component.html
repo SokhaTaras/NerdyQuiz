@@ -9,8 +9,8 @@
       <span class="mx-2">{{ question.type }}</span>
     </div>
     <div class="flex items-center w-full h-full sm:w-1/5 md:w-1/4 lg:w-1/5 xl:w-1/5 m-1.5 border p-2 bg-background rounded">
-      <span class="text-lg font-semibold">{{ 'LABELS.DIFFICULTY' | translateJson }}:</span>
-      <span class="mx-2">{{ question.difficulty }}</span>
+      <span class="text-lg font-semibold">{{ 'BUTTON.ANSWER_AMOUNT' | translateJson }}:</span>
+      <span class="mx-2">{{ question.answers.length }}</span>
     </div>
     <div class="flex items-center w-full h-full sm:w-1/6 md:w-1/5 lg:w-1/5 xl:w-1/5 font-semibold">
       <quiz-app-button

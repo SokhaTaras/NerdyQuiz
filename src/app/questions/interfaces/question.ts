@@ -6,7 +6,6 @@ import {
 export interface Question {
   title?: string;
   type?: QUESTION_TYPE;
-  difficulty?: QUESTION_DIFFICULTY;
   id?: string;
   answers?: Answer[];
 }

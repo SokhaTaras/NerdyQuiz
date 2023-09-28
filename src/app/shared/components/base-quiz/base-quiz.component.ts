@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { Question } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -13,7 +14,22 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
 export class BaseQuizComponent implements OnInit {
   currentQuiz: Quiz;
   id: string | null;
-  quizDifficulty: string;
+
+  get quizTitle(): string {
+    return this?.currentQuiz?.title;
+  }
+
+  get quizTheme(): string {
+    return this?.currentQuiz?.theme;
+  }
+
+  get quizDifficulty(): QUIZ_DIFFICULTY {
+    return this?.currentQuiz?.difficulty;
+  }
+
+  get quizQuestions(): Question[] {
+    return this?.currentQuiz?.questions;
+  }
 
   constructor(
     private quizService: QuizService,

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NavigationRoutes } from '@a-shared/enums/navigationRoutes';
-import { Quiz } from '@a-quizzes/interfaces/quiz';
 
 @Injectable({
   providedIn: 'root'

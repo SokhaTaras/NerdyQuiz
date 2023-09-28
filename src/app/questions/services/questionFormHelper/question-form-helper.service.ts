@@ -11,7 +11,7 @@ import {
   AnswerBooleanList,
   AnswerDifficultyList,
   AnswerTypeList
-} from '@a-questions/constants/dropdonws';
+} from '@a-questions/constants/dropdowns';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import {
   ANSWER_PROPERTIES,
@@ -33,10 +33,6 @@ export class QuestionFormHelperService {
 
   get title(): FormControl {
     return this.currentForm?.controls?.title;
-  }
-
-  get difficulty(): FormControl {
-    return this.currentForm?.controls?.difficulty;
   }
 
   get type(): FormControl {
@@ -74,10 +70,6 @@ export class QuestionFormHelperService {
         Validators.required
       ]),
       type: this.fb.control(question.type, [Validators.required]),
-      difficulty: this.fb.control(
-        question.difficulty || defaultFormValues.difficulty,
-        [Validators.required]
-      ),
       answers: this.fb.array(currentAnswers || defaultAnswers, [
         Validators.required
       ])
