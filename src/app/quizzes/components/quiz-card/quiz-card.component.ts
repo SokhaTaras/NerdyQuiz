@@ -6,8 +6,8 @@ import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.se
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { ButtonConfig, Popover } from '@a-shared/types/popover';
 import { createButtonConfig } from '@a-shared/utils/popover-item-configurator';
+import { PopoverItem } from '@a-shared/types/popover';
 
 @Component({
   selector: 'quiz-app-quiz-card',
@@ -17,7 +17,7 @@ import { createButtonConfig } from '@a-shared/utils/popover-item-configurator';
 export class QuizCardComponent implements OnInit {
   @Input() quiz: Quiz;
 
-  popoverSetup: Popover;
+  popoverSetup: PopoverItem[] = [];
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
   readonly POPOVER_TYPE = POPOVER_TYPE;
@@ -36,14 +36,14 @@ export class QuizCardComponent implements OnInit {
   }
 
   setupPopoverContent(): void {
-    const editButton: ButtonConfig = createButtonConfig(
+    const editButton: PopoverItem = createButtonConfig(
       'BUTTON.EDIT_QUIZ',
       BUTTON_TYPE.PRIMARY,
       this.goEdit,
       this
     );
 
-    const deleteButton: ButtonConfig = createButtonConfig(
+    const deleteButton: PopoverItem = createButtonConfig(
       'BUTTON.DELETE_QUIZ',
       BUTTON_TYPE.ERROR,
       this.confirmRemoving,

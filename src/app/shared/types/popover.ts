@@ -1,8 +1,8 @@
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 
-export type Popover = ButtonConfig[];
+// export type Popover = PopoverItem[];
 
-export type ButtonConfig = {
+export type PopoverItem = {
   text: string;
   type: BUTTON_TYPE;
   method: Function;
