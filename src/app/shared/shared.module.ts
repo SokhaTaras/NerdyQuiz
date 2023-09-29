@@ -37,6 +37,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
     LoaderComponent,
     BaseQuizComponent,
     TranslateJsonPipe,
+    PopoverComponent,
     SelectComponent,
     PopoverComponent,
     ProgressBarComponent
@@ -65,9 +66,9 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
     ButtonComponent,
     LoaderComponent,
     TranslateJsonPipe,
+    PopoverComponent,
     SelectComponent,
     ProgressBarComponent,
-    PopoverComponent
   ]
 })
 export class SharedModule {}

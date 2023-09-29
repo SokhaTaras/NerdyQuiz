@@ -19,7 +19,6 @@ export class ResultComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   rating: number;
-  spentTime: number;
   correctAnswersCount: number;
   resultText: string;
 
@@ -28,6 +27,10 @@ export class ResultComponent implements OnInit {
 
   get quizQuestionResults(): QuestionResult[] {
     return this?.quizResult?.questionResults;
+  }
+
+  get quizTime(): number {
+    return this.quizResult?.quizTime;
   }
 
   constructor(
@@ -43,7 +46,6 @@ export class ResultComponent implements OnInit {
     this.setQuizResults();
     this.setCorrectAnswersCount();
     this.setRating();
-    this.setSpentTime();
     this.setResultText();
   }
 
@@ -84,13 +86,6 @@ export class ResultComponent implements OnInit {
       const percentage = (this.correctAnswersCount / totalQuestions) * 100;
       const rating = Math.round(percentage);
       this.rating = rating;
-    }
-  }
-
-  private setSpentTime(): void {
-    if (this.quizResult) {
-      const lastQuestion = this.quizQuestionResults.length - 1;
-      this.spentTime = this.quizQuestionResults[lastQuestion]?.questionTime;
     }
   }
 

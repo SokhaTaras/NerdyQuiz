@@ -5,7 +5,10 @@
   nzPopoverPlacement="bottom"
   [nzPopoverTitle]= label
   [nzPopoverContent]="content">
-  <span class="text-xl">...</span>
+  <span class="font-bold" *ngIf="!altTrigger.children.length">...</span>
+  <div class="h-full" #altTrigger>
+    <ng-content select="[trigger]"></ng-content>
+  </div>
 </div>
 
 <ng-template class="h-full" #content>
@@ -13,7 +16,7 @@
     <quiz-app-button
       class="popover-item"
       [type]="option.type"
-      (whenClicked)="option.method()">
+      (whenClicked)="option.action()">
       {{ option.text | translateJson }}
     </quiz-app-button>
   </ul>

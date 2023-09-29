@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import { filter, Observable } from 'rxjs';
 
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
@@ -10,6 +9,7 @@ import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { AppState } from '@a-store/state/app.state';
 import { selectQuizzesList } from '@a-store/selectors/quiz.selectors';
 import { GetQuizzes } from '@a-store/actions/quizz.actions';
+import { StoreService } from '@a-store/services/store.service';
 
 @Component({
   selector: 'quiz-app-quiz-list',
@@ -18,17 +18,17 @@ import { GetQuizzes } from '@a-store/actions/quizz.actions';
   providers: [SubscriptionsService]
 })
 export class QuizListComponent implements OnInit {
-  quizzes$: Observable<QuizCard[]>;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
+
+  quizzes$ = new Observable<QuizCard[]>();
 
   isLoading: boolean;
-
-  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private modalQuizService: ModalQuizService,
     private navigateTo: NavigateToService,
     private subscriptionsService: SubscriptionsService,
-    private store: Store<AppState>
+    private storeService: StoreService<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -51,15 +51,18 @@ export class QuizListComponent implements OnInit {
     );
   }
 
+  //todo we need single source of data
   private initQuizzes(): void {
     this.isLoading = true;
-    this.store.dispatch(GetQuizzes());
+    this.storeService.dispatcher(GetQuizzes());
 
-    this.subscriptionsService.addSubscription(
-      this.store.pipe(select(selectQuizzesList)).subscribe(() => {
-        this.quizzes$ = this.store.pipe(select(selectQuizzesList));
-        this.isLoading = false;
-      })
+    this.storeService
+      .selection(selectQuizzesList)
+      .pipe(filter((quizzes) => quizzes !== null && quizzes.length > 0))
+      .subscribe(() => (this.isLoading = false));
+
+    this.quizzes$ = this.storeService.selection(
+      (state: AppState) => state.quizzes.quizzes
     );
   }
 }

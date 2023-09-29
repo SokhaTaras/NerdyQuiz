@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Quiz } from '@a-quizzes/interfaces/quiz';
-import { BUTTON_TYPE, POPOVER_TYPE } from '@a-shared/enums/shared-components';
+import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { ButtonConfig, Popover } from '@a-shared/types/popover';
-import { createButtonConfig } from '@a-shared/utils/popover-item-configurator';
+import { PopoverItem } from '@a-shared/types/popover';
+import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
 import { DropDownItem } from '@a-questions/interfaces/question';
 
 @Component({
@@ -18,10 +18,9 @@ import { DropDownItem } from '@a-questions/interfaces/question';
 export class QuizCardComponent implements OnInit {
   @Input() quiz: Quiz;
 
-  popoverSetup: Popover;
-
   readonly BUTTON_TYPE = BUTTON_TYPE;
-  readonly POPOVER_TYPE = POPOVER_TYPE;
+
+  popoverSetup: PopoverItem[] = [];
 
   get quizDifficulty(): DropDownItem {
     return this?.quiz?.difficulty;
@@ -39,20 +38,18 @@ export class QuizCardComponent implements OnInit {
   }
 
   setupPopoverContent(): void {
-    const editButton: ButtonConfig = createButtonConfig(
-      'BUTTON.EDIT_QUIZ',
-      BUTTON_TYPE.PRIMARY,
-      this.goEdit,
-      this
-    );
-
-    const deleteButton: ButtonConfig = createButtonConfig(
-      'BUTTON.DELETE_QUIZ',
-      BUTTON_TYPE.ERROR,
-      this.confirmRemoving,
-      this
-    );
-    this.popoverSetup = [editButton, deleteButton];
+    this.popoverSetup = [
+      new PopoverItemClass(
+        'BUTTON.EDIT_QUIZ',
+        BUTTON_TYPE.PRIMARY,
+        this.goEdit.bind(this)
+      ),
+      new PopoverItemClass(
+        'BUTTON.DELETE_QUIZ',
+        BUTTON_TYPE.ERROR,
+        this.confirmRemoving.bind(this)
+      )
+    ];
   }
 
   goEdit(): void {

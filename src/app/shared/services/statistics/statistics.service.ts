@@ -10,6 +10,7 @@ import { StorageKey } from '@a-shared/enums/storageKey';
 export class StatisticsService {
   constructor(private localStorageService: LocalStorageService) {}
 
+
   getQuizResults(): QuizResult {
     return this.localStorageService.getParsedData(StorageKey.QUIZ_RESULT);
   }
@@ -19,4 +20,5 @@ export class StatisticsService {
       (result) => result.answer.isCorrect === true
     );
   }
+
 }
