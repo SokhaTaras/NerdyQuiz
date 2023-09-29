@@ -37,8 +37,8 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
     LoaderComponent,
     BaseQuizComponent,
     TranslateJsonPipe,
-    SelectComponent,
     PopoverComponent,
+    SelectComponent,
     ProgressBarComponent
   ],
   imports: [

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { Popover } from '@a-shared/types/popover';
+import { PopoverItem } from '@a-shared/types/popover';
+import { trigger } from '@angular/animations';
 
 @Component({
   selector: 'quiz-app-popover',
@@ -8,5 +9,6 @@ import { Popover } from '@a-shared/types/popover';
 })
 export class PopoverComponent {
   @Input() label: string;
-  @Input() options: Popover;
+  @Input() options: PopoverItem[];
+  protected readonly trigger = trigger;
 }
