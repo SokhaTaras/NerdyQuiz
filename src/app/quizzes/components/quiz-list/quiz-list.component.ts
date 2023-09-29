@@ -56,13 +56,12 @@ export class QuizListComponent implements OnInit {
     this.isLoading = true;
     this.storeService.dispatcher(GetQuizzes());
 
-    this.storeService
+    this.quizzes$ = this.storeService
       .selection(selectQuizzesList)
-      .pipe(filter((quizzes) => quizzes !== null && quizzes.length > 0))
-      .subscribe(() => (this.isLoading = false));
+      .pipe(filter((quizzes) => quizzes !== null && quizzes.length > 0));
 
-    this.quizzes$ = this.storeService.selection(
-      (state: AppState) => state.quizzes.quizzes
+    this.subscriptionsService.addSubscription(
+      this.quizzes$.subscribe(() => (this.isLoading = false))
     );
   }
 }
