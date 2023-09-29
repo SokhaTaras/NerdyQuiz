@@ -9,7 +9,6 @@ import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.se
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizHelperService } from '@a-shared/services/quiz-helper/quiz-helper.service';
-import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-play',
