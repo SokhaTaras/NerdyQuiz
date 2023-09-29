@@ -12,7 +12,7 @@ export interface Quiz {
 export interface QuizCard {
   title: string;
   questions: Question[];
-  difficulty: QUIZ_DIFFICULTY;
+  difficulty: DropDownItem;
   id: string;
 }
 
