@@ -7,7 +7,7 @@ export enum QuizActions {
   GetQuizzesSuccess = '[Quiz] Get Quizzes Success',
   GetQuiz = '[Quiz] Get Quiz',
   GetQuizSuccess = '[Quiz] Get Quiz Success',
-  DeleteQuiz = '[Quiz] Delete Quiz',
+  DeleteQuiz = '[Quiz] Delete Quiz'
 }
 
 export const GetQuizzes = createAction(QuizActions.GetQuizzes);
