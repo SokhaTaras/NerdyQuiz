@@ -3,7 +3,7 @@ import { initialQuizState, QuizState } from '../state/quiz.state';
 import {
   GetQuizSuccess,
   GetQuizzesSuccess,
-  DeleteQuiz
+  DeleteQuizSuccess
 } from '../actions/quizz.actions';
 
 const initialState: QuizState = initialQuizState;
@@ -18,8 +18,8 @@ export const quizReducers = createReducer(
     ...state,
     selectedQuiz: quiz
   })),
-  on(DeleteQuiz, (state, { quizId }) => ({
+  on(DeleteQuizSuccess, (state, { quizToDelete }) => ({
     ...state,
-    quizzes: state.quizzes.filter((quiz) => quiz.id !== quizId)
+    quizzes: state.quizzes.filter((q) => q.id !== quizToDelete.id)
   }))
 );

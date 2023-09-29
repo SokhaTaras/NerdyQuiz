@@ -6,6 +6,7 @@ import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Quiz, QuizCard } from '@a-quizzes/interfaces/quiz';
 import { StorageKey } from '@a-shared/enums/storageKey';
 import {
+  DeleteQuizSuccess,
   GetQuizSuccess,
   GetQuizzesSuccess,
   QuizActions
@@ -42,6 +43,18 @@ export class QuizEffects {
       switchMap((action: { quizId: string }) =>
         this.quizService.getQuizById(action.quizId).pipe(
           map((quiz: Quiz) => GetQuizSuccess({ quiz })),
+          catchError((error) => of(error))
+        )
+      )
+    )
+  );
+
+  deleteQuiz$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(QuizActions.DeleteQuiz),
+      switchMap((action: { quizToDelete: Quiz }) =>
+        this.quizService.deleteQuiz(action.quizToDelete).pipe(
+          map((quiz: Quiz) => DeleteQuizSuccess({ quizToDelete: quiz })),
           catchError((error) => of(error))
         )
       )

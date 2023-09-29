@@ -7,7 +7,8 @@ export enum QuizActions {
   GetQuizzesSuccess = '[Quiz] Get Quizzes Success',
   GetQuiz = '[Quiz] Get Quiz',
   GetQuizSuccess = '[Quiz] Get Quiz Success',
-  DeleteQuiz = '[Quiz] Delete Quiz'
+  DeleteQuiz = '[Quiz] Delete Quiz',
+  DeleteQuizSuccess = '[Quiz] Delete Quiz Success'
 }
 
 export const GetQuizzes = createAction(QuizActions.GetQuizzes);
@@ -29,5 +30,10 @@ export const GetQuizSuccess = createAction(
 
 export const DeleteQuiz = createAction(
   QuizActions.DeleteQuiz,
-  props<{ quizId: string }>()
+  props<{ quizToDelete: Quiz }>()
+);
+
+export const DeleteQuizSuccess = createAction(
+  QuizActions.DeleteQuizSuccess,
+  props<{ quizToDelete: Quiz }>()
 );

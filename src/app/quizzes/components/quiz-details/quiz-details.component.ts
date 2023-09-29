@@ -10,7 +10,7 @@ import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { AppState } from '@a-store/state/app.state';
-import { GetQuiz } from '@a-store/actions/quizz.actions';
+import { DeleteQuiz, GetQuiz } from '@a-store/actions/quizz.actions';
 import { selectSelectedQuiz } from '@a-store/selectors/quiz.selectors';
 import { StoreService } from '@a-store/services/store.service';
 
@@ -67,11 +67,8 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   deleteQuiz(): void {
-    this.subscriptionsService.addSubscription(
-      this.quizService.deleteQuiz(this.currentQuiz).subscribe(() => {
-        this.navigateTo.navigateHome();
-      })
-    );
+    this.store.dispatcher(DeleteQuiz({ quizToDelete: this.currentQuiz }));
+    this.navigateTo.navigateHome();
   }
 
   private initQuiz(): void {
