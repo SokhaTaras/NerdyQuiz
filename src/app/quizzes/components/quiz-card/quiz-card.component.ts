@@ -20,7 +20,8 @@ export class QuizCardComponent implements OnInit {
   popoverSetup: Popover;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
-  readonly POPOVER_TYPE = POPOVER_TYPE;
+
+  quizDifficulty: string;
 
   constructor(
     private navigateTo: NavigateToService,
