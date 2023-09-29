@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
@@ -13,6 +12,7 @@ import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { AppState } from '@a-store/state/app.state';
 import { GetQuiz } from '@a-store/actions/quizz.actions';
 import { selectSelectedQuiz } from '@a-store/selectors/quiz.selectors';
+import { StoreService } from '@a-store/services/store.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -30,7 +30,7 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
     navigateTo: NavigateToService,
     subscriptionsService: SubscriptionsService,
     private modalQuizService: ModalQuizService,
-    private store: Store<AppState>
+    private store: StoreService<AppState>
   ) {
     super(quizService, route, navigateTo, subscriptionsService);
   }
@@ -75,7 +75,7 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   private initQuiz(): void {
-    this.store.dispatch(GetQuiz({ quizId: this.currentQuiz.id }));
-    this.selectedQuiz$ = this.store.pipe(select(selectSelectedQuiz));
+    this.store.dispatcher(GetQuiz({ quizId: this.currentQuiz.id }));
+    this.selectedQuiz$ = this.store.selection(selectSelectedQuiz);
   }
 }

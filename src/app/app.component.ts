@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 
 import { AppState } from '@a-store/state/app.state';
 import { GetQuizzes } from '@a-store/actions/quizz.actions';
+import { StoreService } from '@a-store/services/store.service';
 
 
 @Component({
@@ -13,13 +13,13 @@ import { GetQuizzes } from '@a-store/actions/quizz.actions';
 export class AppComponent implements OnInit {
   title = 'nerdyQuiz-app';
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: StoreService<AppState>) {}
 
   ngOnInit(): void {
     this.getQuizzes();
   }
 
   private getQuizzes(): void {
-    this.store.dispatch(GetQuizzes());
+    this.store.dispatcher(GetQuizzes());
   }
 }
