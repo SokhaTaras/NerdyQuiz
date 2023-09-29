@@ -72,7 +72,7 @@ export class QuizCardComponent implements OnInit {
   }
 
   goPlay(): void {
-    this.navigateTo.navigatePlay(this.quiz);
+    this.navigateTo.navigatePlay(this.quiz?.id);
   }
 
   deleteQuiz(): void {

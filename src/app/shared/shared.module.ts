@@ -23,6 +23,7 @@ import { LoaderComponent } from '@a-shared/components/loader/loader.component';
 import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
 import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json.pipe';
 import { PopoverComponent } from './components/popover/popover.component';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PopoverComponent } from './components/popover/popover.component';
     BaseQuizComponent,
     TranslateJsonPipe,
     SelectComponent,
-    PopoverComponent
+    PopoverComponent,
+    ProgressBarComponent
   ],
   imports: [
     CommonModule,
@@ -63,8 +65,9 @@ import { PopoverComponent } from './components/popover/popover.component';
     ButtonComponent,
     LoaderComponent,
     TranslateJsonPipe,
+    PopoverComponent,
     SelectComponent,
-    PopoverComponent
+    ProgressBarComponent
   ]
 })
 export class SharedModule {}

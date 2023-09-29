@@ -3,7 +3,7 @@
     <div class="w-4/5">
       <p class="question-info">{{ currentQuestion?.title }}</p>
       <p class="question-info text-4xl"><span class="highlighted-text">{{ 'LABELS.DIFFICULTY' | translateJson }}: </span>{{ currentQuestion?.difficulty }}</p>
-      <p class="question-info text-3xl"><span class="highlighted-text">{{ 'LABELS.STEP' | translateJson }}: </span>{{ currentPosition + 1 + '/' + quiz.questions?.length }}</p>
+      <p class="question-info text-3xl"><span class="highlighted-text">{{ 'LABELS.STEP' | translateJson }}: </span>{{ currentPosition + 1 + '/' + questions.length }}</p>
       <p class="question-info text-3xl"><span class="highlighted-text">{{ 'LABELS.TIME' | translateJson }}: </span>{{ timer$ | async }}</p>
     </div>
   </div>

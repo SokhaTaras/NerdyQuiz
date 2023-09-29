@@ -13,9 +13,10 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
   providers: [SubscriptionsService]
 })
 export class PrePlayComponent extends BaseQuizComponent implements OnInit {
+  readonly BUTTON_TYPE = BUTTON_TYPE;
+
   playMode: boolean = false;
 
-  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     quizService: QuizService,
