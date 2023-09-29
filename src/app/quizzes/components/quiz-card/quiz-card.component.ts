@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Quiz } from '@a-quizzes/interfaces/quiz';
-import { BUTTON_TYPE, POPOVER_TYPE } from '@a-shared/enums/shared-components';
+import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
@@ -17,11 +17,9 @@ import { createButtonConfig } from '@a-shared/utils/popover-item-configurator';
 export class QuizCardComponent implements OnInit {
   @Input() quiz: Quiz;
 
-  popoverSetup: Popover;
-
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  quizDifficulty: string;
+  popoverSetup: Popover;
 
   constructor(
     private navigateTo: NavigateToService,
