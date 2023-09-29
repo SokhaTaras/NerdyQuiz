@@ -18,6 +18,10 @@ import {
   defaultDifficulty
 } from '@a-questions/constants/dropdowns';
 import { DropDownItem } from '@a-questions/interfaces/question';
+import { StoreService } from '@a-store/services/store.service';
+import { AppState } from '@a-store/state/app.state';
+import {  EditQuiz } from '@a-store/actions/quizz.actions';
+import { getNewQuizId } from '@a-shared/utils/getId';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -58,7 +62,8 @@ export class CreateQuizModalComponent implements OnInit {
     private fb: FormBuilder,
     private quizService: QuizService,
     private modalRefFacadeService: ModalRefFacadeService<Quiz>,
-    private subscriptionsService: SubscriptionsService
+    private subscriptionsService: SubscriptionsService,
+    private store: StoreService<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -72,19 +77,16 @@ export class CreateQuizModalComponent implements OnInit {
   saveQuiz(): void {
     const formData = this.getFormData();
     const newQuiz = { ...this.quiz, ...formData };
+    newQuiz.id = getNewQuizId();
 
-    const saveMethod = this.getSaveMethod();
+    // const saveMethod = this.getSaveMethod();
 
-    this.subscriptionsService.addSubscription(
-      saveMethod(newQuiz).subscribe({
-        next: (savedQuiz: Quiz) => {
-          this.close(savedQuiz);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      })
-    );
+    // this.store.dispatcher(AddQuiz({ quiz: newQuiz }));
+    this.store.dispatcher(EditQuiz({ quizId: this.quizId, quiz: this.quiz }));
+
+    console.log(newQuiz);
+
+    this.close(newQuiz);
   }
 
   setDifficulty(item: DropDownItem) {

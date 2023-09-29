@@ -7,8 +7,8 @@ import { QuizCard } from '@a-quizzes/interfaces/quiz';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { AppState } from '@a-store/state/app.state';
-import { selectQuizzesList } from '@a-store/selectors/quiz.selectors';
-import { GetQuizzes } from '@a-store/actions/quizz.actions';
+import { selectQuizzesCardList } from '@a-store/selectors/quiz.selectors';
+import { GetCardQuizzes } from '@a-store/actions/quizz.actions';
 import { StoreService } from '@a-store/services/store.service';
 
 @Component({
@@ -54,10 +54,10 @@ export class QuizListComponent implements OnInit {
   //todo we need single source of data
   private initQuizzes(): void {
     this.isLoading = true;
-    this.storeService.dispatcher(GetQuizzes());
+    this.storeService.dispatcher(GetCardQuizzes());
 
     this.quizzes$ = this.storeService
-      .selection(selectQuizzesList)
+      .selection(selectQuizzesCardList)
       .pipe(filter((quizzes) => quizzes !== null && quizzes.length > 0));
 
     this.subscriptionsService.addSubscription(

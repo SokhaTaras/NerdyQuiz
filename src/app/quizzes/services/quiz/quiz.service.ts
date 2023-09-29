@@ -7,7 +7,7 @@ import {
   QuizResult
 } from '@a-questions/interfaces/question';
 import { LocalStorageService } from '@a-shared/services/local-storage/local-storage.service';
-import { getNewQuestionId, getNewQuizId } from '@a-shared/utils/getId';
+import { getNewQuestionId } from '@a-shared/utils/getId';
 import { StorageKey } from '@a-shared/enums/storageKey';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 
@@ -23,7 +23,6 @@ export class QuizService {
   addQuiz(quiz: Quiz): Observable<Quiz> {
     return new Observable<Quiz>((subscriber) => {
       if (quiz) {
-        quiz.id = getNewQuizId();
         this.quizzes$.next([...this.quizzes$.value, quiz]);
         this.localStorageService.updateLocalStorage(
           StorageKey.QUIZZES,

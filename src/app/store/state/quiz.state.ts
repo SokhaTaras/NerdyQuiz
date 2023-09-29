@@ -1,11 +1,13 @@
 import { Quiz, QuizCard } from '@a-quizzes/interfaces/quiz';
 
 export interface QuizState {
-  quizzes: QuizCard[];
+  quizzes: Quiz[];
+  quizzesCard: QuizCard[];
   selectedQuiz: Quiz;
 }
 
 export const initialQuizState: QuizState = {
   quizzes: null,
+  quizzesCard: null,
   selectedQuiz: null
 };

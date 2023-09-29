@@ -8,8 +8,11 @@ import { StorageKey } from '@a-shared/enums/storageKey';
 import {
   DeleteQuizSuccess,
   GetQuizSuccess,
+  GetCardQuizzesSuccess,
+  QuizActions,
   GetQuizzesSuccess,
-  QuizActions
+  AddQuizSuccess,
+  EditQuizSuccess
 } from '@a-store/actions/quizz.actions';
 import { mapQuizToQuizCard } from '@a-shared/utils/quizzMapper';
 
@@ -20,16 +23,16 @@ export class QuizEffects {
     private quizService: QuizService
   ) {}
 
-  getQuizzes$ = createEffect(() =>
+  getCardQuizzes$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(QuizActions.GetQuizzes),
+      ofType(QuizActions.GetCardQuizzes),
       switchMap(() =>
         this.quizService.initAllQuizzes(StorageKey.QUIZZES).pipe(
           map((quizzes) => {
             const quizCards: QuizCard[] = quizzes.map((quiz) =>
               mapQuizToQuizCard(quiz)
             );
-            return GetQuizzesSuccess({ cardQuizzes: quizCards });
+            return GetCardQuizzesSuccess({ cardQuizzes: quizCards });
           }),
           catchError((error) => of(error))
         )
@@ -37,7 +40,7 @@ export class QuizEffects {
     )
   );
 
-  getQuiz$ = createEffect(() =>
+  getCardQuiz$ = createEffect(() =>
     this.actions$.pipe(
       ofType(QuizActions.GetQuiz),
       switchMap((action: { quizId: string }) =>
@@ -55,6 +58,46 @@ export class QuizEffects {
       switchMap((action: { quizToDelete: Quiz }) =>
         this.quizService.deleteQuiz(action.quizToDelete).pipe(
           map((quiz: Quiz) => DeleteQuizSuccess({ quizToDelete: quiz })),
+          catchError((error) => of(error))
+        )
+      )
+    )
+  );
+
+  addQuiz$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(QuizActions.AddQuiz),
+      switchMap((action: { quiz: Quiz }) => {
+        return this.quizService.addQuiz(action.quiz).pipe(
+          map((quiz: Quiz) => AddQuizSuccess({ quiz })),
+          catchError((error) => of(error))
+        );
+      })
+    )
+  );
+
+  getQuizzes$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(QuizActions.GetQuizzes),
+      switchMap(() =>
+        this.quizService.initAllQuizzes(StorageKey.QUIZZES).pipe(
+          map((quizzes) => {
+            return GetQuizzesSuccess({ quizzes: quizzes });
+          }),
+          catchError((error) => of(error))
+        )
+      )
+    )
+  );
+
+  EditQuiz$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(QuizActions.EditQuiz),
+      switchMap((action: { quiz: Quiz }) =>
+        this.quizService.editQuiz(action.quiz.id, action.quiz).pipe(
+          map((quiz) => {
+            return EditQuizSuccess({ quizId: quiz.id, quiz: quiz });
+          }),
           catchError((error) => of(error))
         )
       )
