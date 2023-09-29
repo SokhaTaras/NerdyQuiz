@@ -20,7 +20,7 @@ import {
 import { DropDownItem } from '@a-questions/interfaces/question';
 import { StoreService } from '@a-store/services/store.service';
 import { AppState } from '@a-store/state/app.state';
-import {  EditQuiz } from '@a-store/actions/quizz.actions';
+import { EditQuiz } from '@a-store/actions/quizz.actions';
 import { getNewQuizId } from '@a-shared/utils/getId';
 
 @Component({
