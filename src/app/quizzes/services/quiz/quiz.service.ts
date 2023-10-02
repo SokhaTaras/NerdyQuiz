@@ -120,9 +120,9 @@ export class QuizService {
 
         if (quizIndex !== -1) {
           question.id = getNewQuestionId();
-          const copy: Quiz[] = JSON.parse(JSON.stringify(currentQuizzes));
-          copy[quizIndex].questions.push(question);
-          this.quizzes$.next(copy);
+          const quizCopy: Quiz[] = JSON.parse(JSON.stringify(currentQuizzes));
+          quizCopy[quizIndex].questions.push(question);
+          this.quizzes$.next(quizCopy);
           this.localStorageService.updateLocalStorage(
             StorageKey.QUIZZES,
             this.quizzes$.value
