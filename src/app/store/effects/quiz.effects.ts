@@ -28,6 +28,7 @@ export class QuizEffects {
             const quizCards: QuizCard[] = quizzes.map((quiz) =>
               mapQuizToQuizCard(quiz)
             );
+
             return GetQuizzesSuccess({ cardQuizzes: quizCards });
           }),
           catchError((error) => of(error))
