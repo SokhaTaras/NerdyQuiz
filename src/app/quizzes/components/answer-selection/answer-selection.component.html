@@ -7,7 +7,7 @@
       <quiz-app-button
         [type]="BUTTON_TYPE.PRIMARY"
         (whenClicked)="selectAnswer(answer)">
-        {{ answer?.text | translateJson }}
+        <p [innerHTML]="answer.text | sanitize"></p>
       </quiz-app-button>
     </div>
   </div>

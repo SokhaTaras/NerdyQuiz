@@ -2,7 +2,7 @@
   <div class="flex items-center w-4/5 flex-wrap justify-between p-4 pb-6 bg-primary rounded">
     <div class="flex items-center w-1/4 h-full sm:w-1/3 md:w-1/4 lg:w-1/3 xl:w-1/3 xs:w-full m-1.5 border p-2 bg-background rounded">
       <span class="text-lg font-semibold">{{ 'LABELS.TITLE' | translateJson }}:</span>
-      <span class="mx-2">{{ question.title }}</span>
+      <span class="mx-2" [innerHTML]="question.title | sanitize"></span>
     </div>
     <div class="flex items-center w-full h-full sm:w-1/5 md:w-1/5 lg:w-1/5 xl:w-1/5 m-1.5 border p-2 bg-background rounded">
       <span class="text-lg font-semibold">{{ 'LABELS.TYPE' | translateJson }}:</span>
