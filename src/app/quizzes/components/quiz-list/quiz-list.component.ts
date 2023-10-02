@@ -3,12 +3,11 @@ import { filter, Observable } from 'rxjs';
 
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { QuizCard } from '@a-quizzes/interfaces/quiz';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { AppState } from '@a-store/state/app.state';
-import { selectQuizzesCardList } from '@a-store/selectors/quiz.selectors';
-import { GetCardQuizzes } from '@a-store/actions/quizz.actions';
+import { selectQuizzesList } from '@a-store/selectors/quiz.selectors';
 import { StoreService } from '@a-store/services/store.service';
 
 @Component({
@@ -20,7 +19,7 @@ import { StoreService } from '@a-store/services/store.service';
 export class QuizListComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  quizzes$ = new Observable<QuizCard[]>();
+  quizzes$ = new Observable<Quiz[]>();
 
   isLoading: boolean;
 
@@ -54,10 +53,9 @@ export class QuizListComponent implements OnInit {
   //todo we need single source of data
   private initQuizzes(): void {
     this.isLoading = true;
-    this.storeService.dispatcher(GetCardQuizzes());
 
     this.quizzes$ = this.storeService
-      .selection(selectQuizzesCardList)
+      .selection(selectQuizzesList)
       .pipe(filter((quizzes) => quizzes !== null && quizzes.length > 0));
 
     this.subscriptionsService.addSubscription(

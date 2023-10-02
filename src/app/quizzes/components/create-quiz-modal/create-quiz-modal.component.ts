@@ -5,9 +5,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { Observable } from 'rxjs';
 
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { InitQuizForm } from '@a-shared/types/forms';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
@@ -20,7 +18,7 @@ import {
 import { DropDownItem } from '@a-questions/interfaces/question';
 import { StoreService } from '@a-store/services/store.service';
 import { AppState } from '@a-store/state/app.state';
-import { EditQuiz } from '@a-store/actions/quizz.actions';
+import { AddQuiz, EditQuiz } from '@a-store/actions/quizz.actions';
 import { getNewQuizId } from '@a-shared/utils/getId';
 
 @Component({
@@ -60,9 +58,7 @@ export class CreateQuizModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private quizService: QuizService,
     private modalRefFacadeService: ModalRefFacadeService<Quiz>,
-    private subscriptionsService: SubscriptionsService,
     private store: StoreService<AppState>
   ) {}
 
@@ -74,39 +70,23 @@ export class CreateQuizModalComponent implements OnInit {
     this.modalRefFacadeService.close(data);
   }
 
+  //todo generate id on back, but how?
   saveQuiz(): void {
     const formData = this.getFormData();
     const newQuiz = { ...this.quiz, ...formData };
-    newQuiz.id = getNewQuizId();
 
-    // const saveMethod = this.getSaveMethod();
-
-    // this.store.dispatcher(AddQuiz({ quiz: newQuiz }));
-    this.store.dispatcher(EditQuiz({ quizId: this.quizId, quiz: this.quiz }));
-
-    console.log(newQuiz);
+    if (!this.quiz.id) {
+      newQuiz.id = getNewQuizId();
+      this.store.dispatcher(AddQuiz({ quiz: newQuiz }));
+    } else {
+      this.store.dispatcher(EditQuiz({ quizId: this.quiz.id, quiz: newQuiz }));
+    }
 
     this.close(newQuiz);
   }
 
   setDifficulty(item: DropDownItem) {
     this?.initQuizForm?.controls?.difficulty?.setValue(item);
-  }
-
-  private getSaveMethod(): (quiz: Quiz) => Observable<Quiz> {
-    if (!this.quizId) {
-      return this.addQuiz.bind(this);
-    } else {
-      return this.editQuiz.bind(this);
-    }
-  }
-
-  private editQuiz(newQuiz: Quiz): Observable<Quiz> {
-    return this.quizService.editQuiz(this.quizId, newQuiz);
-  }
-
-  private addQuiz(newQuiz: Quiz): Observable<Quiz> {
-    return this.quizService.addQuiz(newQuiz);
   }
 
   private initForm(): void {

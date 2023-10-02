@@ -5,19 +5,14 @@ import { QuizState } from '../state/quiz.state';
 
 const selectQuizzes = (state: AppState) => state.quizzes;
 
-export const selectQuizzesCardList = createSelector(
+export const selectQuizzesList = createSelector(
   selectQuizzes,
-  (state: QuizState) => state.quizzesCard
+  (state: QuizState) => state.quizzes
 );
 
 export const selectSelectedQuiz = createSelector(
   selectQuizzes,
   (state: QuizState) => state.selectedQuiz
-);
-
-export const selectAllQuizzes = createSelector(
-  selectQuizzes,
-  (state: QuizState) => state.quizzes
 );
 
 //todo delete

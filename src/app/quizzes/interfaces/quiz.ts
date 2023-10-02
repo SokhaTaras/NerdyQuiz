@@ -9,13 +9,6 @@ export interface Quiz {
   questions?: Question[];
 }
 
-export interface QuizCard {
-  title: string;
-  questions: Question[];
-  difficulty: DropDownItem;
-  id: string;
-}
-
 export enum QUIZ_DIFFICULTY {
   EASY = 'easy',
   MEDIUM = 'medium',
