@@ -97,6 +97,11 @@ export class QuizService {
     if (allQuizzes !== null) {
       this.localStorageService.setLocalStorageData(key, allQuizzes);
       this.quizzes$.next(JSON.parse(allQuizzes));
+    } else {
+      return new Observable<Quiz[]>((subscriber) => {
+        subscriber.next([]);
+        subscriber.complete();
+      });
     }
 
     return new Observable<Quiz[]>((subscriber) => {

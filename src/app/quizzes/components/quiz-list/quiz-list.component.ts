@@ -50,16 +50,13 @@ export class QuizListComponent implements OnInit {
     );
   }
 
-  //todo we need single source of data
   private initQuizzes(): void {
     this.isLoading = true;
 
     this.quizzes$ = this.storeService
       .selection(selectQuizzesList)
-      .pipe(filter((quizzes) => quizzes !== null && quizzes.length > 0));
+      .pipe(filter((quizzes) => quizzes !== null));
 
-    this.subscriptionsService.addSubscription(
-      this.quizzes$.subscribe(() => (this.isLoading = false))
-    );
+    this.quizzes$.subscribe(() => (this.isLoading = false));
   }
 }
