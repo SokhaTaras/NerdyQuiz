@@ -112,23 +112,35 @@ export class QuizService {
 
   addQuestion(quizId: string | null, question: Question): Observable<Question> {
     return new Observable<Question>((subscriber) => {
-      if (this.quizzes$.value) {
-        const currentQuizzes = [...this.quizzes$.value];
-        const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
-
-        if (quizIndex !== -1) {
-          question.id = getNewQuestionId();
-          currentQuizzes[quizIndex].questions.push(question);
-          this.quizzes$.next(currentQuizzes);
-          this.localStorageService.updateLocalStorage(
-            StorageKey.QUIZZES,
-            this.quizzes$.value
-          );
-          subscriber.next(question);
-        }
-      } else {
+      const currentQuizzes = this.quizzes$.value;
+      if (!currentQuizzes) {
         subscriber.error();
+        subscriber.complete();
+        return;
       }
+
+      const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
+      if (quizIndex !== -1) {
+        question.id = getNewQuestionId();
+        const updatedQuizzes = [...currentQuizzes];
+        const currentQuiz = updatedQuizzes[quizIndex];
+
+        const updatedQuiz = {
+          ...currentQuiz,
+          questions: [...currentQuiz.questions, question]
+        };
+
+        updatedQuizzes[quizIndex] = updatedQuiz;
+
+        this.quizzes$.next(updatedQuizzes);
+        this.localStorageService.updateLocalStorage(
+          StorageKey.QUIZZES,
+          updatedQuizzes
+        );
+
+        subscriber.next(question);
+      }
+
       subscriber.complete();
     });
   }
@@ -151,22 +163,28 @@ export class QuizService {
     return new Observable<Question>((subscriber) => {
       const currentQuizzes = this.quizzes$.value;
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
-      const currentQuiz = currentQuizzes[quizIndex];
 
-      console.log('Delete');
       if (quizIndex !== -1) {
+        const updatedQuizzes = [...currentQuizzes];
+        const currentQuiz = { ...updatedQuizzes[quizIndex] };
         const updatedQuestions = [...currentQuiz.questions];
-        updatedQuestions.splice(questionIndex, 1);
-        currentQuiz.questions = updatedQuestions;
-        this.quizzes$.next(currentQuizzes);
-        this.localStorageService.updateLocalStorage(
-          StorageKey.QUIZZES,
-          this.quizzes$.value
-        );
-        subscriber.next(updatedQuestions[questionIndex]);
-      } else {
-        subscriber.error();
+
+        if (questionIndex >= 0 && questionIndex < updatedQuestions.length) {
+          updatedQuestions.splice(questionIndex, 1);
+          currentQuiz.questions = updatedQuestions;
+
+          updatedQuizzes[quizIndex] = currentQuiz;
+
+          this.quizzes$.next(updatedQuizzes);
+          this.localStorageService.updateLocalStorage(
+            StorageKey.QUIZZES,
+            updatedQuizzes
+          );
+
+          subscriber.next(updatedQuestions[questionIndex]);
+        }
       }
+
       subscriber.complete();
     });
   }

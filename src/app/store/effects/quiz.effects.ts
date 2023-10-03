@@ -93,9 +93,6 @@ export class QuizEffects {
       ofType(QuizActions.AddQuestion),
       switchMap((action: { quizId: string; question: Question }) =>
         this.quizService.addQuestion(action.quizId, action.question).pipe(
-          tap((question) => {
-            console.log('Question added:', action);
-          }),
           map((question) => AddQuestionSuccess({ question })),
           catchError((error) => of(error))
         )
