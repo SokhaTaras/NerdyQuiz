@@ -10,16 +10,16 @@
     </quiz-app-button>
   </div>
   <div class="flex justify-center items-center mb-2">
-    <quiz-app-button class="w-1/3 2xs:w-4/5" [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="setQuestions()" [isDisabled]="isInvalid">
+    <quiz-app-button class="w-1/3 2xs:w-4/5" [type]="BUTTON_TYPE.PRIMARY" (whenClicked)="fetchQuestions()">
       {{ 'BUTTON.FETCH_QUESTIONS' | translateJson }}
     </quiz-app-button>
   </div>
   <div class="question-list flex-col justify-center">
     <div class="m-2 p-2" *ngIf="displayCreateQuestion">
-      <quiz-app-create-question [quizId]="quiz.id" [isBoolean]="isBoolean" (hideCreation)="toggleQuestionCreation()"></quiz-app-create-question>
+      <quiz-app-create-question [quizId]="quiz?.id" [isBoolean]="isBoolean" (hideCreation)="toggleQuestionCreation()"></quiz-app-create-question>
     </div>
     <div class="m-2 p-2">
-      <quiz-app-question-card [quizId]="quiz.id" [questionIndex]="index" [question]="question" *ngFor="let question of questions; let index = index"></quiz-app-question-card>
+      <quiz-app-question-card [quizId]="quiz?.id" [questionIndex]="index" [question]="question" *ngFor="let question of questions; let index = index"></quiz-app-question-card>
     </div>
   </div>
 </div>

@@ -41,7 +41,7 @@
     </div>
   </div>
   <quiz-app-question-list
-    [quizId]="(selectedQuiz$ | async)?.id"
+    [quiz]="selectedQuiz$ | async"
     [questions]="(selectedQuiz$ | async)?.questions">
   </quiz-app-question-list>
 </div>

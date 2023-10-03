@@ -51,10 +51,6 @@ export class CreateQuizModalComponent implements OnInit {
     return this?.initQuizForm?.controls?.difficulty;
   }
 
-  get quizId(): string {
-    return this?.quiz?.id;
-  }
-
   constructor(
     private fb: FormBuilder,
     private modalRefFacadeService: ModalRefFacadeService<Quiz>,
@@ -64,6 +60,7 @@ export class CreateQuizModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCategories();
+    this.initForm();
   }
 
   close(data?: Quiz): void {
@@ -119,7 +116,6 @@ export class CreateQuizModalComponent implements OnInit {
     return quiz;
   }
 
-  //todo is it good experience to call init methods inside setCategories
   private setCategories(): void {
     this.dropDownCategories = this.quizService?.categories$?.value;
   }
