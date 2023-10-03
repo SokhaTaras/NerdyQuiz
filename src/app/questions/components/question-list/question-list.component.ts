@@ -12,10 +12,10 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
 })
 export class QuestionListComponent implements OnInit {
   @Input() quizId: string | null;
+  @Input() questions: Question[];
 
   displayCreateQuestion = false;
   isBoolean: boolean;
-  allQuestions: Question[];
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
@@ -25,8 +25,11 @@ export class QuestionListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.initQuestions();
+    // this.initQuestions();
+    this.fn();
   }
+
+  fn() {}
 
   toggleQuestionCreation() {
     this.displayCreateQuestion = !this.displayCreateQuestion;
@@ -37,15 +40,15 @@ export class QuestionListComponent implements OnInit {
     this.displayCreateQuestion = true;
   }
 
-  private initQuestions(): void {
-    this.subscriptionService.addSubscription(
-      this.quizService.quizzes$.subscribe(() => {
-        return this.quizService
-          .getQuizQuestions(this.quizId)
-          .subscribe((questions) => {
-            this.allQuestions = questions;
-          });
-      })
-    );
-  }
+  // private initQuestions(): void {
+  //   this.subscriptionService.addSubscription(
+  //     this.quizService.quizzes$.subscribe(() => {
+  //       return this.quizService
+  //         .getQuizQuestions(this.quizId)
+  //         .subscribe((questions) => {
+  //           this.allQuestions = questions;
+  //         });
+  //     })
+  //   );
+  // }
 }

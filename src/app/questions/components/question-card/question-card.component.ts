@@ -5,6 +5,12 @@ import { Question } from '@a-questions/interfaces/question';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { StoreService } from '@a-store/services/store.service';
+import { AppState } from '@a-store/state/app.state';
+import {
+  DeleteQuestion,
+  DeleteQuestionSuccess
+} from '@a-store/actions/quizz.actions';
 
 @Component({
   selector: 'quiz-app-question-card',
@@ -21,7 +27,8 @@ export class QuestionCardComponent {
   constructor(
     private modalQuizService: ModalQuizService,
     private quizService: QuizService,
-    private subscriptionsService: SubscriptionsService
+    private subscriptionsService: SubscriptionsService,
+    private store: StoreService<AppState>
   ) {}
 
   deleteQuestionConfirm(): void {
@@ -42,10 +49,11 @@ export class QuestionCardComponent {
   }
 
   private deleteQuestion(): void {
-    this.subscriptionsService.addSubscription(
-      this.quizService
-        .deleteQuestion(this.quizId, this.questionIndex)
-        .subscribe()
-    );
+    const quizId = this.quizId;
+    const questionIndex = this.questionIndex;
+
+    if (quizId !== undefined && questionIndex !== undefined) {
+      this.store.dispatcher(DeleteQuestionSuccess({ question: this.question }));
+    }
   }
 }

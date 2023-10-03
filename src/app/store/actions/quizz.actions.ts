@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { Question } from '@a-questions/interfaces/question';
 
 export enum QuizActions {
   GetQuizzes = '[Quiz] Get Quizzes',
@@ -12,7 +13,11 @@ export enum QuizActions {
   AddQuiz = '[Quiz] Add Quiz',
   AddQuizSuccess = '[Quiz] Add Quiz Success',
   EditQuiz = '[Quiz] Edit Quiz',
-  EditQuizSuccess = '[Quiz] Edit Quiz Success'
+  EditQuizSuccess = '[Quiz] Edit Quiz Success',
+  AddQuestion = '[Quiz] Add Question',
+  AddQuestionSuccess = '[Quiz] Add Question Success',
+  DeleteQuestion = '[Quiz] Delete Question',
+  DeleteQuestionSuccess = '[Quiz] Delete Question Success'
 }
 
 export const GetQuizzes = createAction(QuizActions.GetQuizzes);
@@ -60,4 +65,24 @@ export const EditQuiz = createAction(
 export const EditQuizSuccess = createAction(
   QuizActions.EditQuizSuccess,
   props<{ quizId: string; quiz: Quiz }>()
+);
+
+export const AddQuestion = createAction(
+  QuizActions.AddQuestion,
+  props<{ question: Question; quizId: string }>()
+);
+
+export const AddQuestionSuccess = createAction(
+  QuizActions.AddQuestionSuccess,
+  props<{ question: Question }>()
+);
+
+export const DeleteQuestion = createAction(
+  QuizActions.DeleteQuestion,
+  props<{ question: Question; quizId: string }>()
+);
+
+export const DeleteQuestionSuccess = createAction(
+  QuizActions.DeleteQuestionSuccess,
+  props<{ question: Question }>()
 );

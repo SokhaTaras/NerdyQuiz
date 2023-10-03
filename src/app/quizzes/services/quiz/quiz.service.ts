@@ -153,6 +153,7 @@ export class QuizService {
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
       const currentQuiz = currentQuizzes[quizIndex];
 
+      console.log('Delete');
       if (quizIndex !== -1) {
         const updatedQuestions = [...currentQuiz.questions];
         updatedQuestions.splice(questionIndex, 1);

@@ -11,13 +11,13 @@
     <div>
       <div class="flex flex-col">
         <div *ngIf="quizTitle" class="mx-3.5 modal-title">
-        {{ 'LABELS.TITLE' | translateJson }}: {{ quizTitle }}
+        {{ 'LABELS.TITLE' | translateJson }}: {{ (selectedQuiz$ | async)?.title }}
         </div>
         <div *ngIf="quizTheme" class="mx-3.5 modal-title">
-          {{ 'LABELS.THEME' | translateJson }}: {{ quizTheme }}
+          {{ 'LABELS.THEME' | translateJson }}: {{ (selectedQuiz$ | async)?.theme }}
         </div>
         <div *ngIf="quizDifficulty" class="mx-3.5 modal-title">
-          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ quizDifficulty | translateJson }}
+          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ (selectedQuiz$ | async)?.difficulty.text | translateJson }}
         </div>
       </div>
       <div class="w-full">
@@ -40,6 +40,6 @@
       </div>
     </div>
   </div>
-  <quiz-app-question-list [quizId]="id"></quiz-app-question-list>
+  <quiz-app-question-list [quizId]="(selectedQuiz$ | async)?.id" [questions]="(selectedQuiz$ | async)?.questions"></quiz-app-question-list>
 </div>
 

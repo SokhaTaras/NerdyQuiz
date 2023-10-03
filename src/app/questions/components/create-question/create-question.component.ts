@@ -6,6 +6,9 @@ import { Question } from '@a-questions/interfaces/question';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
+import { StoreService } from '@a-store/services/store.service';
+import { AppState } from '@a-store/state/app.state';
+import { AddQuestion } from '@a-store/actions/quizz.actions';
 
 @Component({
   selector: 'quiz-app-create-question',
@@ -24,8 +27,9 @@ export class CreateQuestionComponent {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
-    private quizService: QuizService,
-    private subscriptionsService: SubscriptionsService
+    private store: StoreService<AppState>,
+    private subscriptionsService: SubscriptionsService,
+    private quizService: QuizService
   ) {}
 
   getBooleanQuestionForm(event: FormGroup<QuestionForm>): void {
@@ -40,9 +44,9 @@ export class CreateQuestionComponent {
 
   saveQuestion(): void {
     const question: Question = this.mapQuestionToObject();
-    this.subscriptionsService.addSubscription(
-      this.quizService.addQuestion(this.quizId, question).subscribe()
-    );
+    console.log(question, this.quizId);
+    this.store.dispatcher(AddQuestion({ question, quizId: this.quizId }));
+
     this.hideCreation.emit();
   }
 
