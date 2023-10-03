@@ -25,6 +25,7 @@ import { TranslateJsonPipe } from '@a-shared/pipes/translate-json/translate-json
 import { PopoverComponent } from './components/popover/popover.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { TextSanitizerPipe } from './pipes/text-sanitizer/text-sanitizer.pipe';
+import { AddQuizComponent } from './components/add-quiz/add-quiz.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TextSanitizerPipe } from './pipes/text-sanitizer/text-sanitizer.pipe';
     SelectComponent,
     PopoverComponent,
     ProgressBarComponent,
-    TextSanitizerPipe
+    TextSanitizerPipe,
+    AddQuizComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,8 @@ import { TextSanitizerPipe } from './pipes/text-sanitizer/text-sanitizer.pipe';
     PopoverComponent,
     SelectComponent,
     ProgressBarComponent,
-    TextSanitizerPipe
+    TextSanitizerPipe,
+    AddQuizComponent
   ]
 })
 export class SharedModule {}

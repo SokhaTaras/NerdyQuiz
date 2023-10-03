@@ -13,7 +13,6 @@ import { StoreService } from '@a-store/services/store.service';
 @Component({
   selector: 'quiz-app-quiz-list',
   templateUrl: './quiz-list.component.html',
-  styleUrls: ['./quiz-list.component.scss'],
   providers: [SubscriptionsService]
 })
 export class QuizListComponent implements OnInit {
