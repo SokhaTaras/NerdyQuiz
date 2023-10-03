@@ -54,7 +54,7 @@ export class QuizListComponent implements OnInit {
     this.isLoading = true;
 
     this.quizzes$ = this.storeService
-      .selection(selectQuizzesList)
+      .select(selectQuizzesList)
       .pipe(filter((quizzes) => quizzes !== null));
 
     this.quizzes$.subscribe(() => (this.isLoading = false));

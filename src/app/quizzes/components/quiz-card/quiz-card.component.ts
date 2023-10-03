@@ -77,6 +77,6 @@ export class QuizCardComponent implements OnInit {
   }
 
   deleteQuiz(): void {
-    this.store.dispatcher(DeleteQuiz({ quizToDelete: this.quiz }));
+    this.store.dispatch(DeleteQuiz({ quizToDelete: this.quiz }));
   }
 }

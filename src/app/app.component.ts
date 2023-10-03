@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
   }
 
   private getQuizzes(): void {
-    this.store.dispatcher(GetQuizzes());
-    this.store.selection(selectState).subscribe((val) => {
+    this.store.dispatch(GetQuizzes());
+    this.store.select(selectState).subscribe((val) => {
       console.log(val);
     });
   }

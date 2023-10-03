@@ -67,12 +67,12 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   deleteQuiz(): void {
-    this.store.dispatcher(DeleteQuiz({ quizToDelete: this.currentQuiz }));
+    this.store.dispatch(DeleteQuiz({ quizToDelete: this.currentQuiz }));
     this.navigateTo.navigateHome();
   }
 
   private initQuiz(): void {
-    this.store.dispatcher(GetQuiz({ quizId: this.currentQuiz.id }));
-    this.selectedQuiz$ = this.store.selection(selectSelectedQuiz);
+    this.store.dispatch(GetQuiz({ quizId: this.currentQuiz.id }));
+    this.selectedQuiz$ = this.store.select(selectSelectedQuiz);
   }
 }

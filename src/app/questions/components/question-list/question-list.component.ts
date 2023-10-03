@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Question } from '@a-questions/interfaces/question';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
@@ -10,7 +9,7 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
   templateUrl: './question-list.component.html',
   providers: [SubscriptionsService]
 })
-export class QuestionListComponent implements OnInit {
+export class QuestionListComponent {
   @Input() quizId: string | null;
   @Input() questions: Question[];
 
@@ -18,18 +17,6 @@ export class QuestionListComponent implements OnInit {
   isBoolean: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
-
-  constructor(
-    private quizService: QuizService,
-    private subscriptionService: SubscriptionsService
-  ) {}
-
-  ngOnInit(): void {
-    // this.initQuestions();
-    this.fn();
-  }
-
-  fn() {}
 
   toggleQuestionCreation() {
     this.displayCreateQuestion = !this.displayCreateQuestion;
@@ -39,16 +26,4 @@ export class QuestionListComponent implements OnInit {
     this.isBoolean = !isMultiple;
     this.displayCreateQuestion = true;
   }
-
-  // private initQuestions(): void {
-  //   this.subscriptionService.addSubscription(
-  //     this.quizService.quizzes$.subscribe(() => {
-  //       return this.quizService
-  //         .getQuizQuestions(this.quizId)
-  //         .subscribe((questions) => {
-  //           this.allQuestions = questions;
-  //         });
-  //     })
-  //   );
-  // }
 }

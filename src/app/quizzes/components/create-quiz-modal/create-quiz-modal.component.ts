@@ -77,9 +77,9 @@ export class CreateQuizModalComponent implements OnInit {
 
     if (!this.quiz.id) {
       newQuiz.id = getNewQuizId();
-      this.store.dispatcher(AddQuiz({ quiz: newQuiz }));
+      this.store.dispatch(AddQuiz({ quiz: newQuiz }));
     } else {
-      this.store.dispatcher(EditQuiz({ quizId: this.quiz.id, quiz: newQuiz }));
+      this.store.dispatch(EditQuiz({ quizId: this.quiz.id, quiz: newQuiz }));
     }
 
     this.close(newQuiz);
