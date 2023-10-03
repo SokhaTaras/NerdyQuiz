@@ -37,7 +37,7 @@ export const quizReducers = createReducer(
   on(EditQuizSuccess, (state, { quizId, quiz }) => ({
     ...state,
     selectedQuiz: quizId === state.selectedQuiz.id ? quiz : state.selectedQuiz,
-    quizzes: { ...state.quizzes, [quizId]: quiz }
+    quizzes: state.quizzes.map((q) => (q.id === quizId ? quiz : q))
   })),
 
   on(AddQuestionSuccess, (state, { question }) => {

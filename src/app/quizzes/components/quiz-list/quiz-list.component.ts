@@ -58,6 +58,9 @@ export class QuizListComponent implements OnInit {
       .select(selectQuizzesList)
       .pipe(filter((quizzes) => quizzes !== null));
 
-    this.quizzes$.subscribe(() => (this.isLoading = false));
+    this.quizzes$.subscribe((val) => {
+      this.isLoading = false;
+      console.log(val);
+    });
   }
 }
