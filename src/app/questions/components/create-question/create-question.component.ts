@@ -24,8 +24,8 @@ export class CreateQuestionComponent {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
-    private quizService: QuizService,
-    private subscriptionsService: SubscriptionsService
+    private subscriptionsService: SubscriptionsService,
+    private quizService: QuizService
   ) {}
 
   getBooleanQuestionForm(event: FormGroup<QuestionForm>): void {
@@ -40,9 +40,11 @@ export class CreateQuestionComponent {
 
   saveQuestion(): void {
     const question: Question = this.mapQuestionToObject();
+
     this.subscriptionsService.addSubscription(
       this.quizService.addQuestion(this.quizId, question).subscribe()
     );
+
     this.hideCreation.emit();
   }
 

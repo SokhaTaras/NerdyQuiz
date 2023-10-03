@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 export class StoreService<State> {
   constructor(private store: Store<State>) {}
 
-  selection<T>(selector: (state: State) => T): Observable<T> {
+  select<T>(selector: (state: State) => T): Observable<T> {
     return this.store.select(selector);
   }
 
-  dispatcher(action: any): void {
+  dispatch(action: any): void {
     this.store.dispatch(action);
   }
 }

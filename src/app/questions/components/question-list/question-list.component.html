@@ -19,7 +19,7 @@
       <quiz-app-create-question [quizId]="quiz.id" [isBoolean]="isBoolean" (hideCreation)="toggleQuestionCreation()"></quiz-app-create-question>
     </div>
     <div class="m-2 p-2">
-      <quiz-app-question-card [quizId]="quiz.id" [questionIndex]="index" [question]="question" *ngFor="let question of allQuestions; let index = index"></quiz-app-question-card>
+      <quiz-app-question-card [quizId]="quiz.id" [questionIndex]="index" [question]="question" *ngFor="let question of questions; let index = index"></quiz-app-question-card>
     </div>
   </div>
 </div>

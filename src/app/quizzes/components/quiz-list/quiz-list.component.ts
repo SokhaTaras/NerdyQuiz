@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, Observable, take } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { QuizCard } from '@a-quizzes/interfaces/quiz';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { AppState } from '@a-store/state/app.state';
@@ -19,7 +19,7 @@ import { StoreService } from '@a-store/services/store.service';
 export class QuizListComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  quizzes$ = new Observable<QuizCard[]>();
+  quizzes$ = new Observable<Quiz[]>();
 
   isLoading: boolean;
 
@@ -50,22 +50,13 @@ export class QuizListComponent implements OnInit {
     );
   }
 
-  //todo we need single source of data
   private initQuizzes(): void {
     this.isLoading = true;
 
-    this.storeService
-      .selection(selectQuizzesList)
-      .pipe(
-        filter((quizzes) => quizzes !== null),
-        take(1)
-      )
-      .subscribe(() => {
-        this.isLoading = false;
-      });
+    this.quizzes$ = this.storeService
+      .select(selectQuizzesList)
+      .pipe(filter((quizzes) => quizzes !== null));
 
-    this.quizzes$ = this.storeService.selection(
-      (state: AppState) => state.quizzes.quizzes
-    );
+    this.quizzes$.subscribe(() => (this.isLoading = false));
   }
 }

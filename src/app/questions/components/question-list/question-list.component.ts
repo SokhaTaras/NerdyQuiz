@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Question } from '@a-questions/interfaces/question';
 import {
   BUTTON_TYPE,
@@ -16,12 +15,12 @@ import { mapQuestion } from '@a-shared/utils/questionsMapper';
   templateUrl: './question-list.component.html',
   providers: [SubscriptionsService]
 })
-export class QuestionListComponent implements OnInit {
+export class QuestionListComponent {
   @Input() quiz: Quiz;
+  @Input() questions: Question[];
 
   displayCreateQuestion = false;
   isBoolean: boolean;
-  allQuestions: Question[];
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
@@ -63,15 +62,15 @@ export class QuestionListComponent implements OnInit {
       });
   }
 
-  private initQuestions(): void {
-    this.subscriptionService.addSubscription(
-      this.quizService.quizzes$.subscribe(() => {
-        return this.quizService
-          .getQuizQuestions(this.quiz.id)
-          .subscribe((questions) => {
-            this.allQuestions = questions;
-          });
-      })
-    );
-  }
+  // private initQuestions(): void {
+  //   this.subscriptionService.addSubscription(
+  //     this.quizService.quizzes$.subscribe(() => {
+  //       return this.quizService
+  //         .getQuizQuestions(this.quiz.id)
+  //         .subscribe((questions) => {
+  //           this.allQuestions = questions;
+  //         });
+  //     })
+  //   );
+  // }
 }

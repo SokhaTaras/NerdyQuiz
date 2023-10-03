@@ -5,19 +5,20 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { Observable } from 'rxjs';
 
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { InitQuizForm } from '@a-shared/types/forms';
-import { CategoriesResponse, Quiz } from '@a-quizzes/interfaces/quiz';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { AnswerDifficultyList } from '@a-questions/constants/dropdowns';
 import { DropDownItem } from '@a-questions/interfaces/question';
-import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
-import { mapArrayToDropDownItems } from '@a-shared/utils/drop-down-mapper';
 import { defaultDifficulty } from '@a-shared/enums/shared-components';
+import { StoreService } from '@a-store/services/store.service';
+import { AppState } from '@a-store/state/app.state';
+import { AddQuiz, EditQuiz } from '@a-store/actions/quizz.actions';
+import { getNewQuizId } from '@a-shared/utils/getId';
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -56,10 +57,9 @@ export class CreateQuizModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private quizService: QuizService,
     private modalRefFacadeService: ModalRefFacadeService<Quiz>,
-    private subscriptionsService: SubscriptionsService,
-    private quizApi: QuizApiService
+    private quizService: QuizService,
+    private store: StoreService<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -74,18 +74,14 @@ export class CreateQuizModalComponent implements OnInit {
     const formData = this.getFormData();
     const newQuiz = { ...this.quiz, ...formData };
 
-    const saveMethod = this.getSaveMethod();
+    if (!this.quiz.id) {
+      newQuiz.id = getNewQuizId();
+      this.store.dispatch(AddQuiz({ quiz: newQuiz }));
+    } else {
+      this.store.dispatch(EditQuiz({ quizId: this.quiz.id, quiz: newQuiz }));
+    }
 
-    this.subscriptionsService.addSubscription(
-      saveMethod(newQuiz).subscribe({
-        next: (savedQuiz: Quiz) => {
-          this.close(savedQuiz);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      })
-    );
+    this.close(newQuiz);
   }
 
   setDifficulty(item: DropDownItem): void {
@@ -96,22 +92,6 @@ export class CreateQuizModalComponent implements OnInit {
     this?.initQuizForm?.controls?.category?.setValue(item);
   }
 
-  private getSaveMethod(): (quiz: Quiz) => Observable<Quiz> {
-    if (!this.quizId) {
-      return this.addQuiz.bind(this);
-    } else {
-      return this.editQuiz.bind(this);
-    }
-  }
-
-  private editQuiz(newQuiz: Quiz): Observable<Quiz> {
-    return this.quizService.editQuiz(this.quizId, newQuiz);
-  }
-
-  private addQuiz(newQuiz: Quiz): Observable<Quiz> {
-    return this.quizService.addQuiz(newQuiz);
-  }
-
   private initForm(): void {
     this.isLoading = true;
     this.initQuizForm = this.fb.nonNullable.group<InitQuizForm>({
@@ -120,7 +100,7 @@ export class CreateQuizModalComponent implements OnInit {
         Validators.minLength(2)
       ]),
       category: this.fb.control(
-        this?.quiz?.category || this?.dropDownCategories[0],
+        this?.quiz?.category || this.dropDownCategories[0],
         [Validators.required, Validators.minLength(2)]
       ),
       difficulty: this.fb.control(this?.quiz?.difficulty || defaultDifficulty)
@@ -141,21 +121,6 @@ export class CreateQuizModalComponent implements OnInit {
 
   //todo is it good experience to call init methods inside setCategories
   private setCategories(): void {
-    this.isLoading = true;
-    this.subscriptionsService.addSubscription(
-      this.quizApi.getCategories().subscribe((categories) => {
-        this.mapToDropDownItem(categories);
-        this.initForm();
-        this.isLoading = false;
-      })
-    );
-  }
-
-  private mapToDropDownItem(fetchedCategories: CategoriesResponse): void {
-    this.dropDownCategories = mapArrayToDropDownItems(
-      fetchedCategories.trivia_categories,
-      'id',
-      'name'
-    );
+    this.dropDownCategories = this.quizService?.categories$?.value;
   }
 }
