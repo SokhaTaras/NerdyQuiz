@@ -8,7 +8,6 @@ import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.serv
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { AppState } from '@a-store/state/app.state';
 import { selectQuizzesList } from '@a-store/selectors/quiz.selectors';
-import { GetQuizzes } from '@a-store/actions/quizz.actions';
 import { StoreService } from '@a-store/services/store.service';
 
 @Component({
@@ -58,9 +57,6 @@ export class QuizListComponent implements OnInit {
       .select(selectQuizzesList)
       .pipe(filter((quizzes) => quizzes !== null));
 
-    this.quizzes$.subscribe((val) => {
-      this.isLoading = false;
-      console.log(val);
-    });
+    this.quizzes$.subscribe(() => (this.isLoading = false));
   }
 }

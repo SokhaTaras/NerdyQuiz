@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import {
+  DropDownItem,
   Question,
   QuestionResult,
   QuizResult
@@ -16,6 +17,7 @@ import { Quiz } from '@a-quizzes/interfaces/quiz';
 })
 export class QuizService {
   quizzes$ = new BehaviorSubject<Quiz[]>([]);
+  categories$ = new BehaviorSubject<DropDownItem[]>([]);
   questionsResults = new BehaviorSubject<QuestionResult[]>([]);
 
   constructor(private localStorageService: LocalStorageService) {}
