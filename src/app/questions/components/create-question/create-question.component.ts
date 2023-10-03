@@ -41,7 +41,10 @@ export class CreateQuestionComponent {
   saveQuestion(): void {
     const question: Question = this.mapQuestionToObject();
 
-    this.quizService.addQuestion(this.quizId, question).subscribe();
+    this.subscriptionsService.addSubscription(
+      this.quizService.addQuestion(this.quizId, question).subscribe()
+    );
+
     this.hideCreation.emit();
   }
 

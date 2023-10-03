@@ -169,20 +169,18 @@ export class QuizService {
         const currentQuiz = { ...updatedQuizzes[quizIndex] };
         const updatedQuestions = [...currentQuiz.questions];
 
-        if (questionIndex >= 0 && questionIndex < updatedQuestions.length) {
-          updatedQuestions.splice(questionIndex, 1);
-          currentQuiz.questions = updatedQuestions;
+        updatedQuestions.splice(questionIndex, 1);
+        currentQuiz.questions = updatedQuestions;
 
-          updatedQuizzes[quizIndex] = currentQuiz;
+        updatedQuizzes[quizIndex] = currentQuiz;
 
-          this.quizzes$.next(updatedQuizzes);
-          this.localStorageService.updateLocalStorage(
-            StorageKey.QUIZZES,
-            updatedQuizzes
-          );
+        this.quizzes$.next(updatedQuizzes);
+        this.localStorageService.updateLocalStorage(
+          StorageKey.QUIZZES,
+          updatedQuizzes
+        );
 
-          subscriber.next(updatedQuestions[questionIndex]);
-        }
+        subscriber.next(updatedQuestions[questionIndex]);
       }
 
       subscriber.complete();
