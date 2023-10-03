@@ -8,10 +8,6 @@ export enum BUTTON_TYPE {
   ERROR
 }
 
-export enum POPOVER_TYPE {
-  CARD
-}
-
 export const defaultDifficulty: DropDownItem = {
   value: DifficultiesEnum.Easy,
   text: AnswerDifficultyList[0].text

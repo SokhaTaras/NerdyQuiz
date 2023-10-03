@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import { filter, Observable } from 'rxjs';
 
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { QuizCard } from '@a-quizzes/interfaces/quiz';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { AppState } from '@a-store/state/app.state';
 import { selectQuizzesList } from '@a-store/selectors/quiz.selectors';
 import { GetQuizzes } from '@a-store/actions/quizz.actions';
+import { StoreService } from '@a-store/services/store.service';
 
 @Component({
   selector: 'quiz-app-quiz-list',
@@ -18,17 +18,17 @@ import { GetQuizzes } from '@a-store/actions/quizz.actions';
   providers: [SubscriptionsService]
 })
 export class QuizListComponent implements OnInit {
-  quizzes$: Observable<QuizCard[]>;
+  readonly BUTTON_TYPE = BUTTON_TYPE;
+
+  quizzes$ = new Observable<Quiz[]>();
 
   isLoading: boolean;
-
-  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   constructor(
     private modalQuizService: ModalQuizService,
     private navigateTo: NavigateToService,
     private subscriptionsService: SubscriptionsService,
-    private store: Store<AppState>
+    private storeService: StoreService<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -53,13 +53,11 @@ export class QuizListComponent implements OnInit {
 
   private initQuizzes(): void {
     this.isLoading = true;
-    this.store.dispatch(GetQuizzes());
 
-    this.subscriptionsService.addSubscription(
-      this.store.pipe(select(selectQuizzesList)).subscribe(() => {
-        this.quizzes$ = this.store.pipe(select(selectQuizzesList));
-        this.isLoading = false;
-      })
-    );
+    this.quizzes$ = this.storeService
+      .select(selectQuizzesList)
+      .pipe(filter((quizzes) => quizzes !== null));
+
+    this.quizzes$.subscribe(() => (this.isLoading = false));
   }
 }

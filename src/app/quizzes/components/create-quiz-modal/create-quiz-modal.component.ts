@@ -5,9 +5,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { Observable } from 'rxjs';
 
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { InitQuizForm } from '@a-shared/types/forms';
 import { CategoriesResponse, Quiz } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
@@ -21,6 +19,10 @@ import {
   defaultCategory,
   defaultDifficulty
 } from '@a-shared/enums/shared-components';
+import { StoreService } from '@a-store/services/store.service';
+import { AppState } from '@a-store/state/app.state';
+import { AddQuiz, EditQuiz } from '@a-store/actions/quizz.actions';
+import { getNewQuizId } from '@a-shared/utils/getId';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -59,10 +61,10 @@ export class CreateQuizModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private quizService: QuizService,
     private modalRefFacadeService: ModalRefFacadeService<Quiz>,
     private subscriptionsService: SubscriptionsService,
-    private quizApi: QuizApiService
+    private quizApi: QuizApiService,
+    private store: StoreService<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -78,18 +80,14 @@ export class CreateQuizModalComponent implements OnInit {
     const formData = this.getFormData();
     const newQuiz = { ...this.quiz, ...formData };
 
-    const saveMethod = this.getSaveMethod();
+    if (!this.quiz.id) {
+      newQuiz.id = getNewQuizId();
+      this.store.dispatch(AddQuiz({ quiz: newQuiz }));
+    } else {
+      this.store.dispatch(EditQuiz({ quizId: this.quiz.id, quiz: newQuiz }));
+    }
 
-    this.subscriptionsService.addSubscription(
-      saveMethod(newQuiz).subscribe({
-        next: (savedQuiz: Quiz) => {
-          this.close(savedQuiz);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      })
-    );
+    this.close(newQuiz);
   }
 
   setDifficulty(item: DropDownItem): void {
@@ -100,21 +98,6 @@ export class CreateQuizModalComponent implements OnInit {
     this?.initQuizForm?.controls?.category?.setValue(item);
   }
 
-  private getSaveMethod(): (quiz: Quiz) => Observable<Quiz> {
-    if (!this.quizId) {
-      return this.addQuiz.bind(this);
-    } else {
-      return this.editQuiz.bind(this);
-    }
-  }
-
-  private editQuiz(newQuiz: Quiz): Observable<Quiz> {
-    return this.quizService.editQuiz(this.quizId, newQuiz);
-  }
-
-  private addQuiz(newQuiz: Quiz): Observable<Quiz> {
-    return this.quizService.addQuiz(newQuiz);
-  }
 
   private initForm(): void {
     this.isLoading = true;

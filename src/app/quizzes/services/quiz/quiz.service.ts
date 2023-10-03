@@ -7,7 +7,7 @@ import {
   QuizResult
 } from '@a-questions/interfaces/question';
 import { LocalStorageService } from '@a-shared/services/local-storage/local-storage.service';
-import { getNewQuestionId, getNewQuizId } from '@a-shared/utils/getId';
+import { getNewQuestionId } from '@a-shared/utils/getId';
 import { StorageKey } from '@a-shared/enums/storageKey';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 
@@ -23,7 +23,6 @@ export class QuizService {
   addQuiz(quiz: Quiz): Observable<Quiz> {
     return new Observable<Quiz>((subscriber) => {
       if (quiz) {
-        quiz.id = getNewQuizId();
         this.quizzes$.next([...this.quizzes$.value, quiz]);
         this.localStorageService.updateLocalStorage(
           StorageKey.QUIZZES,
@@ -99,7 +98,10 @@ export class QuizService {
       this.localStorageService.setLocalStorageData(key, allQuizzes);
       this.quizzes$.next(JSON.parse(allQuizzes));
     } else {
-      return new Observable<Quiz[]>();
+      return new Observable<Quiz[]>((subscriber) => {
+        subscriber.next([]);
+        subscriber.complete();
+      });
     }
 
     return new Observable<Quiz[]>((subscriber) => {
@@ -110,23 +112,35 @@ export class QuizService {
 
   addQuestion(quizId: string | null, question: Question): Observable<Question> {
     return new Observable<Question>((subscriber) => {
-      if (this.quizzes$.value) {
-        const currentQuizzes = [...this.quizzes$.value];
-        const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
-
-        if (quizIndex !== -1) {
-          question.id = getNewQuestionId();
-          currentQuizzes[quizIndex].questions.push(question);
-          this.quizzes$.next(currentQuizzes);
-          this.localStorageService.updateLocalStorage(
-            StorageKey.QUIZZES,
-            this.quizzes$.value
-          );
-          subscriber.next(question);
-        }
-      } else {
+      const currentQuizzes = this.quizzes$.value;
+      if (!currentQuizzes) {
         subscriber.error();
+        subscriber.complete();
+        return;
       }
+
+      const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
+      if (quizIndex !== -1) {
+        question.id = getNewQuestionId();
+        const updatedQuizzes = [...currentQuizzes];
+        const currentQuiz = updatedQuizzes[quizIndex];
+
+        const updatedQuiz = {
+          ...currentQuiz,
+          questions: [...currentQuiz.questions, question]
+        };
+
+        updatedQuizzes[quizIndex] = updatedQuiz;
+
+        this.quizzes$.next(updatedQuizzes);
+        this.localStorageService.updateLocalStorage(
+          StorageKey.QUIZZES,
+          updatedQuizzes
+        );
+
+        subscriber.next(question);
+      }
+
       subscriber.complete();
     });
   }
@@ -149,21 +163,26 @@ export class QuizService {
     return new Observable<Question>((subscriber) => {
       const currentQuizzes = this.quizzes$.value;
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
-      const currentQuiz = currentQuizzes[quizIndex];
 
       if (quizIndex !== -1) {
+        const updatedQuizzes = [...currentQuizzes];
+        const currentQuiz = { ...updatedQuizzes[quizIndex] };
         const updatedQuestions = [...currentQuiz.questions];
+
         updatedQuestions.splice(questionIndex, 1);
         currentQuiz.questions = updatedQuestions;
-        this.quizzes$.next(currentQuizzes);
+
+        updatedQuizzes[quizIndex] = currentQuiz;
+
+        this.quizzes$.next(updatedQuizzes);
         this.localStorageService.updateLocalStorage(
           StorageKey.QUIZZES,
-          this.quizzes$.value
+          updatedQuizzes
         );
+
         subscriber.next(updatedQuestions[questionIndex]);
-      } else {
-        subscriber.error();
       }
+
       subscriber.complete();
     });
   }

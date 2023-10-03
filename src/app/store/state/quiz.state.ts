@@ -1,7 +1,7 @@
-import { Quiz, QuizCard } from '@a-quizzes/interfaces/quiz';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 
 export interface QuizState {
-  quizzes: QuizCard[];
+  quizzes: Quiz[];
   selectedQuiz: Quiz;
 }
 

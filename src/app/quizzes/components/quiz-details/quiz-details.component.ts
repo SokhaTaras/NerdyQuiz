@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
@@ -11,8 +10,9 @@ import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { AppState } from '@a-store/state/app.state';
-import { GetQuiz } from '@a-store/actions/quizz.actions';
+import { DeleteQuiz, GetQuiz } from '@a-store/actions/quizz.actions';
 import { selectSelectedQuiz } from '@a-store/selectors/quiz.selectors';
+import { StoreService } from '@a-store/services/store.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -30,7 +30,7 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
     navigateTo: NavigateToService,
     subscriptionsService: SubscriptionsService,
     private modalQuizService: ModalQuizService,
-    private store: Store<AppState>
+    private store: StoreService<AppState>
   ) {
     super(quizService, route, navigateTo, subscriptionsService);
   }
@@ -67,15 +67,12 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   deleteQuiz(): void {
-    this.subscriptionsService.addSubscription(
-      this.quizService.deleteQuiz(this.currentQuiz).subscribe(() => {
-        this.navigateTo.navigateHome();
-      })
-    );
+    this.store.dispatch(DeleteQuiz({ quizToDelete: this.currentQuiz }));
+    this.navigateTo.navigateHome();
   }
 
   private initQuiz(): void {
     this.store.dispatch(GetQuiz({ quizId: this.currentQuiz.id }));
-    this.selectedQuiz$ = this.store.pipe(select(selectSelectedQuiz));
+    this.selectedQuiz$ = this.store.select(selectSelectedQuiz);
   }
 }
