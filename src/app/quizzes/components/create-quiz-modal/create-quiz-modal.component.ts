@@ -70,7 +70,6 @@ export class CreateQuizModalComponent implements OnInit {
     this.modalRefFacadeService.close(data);
   }
 
-  //todo generate id on back, but how?
   saveQuiz(): void {
     const formData = this.getFormData();
     const newQuiz = { ...this.quiz, ...formData };

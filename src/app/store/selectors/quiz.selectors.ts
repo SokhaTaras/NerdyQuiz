@@ -14,9 +14,3 @@ export const selectSelectedQuiz = createSelector(
   selectQuizzes,
   (state: QuizState) => state.selectedQuiz
 );
-
-//todo delete
-export const selectState = createSelector(
-  selectQuizzes,
-  (state: QuizState) => state
-);
