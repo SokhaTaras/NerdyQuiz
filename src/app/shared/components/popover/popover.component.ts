@@ -10,5 +10,6 @@ import { SVG_TYPE } from '@a-shared/enums/shared-components';
 export class PopoverComponent {
   @Input() label: string;
   @Input() options: PopoverItem[];
-  protected readonly SVG_TYPE = SVG_TYPE;
+
+  readonly SVG_TYPE = SVG_TYPE;
 }
