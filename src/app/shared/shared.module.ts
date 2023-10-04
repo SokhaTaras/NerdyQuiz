@@ -11,6 +11,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 import { SelectComponent } from '@a-shared/components/select/select.component';
 import { InputComponent } from '@a-shared/components/input/input.component';
@@ -29,7 +30,6 @@ import { AddQuizComponent } from './components/add-quiz/add-quiz.component';
 import { LabelComponent } from './components/label/label.component';
 import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 import { DividerComponent } from './components/divider/divider.component';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { PopoverItemComponent } from './components/popover-item/popover-item.component';
 
 @NgModule({
