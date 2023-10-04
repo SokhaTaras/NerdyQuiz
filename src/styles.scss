@@ -9,9 +9,16 @@ body {
   font-size: var(--text-base);
 }
 
+.ant-modal-body {
+  padding: 32px;
+  //width: 600px;
+}
+
 .ant-modal-content {
   border-radius: var(--border-radius);
   background-color: var(--color-background);
+  width: 546px;
+  height: 398px;
 }
 
 .ant-modal-confirm-btns {
@@ -49,6 +56,16 @@ body {
 
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
   background-color: var(--color-primary);
+}
+
+.ant-select-single .ant-select-selector .ant-select-selection-item,
+.ant-select-single .ant-select-selector .ant-select-selection-placeholder{
+  line-height: 22px;
+}
+
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  padding: 0;
+  height: 22px;
 }
 
 .ant-popover-inner {
@@ -91,15 +108,15 @@ button {
   }
 
   .labels {
-    @apply text-2xl;
+    @apply pl-3;
   }
 
   .input {
-    @apply border rounded p-2 border-none focus:outline-none;
+    @apply border rounded-[8px] px-3 py-2  border-gray-400 focus:outline-none;
   }
 
   .modal-title {
-    @apply text-3xl text-center mb-6;
+    @apply text-4xl font-semibold leading-7 text-left;
   }
 
   .question-info {
