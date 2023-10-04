@@ -40,6 +40,22 @@ export class QuizCardComponent implements OnInit {
     }
   }
 
+  get quizTitle(): string {
+    return this.quiz?.title;
+  }
+
+  get quizCategory(): string {
+    return this.quiz?.category.text;
+  }
+
+  get quizDifficulty(): string {
+    return this.quiz?.difficulty?.text;
+  }
+
+  get amountOfQuestions(): number {
+    return this.quiz?.questions?.length || 0;
+  }
+
   constructor(
     private navigateTo: NavigateToService,
     private modalQuizService: ModalQuizService,

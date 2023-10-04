@@ -1,14 +1,14 @@
 <div class="bg-white shadow-lg rounded-2xl flex-col w-full h-full cursor-pointer border-primary border hover:shadow-xl" (click)="goPlay()">
   <div class="m-4 flex flex-col justify-between h-3/4">
     <div class="flex flex-col justify-start items-start overflow-hidden">
-      <p class="text-font-secondary font-semibold text-2xl truncate">{{ quiz?.title }}</p>
-      <p class="text-font-grey font-inter text-xs font-normal leading-4">{{ quiz?.category?.text | translateJson }}</p>
+      <p class="text-font-secondary font-semibold text-2xl truncate">{{ quizTitle }}</p>
+      <p class="text-font-grey font-inter text-xs font-normal leading-4">{{ quizCategory | translateJson }}</p>
     </div>
     <div class="flex flex-row justify-between">
       <div class="flex items-center justify-center flex-row text-font-grey font-inter text-xs font-normal leading-4">
-        <div><quiz-app-label [type]="quizDifficultyLabel">{{ quiz.difficulty.text | translateJson}}</quiz-app-label></div>
+        <div><quiz-app-label [type]="quizDifficultyLabel">{{ quizDifficulty | translateJson}}</quiz-app-label></div>
         <quiz-app-divider [type]="DIVIDER.VERTICAL"></quiz-app-divider>
-        <div>{{ 'BUTTON.QUESTION_AMOUNT' | translateJson }} {{ quiz?.questions?.length || 0 }}</div>
+        <div>{{ 'BUTTON.QUESTION_AMOUNT' | translateJson }} {{ amountOfQuestions }}</div>
       </div>
       <div class="w-6 h-6" (click)="$event.stopPropagation()">
         <quiz-app-popover [options]="popoverSetup"></quiz-app-popover>
