@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,6 +30,7 @@ import { LabelComponent } from './components/label/label.component';
 import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 import { DividerComponent } from './components/divider/divider.component';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { PopoverItemComponent } from './components/popover-item/popover-item.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     AddQuizComponent,
     LabelComponent,
     SvgIconComponent,
-    DividerComponent
+    DividerComponent,
+    PopoverItemComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +69,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     NzIconModule,
     NzSelectModule,
     NzPopoverModule,
-    NzDividerModule
+    NzDividerModule,
+    NgOptimizedImage
   ],
   exports: [
     InputComponent,

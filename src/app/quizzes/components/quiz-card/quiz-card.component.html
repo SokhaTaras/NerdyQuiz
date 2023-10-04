@@ -11,7 +11,7 @@
         <div>{{ 'BUTTON.QUESTION_AMOUNT' | translateJson }} {{ quiz?.questions?.length || 0 }}</div>
       </div>
       <div class="w-6 h-6" (click)="$event.stopPropagation()">
-        <quiz-app-popover [label]="'POPOVER.QUIZ_MANAGER' | translateJson" [options]="popoverSetup"></quiz-app-popover>
+        <quiz-app-popover [options]="popoverSetup"></quiz-app-popover>
       </div>
     </div>
   </div>

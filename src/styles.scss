@@ -55,6 +55,14 @@ body {
   border-radius: var(--border-radius);
 }
 
+.ant-popover-inner-content{
+  padding: 0;
+}
+
+.ant-popover-arrow {
+  width: 11px;
+}
+
 button {
   background-color: var(--color-primary);
   min-width: 100px;
@@ -107,7 +115,7 @@ button {
   }
 
   .popover-item {
-    @apply flex justify-center items-center hover:bg-black/5 rounded h-8 w-full hover:cursor-pointer mb-2
+    @apply flex justify-center items-center rounded-[10px] hover:bg-black/5 h-full w-full hover:cursor-pointer
   }
 
 
@@ -125,7 +133,7 @@ button {
     --color-button: rgb(229, 231, 235);
     --color-buttons-hover: rgba(0, 0, 0, 0.05);
     --color-error: rgb(209, 0, 0);
-    --primary-font-color : #333333;
+    --primary-font-color : #000;
     --secondary-font-color : rgba(127, 86, 217, 1);
     --grey-font-color : rgba(152, 162, 179, 1);
     --primary-font-family: system-ui;

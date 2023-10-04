@@ -4,7 +4,9 @@ import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import {
   BUTTON_TYPE,
   DIVIDER,
-  LABELS
+  LABELS,
+  POPOVER_ITEM_TYPE,
+  SVG_TYPE
 } from '@a-shared/enums/shared-components';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
@@ -53,12 +55,14 @@ export class QuizCardComponent implements OnInit {
     this.popoverSetup = [
       new PopoverItemClass(
         'BUTTON.EDIT_QUIZ',
-        BUTTON_TYPE.PRIMARY,
+        POPOVER_ITEM_TYPE.PRIMARY,
+        SVG_TYPE.EDIT,
         this.goEdit.bind(this)
       ),
       new PopoverItemClass(
         'BUTTON.DELETE_QUIZ',
-        BUTTON_TYPE.ERROR,
+        POPOVER_ITEM_TYPE.ERROR,
+        SVG_TYPE.TRASH_RED,
         this.confirmRemoving.bind(this)
       )
     ];

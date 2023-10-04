@@ -1,7 +1,8 @@
-import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
+import { POPOVER_ITEM_TYPE, SVG_TYPE } from '@a-shared/enums/shared-components';
 
 export type PopoverItem = {
   text: string;
-  type: BUTTON_TYPE;
+  type: POPOVER_ITEM_TYPE;
+  icon: SVG_TYPE;
   action: Function;
 };
