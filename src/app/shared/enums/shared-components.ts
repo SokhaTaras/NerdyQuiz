@@ -8,6 +8,17 @@ export enum BUTTON_TYPE {
   ERROR
 }
 
+export enum LABELS {
+  GREEN,
+  YELLOW,
+  RED
+}
+
+export enum DIVIDER {
+  VERTICAL = 'vertical',
+  HORIZONTAL = 'horizontal'
+}
+
 export const defaultDifficulty: DropDownItem = {
   value: DifficultiesEnum.Easy,
   text: AnswerDifficultyList[0].text

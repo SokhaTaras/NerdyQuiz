@@ -1,39 +1,47 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Quiz } from '@a-quizzes/interfaces/quiz';
-import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
+import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
+import {
+  BUTTON_TYPE,
+  DIVIDER,
+  LABELS
+} from '@a-shared/enums/shared-components';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { PopoverItem } from '@a-shared/types/popover';
 import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
-import { DropDownItem } from '@a-questions/interfaces/question';
 import { StoreService } from '@a-store/services/store.service';
 import { AppState } from '@a-store/state/app.state';
 import { DeleteQuiz } from '@a-store/actions/quizz.actions';
 
 @Component({
   selector: 'quiz-app-quiz-card',
-  templateUrl: './quiz-card.component.html',
-  styleUrls: ['./quiz-card.component.scss']
+  templateUrl: './quiz-card.component.html'
 })
 export class QuizCardComponent implements OnInit {
   @Input() quiz: Quiz;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly LABELS = LABELS;
+  readonly DIVIDER = DIVIDER;
 
   popoverSetup: PopoverItem[] = [];
 
-  get quizDifficulty(): DropDownItem {
-    return this?.quiz?.difficulty;
+  get quizDifficultyLabel(): LABELS {
+    if (this.quiz.difficulty.value === QUIZ_DIFFICULTY.EASY) {
+      return LABELS.GREEN;
+    } else if (this.quiz.difficulty.value === QUIZ_DIFFICULTY.MEDIUM) {
+      return LABELS.YELLOW;
+    } else {
+      return LABELS.RED;
+    }
   }
 
   constructor(
     private navigateTo: NavigateToService,
     private modalQuizService: ModalQuizService,
     private subscriptionsService: SubscriptionsService,
-    private quizService: QuizService,
     private store: StoreService<AppState>
   ) {}
 

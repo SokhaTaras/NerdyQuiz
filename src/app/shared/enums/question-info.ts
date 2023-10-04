@@ -1,7 +1,7 @@
 export enum DifficultiesEnum {
-  Easy = 'Easy',
-  Medium = 'Medium',
-  Hard = 'Hard'
+  Easy = 'easy',
+  Medium = 'medium',
+  Hard = 'hard'
 }
 
 export enum QUESTION_TYPE {

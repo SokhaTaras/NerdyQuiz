@@ -5,8 +5,8 @@
   nzPopoverPlacement="bottom"
   [nzPopoverTitle]= label
   [nzPopoverContent]="content">
-  <span class="font-bold" *ngIf="!altTrigger.children.length">...</span>
-  <div class="h-full" #altTrigger>
+  <span class="font-bold flex justify-center items-center" *ngIf="!altTrigger.children.length">...</span>
+  <div class="h-full flex justify-center items-center" #altTrigger>
     <ng-content select="[trigger]"></ng-content>
   </div>
 </div>

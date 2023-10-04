@@ -26,6 +26,10 @@ import { PopoverComponent } from './components/popover/popover.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { TextSanitizerPipe } from './pipes/text-sanitizer/text-sanitizer.pipe';
 import { AddQuizComponent } from './components/add-quiz/add-quiz.component';
+import { LabelComponent } from './components/label/label.component';
+import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
+import { DividerComponent } from './components/divider/divider.component';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,10 @@ import { AddQuizComponent } from './components/add-quiz/add-quiz.component';
     PopoverComponent,
     ProgressBarComponent,
     TextSanitizerPipe,
-    AddQuizComponent
+    AddQuizComponent,
+    LabelComponent,
+    SvgIconComponent,
+    DividerComponent
   ],
   imports: [
     CommonModule,
@@ -59,7 +66,8 @@ import { AddQuizComponent } from './components/add-quiz/add-quiz.component';
     NzRadioModule,
     NzIconModule,
     NzSelectModule,
-    NzPopoverModule
+    NzPopoverModule,
+    NzDividerModule
   ],
   exports: [
     InputComponent,
@@ -73,7 +81,9 @@ import { AddQuizComponent } from './components/add-quiz/add-quiz.component';
     SelectComponent,
     ProgressBarComponent,
     TextSanitizerPipe,
-    AddQuizComponent
+    AddQuizComponent,
+    LabelComponent,
+    DividerComponent
   ]
 })
 export class SharedModule {}
