@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { Question } from '@a-questions/interfaces/question';
@@ -23,8 +23,8 @@ export class BaseQuizComponent implements OnInit {
     return this?.currentQuiz?.theme;
   }
 
-  get quizDifficulty(): QUIZ_DIFFICULTY {
-    return this?.currentQuiz?.difficulty;
+  get quizDifficulty(): string {
+    return this?.currentQuiz?.difficulty.text;
   }
 
   get quizQuestions(): Question[] {

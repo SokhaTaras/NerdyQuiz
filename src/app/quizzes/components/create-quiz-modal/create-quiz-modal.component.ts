@@ -9,11 +9,14 @@ import { Observable } from 'rxjs';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { InitQuizForm } from '@a-shared/types/forms';
-import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { AnswerDifficultyList } from '@a-questions/constants/dropdowns';
+import {
+  AnswerDifficultyList,
+  defaultDifficulty
+} from '@a-questions/constants/dropdowns';
 import { DropDownItem } from '@a-questions/interfaces/question';
 
 @Component({
@@ -22,7 +25,6 @@ import { DropDownItem } from '@a-questions/interfaces/question';
   providers: [ModalRefFacadeService, SubscriptionsService]
 })
 export class CreateQuizModalComponent implements OnInit {
-  @Input() quizId: string;
   @Input() quiz: Quiz = {};
   @Input() label: string;
   @Input() buttonText: string;
@@ -33,22 +35,24 @@ export class CreateQuizModalComponent implements OnInit {
   readonly AnswerDifficultyList = AnswerDifficultyList;
 
   get title(): FormControl<string> {
-    return this.initQuizForm.controls.title;
+    return this?.initQuizForm?.controls?.title;
   }
 
   get theme(): FormControl<string> {
-    return this.initQuizForm.controls.theme;
+    return this?.initQuizForm?.controls?.theme;
   }
 
-  get difficulty(): FormControl<QUIZ_DIFFICULTY> {
-    return this.initQuizForm.controls.difficulty;
+  get difficulty(): FormControl<DropDownItem> {
+    return this?.initQuizForm?.controls?.difficulty;
   }
 
-  // get selectedDifficultyItem(): DropDownItem {
-  //   return this.AnswerDifficultyList.find(
-  //     (item) => item.value === this.difficulty.value
-  //   );
-  // }
+  get easyDifficulty(): DropDownItem {
+    return AnswerDifficultyList[0];
+  }
+
+  get quizId(): string {
+    return this?.quiz?.id;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -83,8 +87,12 @@ export class CreateQuizModalComponent implements OnInit {
     );
   }
 
+  setDifficulty(item: DropDownItem) {
+    this?.initQuizForm?.controls?.difficulty?.setValue(item);
+  }
+
   private getSaveMethod(): (quiz: Quiz) => Observable<Quiz> {
-    if (!this.quiz.id) {
+    if (!this.quizId) {
       return this.addQuiz.bind(this);
     } else {
       return this.editQuiz.bind(this);
@@ -92,7 +100,7 @@ export class CreateQuizModalComponent implements OnInit {
   }
 
   private editQuiz(newQuiz: Quiz): Observable<Quiz> {
-    return this.quizService.editQuiz(this.quiz.id, newQuiz);
+    return this.quizService.editQuiz(this.quizId, newQuiz);
   }
 
   private addQuiz(newQuiz: Quiz): Observable<Quiz> {
@@ -101,23 +109,23 @@ export class CreateQuizModalComponent implements OnInit {
 
   private initForm(): void {
     this.initQuizForm = this.fb.nonNullable.group<InitQuizForm>({
-      title: this.fb.control(this.quiz.title || '', [
+      title: this.fb.control(this?.quiz?.title || '', [
         Validators.required,
         Validators.minLength(2)
       ]),
-      theme: this.fb.control(this.quiz.theme || '', [
+      theme: this.fb.control(this?.quiz?.theme || '', [
         Validators.required,
         Validators.minLength(2)
       ]),
-      difficulty: this.fb.control(this.quiz.difficulty || QUIZ_DIFFICULTY.EASY)
+      difficulty: this.fb.control(this?.quiz?.difficulty || defaultDifficulty)
     });
   }
 
   private getFormData(): Quiz {
     const quiz: Quiz = {
-      title: this.title.value,
-      theme: this.theme.value,
-      difficulty: this.difficulty.value,
+      title: this.title?.value,
+      theme: this.theme?.value,
+      difficulty: this.difficulty?.value,
       questions: []
     };
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { DropDownItem } from '@a-questions/interfaces/question';
@@ -10,13 +10,11 @@ import { DropDownItem } from '@a-questions/interfaces/question';
 export class SelectComponent {
   @Input() list: DropDownItem[];
   @Input() label: string;
-  @Input() control: FormControl = new FormControl();
-  @Input() placeHolder: string = '';
+  @Input() selectedValue: DropDownItem;
+  @Output() whenSelected: EventEmitter<DropDownItem> = new EventEmitter();
 
-  selectedValue: string;
-
-  selectItem(item: string): void {
+  selectItem(item: DropDownItem): void {
     this.selectedValue = item;
-    this.control.setValue(item);
+    this.whenSelected.emit(this.selectedValue);
   }
 }
