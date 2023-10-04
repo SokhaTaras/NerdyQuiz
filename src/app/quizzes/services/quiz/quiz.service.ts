@@ -17,8 +17,9 @@ import { Quiz } from '@a-quizzes/interfaces/quiz';
 })
 export class QuizService {
   quizzes$ = new BehaviorSubject<Quiz[]>([]);
-  categories$ = new BehaviorSubject<DropDownItem[]>([]);
   questionsResults = new BehaviorSubject<QuestionResult[]>([]);
+
+  categories: DropDownItem[] = [];
 
   constructor(private localStorageService: LocalStorageService) {}
 

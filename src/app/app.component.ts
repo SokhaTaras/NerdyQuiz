@@ -49,6 +49,6 @@ export class AppComponent implements OnInit {
       'name'
     );
 
-    this.quizService.categories$.next(categories);
+    this.quizService.categories = categories;
   }
 }
