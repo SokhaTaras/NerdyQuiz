@@ -5,7 +5,7 @@
   nzPopoverPlacement="bottom"
   [nzPopoverTitle]= label
   [nzPopoverContent]="content">
-  <span class="font-bold flex justify-center items-center" *ngIf="!altTrigger.children.length">...</span>
+  <quiz-app-svg-icon *ngIf="!altTrigger.children.length" [svgPath]="SVG_TYPE.MORE_HORIZONTAL"></quiz-app-svg-icon>
   <div class="h-full flex justify-center items-center" #altTrigger>
     <ng-content select="[trigger]"></ng-content>
   </div>

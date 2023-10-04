@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { PopoverItem } from '@a-shared/types/popover';
+import { SVG_TYPE } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-popover',
@@ -9,4 +10,5 @@ import { PopoverItem } from '@a-shared/types/popover';
 export class PopoverComponent {
   @Input() label: string;
   @Input() options: PopoverItem[];
+  protected readonly SVG_TYPE = SVG_TYPE;
 }
