@@ -1,11 +1,11 @@
 <quiz-app-loader [isLoading]="isLoading">
   <div class="m-[80px] min-h-screen">
     <div class="flex flex-wrap">
-      <div class="m-4 w-1/3 min-w-[344px] min-h-[140px] max-w-[410px]">
+      <div class="m-4 min-h-[148px] w-[344px]">
         <quiz-app-add-quiz class="text-font-secondary text-xl" (whenClicked)="openInitPopUp()">+ {{ 'BUTTON.ADD_QUIZ' | translateJson }}</quiz-app-add-quiz>
       </div>
       <ng-container *ngFor="let quiz of (quizzes$ | async)">
-        <div class="m-4 w-1/3 min-w-[344px] min-h-[140px] max-w-[410px]">
+        <div class="m-4 min-h-[148px] w-[344px]">
           <quiz-app-quiz-card [quiz]="quiz"></quiz-app-quiz-card>
         </div>
       </ng-container>
