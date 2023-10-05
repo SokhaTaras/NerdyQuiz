@@ -17,7 +17,7 @@
       class="popover-item"
       [type]="option.type"
       (click)="option.action()">
-      <quiz-app-svg-icon [svgPath]="option.icon"></quiz-app-svg-icon>
+      <quiz-app-svg-icon class="pr-1" [svgPath]="option.icon"></quiz-app-svg-icon>
       {{ option.text | translateJson }}
     </quiz-app-popover-item>
   </ul>

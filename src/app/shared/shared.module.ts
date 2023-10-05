@@ -32,6 +32,7 @@ import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 import { DividerComponent } from './components/divider/divider.component';
 import { PopoverItemComponent } from './components/popover-item/popover-item.component';
 import { LabelsListComponent } from './components/labels-list/labels-list.component';
+import { CollapsePanelComponent } from './components/collapse-panel/collapse-panel.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { LabelsListComponent } from './components/labels-list/labels-list.compon
     SvgIconComponent,
     DividerComponent,
     PopoverItemComponent,
-    LabelsListComponent
+    LabelsListComponent,
+    CollapsePanelComponent
   ],
   imports: [
     CommonModule,
@@ -89,7 +91,8 @@ import { LabelsListComponent } from './components/labels-list/labels-list.compon
     AddQuizComponent,
     LabelComponent,
     DividerComponent,
-    LabelsListComponent
+    LabelsListComponent,
+    SvgIconComponent
   ]
 })
 export class SharedModule {}

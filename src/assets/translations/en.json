@@ -27,8 +27,10 @@
 
   "BUTTON": {
     "ADD_QUIZ": "Add quiz",
+    "ADD_NEW": "Add new",
     "NEW_ANSWER": "Add answer",
     "FETCH_QUESTIONS": "Fetch questions",
+    "QUESTIONS": "Questions",
     "NEW_MULTIPLE_QUESTION": "Add multiple question",
     "NEW_BOOLEAN_QUESTION": "Add boolean question",
     "NEW_QUIZ": "New quiz adding",
@@ -39,9 +41,11 @@
     "DELETE_QUESTION": "Delete question",
     "DELETE_QUIZ": "Delete quiz",
     "EDIT_TITLE": "Edit title",
+    "EDIT_MAIN_INFO": "Edit main info",
     "CANCEL": "Cancel",
     "SAVE": "Save",
     "HOME": "Home",
+    "BACK": "Back",
     "QUIZ": "Quiz",
     "PLAY": "Play",
     "PLAY_AGAIN": "Play again",

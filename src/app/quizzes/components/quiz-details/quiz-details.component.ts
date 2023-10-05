@@ -6,7 +6,11 @@ import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { BaseQuizComponent } from '@a-shared/components/base-quiz/base-quiz.component';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
+import {
+  BUTTON_TYPE,
+  DIVIDER,
+  LABELS,
+} from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { AppState } from '@a-store/state/app.state';
@@ -21,6 +25,8 @@ import { StoreService } from '@a-store/services/store.service';
 })
 export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly DIVIDER = DIVIDER;
+  readonly LABELS = LABELS;
 
   selectedQuiz$: Observable<Quiz>;
 
