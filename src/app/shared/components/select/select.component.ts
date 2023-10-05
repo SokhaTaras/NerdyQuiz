@@ -19,6 +19,4 @@ export class SelectComponent {
     this.selectedValue = item;
     this.whenSelected.emit(this.selectedValue);
   }
-
-  protected readonly SVG_TYPE = SVG_TYPE;
 }
