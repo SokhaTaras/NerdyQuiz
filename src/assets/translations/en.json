@@ -39,6 +39,7 @@
     "QUESTION_AMOUNT": "Question amount",
     "ANSWER_AMOUNT": "Answer amount",
     "DELETE_QUESTION": "Delete question",
+    "EDIT_QUESTION": "Edit question",
     "DELETE_QUIZ": "Delete quiz",
     "EDIT_TITLE": "Edit title",
     "EDIT_MAIN_INFO": "Edit main info",

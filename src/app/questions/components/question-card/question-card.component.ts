@@ -3,8 +3,14 @@ import { Component, Input } from '@angular/core';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { Question } from '@a-questions/interfaces/question';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
-import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
+import {
+  BUTTON_TYPE,
+  POPOVER_ITEM_TYPE,
+  SVG_TYPE
+} from '@a-shared/enums/shared-components';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
+import { PopoverItem } from '@a-shared/types/popover';
+import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
 
 @Component({
   selector: 'quiz-app-question-card',
@@ -17,12 +23,17 @@ export class QuestionCardComponent {
   @Input() quizId: string | null;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly SVG_TYPE = SVG_TYPE;
+
+  popoverSetup: PopoverItem[];
 
   constructor(
     private modalQuizService: ModalQuizService,
     private quizService: QuizService,
     private subscriptionsService: SubscriptionsService
-  ) {}
+  ) {
+    this.setupPopoverContent();
+  }
 
   deleteQuestionConfirm(): void {
     const data: any = {
@@ -40,6 +51,25 @@ export class QuestionCardComponent {
         })
     );
   }
+
+  private setupPopoverContent(): void {
+    this.popoverSetup = [
+      new PopoverItemClass(
+        'BUTTON.EDIT_QUESTION',
+        POPOVER_ITEM_TYPE.PRIMARY,
+        SVG_TYPE.EDIT,
+        this.editQuestion.bind(this)
+      ),
+      new PopoverItemClass(
+        'BUTTON.DELETE_QUESTION',
+        POPOVER_ITEM_TYPE.ERROR,
+        SVG_TYPE.TRASH_RED,
+        this.deleteQuestion.bind(this)
+      )
+    ];
+  }
+
+  private editQuestion(): void {}
 
   private deleteQuestion(): void {
     this.subscriptionsService.addSubscription(

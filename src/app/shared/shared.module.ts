@@ -33,6 +33,7 @@ import { DividerComponent } from './components/divider/divider.component';
 import { PopoverItemComponent } from './components/popover-item/popover-item.component';
 import { LabelsListComponent } from './components/labels-list/labels-list.component';
 import { CollapsePanelComponent } from './components/collapse-panel/collapse-panel.component';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { CollapsePanelComponent } from './components/collapse-panel/collapse-pan
     NzSelectModule,
     NzPopoverModule,
     NzDividerModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NzCollapseModule
   ],
   exports: [
     InputComponent,
@@ -92,7 +94,8 @@ import { CollapsePanelComponent } from './components/collapse-panel/collapse-pan
     LabelComponent,
     DividerComponent,
     LabelsListComponent,
-    SvgIconComponent
+    SvgIconComponent,
+    CollapsePanelComponent
   ]
 })
 export class SharedModule {}
