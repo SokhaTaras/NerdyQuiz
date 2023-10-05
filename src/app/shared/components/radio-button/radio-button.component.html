@@ -8,8 +8,10 @@
     (change)="selectItem(!control.value)"
    />
   <label class="flex items-center cursor-pointer" [for]="id">
-    <span class="w-[18px] h-[18px] inline-block mr-1 rounded-full border border-secondary transition-transform duration-200 hover:scale-110"
-          [ngClass]="{'bg-primary shadow-inner' : control.value}">
+    <span class=" flex justify-center items-center w-[16px] h-[16px]  mr-1 rounded-full border border-secondary transition-transform duration-200 hover:scale-110">
+      <span class="absolute w-[6px] h-[6px] rounded-full bg-secondary"
+            *ngIf="control.value">
+    </span>
     </span>
     <ng-content></ng-content>
   </label>

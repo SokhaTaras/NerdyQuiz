@@ -35,7 +35,7 @@ export class QuizListComponent implements OnInit {
 
   openInitPopUp(): void {
     const data: any = {
-      label: 'BUTTON.CREATE_QUIZ',
+      label: 'BUTTON.NEW_QUIZ',
       buttonText: 'BUTTON.SAVE'
     };
     this.subscriptionsService.addSubscription(

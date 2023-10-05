@@ -16,8 +16,6 @@ body {
 .ant-modal-content {
   border-radius: var(--border-radius);
   background-color: var(--color-background);
-  width: 546px;
-  height: 398px;
 }
 
 .ant-modal-confirm-btns {
@@ -112,7 +110,7 @@ button {
   }
 
   .labels {
-    @apply pl-3;
+    @apply pl-3 text-xs font-normal leading-4 text-black;
   }
 
   .input {

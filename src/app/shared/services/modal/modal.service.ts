@@ -17,6 +17,10 @@ export class ModalService {
       nzCentered: true,
       nzComponentParams: {
         ...data
+      },
+      nzWidth: '546px',
+      nzBodyStyle: {
+        height: '398px'
       }
     });
 

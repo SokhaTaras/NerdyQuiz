@@ -1,5 +1,6 @@
-<div>
-  <div *ngFor="let label of labelsList; let index = index">
+<label class="labels">{{ label | translateJson }}</label>
+<div class="flex-row flex justify-between mt-2">
+  <div class="flex items-center justify-center" *ngFor="let label of labelsList; let index = index">
     <quiz-app-radio-button [control]="control" [id]="index + 1"></quiz-app-radio-button>
     <quiz-app-label [type]="label.type">{{ label?.text | translateJson }}</quiz-app-label>
   </div>

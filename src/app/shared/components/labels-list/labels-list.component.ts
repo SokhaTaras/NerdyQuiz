@@ -9,6 +9,7 @@ import { RadioButtonItem } from '@a-questions/interfaces/question';
   templateUrl: './labels-list.component.html'
 })
 export class LabelsListComponent implements OnInit {
+  @Input() label: string;
   @Input() labelsList: Label[];
   @Input() control: FormControl<RadioButtonItem>;
 
