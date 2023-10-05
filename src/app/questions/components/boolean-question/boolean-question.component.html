@@ -20,8 +20,10 @@
                 {{ AnswerBooleanList[index].text | translateJson }}
                 <quiz-app-radio-button
                   class="flex w-1/10 pl-2 pt-1"
-                  [control]="answer.controls.isCorrect"
-                  [id]="index + 1">
+                  [id]="index"
+                  [isChecked]="radioSelectedIndex === index"
+                  (whenChecked)="onRadioChecked($event)"
+                >
                 </quiz-app-radio-button>
               </div>
             </div>

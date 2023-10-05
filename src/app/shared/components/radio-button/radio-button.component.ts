@@ -1,23 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'quiz-app-radio-button',
   templateUrl: './radio-button.component.html'
 })
-export class RadioButtonComponent implements OnInit {
+export class RadioButtonComponent {
   @Input() id: number;
-  @Input() control: FormControl;
+  @Input() isChecked: boolean;
+  @Output() whenChecked = new EventEmitter<number>();
 
-  isSelected: boolean;
-
-  ngOnInit(): void {
-    console.log(this.control.value);
-    this.isSelected = this.control.value;
-  }
-
-  selectItem(item: boolean): void {
-    console.log('st', item);
-    this.control.setValue(item);
+  onRadioClick(): void {
+    this.whenChecked.emit(this.id);
   }
 }

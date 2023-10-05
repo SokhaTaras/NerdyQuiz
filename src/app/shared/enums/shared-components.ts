@@ -44,11 +44,5 @@ export enum DIVIDER {
 
 export const defaultDifficulty: RadioButtonItem = {
   value: DifficultiesEnum.Easy,
-  text: AnswerDifficultyList[0].text,
-  isChecked: false
-};
-
-export const defaultCategory: DropDownItem = {
-  value: 'category',
-  text: 'Default'
+  text: AnswerDifficultyList[0].text
 };

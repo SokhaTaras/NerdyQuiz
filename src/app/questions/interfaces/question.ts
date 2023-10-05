@@ -1,4 +1,5 @@
 import { QUESTION_TYPE } from '@a-shared/enums/question-info';
+import { LABELS } from '@a-shared/enums/shared-components';
 
 export interface Question {
   title?: string;
@@ -41,15 +42,8 @@ export interface DropDownItem {
   text: string;
 }
 
-export interface RadioButtonItem {
-  value: string;
-  text: string;
-  isChecked: boolean;
-}
-
-export interface AnswerList {
-  value: string;
-  text: string;
+export interface RadioButtonItem extends DropDownItem {
+  type?: LABELS;
 }
 
 export interface DifficultyRange {

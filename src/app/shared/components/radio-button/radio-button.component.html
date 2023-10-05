@@ -4,13 +4,13 @@
     name="radioGroup"
     class="hidden"
     [id]="id"
-    [checked]="control.value"
-    (change)="selectItem(!control.value)"
+    [checked]="isChecked"
+    (change)="onRadioClick()"
    />
   <label class="flex items-center cursor-pointer" [for]="id">
-    <span class=" flex justify-center items-center w-[16px] h-[16px]  mr-1 rounded-full border border-secondary transition-transform duration-200 hover:scale-110">
+    <span class=" flex justify-center items-center w-[16px] h-[16px] mr-1 rounded-full border border-secondary transition-transform duration-200 hover:scale-110">
       <span class="absolute w-[6px] h-[6px] rounded-full bg-secondary"
-            *ngIf="control.value">
+            *ngIf="isChecked">
     </span>
     </span>
     <ng-content></ng-content>

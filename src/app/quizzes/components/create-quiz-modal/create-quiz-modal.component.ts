@@ -7,11 +7,10 @@ import {
 } from '@angular/forms';
 
 import { InitQuizForm } from '@a-shared/types/forms';
-import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { AnswerDifficultyList } from '@a-questions/constants/dropdowns';
 import {
   DropDownItem,
   RadioButtonItem
@@ -23,7 +22,6 @@ import { AddQuiz, EditQuiz } from '@a-store/actions/quizz.actions';
 import { getNewQuizId } from '@a-shared/utils/getId';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { LabelItem } from '@a-shared/classes/label-item/label-item';
-import { Label } from '@a-shared/types/label';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -40,10 +38,9 @@ export class CreateQuizModalComponent implements OnInit {
   initQuizForm: FormGroup<InitQuizForm>;
 
   dropDownCategories: DropDownItem[];
-  labelsList: Label[];
+  labelsList: RadioButtonItem[];
 
   readonly PlaceHolder = PlaceHolder;
-  readonly AnswerDifficultyList = AnswerDifficultyList;
 
   get title(): FormControl<string> {
     return this?.initQuizForm?.controls?.title;
@@ -88,10 +85,6 @@ export class CreateQuizModalComponent implements OnInit {
     this.close(newQuiz);
   }
 
-  setDifficulty(item: RadioButtonItem): void {
-    this?.initQuizForm?.controls?.difficulty?.setValue(item);
-  }
-
   setCategory(item: DropDownItem): void {
     this?.initQuizForm?.controls?.category?.setValue(item);
   }
@@ -129,9 +122,9 @@ export class CreateQuizModalComponent implements OnInit {
 
   private labelsSetup(): void {
     this.labelsList = [
-      new LabelItem('DIFFICULTY.EASY', LABELS.GREEN, true),
-      new LabelItem('DIFFICULTY.MEDIUM', LABELS.YELLOW, false),
-      new LabelItem('DIFFICULTY.HARD', LABELS.RED, false)
+      new LabelItem(QUIZ_DIFFICULTY.EASY, 'DIFFICULTY.EASY', LABELS.GREEN),
+      new LabelItem(QUIZ_DIFFICULTY.MEDIUM, 'DIFFICULTY.MEDIUM', LABELS.YELLOW),
+      new LabelItem(QUIZ_DIFFICULTY.HARD, 'DIFFICULTY.HARD', LABELS.RED)
     ];
   }
 }

@@ -2,10 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
-import {
-  AnswerBooleanList,
-  AnswerDifficultyList
-} from '@a-questions/constants/dropdowns';
+import { AnswerBooleanList } from '@a-questions/constants/dropdowns';
 import { QuestionForm } from '@a-shared/types/forms';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { QuestionFormHelperService } from '@a-questions/services/questionFormHelper/question-form-helper.service';
@@ -23,8 +20,9 @@ export class BooleanQuestionComponent implements OnInit {
     new EventEmitter<FormGroup<QuestionForm>>();
 
   readonly PlaceHolder = PlaceHolder;
-  readonly AnswerDifficultyList = AnswerDifficultyList;
   readonly AnswerBooleanList = AnswerBooleanList;
+
+  radioSelectedIndex = 0;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
@@ -42,6 +40,11 @@ export class BooleanQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  onRadioChecked(selectedIndex: number): void {
+    this.radioSelectedIndex = selectedIndex;
+    this.answersControl[selectedIndex].controls.isCorrect.setValue(true);
   }
 
   private initForm(): void {
