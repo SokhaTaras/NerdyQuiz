@@ -9,7 +9,7 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
 import {
   BUTTON_TYPE,
   DIVIDER,
-  LABELS,
+  LABELS
 } from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
