@@ -1,12 +1,15 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { QUESTION_TYPE } from '@a-shared/enums/question-info';
-import { DropDownItem } from '@a-questions/interfaces/question';
+import {
+  DropDownItem,
+  RadioButtonItem
+} from '@a-questions/interfaces/question';
 
 export interface InitQuizForm {
   title: FormControl<string>;
   category: FormControl<DropDownItem>;
-  difficulty: FormControl<DropDownItem>;
+  difficulty: FormControl<RadioButtonItem>;
 }
 
 export interface QuestionForm {

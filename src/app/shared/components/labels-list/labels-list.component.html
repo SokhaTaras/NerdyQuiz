@@ -1,0 +1,6 @@
+<div>
+  <div *ngFor="let label of labelsList; let index = index">
+    <quiz-app-radio-button [control]="control" [id]="index + 1"></quiz-app-radio-button>
+    <quiz-app-label [type]="label.type">{{ label?.text | translateJson }}</quiz-app-label>
+  </div>
+</div>

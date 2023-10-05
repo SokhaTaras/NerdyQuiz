@@ -12,10 +12,12 @@ export class RadioButtonComponent implements OnInit {
   isSelected: boolean;
 
   ngOnInit(): void {
+    console.log(this.control.value);
     this.isSelected = this.control.value;
   }
 
   selectItem(item: boolean): void {
+    console.log('st', item);
     this.control.setValue(item);
   }
 }

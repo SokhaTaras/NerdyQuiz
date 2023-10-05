@@ -1,5 +1,4 @@
 import { QUESTION_TYPE } from '@a-shared/enums/question-info';
-import { QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 
 export interface Question {
   title?: string;
@@ -40,6 +39,12 @@ export interface Answer {
 export interface DropDownItem {
   value: string;
   text: string;
+}
+
+export interface RadioButtonItem {
+  value: string;
+  text: string;
+  isChecked: boolean;
 }
 
 export interface AnswerList {

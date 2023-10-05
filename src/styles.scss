@@ -11,7 +11,6 @@ body {
 
 .ant-modal-body {
   padding: 32px;
-  //width: 600px;
 }
 
 .ant-modal-content {
@@ -33,6 +32,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--primary-font-color);
 }
 
 .ant-modal-close{
@@ -66,6 +66,10 @@ body {
 .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
   padding: 0;
   height: 22px;
+}
+
+.ant-select-arrow {
+  color: var(--primary-font-color);
 }
 
 .ant-popover-inner {

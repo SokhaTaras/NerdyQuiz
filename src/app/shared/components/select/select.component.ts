@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { DropDownItem } from '@a-questions/interfaces/question';
+import { SVG_TYPE } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-select',
@@ -18,4 +19,6 @@ export class SelectComponent {
     this.selectedValue = item;
     this.whenSelected.emit(this.selectedValue);
   }
+
+  protected readonly SVG_TYPE = SVG_TYPE;
 }

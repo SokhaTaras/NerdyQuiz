@@ -12,13 +12,18 @@ import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { AnswerDifficultyList } from '@a-questions/constants/dropdowns';
-import { DropDownItem } from '@a-questions/interfaces/question';
-import { defaultDifficulty } from '@a-shared/enums/shared-components';
+import {
+  DropDownItem,
+  RadioButtonItem
+} from '@a-questions/interfaces/question';
+import { defaultDifficulty, LABELS } from '@a-shared/enums/shared-components';
 import { StoreService } from '@a-store/services/store.service';
 import { AppState } from '@a-store/state/app.state';
 import { AddQuiz, EditQuiz } from '@a-store/actions/quizz.actions';
 import { getNewQuizId } from '@a-shared/utils/getId';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { LabelItem } from '@a-shared/classes/label-item/label-item';
+import { Label } from '@a-shared/types/label';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -35,6 +40,7 @@ export class CreateQuizModalComponent implements OnInit {
   initQuizForm: FormGroup<InitQuizForm>;
 
   dropDownCategories: DropDownItem[];
+  labelsList: Label[];
 
   readonly PlaceHolder = PlaceHolder;
   readonly AnswerDifficultyList = AnswerDifficultyList;
@@ -47,7 +53,7 @@ export class CreateQuizModalComponent implements OnInit {
     return this?.initQuizForm?.controls?.category;
   }
 
-  get difficulty(): FormControl<DropDownItem> {
+  get difficulty(): FormControl<RadioButtonItem> {
     return this?.initQuizForm?.controls?.difficulty;
   }
 
@@ -59,6 +65,7 @@ export class CreateQuizModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.labelsSetup();
     this.setCategories();
     this.initForm();
   }
@@ -81,7 +88,7 @@ export class CreateQuizModalComponent implements OnInit {
     this.close(newQuiz);
   }
 
-  setDifficulty(item: DropDownItem): void {
+  setDifficulty(item: RadioButtonItem): void {
     this?.initQuizForm?.controls?.difficulty?.setValue(item);
   }
 
@@ -118,5 +125,13 @@ export class CreateQuizModalComponent implements OnInit {
 
   private setCategories(): void {
     this.dropDownCategories = this.quizService?.categories$?.value;
+  }
+
+  private labelsSetup(): void {
+    this.labelsList = [
+      new LabelItem('DIFFICULTY.EASY', LABELS.GREEN, true),
+      new LabelItem('DIFFICULTY.MEDIUM', LABELS.YELLOW, false),
+      new LabelItem('DIFFICULTY.HARD', LABELS.RED, false)
+    ];
   }
 }

@@ -50,6 +50,12 @@
     "CONFIRM": "Confirm"
   },
 
+  "DIFFICULTY": {
+    "EASY": "Easy",
+    "MEDIUM": "Medium",
+    "HARD": "Hard"
+  },
+
   "DROPDOWN": {
     "TYPE": {
       "MULTIPLE": "Multiple",

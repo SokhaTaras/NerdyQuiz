@@ -31,6 +31,7 @@ import { LabelComponent } from './components/label/label.component';
 import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 import { DividerComponent } from './components/divider/divider.component';
 import { PopoverItemComponent } from './components/popover-item/popover-item.component';
+import { LabelsListComponent } from './components/labels-list/labels-list.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { PopoverItemComponent } from './components/popover-item/popover-item.com
     LabelComponent,
     SvgIconComponent,
     DividerComponent,
-    PopoverItemComponent
+    PopoverItemComponent,
+    LabelsListComponent
   ],
   imports: [
     CommonModule,
@@ -86,7 +88,8 @@ import { PopoverItemComponent } from './components/popover-item/popover-item.com
     TextSanitizerPipe,
     AddQuizComponent,
     LabelComponent,
-    DividerComponent
+    DividerComponent,
+    LabelsListComponent
   ]
 })
 export class SharedModule {}
