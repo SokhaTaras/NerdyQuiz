@@ -11,7 +11,6 @@ import { SVG_TYPE } from '@a-shared/enums/shared-components';
 export class SelectComponent {
   @Input() list: DropDownItem[];
   @Input() label: string;
-  @Input() control: FormControl = new FormControl();
   @Input() selectedValue: DropDownItem;
   @Output() whenSelected: EventEmitter<DropDownItem> = new EventEmitter();
 

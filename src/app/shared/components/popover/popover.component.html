@@ -3,7 +3,7 @@
   class="cursor-pointer"
   nzPopoverTrigger="click"
   nzPopoverPlacement="bottom"
-  [nzPopoverTitle]= label
+  [nzPopoverTitle]="label"
   [nzPopoverContent]="content">
   <quiz-app-svg-icon *ngIf="!altTrigger.children.length" [svgPath]="SVG_TYPE.MORE_HORIZONTAL"></quiz-app-svg-icon>
   <div class="h-full flex justify-center items-center" #altTrigger>

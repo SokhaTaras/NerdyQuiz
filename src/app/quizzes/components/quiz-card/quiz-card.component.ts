@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import {
@@ -21,7 +21,7 @@ import { DeleteQuiz } from '@a-store/actions/quizz.actions';
   selector: 'quiz-app-quiz-card',
   templateUrl: './quiz-card.component.html'
 })
-export class QuizCardComponent implements OnInit {
+export class QuizCardComponent {
   @Input() quiz: Quiz;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
@@ -61,13 +61,15 @@ export class QuizCardComponent implements OnInit {
     private modalQuizService: ModalQuizService,
     private subscriptionsService: SubscriptionsService,
     private store: StoreService<AppState>
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.setupPopoverContent();
   }
 
-  setupPopoverContent(): void {
+  goPlay(): void {
+    this.navigateTo.navigatePlay(this.quiz?.id);
+  }
+
+  private setupPopoverContent(): void {
     this.popoverSetup = [
       new PopoverItemClass(
         'BUTTON.EDIT_QUIZ',
@@ -84,11 +86,11 @@ export class QuizCardComponent implements OnInit {
     ];
   }
 
-  goEdit(): void {
+  private goEdit(): void {
     this.navigateTo.navigateToQuizDetailsPage(this.quiz.id);
   }
 
-  confirmRemoving(): void {
+  private confirmRemoving(): void {
     const data: any = {
       text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ',
       buttonText: 'BUTTON.CONFIRM'
@@ -105,11 +107,7 @@ export class QuizCardComponent implements OnInit {
     );
   }
 
-  goPlay(): void {
-    this.navigateTo.navigatePlay(this.quiz?.id);
-  }
-
-  deleteQuiz(): void {
+  private deleteQuiz(): void {
     this.store.dispatch(DeleteQuiz({ quizToDelete: this.quiz }));
   }
 }
