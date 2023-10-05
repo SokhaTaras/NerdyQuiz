@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 import { DropDownItem } from '@a-questions/interfaces/question';
-import { SVG_TYPE } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-select',
