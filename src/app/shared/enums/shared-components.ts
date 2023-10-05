@@ -8,6 +8,7 @@ import { AnswerDifficultyList } from '@a-questions/constants/dropdowns';
 export enum BUTTON_TYPE {
   PRIMARY,
   SECONDARY,
+  DEFAULT,
   ERROR
 }
 

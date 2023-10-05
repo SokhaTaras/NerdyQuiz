@@ -24,13 +24,17 @@ export class ButtonComponent implements OnInit {
   private setType(): void {
     switch (this.type) {
       case BUTTON_TYPE.PRIMARY:
-        this.dynamicClass = 'bg-primary';
+        this.dynamicClass = 'text-white bg-secondary';
         break;
       case BUTTON_TYPE.SECONDARY:
-        this.dynamicClass = 'bg-transparent border-2 border-primary';
+        this.dynamicClass =
+          'bg-transparent border border-secondary text-secondary';
+        break;
+      case BUTTON_TYPE.DEFAULT:
+        this.dynamicClass = 'bg-transparent text-secondary';
         break;
       case BUTTON_TYPE.ERROR:
-        this.dynamicClass = 'border border-error text-error bg-white';
+        this.dynamicClass = 'bg-red-600 text-white ';
         break;
     }
   }

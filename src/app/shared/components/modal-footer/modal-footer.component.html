@@ -1,6 +1,6 @@
 <div class="flex justify-end pt-6">
-  <div class="flex space-x-4">
-    <quiz-app-button class="" [type]="BUTTON_TYPE.SECONDARY" (whenClicked)="handleCancel()">
+  <div class="flex space-x-2">
+    <quiz-app-button [type]="BUTTON_TYPE.DEFAULT" (whenClicked)="handleCancel()">
       {{ 'BUTTON.CANCEL' | translateJson }}
     </quiz-app-button>
     <quiz-app-button [type]="BUTTON_TYPE.PRIMARY" [isDisabled]="disableButton" (whenClicked)="handleSubmit()">

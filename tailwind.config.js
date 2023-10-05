@@ -15,8 +15,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
-        "font-secondary": "var(--secondary-font-color)",
+        secondary: "var(--secondary-color)",
         "font-grey": "var(--grey-font-color)",
         background: "var(--color-background)",
         buttons: "var(--color-button)",

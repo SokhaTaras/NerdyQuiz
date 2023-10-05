@@ -86,7 +86,7 @@ body {
 
 button {
   background-color: var(--color-primary);
-  min-width: 100px;
+  min-width: 90px;
   padding: 4px 8px;
 }
 
@@ -155,7 +155,7 @@ button {
     --color-buttons-hover: rgba(0, 0, 0, 0.05);
     --color-error: rgb(209, 0, 0);
     --primary-font-color : #000;
-    --secondary-font-color : rgba(127, 86, 217, 1);
+    --secondary-color : rgba(127, 86, 217, 1);
     --grey-font-color : rgba(152, 162, 179, 1);
     --primary-font-family: system-ui;
     --border-radius: 10px;
