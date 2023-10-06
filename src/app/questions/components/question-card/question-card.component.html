@@ -3,7 +3,9 @@
     <quiz-app-svg-icon
       class="rotate-[270deg]"
       [ngClass]="{'rotate-[0deg]' : isShown}"
-      [svgPath]="SVG_TYPE.CHEVRON_DOWN">
+      [svgName]="SVG_TYPE.CHEVRON_DOWN"
+      [iconColor]="SVG_COLOR.PRIMARY"
+    >
     </quiz-app-svg-icon>
     <div class="flex-auto ml-2">
       <p class="line-clamp-1" [innerHTML]="question.title | sanitize"></p>
@@ -30,7 +32,9 @@
               class="font-inter text-base font-normal leading-6 tracking-normal text-left">
               {{ i + 1 + '.' }} {{ answer.text }}
             </p>
-            <p>{{ answer.isCorrect }}</p>
+            <quiz-app-correctness-indicator
+              [indicatorInfo]="indicatorsInfo[i]">
+            </quiz-app-correctness-indicator>
           </div>
         </div>
         <div>

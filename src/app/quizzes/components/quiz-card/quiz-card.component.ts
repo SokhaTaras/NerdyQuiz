@@ -5,8 +5,7 @@ import {
   BUTTON_TYPE,
   DIVIDER,
   LABELS,
-  POPOVER_ITEM_TYPE,
-  SVG_TYPE
+  POPOVER_ITEM_TYPE
 } from '@a-shared/enums/shared-components';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
@@ -16,6 +15,7 @@ import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
 import { StoreService } from '@a-store/services/store.service';
 import { AppState } from '@a-store/state/app.state';
 import { DeleteQuiz } from '@a-store/actions/quizz.actions';
+import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
 
 @Component({
   selector: 'quiz-app-quiz-card',
@@ -75,12 +75,14 @@ export class QuizCardComponent {
         'BUTTON.EDIT_QUIZ',
         POPOVER_ITEM_TYPE.PRIMARY,
         SVG_TYPE.EDIT,
+        SVG_COLOR.PRIMARY,
         this.goEdit.bind(this)
       ),
       new PopoverItemClass(
         'BUTTON.DELETE_QUIZ',
         POPOVER_ITEM_TYPE.ERROR,
-        SVG_TYPE.TRASH_RED,
+        SVG_TYPE.TRASH,
+        SVG_COLOR.RED,
         this.confirmRemoving.bind(this)
       )
     ];

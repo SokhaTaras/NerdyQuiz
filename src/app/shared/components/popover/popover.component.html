@@ -5,7 +5,11 @@
   nzPopoverPlacement="bottom"
   [nzPopoverTitle]="label"
   [nzPopoverContent]="content">
-  <quiz-app-svg-icon *ngIf="!altTrigger.children.length" [svgPath]="SVG_TYPE.MORE_HORIZONTAL"></quiz-app-svg-icon>
+  <quiz-app-svg-icon
+    *ngIf="!altTrigger.children.length"
+    [svgName]="SVG_TYPE.MORE_HORIZONTAL"
+    [iconColor]="SVG_COLOR.PRIMARY">
+  </quiz-app-svg-icon>
   <div class="h-full flex justify-center items-center" #altTrigger>
     <ng-content select="[trigger]"></ng-content>
   </div>
@@ -17,7 +21,11 @@
       class="popover-item"
       [type]="option.type"
       (click)="option.action()">
-      <quiz-app-svg-icon class="pr-1" [svgPath]="option.icon"></quiz-app-svg-icon>
+      <quiz-app-svg-icon
+        class="pr-1"
+        [svgName]="option.icon"
+        [iconColor]="option.iconColor">
+      </quiz-app-svg-icon>
       {{ option.text | translateJson }}
     </quiz-app-popover-item>
   </ul>

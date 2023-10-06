@@ -1,3 +1,6 @@
-<div class="w-[24px] h-[24px] flex justify-center items-center">
-  <img [src]="svgPath" alt=":)">
+<div class="flex justify-center items-center">
+  <svg-icon
+    [src]="'assets/icons/' + svgName + '.svg'"
+    [svgStyle]="{'stroke': iconColor, 'width.px' : 24, 'height.px' : 24}">
+  </svg-icon>
 </div>

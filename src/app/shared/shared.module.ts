@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -34,6 +35,7 @@ import { PopoverItemComponent } from './components/popover-item/popover-item.com
 import { LabelsListComponent } from './components/labels-list/labels-list.component';
 import { CollapsePanelComponent } from './components/collapse-panel/collapse-panel.component';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { CorrectnessIndicatorComponent } from '@a-shared/components/correctness-indicator/correctness-indicator.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
     DividerComponent,
     PopoverItemComponent,
     LabelsListComponent,
-    CollapsePanelComponent
+    CollapsePanelComponent,
+    CorrectnessIndicatorComponent
   ],
   imports: [
     CommonModule,
@@ -76,7 +79,8 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
     NzPopoverModule,
     NzDividerModule,
     NgOptimizedImage,
-    NzCollapseModule
+    NzCollapseModule,
+    AngularSvgIconModule.forRoot()
   ],
   exports: [
     InputComponent,
@@ -95,7 +99,8 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
     DividerComponent,
     LabelsListComponent,
     SvgIconComponent,
-    CollapsePanelComponent
+    CollapsePanelComponent,
+    CorrectnessIndicatorComponent
   ]
 })
 export class SharedModule {}

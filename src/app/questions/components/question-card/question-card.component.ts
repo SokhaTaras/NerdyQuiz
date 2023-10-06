@@ -1,32 +1,37 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { Question } from '@a-questions/interfaces/question';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import {
   BUTTON_TYPE,
-  POPOVER_ITEM_TYPE,
-  SVG_TYPE
+  CORRECTNESS,
+  POPOVER_ITEM_TYPE
 } from '@a-shared/enums/shared-components';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { PopoverItem } from '@a-shared/types/popover';
 import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
+import { CorrectnessIndicatorInfo } from '@a-shared/types/correctness-indicator-info';
+import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
 
 @Component({
   selector: 'quiz-app-question-card',
   templateUrl: './question-card.component.html',
   providers: [SubscriptionsService]
 })
-export class QuestionCardComponent {
+export class QuestionCardComponent implements OnInit {
   @Input() question: Question;
   @Input() questionIndex: number;
   @Input() quizId: string | null;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly CORRECTNESS = CORRECTNESS;
   readonly SVG_TYPE = SVG_TYPE;
+  readonly SVG_COLOR = SVG_COLOR;
 
   popoverSetup: PopoverItem[];
   isShown = false;
+  indicatorsInfo: CorrectnessIndicatorInfo[];
 
   constructor(
     private modalQuizService: ModalQuizService,
@@ -34,6 +39,9 @@ export class QuestionCardComponent {
     private subscriptionsService: SubscriptionsService
   ) {
     this.setupPopoverContent();
+  }
+  ngOnInit() {
+    this.setIndicatorInfoInfo();
   }
 
   deleteQuestionConfirm(): void {
@@ -63,12 +71,14 @@ export class QuestionCardComponent {
         'BUTTON.EDIT_QUESTION',
         POPOVER_ITEM_TYPE.PRIMARY,
         SVG_TYPE.EDIT,
+        SVG_COLOR.PRIMARY,
         this.editQuestion.bind(this)
       ),
       new PopoverItemClass(
         'BUTTON.DELETE_QUESTION',
         POPOVER_ITEM_TYPE.ERROR,
-        SVG_TYPE.TRASH_RED,
+        SVG_TYPE.TRASH,
+        SVG_COLOR.RED,
         this.deleteQuestion.bind(this)
       )
     ];
@@ -81,6 +91,24 @@ export class QuestionCardComponent {
       this.quizService
         .deleteQuestion(this.quizId, this.questionIndex)
         .subscribe()
+    );
+  }
+
+  private setIndicatorInfoInfo(): void {
+    this.indicatorsInfo = this.question.answers.map(
+      (answer): CorrectnessIndicatorInfo => {
+        return answer.isCorrect
+          ? {
+              correctness: this.CORRECTNESS.CORRECT,
+              icon: SVG_TYPE.CHECK,
+              iconColor: SVG_COLOR.GREEN
+            }
+          : {
+              correctness: this.CORRECTNESS.WRONG,
+              icon: SVG_TYPE.X,
+              iconColor: SVG_COLOR.RED
+            };
+      }
     );
   }
 }
