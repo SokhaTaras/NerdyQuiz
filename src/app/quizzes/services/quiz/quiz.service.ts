@@ -65,19 +65,19 @@ export class QuizService {
     });
   }
 
-  deleteQuiz(quiz: Quiz): Observable<void> {
-    return new Observable<void>((subscriber) => {
+  deleteQuiz(quiz: Quiz): Observable<Quiz> {
+    return new Observable<Quiz>((subscriber) => {
       const currentQuizzes = [...this.quizzes$.value];
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quiz.id);
 
       if (quizIndex !== -1) {
-        currentQuizzes.splice(quizIndex, 1);
+        const deletedQuiz = currentQuizzes.splice(quizIndex, 1);
         this.quizzes$.next(currentQuizzes);
         this.localStorageService.updateLocalStorage(
           StorageKey.QUIZZES,
           currentQuizzes
         );
-        subscriber.next();
+        subscriber.next(deletedQuiz[0]);
       } else {
         subscriber.error();
       }
