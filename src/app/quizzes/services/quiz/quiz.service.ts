@@ -3,7 +3,8 @@ import { BehaviorSubject, delay, map, Observable } from 'rxjs';
 
 import {
   Question,
-  QuestionResult
+  QuestionResult,
+  QuizResult
 } from '@a-questions/interfaces/question';
 import { LocalStorageService } from '@a-shared/services/local-storage/local-storage.service';
 import { getNewQuestionId, getNewQuizId } from '@a-shared/utils/getId';
@@ -58,19 +59,19 @@ export class QuizService {
     });
   }
 
-  deleteQuiz(quiz: Quiz): Observable<Quiz> {
-    return new Observable<Quiz>((subscriber) => {
+  deleteQuiz(quiz: Quiz): Observable<void> {
+    return new Observable<void>((subscriber) => {
       const currentQuizzes = [...this.quizzes$.value];
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quiz.id);
 
       if (quizIndex !== -1) {
-        const deletedQuiz = currentQuizzes.splice(quizIndex, 1);
+        currentQuizzes.splice(quizIndex, 1);
         this.quizzes$.next(currentQuizzes);
         this.localStorageService.updateLocalStorage(
           StorageKey.QUIZZES,
-          this.quizzes$.value
+          currentQuizzes
         );
-        subscriber.next(deletedQuiz[0]);
+        subscriber.next();
       } else {
         subscriber.error();
       }
@@ -158,15 +159,13 @@ export class QuizService {
     });
   }
 
-  setQuizResult(
-    questionResults: BehaviorSubject<QuestionResult[]>
-  ): Observable<QuestionResult[]> {
-    return new Observable((subscriber) => {
+  setQuizResult(quizResult: QuizResult): Observable<QuizResult> {
+    return new Observable<QuizResult>((subscriber) => {
       this.localStorageService.updateLocalStorage(
         StorageKey.QUIZ_RESULT,
-        questionResults.value
+        quizResult
       );
-      subscriber.next(questionResults.value);
+      subscriber.next(quizResult);
       subscriber.complete();
     });
   }

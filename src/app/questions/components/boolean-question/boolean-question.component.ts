@@ -5,7 +5,7 @@ import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import {
   AnswerBooleanList,
   AnswerDifficultyList
-} from '@a-questions/constants/dropdonws';
+} from '@a-questions/constants/dropdowns';
 import { QuestionForm } from '@a-shared/types/forms';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { QuestionFormHelperService } from '@a-questions/services/questionFormHelper/question-form-helper.service';
@@ -36,10 +36,6 @@ export class BooleanQuestionComponent implements OnInit {
 
   get title(): FormControl<string> {
     return this.questionFormHelper.title;
-  }
-
-  get difficulty(): FormControl<string> {
-    return this.questionFormHelper.difficulty;
   }
 
   constructor(private questionFormHelper: QuestionFormHelperService) {}
