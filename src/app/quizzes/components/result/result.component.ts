@@ -26,7 +26,7 @@ export class ResultComponent implements OnInit {
   quizResult: QuizResult;
 
   get quizQuestionResults(): QuestionResult[] {
-    return this?.quizResult?.questionResults;
+    return this.quizResult?.questionResults;
   }
 
   get quizTime(): number {

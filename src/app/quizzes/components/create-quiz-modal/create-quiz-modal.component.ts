@@ -16,10 +16,8 @@ import {
   defaultDifficulty
 } from '@a-questions/constants/dropdowns';
 import { DropDownItem } from '@a-questions/interfaces/question';
-import { StoreService } from '@a-store/services/store.service';
-import { AppState } from '@a-store/state/app.state';
-import { AddQuiz, EditQuiz } from '@a-store/actions/quizz.actions';
 import { getNewQuizId } from '@a-shared/utils/getId';
+import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -37,15 +35,15 @@ export class CreateQuizModalComponent implements OnInit {
   readonly AnswerDifficultyList = AnswerDifficultyList;
 
   get title(): FormControl<string> {
-    return this?.initQuizForm?.controls?.title;
+    return this.initQuizForm?.controls?.title;
   }
 
   get theme(): FormControl<string> {
-    return this?.initQuizForm?.controls?.theme;
+    return this.initQuizForm?.controls?.theme;
   }
 
   get difficulty(): FormControl<DropDownItem> {
-    return this?.initQuizForm?.controls?.difficulty;
+    return this.initQuizForm?.controls?.difficulty;
   }
 
   get easyDifficulty(): DropDownItem {
@@ -53,13 +51,13 @@ export class CreateQuizModalComponent implements OnInit {
   }
 
   get quizId(): string {
-    return this?.quiz?.id;
+    return this.quiz?.id;
   }
 
   constructor(
     private fb: FormBuilder,
     private modalRefFacadeService: ModalRefFacadeService<Quiz>,
-    private store: StoreService<AppState>
+    private quizState: QuizStateService
   ) {}
 
   ngOnInit(): void {
@@ -76,29 +74,29 @@ export class CreateQuizModalComponent implements OnInit {
 
     if (!this.quiz.id) {
       newQuiz.id = getNewQuizId();
-      this.store.dispatch(AddQuiz({ quiz: newQuiz }));
+      this.quizState.addQuiz(newQuiz);
     } else {
-      this.store.dispatch(EditQuiz({ quizId: this.quiz.id, quiz: newQuiz }));
+      this.quizState.editQuiz(this.quizId, newQuiz);
     }
 
     this.close(newQuiz);
   }
 
   setDifficulty(item: DropDownItem) {
-    this?.initQuizForm?.controls?.difficulty?.setValue(item);
+    this.initQuizForm?.controls?.difficulty?.setValue(item);
   }
 
   private initForm(): void {
     this.initQuizForm = this.fb.nonNullable.group<InitQuizForm>({
-      title: this.fb.control(this?.quiz?.title || '', [
+      title: this.fb.control(this.quiz?.title || '', [
         Validators.required,
         Validators.minLength(2)
       ]),
-      theme: this.fb.control(this?.quiz?.theme || '', [
+      theme: this.fb.control(this.quiz?.theme || '', [
         Validators.required,
         Validators.minLength(2)
       ]),
-      difficulty: this.fb.control(this?.quiz?.difficulty || defaultDifficulty)
+      difficulty: this.fb.control(this.quiz?.difficulty || defaultDifficulty)
     });
   }
 
