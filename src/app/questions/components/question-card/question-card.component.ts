@@ -26,6 +26,7 @@ export class QuestionCardComponent {
   readonly SVG_TYPE = SVG_TYPE;
 
   popoverSetup: PopoverItem[];
+  isShown = false;
 
   constructor(
     private modalQuizService: ModalQuizService,
@@ -50,6 +51,10 @@ export class QuestionCardComponent {
           }
         })
     );
+  }
+
+  toggleCollapse(): void {
+    this.isShown = !this.isShown;
   }
 
   private setupPopoverContent(): void {

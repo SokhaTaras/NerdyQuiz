@@ -1,10 +1,41 @@
-<div class="flex min-h-[56px] justify-start items-center bg-white shadow-lg rounded-2xl w-full h-full hover:shadow-xl mb-4 p-4">
-  <quiz-app-svg-icon class="rotate-[270deg] pb-2" [svgPath]="SVG_TYPE.CHEVRON_DOWN" ></quiz-app-svg-icon>
-  <div class="flex-auto">
-    <p class="line-clamp-1" [innerHTML]="question.title | sanitize"></p>
+<div class="flex flex-col min-h-[56px] justify-start items-center bg-white shadow-lg rounded-2xl w-full h-full hover:shadow-xl mb-4">
+  <div class="flex justify-start w-full h-full cursor-pointer p-4" (click)="toggleCollapse()">
+    <quiz-app-svg-icon
+      class="rotate-[270deg]"
+      [ngClass]="{'rotate-[0deg]' : isShown}"
+      [svgPath]="SVG_TYPE.CHEVRON_DOWN">
+    </quiz-app-svg-icon>
+    <div class="flex-auto ml-2">
+      <p class="line-clamp-1" [innerHTML]="question.title | sanitize"></p>
+    </div>
+    <div class="justify-end items-center">
+      <quiz-app-popover
+        [options]="popoverSetup"
+        (click)="$event.stopPropagation()">
+      </quiz-app-popover>
+    </div>
   </div>
-  <quiz-app-collapse-panel></quiz-app-collapse-panel>
-  <div class="justify-end items-center">
-    <quiz-app-popover [options]="popoverSetup"></quiz-app-popover>
-  </div>
+  <quiz-app-collapse-panel
+    class="w-full"
+    *ngIf="isShown">
+    <div class="px-8 py-6">
+      <div class="w-full flex justify-between items-center labels text-gray-400 mb-2">
+        <p>{{ 'LABELS.ANSWERS' | translateJson }}</p>
+        <p>{{ 'LABELS.CORRECTNESS' | translateJson }}</p>
+      </div>
+      <div class="w-full flex flex-col justify-between">
+        <div class="" *ngFor="let answer of question.answers; let i = index">
+          <div class="flex justify-between space-y-2">
+            <p
+              class="font-inter text-base font-normal leading-6 tracking-normal text-left">
+              {{ i + 1 + '.' }} {{ answer.text }}
+            </p>
+            <p>{{ answer.isCorrect }}</p>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </quiz-app-collapse-panel>
 </div>
