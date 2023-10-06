@@ -12,7 +12,7 @@ import {
   LABELS
 } from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
-import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import { AppState } from '@a-store/state/app.state';
 import { DeleteQuiz, GetQuiz } from '@a-store/actions/quizz.actions';
 import { selectSelectedQuiz } from '@a-store/selectors/quiz.selectors';
@@ -29,6 +29,16 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   readonly LABELS = LABELS;
 
   selectedQuiz$: Observable<Quiz>;
+
+  get quizDifficultyLabel(): LABELS {
+    if (this.currentQuiz.difficulty.value === QUIZ_DIFFICULTY.EASY) {
+      return LABELS.GREEN;
+    } else if (this.currentQuiz.difficulty.value === QUIZ_DIFFICULTY.MEDIUM) {
+      return LABELS.YELLOW;
+    } else {
+      return LABELS.RED;
+    }
+  }
 
   constructor(
     quizService: QuizService,

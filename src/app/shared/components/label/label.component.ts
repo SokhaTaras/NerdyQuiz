@@ -1,16 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { LABELS } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-label',
   templateUrl: './label.component.html'
 })
-export class LabelComponent implements OnInit {
+export class LabelComponent implements OnChanges {
   @Input() type: LABELS;
 
   dynamicClass: string;
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.setType();
   }
 
