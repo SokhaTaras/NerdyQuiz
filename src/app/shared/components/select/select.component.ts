@@ -10,7 +10,6 @@ import { DropDownItem } from '@a-questions/interfaces/question';
 export class SelectComponent {
   @Input() list: DropDownItem[];
   @Input() label: string;
-  @Input() control: FormControl = new FormControl();
   @Input() selectedValue: DropDownItem;
   @Output() whenSelected: EventEmitter<DropDownItem> = new EventEmitter();
 
