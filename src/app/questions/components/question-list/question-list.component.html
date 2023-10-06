@@ -1,22 +1,20 @@
-<div class="mt-8">
-  <div class="w-full flex justify-between items-center">
-    <p
-      class="font-inter text-2xl font-semibold leading-6 tracking-normal text-left">
-      {{ "BUTTON.QUESTIONS" | translateJson }}
-    </p>
-    <quiz-app-button
-      [type]="BUTTON_TYPE.DEFAULT"
-      (whenClicked)="showQuestionCreation(true)">
-      + {{ 'BUTTON.ADD_NEW' | translateJson }}
-    </quiz-app-button>
-  </div>
+<div class="w-full flex justify-between items-center mt-10 mb-6">
+  <p class="font-inter text-2xl font-semibold leading-6 tracking-normal text-left">
+    {{ "BUTTON.QUESTIONS" | translateJson }}
+  </p>
+  <quiz-app-button
+    [type]="BUTTON_TYPE.DEFAULT"
+    (whenClicked)="showQuestionCreation(true)">
+    + {{ 'BUTTON.ADD_NEW' | translateJson }}
+  </quiz-app-button>
+</div>
+<div class="max-h-[50vh] overflow-y-auto pr-2">
   <div class="mt-8">
     <quiz-app-question-card
       [quizId]="quiz?.id"
       [questionIndex]="index"
       [question]="question"
-      *ngFor="let question of questions;
-       let index = index">
+      *ngFor="let question of questions; let index = index">
     </quiz-app-question-card>
   </div>
 </div>
