@@ -61,9 +61,8 @@ export class MultipleQuestionComponent implements OnInit {
     this.questionFormHelper.answersFormArray.controls.splice(answerIndex, 1);
   }
 
-  onRadioChecked(selectedIndex: number): void {
-    this.radioSelectedIndex = selectedIndex;
-    this.answersControl[selectedIndex].controls.isCorrect.setValue(true);
+  onRadioChecked(answer: AnswersFormType): void {
+    answer.controls.isCorrect.setValue(true);
   }
 
   private initForm(): void {

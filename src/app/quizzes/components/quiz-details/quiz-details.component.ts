@@ -13,10 +13,7 @@ import {
 } from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
-import { AppState } from '@a-store/state/app.state';
-import { DeleteQuiz, GetQuiz } from '@a-store/actions/quizz.actions';
-import { selectSelectedQuiz } from '@a-store/selectors/quiz.selectors';
-import { StoreService } from '@a-store/services/store.service';
+import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -46,14 +43,15 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
     navigateTo: NavigateToService,
     subscriptionsService: SubscriptionsService,
     private modalQuizService: ModalQuizService,
-    private store: StoreService<AppState>
+    private quizState: QuizStateService
   ) {
     super(quizService, route, navigateTo, subscriptionsService);
   }
 
   override ngOnInit() {
     super.ngOnInit();
-    this.initQuiz();
+    this.getQuiz();
+    this.setQuiz();
   }
 
   openEditPopUp(): void {
@@ -83,12 +81,15 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   deleteQuiz(): void {
-    this.store.dispatch(DeleteQuiz({ quizToDelete: this.currentQuiz }));
+    this.quizState.deleteQuiz(this.currentQuiz);
     this.navigateTo.navigateHome();
   }
 
-  private initQuiz(): void {
-    this.store.dispatch(GetQuiz({ quizId: this.currentQuiz.id }));
-    this.selectedQuiz$ = this.store.select(selectSelectedQuiz);
+  private setQuiz(): void {
+    this.selectedQuiz$ = this.quizState.selectedQuiz$;
+  }
+
+  private getQuiz(): void {
+    this.quizState.getQuiz(this.currentQuiz.id);
   }
 }

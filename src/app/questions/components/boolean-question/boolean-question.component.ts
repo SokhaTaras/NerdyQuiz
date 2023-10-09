@@ -22,8 +22,6 @@ export class BooleanQuestionComponent implements OnInit {
   readonly PlaceHolder = PlaceHolder;
   readonly AnswerBooleanList = AnswerBooleanList;
 
-  radioSelectedIndex = 0;
-
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
   }
@@ -42,9 +40,8 @@ export class BooleanQuestionComponent implements OnInit {
     this.initForm();
   }
 
-  onRadioChecked(selectedIndex: number): void {
-    this.radioSelectedIndex = selectedIndex;
-    this.answersControl[selectedIndex].controls.isCorrect.setValue(true);
+  onRadioChecked(answer: AnswersFormType): void {
+    answer.controls.isCorrect.setValue(true);
   }
 
   private initForm(): void {

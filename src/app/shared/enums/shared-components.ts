@@ -33,5 +33,6 @@ export enum CORRECTNESS {
 
 export const defaultDifficulty: RadioButtonItem = {
   value: DifficultiesEnum.Easy,
-  text: AnswerDifficultyList[0].text
+  text: AnswerDifficultyList[0].text,
+  isChecked: true
 };

@@ -44,6 +44,7 @@ export interface DropDownItem {
 
 export interface RadioButtonItem extends DropDownItem {
   type?: LABELS;
+  isChecked: boolean;
 }
 
 export interface DifficultyRange {
