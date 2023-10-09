@@ -51,9 +51,9 @@ export class QuizListComponent implements OnInit {
   private initQuizzes(): void {
     this.isLoading = true;
 
-    this.quizzes$ = this.quizState
-      .getQuizzesList()
-      .pipe(filter((quizzes) => quizzes !== null));
+    this.quizzes$ = this.quizState.quizzesList$.pipe(
+      filter((quizzes) => quizzes !== null)
+    );
 
     this.quizzes$.subscribe(() => (this.isLoading = false));
   }

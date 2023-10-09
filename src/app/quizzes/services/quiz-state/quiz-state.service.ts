@@ -19,21 +19,16 @@ import {
   providedIn: 'root'
 })
 export class QuizStateService {
+  selectedQuiz$: Observable<Quiz> = this.store.select(selectSelectedQuiz);
+  quizzesList$: Observable<Quiz[]> = this.store.select(selectQuizzesList);
+
   constructor(private store: Store<AppState>) {}
 
-  getQuizzesList(): Observable<Quiz[]> {
-    return this.store.select(selectQuizzesList);
-  }
-
-  dispatchQuizzes(): void {
+  getQuizzesList(): void {
     this.store.dispatch(GetQuizzes());
   }
 
-  getSelectedQuiz(): Observable<Quiz> {
-    return this.store.select(selectSelectedQuiz);
-  }
-
-  dispatchSelectedQuiz(quizId: string): void {
+  getQuiz(quizId: string): void {
     this.store.dispatch(GetQuiz({ quizId }));
   }
 

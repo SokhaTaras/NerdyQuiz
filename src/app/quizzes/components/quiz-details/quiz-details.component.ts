@@ -34,7 +34,7 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
 
   override ngOnInit() {
     super.ngOnInit();
-    this.dispatchQuiz();
+    this.getQuiz();
     this.setQuiz();
   }
 
@@ -70,10 +70,10 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   private setQuiz(): void {
-    this.selectedQuiz$ = this.quizState.getSelectedQuiz();
+    this.selectedQuiz$ = this.quizState.selectedQuiz$;
   }
 
-  private dispatchQuiz(): void {
-    this.quizState.dispatchSelectedQuiz(this.currentQuiz.id);
+  private getQuiz(): void {
+    this.quizState.getQuiz(this.currentQuiz.id);
   }
 }
