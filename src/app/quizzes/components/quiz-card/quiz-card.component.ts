@@ -13,9 +13,7 @@ import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.serv
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { PopoverItem } from '@a-shared/types/popover';
 import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
-import { StoreService } from '@a-store/services/store.service';
-import { AppState } from '@a-store/state/app.state';
-import { DeleteQuiz } from '@a-store/actions/quizz.actions';
+import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
 
 @Component({
   selector: 'quiz-app-quiz-card',
@@ -60,7 +58,7 @@ export class QuizCardComponent {
     private navigateTo: NavigateToService,
     private modalQuizService: ModalQuizService,
     private subscriptionsService: SubscriptionsService,
-    private store: StoreService<AppState>
+    private quizState: QuizStateService
   ) {
     this.setupPopoverContent();
   }
@@ -108,6 +106,6 @@ export class QuizCardComponent {
   }
 
   private deleteQuiz(): void {
-    this.store.dispatch(DeleteQuiz({ quizToDelete: this.quiz }));
+    this.quizState.deleteQuiz(this.quiz);
   }
 }

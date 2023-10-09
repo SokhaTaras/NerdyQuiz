@@ -17,19 +17,19 @@ export class BaseQuizComponent implements OnInit {
   id: string | null;
 
   get quizTitle(): string {
-    return this?.currentQuiz?.title;
+    return this.currentQuiz?.title;
   }
 
   get quizCategory(): string {
-    return this?.currentQuiz?.category.text;
+    return this.currentQuiz?.category.text;
   }
 
   get quizDifficulty(): string {
-    return this?.currentQuiz?.difficulty.text;
+    return this.currentQuiz?.difficulty.text;
   }
 
   get quizQuestions(): Question[] {
-    return this?.currentQuiz?.questions;
+    return this.currentQuiz?.questions;
   }
 
   constructor(

@@ -16,12 +16,10 @@ import {
   RadioButtonItem
 } from '@a-questions/interfaces/question';
 import { defaultDifficulty, LABELS } from '@a-shared/enums/shared-components';
-import { StoreService } from '@a-store/services/store.service';
-import { AppState } from '@a-store/state/app.state';
-import { AddQuiz, EditQuiz } from '@a-store/actions/quizz.actions';
 import { getNewQuizId } from '@a-shared/utils/getId';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { LabelItem } from '@a-shared/classes/label-item/label-item';
+import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
 
 @Component({
   selector: 'quiz-app-create-quiz-modal',
@@ -43,22 +41,26 @@ export class CreateQuizModalComponent implements OnInit {
   readonly PlaceHolder = PlaceHolder;
 
   get title(): FormControl<string> {
-    return this?.initQuizForm?.controls?.title;
+    return this.initQuizForm?.controls?.title;
   }
 
   get category(): FormControl<DropDownItem> {
-    return this?.initQuizForm?.controls?.category;
+    return this.initQuizForm?.controls?.category;
   }
 
   get difficulty(): FormControl<RadioButtonItem> {
-    return this?.initQuizForm?.controls?.difficulty;
+    return this.initQuizForm?.controls?.difficulty;
+  }
+
+  get quizId(): string {
+    return this?.quiz?.id;
   }
 
   constructor(
     private fb: FormBuilder,
     private modalRefFacadeService: ModalRefFacadeService<Quiz>,
     private quizService: QuizService,
-    private store: StoreService<AppState>
+    private quizState: QuizStateService
   ) {}
 
   ngOnInit(): void {
@@ -77,30 +79,30 @@ export class CreateQuizModalComponent implements OnInit {
 
     if (!this.quiz.id) {
       newQuiz.id = getNewQuizId();
-      this.store.dispatch(AddQuiz({ quiz: newQuiz }));
+      this.quizState.addQuiz(newQuiz);
     } else {
-      this.store.dispatch(EditQuiz({ quizId: this.quiz.id, quiz: newQuiz }));
+      this.quizState.editQuiz(this.quizId, newQuiz);
     }
 
     this.close(newQuiz);
   }
 
   setCategory(item: DropDownItem): void {
-    this?.initQuizForm?.controls?.category?.setValue(item);
+    this.initQuizForm?.controls?.category?.setValue(item);
   }
 
   private initForm(): void {
     this.isLoading = true;
     this.initQuizForm = this.fb.nonNullable.group<InitQuizForm>({
-      title: this.fb.control(this?.quiz?.title || '', [
+      title: this.fb.control(this.quiz?.title || '', [
         Validators.required,
         Validators.minLength(2)
       ]),
       category: this.fb.control(
-        this?.quiz?.category || this.dropDownCategories[0],
+        this.quiz?.category || this.dropDownCategories[0],
         [Validators.required, Validators.minLength(2)]
       ),
-      difficulty: this.fb.control(this?.quiz?.difficulty || defaultDifficulty)
+      difficulty: this.fb.control(this.quiz?.difficulty || defaultDifficulty)
     });
     this.isLoading = false;
   }
