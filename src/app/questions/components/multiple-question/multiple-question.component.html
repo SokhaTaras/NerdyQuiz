@@ -22,9 +22,9 @@
             <div class="flex justify-center items-center pt-4 w-1/4 xs:w-4/5 xs:space-x-1">
               <quiz-app-radio-button
               class="flex justify-center items-center pr-4"
-              [id]="index"
-              [isChecked]="radioSelectedIndex === index"
-              (whenChecked)="onRadioChecked($event)"
+              [currentItem]="answer"
+              [isChecked]="answer.controls.isCorrect.value"
+              (whenChecked)="onRadioChecked(answer)"
               >
               {{ 'LABELS.CORRECT' | translateJson }}
               </quiz-app-radio-button>

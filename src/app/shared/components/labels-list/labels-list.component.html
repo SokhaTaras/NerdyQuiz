@@ -1,7 +1,12 @@
 <label class="labels">{{ label | translateJson }}</label>
 <div class="flex-row flex justify-between mt-2">
   <div class="flex items-center justify-center" *ngFor="let label of labelsList; let index = index">
-    <quiz-app-radio-button [id]="index" [isChecked]="radioSelectedIndex === index" (whenChecked)="onRadioChecked($event)"></quiz-app-radio-button>
+    <quiz-app-radio-button
+      [id]="index"
+      [currentItem]="label"
+      [isChecked]="controlValue === labelsList[index].value"
+      (whenChecked)="onRadioChecked($event)">
+    </quiz-app-radio-button>
     <quiz-app-label [type]="label?.type">{{ label?.text | translateJson }}</quiz-app-label>
   </div>
 </div>

@@ -1,7 +1,4 @@
-import {
-  DropDownItem,
-  RadioButtonItem
-} from '@a-questions/interfaces/question';
+import { RadioButtonItem } from '@a-questions/interfaces/question';
 import { DifficultiesEnum } from '@a-shared/enums/question-info';
 import { AnswerDifficultyList } from '@a-questions/constants/dropdowns';
 
@@ -44,5 +41,6 @@ export enum DIVIDER {
 
 export const defaultDifficulty: RadioButtonItem = {
   value: DifficultiesEnum.Easy,
-  text: AnswerDifficultyList[0].text
+  text: AnswerDifficultyList[0].text,
+  isChecked: true
 };

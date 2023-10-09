@@ -14,10 +14,11 @@ export class LabelsListComponent {
 
   readonly LABELS = LABELS;
 
-  radioSelectedIndex: number = 0;
+  get controlValue(): string {
+    return this.control.value.value;
+  }
 
-  onRadioChecked(selectedIndex: number): void {
-    this.control.setValue(this.labelsList[selectedIndex]);
-    this.radioSelectedIndex = selectedIndex;
+  onRadioChecked(item: RadioButtonItem): void {
+    this.control.setValue(item);
   }
 }

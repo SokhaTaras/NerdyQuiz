@@ -122,9 +122,19 @@ export class CreateQuizModalComponent implements OnInit {
 
   private labelsSetup(): void {
     this.labelsList = [
-      new LabelItem(QUIZ_DIFFICULTY.EASY, 'DIFFICULTY.EASY', LABELS.GREEN),
-      new LabelItem(QUIZ_DIFFICULTY.MEDIUM, 'DIFFICULTY.MEDIUM', LABELS.YELLOW),
-      new LabelItem(QUIZ_DIFFICULTY.HARD, 'DIFFICULTY.HARD', LABELS.RED)
+      new LabelItem(
+        QUIZ_DIFFICULTY.EASY,
+        'DIFFICULTY.EASY',
+        LABELS.GREEN,
+        false
+      ),
+      new LabelItem(
+        QUIZ_DIFFICULTY.MEDIUM,
+        'DIFFICULTY.MEDIUM',
+        LABELS.YELLOW,
+        false
+      ),
+      new LabelItem(QUIZ_DIFFICULTY.HARD, 'DIFFICULTY.HARD', LABELS.RED, false)
     ];
   }
 }
