@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { RadioButtonItem } from '@a-questions/interfaces/question';
-
 @Component({
   selector: 'quiz-app-radio-button',
   templateUrl: './radio-button.component.html'
@@ -9,9 +7,9 @@ import { RadioButtonItem } from '@a-questions/interfaces/question';
 export class RadioButtonComponent {
   @Input() isChecked: boolean;
   @Input() currentItem: any;
-  @Output() whenChecked = new EventEmitter<RadioButtonItem>();
+  @Output() whenChecked = new EventEmitter<any>();
 
-  onRadioClick(item: RadioButtonItem): void {
+  onRadioClick(item: any): void {
     this.whenChecked.emit(item);
   }
 }

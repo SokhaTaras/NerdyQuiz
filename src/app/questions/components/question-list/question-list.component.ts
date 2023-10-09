@@ -7,6 +7,8 @@ import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 import { mapQuestion } from '@a-shared/utils/questionsMapper';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
+import { CreateQuestionModalData } from '@a-quizzes/interfaces/modal-data';
 
 @Component({
   selector: 'quiz-app-question-list',
@@ -29,7 +31,8 @@ export class QuestionListComponent {
   constructor(
     private quizService: QuizService,
     private subscriptionService: SubscriptionsService,
-    private quizApi: QuizApiService
+    private quizApi: QuizApiService,
+    private modalQuizService: ModalQuizService
   ) {}
 
   toggleQuestionCreation() {
@@ -39,6 +42,17 @@ export class QuestionListComponent {
   showQuestionCreation(isMultiple: boolean): void {
     this.isBoolean = !isMultiple;
     this.displayCreateQuestion = true;
+  }
+
+  openCreateQuestionModal(): void {
+    const data: CreateQuestionModalData = {
+      modalWidth: '768px',
+      modalHeight: '341px',
+      buttonText: 'BUTTON.NEXT',
+      label: 'BUTTON.NEW_QUESTION'
+    };
+
+    this.modalQuizService.showCreateQuestionModal(data);
   }
 
   fetchQuestions(): void {

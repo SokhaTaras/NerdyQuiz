@@ -7,6 +7,7 @@ import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
+import { CreateQuizModalData } from '@a-quizzes/interfaces/modal-data';
 
 @Component({
   selector: 'quiz-app-quiz-list',
@@ -32,9 +33,11 @@ export class QuizListComponent implements OnInit {
   }
 
   openInitPopUp(): void {
-    const data: any = {
+    const data: CreateQuizModalData = {
       label: 'BUTTON.NEW_QUIZ',
-      buttonText: 'BUTTON.SAVE'
+      buttonText: 'BUTTON.SAVE',
+      modalWidth: '546px',
+      modalHeight: '398px'
     };
     this.subscriptionsService.addSubscription(
       this.modalQuizService

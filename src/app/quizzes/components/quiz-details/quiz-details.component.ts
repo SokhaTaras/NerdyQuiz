@@ -14,6 +14,7 @@ import {
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
+import { CreateQuizModalData } from '@a-quizzes/interfaces/modal-data';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -55,10 +56,12 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   openEditPopUp(): void {
-    const data: any = {
+    const data: CreateQuizModalData = {
       label: 'BUTTON.EDIT_QUIZ',
       buttonText: 'BUTTON.EDIT',
-      quiz: this.currentQuiz
+      quiz: this.currentQuiz,
+      modalWidth: '546px',
+      modalHeight: '398px'
     };
     this.modalQuizService.showInitQuizModal(data);
   }

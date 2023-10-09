@@ -35,6 +35,7 @@
     "NEW_MULTIPLE_QUESTION": "Add multiple question",
     "NEW_BOOLEAN_QUESTION": "Add boolean question",
     "NEW_QUIZ": "New quiz adding",
+    "NEW_QUESTION": "New question adding",
     "EDIT": "Edit",
     "EDIT_QUIZ": "Edit quiz",
     "QUESTION_AMOUNT": "Question amount",
@@ -49,6 +50,7 @@
     "HOME": "Home",
     "BACK": "Back",
     "QUIZ": "Quiz",
+    "MANUALLY": "Manually",
     "PLAY": "Play",
     "PLAY_AGAIN": "Play again",
     "PREVIOUS": "Previous",
@@ -104,5 +106,12 @@
     "CANCEL_QUIZ": "Are you sure you want cancel quiz?",
     "DELETE_QUESTION": "Are you sure you want to delete question?",
     "DELETE_QUIZ": "Are you sure you want to delete quiz?"
+  },
+
+  "CREATE_QUESTION_MODAL_TEXT": {
+    "FROM_SCRATCH": "By choosing this option will have to create question from scratch",
+    "RANDOM_QUESTION": "By choosing this option will fetch random question for your selected quiz category",
+    "DELETE_QUIZ": "Are you sure you want to delete quiz?",
+    "FROM_API": "Fetch from 3rd-party API"
   }
 }

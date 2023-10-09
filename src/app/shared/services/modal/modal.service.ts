@@ -18,9 +18,9 @@ export class ModalService {
       nzComponentParams: {
         ...data
       },
-      nzWidth: '546px',
+      nzWidth: data?.modalWidth,
       nzBodyStyle: {
-        height: '398px'
+        height: data?.modalHeight
       }
     });
 
