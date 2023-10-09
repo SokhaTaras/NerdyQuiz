@@ -13,6 +13,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 
 import { SelectComponent } from '@a-shared/components/select/select.component';
 import { InputComponent } from '@a-shared/components/input/input.component';
@@ -34,7 +35,6 @@ import { DividerComponent } from './components/divider/divider.component';
 import { PopoverItemComponent } from './components/popover-item/popover-item.component';
 import { LabelsListComponent } from './components/labels-list/labels-list.component';
 import { CollapsePanelComponent } from './components/collapse-panel/collapse-panel.component';
-import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { CorrectnessIndicatorComponent } from '@a-shared/components/correctness-indicator/correctness-indicator.component';
 
 @NgModule({

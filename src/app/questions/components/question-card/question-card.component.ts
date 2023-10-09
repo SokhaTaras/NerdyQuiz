@@ -40,6 +40,7 @@ export class QuestionCardComponent implements OnInit {
   ) {
     this.setupPopoverContent();
   }
+
   ngOnInit() {
     this.setIndicatorInfoInfo();
   }
