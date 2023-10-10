@@ -17,3 +17,7 @@ export interface CreateQuestionModalData {
   modalWidth?: string;
   modalHeight?: string;
 }
+
+export interface ConfirmationModalData {
+  text: string;
+}

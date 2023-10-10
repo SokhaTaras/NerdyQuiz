@@ -9,6 +9,7 @@ import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.se
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizHelperService } from '@a-shared/services/quiz-helper/quiz-helper.service';
+import { ConfirmationModalData } from '@a-quizzes/interfaces/modal-data';
 
 @Component({
   selector: 'quiz-app-play',
@@ -79,9 +80,8 @@ export class PlayComponent implements OnInit {
   }
 
   cancelQuizConfirm(): void {
-    const data: any = {
-      text: 'CONFIRM_MODAL_TEXT.CANCEL_QUIZ',
-      primaryButtonText: 'BUTTON.CONFIRM'
+    const data: ConfirmationModalData = {
+      text: 'CONFIRM_MODAL_TEXT.CANCEL_QUIZ'
     };
 
     this.subscriptions.addSubscription(

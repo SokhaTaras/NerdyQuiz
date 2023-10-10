@@ -13,6 +13,7 @@ import { PopoverItem } from '@a-shared/types/popover';
 import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
 import { CorrectnessIndicatorInfo } from '@a-shared/types/correctness-indicator-info';
 import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
+import { ConfirmationModalData } from '@a-quizzes/interfaces/modal-data';
 
 @Component({
   selector: 'quiz-app-question-card',
@@ -46,9 +47,8 @@ export class QuestionCardComponent implements OnInit {
   }
 
   deleteQuestionConfirm(): void {
-    const data: any = {
-      text: 'CONFIRM_MODAL_TEXT.DELETE_QUESTION',
-      primaryButtonText: 'LABELS.DELETE'
+    const data: ConfirmationModalData = {
+      text: 'CONFIRM_MODAL_TEXT.DELETE_QUESTION'
     };
 
     this.subscriptionsService.addSubscription(

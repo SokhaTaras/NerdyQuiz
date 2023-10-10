@@ -14,6 +14,7 @@ import { PopoverItem } from '@a-shared/types/popover';
 import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
 import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
 import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
+import { ConfirmationModalData } from '@a-quizzes/interfaces/modal-data';
 
 @Component({
   selector: 'quiz-app-quiz-card',
@@ -91,9 +92,8 @@ export class QuizCardComponent {
   }
 
   private confirmRemoving(): void {
-    const data: any = {
-      text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ',
-      primaryButtonText: 'BUTTON.CONFIRM'
+    const data: ConfirmationModalData = {
+      text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ'
     };
 
     this.subscriptionsService.addSubscription(

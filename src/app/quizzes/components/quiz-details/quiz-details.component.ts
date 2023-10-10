@@ -14,7 +14,10 @@ import {
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
-import { CreateQuizModalData } from '@a-quizzes/interfaces/modal-data';
+import {
+  ConfirmationModalData,
+  CreateQuizModalData
+} from '@a-quizzes/interfaces/modal-data';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -67,9 +70,8 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   confirmRemoving(): void {
-    const data: any = {
-      text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ',
-      primaryButtonText: 'BUTTON.CONFIRM'
+    const data: ConfirmationModalData = {
+      text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ'
     };
 
     this.subscriptionsService.addSubscription(
