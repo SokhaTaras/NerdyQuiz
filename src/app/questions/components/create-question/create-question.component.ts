@@ -124,7 +124,10 @@ export class CreateQuestionComponent {
     const question = this.isFetch
       ? this.fetchedQuestion
       : { type: QUESTION_TYPE.MULTIPLE };
+
     this.questionFormHelper.initForm(question);
+
+    this.isFormInvalid = this.form.invalid;
   }
 
   private mapQuestionToObject(): Question {

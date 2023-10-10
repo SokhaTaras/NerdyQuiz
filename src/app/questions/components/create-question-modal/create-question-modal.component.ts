@@ -54,6 +54,7 @@ export class CreateQuestionModalComponent {
   async handleQuestionCreation(): Promise<void> {
     if (this.selectedCardValue === QUESTION_CREATION_TYPE.MANUALLY) {
       this.creationModalLabel = 'CREATE_QUESTION_MODAL_TEXT.MANUAL_ADDING';
+      this.isFetch = false;
       this.isCreation = true;
     } else {
       await this.fetchQuestion();
