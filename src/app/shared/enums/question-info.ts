@@ -9,6 +9,11 @@ export enum QUESTION_TYPE {
   MULTIPLE = 'multiple'
 }
 
+export enum QUESTION_CREATION_TYPE {
+  MANUALLY = 'manually',
+  FETCH = 'fetch'
+}
+
 export enum QUESTION_DIFFICULTY {
   EASY = 'easy',
   MEDIUM = 'medium',

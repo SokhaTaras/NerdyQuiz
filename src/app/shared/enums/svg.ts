@@ -12,6 +12,7 @@ export enum SVG_TYPE {
 
 export enum SVG_COLOR {
   PRIMARY = '#101828',
+  SECONDARY = 'rgba(127, 86, 217, 1)',
   RED = '#D92D20',
   GREEN = '#039855'
 }

@@ -93,7 +93,7 @@ export class QuizCardComponent {
   private confirmRemoving(): void {
     const data: any = {
       text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ',
-      buttonText: 'BUTTON.CONFIRM'
+      primaryButtonText: 'BUTTON.CONFIRM'
     };
 
     this.subscriptionsService.addSubscription(

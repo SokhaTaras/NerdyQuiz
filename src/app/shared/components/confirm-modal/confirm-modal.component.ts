@@ -9,7 +9,7 @@ import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal
 })
 export class ConfirmModalComponent {
   @Input() text: string;
-  @Input() buttonText: string;
+  @Input() primaryButtonText: string;
 
   constructor(private modalRefFacadeService: ModalRefFacadeService) {}
 

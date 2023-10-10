@@ -48,7 +48,7 @@ export class QuestionCardComponent implements OnInit {
   deleteQuestionConfirm(): void {
     const data: any = {
       text: 'CONFIRM_MODAL_TEXT.DELETE_QUESTION',
-      buttonText: 'LABELS.DELETE'
+      primaryButtonText: 'LABELS.DELETE'
     };
 
     this.subscriptionsService.addSubscription(

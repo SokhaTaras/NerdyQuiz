@@ -27,8 +27,6 @@ export class MultipleQuestionComponent implements OnInit {
   readonly maxQuestionsAmount = maxQuestionsAmount;
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  radioSelectedIndex = 0;
-
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
   }

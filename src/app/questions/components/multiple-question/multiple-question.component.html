@@ -7,7 +7,7 @@
       <quiz-app-input
         [control]="title"
         [label]="'LABELS.TITLE' | translateJson"
-        [placeHolder]="PlaceHolder.title | translateJson"
+        [placeHolder]="PlaceHolder.TITLE | translateJson"
         class="w-full">
       </quiz-app-input>
     </div>
@@ -22,7 +22,6 @@
             <div class="flex justify-center items-center pt-4 w-1/4 xs:w-4/5 xs:space-x-1">
               <quiz-app-radio-button
               class="flex justify-center items-center pr-4"
-              [currentItem]="answer"
               [isChecked]="answer.controls.isCorrect.value"
               (whenChecked)="onRadioChecked(answer)"
               >

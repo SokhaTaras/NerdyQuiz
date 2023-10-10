@@ -12,11 +12,13 @@
     "CORRECT": "Correct",
     "ANSWER": "Answer",
     "ANSWERS": "Answers",
+    "ANSWERS_TEXT": "Answer text",
     "DELETE": "Delete",
     "STEP": "Step",
     "TIME": "Time",
     "SEC": "sec.",
     "QUIZ_RESULT": "Quiz Result",
+    "QUESTION_TEXT": "Question text",
     "CORRECTNESS": "Correctness",
     "POINTS": "Points",
     "SELECT": "Select"
@@ -28,6 +30,7 @@
 
   "BUTTON": {
     "ADD_QUIZ": "Add quiz",
+    "ADD_QUESTION": "Add question",
     "ADD_NEW": "Add new",
     "NEW_ANSWER": "Add answer",
     "FETCH_QUESTIONS": "Fetch questions",
@@ -49,6 +52,8 @@
     "SAVE": "Save",
     "HOME": "Home",
     "BACK": "Back",
+    "REFRESH": "Refresh",
+    "REFETCH": "Refetch",
     "QUIZ": "Quiz",
     "MANUALLY": "Manually",
     "PLAY": "Play",
@@ -112,6 +117,8 @@
     "FROM_SCRATCH": "By choosing this option will have to create question from scratch",
     "RANDOM_QUESTION": "By choosing this option will fetch random question for your selected quiz category",
     "DELETE_QUIZ": "Are you sure you want to delete quiz?",
-    "FROM_API": "Fetch from 3rd-party API"
+    "FROM_API": "Fetch from 3rd-party API",
+    "MANUAL_ADDING": "Manual adding",
+    "FETCH": "Fetching from API"
   }
 }

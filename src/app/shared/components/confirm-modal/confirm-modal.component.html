@@ -1,10 +1,10 @@
 <div class="flex items-center justify-center">
   <div class="flex-col justify-center content-center items-center w-full">
-    <div class="flex justify-center">
+    <div class="flex justify-center mb-8">
       {{ text | translateJson }}
     </div>
     <quiz-app-modal-footer
-      [buttonText]="buttonText"
+      [primaryButtonText]="primaryButtonText"
       (whenConfirm)="close(true)"
       (whenCancel)="close(false)">
     </quiz-app-modal-footer>

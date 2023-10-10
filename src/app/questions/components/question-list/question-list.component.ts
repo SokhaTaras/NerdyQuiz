@@ -47,7 +47,6 @@ export class QuestionListComponent {
   openCreateQuestionModal(): void {
     const data: CreateQuestionModalData = {
       modalWidth: '768px',
-      modalHeight: '341px',
       buttonText: 'BUTTON.NEXT',
       label: 'BUTTON.NEW_QUESTION'
     };

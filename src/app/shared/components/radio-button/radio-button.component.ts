@@ -6,10 +6,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class RadioButtonComponent {
   @Input() isChecked: boolean;
-  @Input() currentItem: any;
-  @Output() whenChecked = new EventEmitter<any>();
+  @Output() whenChecked = new EventEmitter<void>();
 
-  onRadioClick(item: any): void {
-    this.whenChecked.emit(item);
+  onRadioClick(): void {
+    this.whenChecked.emit();
   }
 }

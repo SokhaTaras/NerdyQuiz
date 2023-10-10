@@ -8,8 +8,8 @@ import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 })
 export class ModalFooterComponent {
   @Input() disableButton: boolean;
-  @Input() buttonText: string;
-  @Input() isSave: boolean;
+  @Input() primaryButtonText: string;
+  @Input() secondaryButtonText: string = 'BUTTON.CANCEL';
   @Output() whenConfirm: EventEmitter<void> = new EventEmitter();
   @Output() whenCancel: EventEmitter<void> = new EventEmitter();
 

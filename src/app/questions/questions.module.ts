@@ -9,17 +9,19 @@ import { SharedModule } from '@a-shared/shared.module';
 import { QuestionsRoutingModule } from '@a-questions/questions-routing.module';
 import { QuestionCardComponent } from '@a-questions/components/question-card/question-card.component';
 import { QuestionListComponent } from '@a-questions/components/question-list/question-list.component';
-import { CreateQuestionComponent } from '@a-questions/components/create-question/create-question.component';
+import { CreateQuestionModalComponent } from '@a-questions/components/create-question-modal/create-question-modal.component';
 import { BooleanQuestionComponent } from '@a-questions/components/boolean-question/boolean-question.component';
 import { MultipleQuestionComponent } from '@a-questions/components/multiple-question/multiple-question.component';
+import { CreateQuestionComponent } from './components/create-question/create-question.component';
 
 @NgModule({
   declarations: [
     QuestionCardComponent,
     QuestionListComponent,
-    CreateQuestionComponent,
+    CreateQuestionModalComponent,
     BooleanQuestionComponent,
-    MultipleQuestionComponent
+    MultipleQuestionComponent,
+    CreateQuestionComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,7 @@ import { MultipleQuestionComponent } from '@a-questions/components/multiple-ques
   ],
   exports: [
     QuestionListComponent,
-    CreateQuestionComponent,
+    CreateQuestionModalComponent,
     QuestionCardComponent,
     MultipleQuestionComponent,
     BooleanQuestionComponent
