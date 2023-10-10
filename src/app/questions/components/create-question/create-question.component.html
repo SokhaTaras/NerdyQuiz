@@ -6,7 +6,8 @@
   <form class="mb-8" [formGroup]="form" *ngIf="form">
     <quiz-app-input
       label="LABELS.QUESTION_TEXT"
-      [placeHolder]="PlaceHolder.TYPE_QUESTION">
+      [placeHolder]="PlaceHolder.TYPE_QUESTION"
+      [control]="title">
     </quiz-app-input>
     <p
       class="font-inter text-base font-semibold leading-5 tracking-normal text-left mb-2 mt-6">
@@ -34,8 +35,8 @@
                 </quiz-app-input>
                 <quiz-app-button
                   class="h-1/2 flex justify-center items-center w-[24px]"
-                [isDisabled]="false"
-                (whenClicked)="deleteAnswer(index)">
+                  [isDisabled]="answerCount <= minQuestionsAmount"
+                  (whenClicked)="deleteAnswer(index)">
                 <quiz-app-svg-icon
                   class="h-1/2 flex items-center justify-center"
                   [svgName]="SVG_TYPE.TRASH"
@@ -48,7 +49,9 @@
         </ng-container>
       </div>
       <quiz-app-add-quiz
-        class="w-full h-[44px] text-secondary">
+        class="w-full h-[44px] text-secondary"
+        (whenClicked)="addAnswer()"
+        [isDisabled]="answerCount >= maxQuestionsAmount">
         + {{ 'BUTTON.ADD_QUESTION' | translateJson }}
       </quiz-app-add-quiz>
     </div>
@@ -73,7 +76,8 @@
       <quiz-app-modal-footer
         primaryButtonText="BUTTON.SAVE"
         secondaryButtonText="BUTTON.PREVIOUS"
-        (whenCancel)="goPrevious()">
+        (whenCancel)="goPrevious()"
+        (whenConfirm)="saveQuestion()">
       </quiz-app-modal-footer>
     </div>
   </div>

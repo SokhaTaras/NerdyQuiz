@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { PlaceHolder } from '@a-shared/enums/placeHolder';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -13,6 +14,7 @@ import {
 } from '@a-questions/constants/questions-info';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
+import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 
 @Component({
   selector: 'quiz-app-create-question',
@@ -33,6 +35,8 @@ export class CreateQuestionComponent {
   readonly minQuestionsAmount = minQuestionsAmount;
   readonly maxQuestionsAmount = maxQuestionsAmount;
   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly SVG_TYPE = SVG_TYPE;
+  readonly SVG_COLOR = SVG_COLOR;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
@@ -52,12 +56,13 @@ export class CreateQuestionComponent {
 
   constructor(
     private questionFormHelper: QuestionFormHelperService,
-    private modalRefFacadeService: ModalRefFacadeService
+    private modalRefFacadeService: ModalRefFacadeService,
+    private subscriptionsService: SubscriptionsService,
+    private quizService: QuizService
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.form);
   }
 
   close(data?: Question): void {
@@ -69,10 +74,12 @@ export class CreateQuestionComponent {
   }
 
   saveQuestion(): void {
-    // const question: Question = this.mapQuestionToObject();
-    // this.subscriptionService.addSubscription(
-    // this.quizService.addQuestion(this.quizId, question).subscribe()
-    // );
+    const question: Question = this.mapQuestionToObject();
+    this.subscriptionsService.addSubscription(
+      this.quizService.addQuestion(this.quizId, question).subscribe()
+    );
+
+    this.close(question);
   }
 
   addAnswer(): void {
@@ -97,26 +104,15 @@ export class CreateQuestionComponent {
     this.questionFormHelper.initForm(question);
   }
 
-  // private mapQuestionToObject(): Question {
-  //   const formData = this.getFormData();
-  //
-  //   const question: Question = {
-  //     title: formData.title,
-  //     type: formData.type,
-  //     answers: formData.answers
-  //   };
-  //
-  //   return question;
-  // }
+  private mapQuestionToObject(): Question {
+    const formData = this.form.value as Question;
 
-  private getFormData() {
-    // if (this.multipleQuestionForm) {
-    //   return this.multipleQuestionForm.value as Question;
-    // } else {
-    //   return this.booleanQuestionForm.value as Question;
-    // }
+    const question: Question = {
+      title: formData.title,
+      type: formData.type,
+      answers: formData.answers
+    };
+
+    return question;
   }
-
-  protected readonly SVG_TYPE = SVG_TYPE;
-  protected readonly SVG_COLOR = SVG_COLOR;
 }

@@ -28,6 +28,10 @@ export class QuestionListComponent {
     return this?.quiz?.category?.value;
   }
 
+  get quizId(): string {
+    return this.quiz?.id;
+  }
+
   constructor(
     private quizService: QuizService,
     private subscriptionService: SubscriptionsService,
@@ -48,7 +52,8 @@ export class QuestionListComponent {
     const data: CreateQuestionModalData = {
       modalWidth: '768px',
       buttonText: 'BUTTON.NEXT',
-      label: 'BUTTON.NEW_QUESTION'
+      label: 'BUTTON.NEW_QUESTION',
+      quizId: this.quizId
     };
 
     this.modalQuizService.showCreateQuestionModal(data);

@@ -11,6 +11,7 @@ export interface CreateQuizModalData {
 
 export interface CreateQuestionModalData {
   question?: Question;
+  quizId?: string;
   label: string;
   buttonText: string;
   modalWidth?: string;
