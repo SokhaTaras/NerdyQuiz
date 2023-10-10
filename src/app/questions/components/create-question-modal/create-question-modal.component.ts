@@ -1,14 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
 
-import { QuestionForm } from '@a-shared/types/forms';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { InfoCardItem } from '@a-shared/classes/info-card-item/info-card-item';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { QUESTION_CREATION_TYPE } from '@a-shared/enums/question-info';
-import { PlaceHolder } from '@a-shared/enums/placeHolder';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { Question } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-create-question-modal',
@@ -16,57 +15,51 @@ import { PlaceHolder } from '@a-shared/enums/placeHolder';
   providers: [SubscriptionsService, ModalRefFacadeService]
 })
 export class CreateQuestionModalComponent {
-  @Input() quizId: string;
+  @Input() currentQuiz: Quiz;
   @Input() label: string;
-  @Output() hideCreation: EventEmitter<void> = new EventEmitter();
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
-  readonly PlaceHolder = PlaceHolder;
 
-  booleanQuestionForm: FormGroup<QuestionForm>;
-  multipleQuestionForm: FormGroup<QuestionForm>;
-
-  isFormInvalid = true;
   isFetch: boolean;
+  isLoading: boolean;
   isCreation: boolean;
   creationModalLabel: string;
   infoCardSetup: InfoCardItem[];
   selectedCard: InfoCardItem;
+  fetchedQuestion: Question;
 
   get selectedCardValue() {
     return this.selectedCard?.value;
   }
 
+  get quizId(): string {
+    return this.currentQuiz?.id;
+  }
+
+  get category(): string {
+    return this.currentQuiz?.category.value;
+  }
+
   constructor(
-    private subscriptionsService: SubscriptionsService,
-    private quizService: QuizService,
-    private modalRefFacadeService: ModalRefFacadeService
+    private modalRefFacadeService: ModalRefFacadeService,
+    private quizService: QuizService
   ) {
     this.setupInfoCardItems();
-  }
-
-  getBooleanQuestionForm(event: FormGroup<QuestionForm>): void {
-    this.booleanQuestionForm = event;
-    this.subscribeOnFormChange(this.booleanQuestionForm);
-  }
-
-  getMultipleQuestionForm(event: FormGroup<QuestionForm>): void {
-    this.multipleQuestionForm = event;
-    this.subscribeOnFormChange(this.multipleQuestionForm);
   }
 
   close(): void {
     this.modalRefFacadeService.close();
   }
 
-  goToQuestionCreation(): void {
+  async handleQuestionCreation(): Promise<void> {
     if (this.selectedCardValue === QUESTION_CREATION_TYPE.MANUALLY) {
       this.creationModalLabel = 'CREATE_QUESTION_MODAL_TEXT.MANUAL_ADDING';
       this.isCreation = true;
     } else {
+      await this.fetchQuestion();
       this.creationModalLabel = 'CREATE_QUESTION_MODAL_TEXT.FETCH';
-      this.isCreation = true;
       this.isFetch = true;
+      this.isCreation = true;
     }
   }
 
@@ -76,14 +69,6 @@ export class CreateQuestionModalComponent {
 
   toggleCreation(): void {
     this.isCreation = false;
-  }
-
-  private subscribeOnFormChange(formGroup: FormGroup): void {
-    this.subscriptionsService.addSubscription(
-      formGroup.valueChanges.subscribe(() => {
-        this.isFormInvalid = formGroup.invalid;
-      })
-    );
   }
 
   private setupInfoCardItems(): void {
@@ -100,5 +85,21 @@ export class CreateQuestionModalComponent {
       )
     ];
     this.selectedCard = this.infoCardSetup[0];
+  }
+
+  //todo is it fine to use promise here?
+  private async fetchQuestion(): Promise<void> {
+    this.isLoading = true;
+
+    try {
+      const question = await this.quizService
+        .fetchQuestion(this.category)
+        .toPromise();
+      this.fetchedQuestion = question;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.isLoading = false;
+    }
   }
 }

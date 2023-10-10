@@ -11,6 +11,8 @@ import { LocalStorageService } from '@a-shared/services/local-storage/local-stor
 import { getNewQuestionId } from '@a-shared/utils/getId';
 import { StorageKey } from '@a-shared/enums/storageKey';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { mapQuestion } from '@a-shared/utils/questionsMapper';
+import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,10 @@ export class QuizService {
   categories$ = new BehaviorSubject<DropDownItem[]>([]);
   questionsResults = new BehaviorSubject<QuestionResult[]>([]);
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(
+    private localStorageService: LocalStorageService,
+    private quizApi: QuizApiService
+  ) {}
 
   addQuiz(quiz: Quiz): Observable<Quiz> {
     return new Observable<Quiz>((subscriber) => {
@@ -187,6 +192,15 @@ export class QuizService {
 
       subscriber.complete();
     });
+  }
+
+  fetchQuestion(category: string): Observable<Question> {
+    return this.quizApi.getQuestions(category).pipe(
+      map((questionResponse) => {
+        const mappedQuestion = mapQuestion(questionResponse.results[0]);
+        return mappedQuestion;
+      })
+    );
   }
 
   setQuizResult(quizResult: QuizResult): Observable<QuizResult> {

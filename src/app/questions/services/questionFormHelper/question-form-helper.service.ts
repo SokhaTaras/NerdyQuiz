@@ -59,17 +59,17 @@ export class QuestionFormHelperService {
   initForm(question: Question): void {
     let currentAnswers: AnswersFormType[];
 
-    if (question.answers) {
+    if (question?.answers) {
       currentAnswers = this.mapCurrentAnswers(question.answers);
     }
 
-    const defaultAnswers = this.generateDefaultAnswers(question.type);
+    const defaultAnswers = this.generateDefaultAnswers(question?.type);
 
     const initForm: QuestionForm = {
-      title: this.fb.control(question.title || defaultFormValues.title, [
+      title: this.fb.control(question?.title || defaultFormValues.title, [
         Validators.required
       ]),
-      type: this.fb.control(question.type, [Validators.required]),
+      type: this.fb.control(question?.type, [Validators.required]),
       answers: this.fb.array(currentAnswers || defaultAnswers, [
         Validators.required
       ])

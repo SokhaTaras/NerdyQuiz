@@ -1,84 +1,88 @@
-<div class="w-full">
-  <p
-    class="modal-title mb-8">
-    {{ label | translateJson }}
-  </p>
-  <form class="mb-8" [formGroup]="form" *ngIf="form">
-    <quiz-app-input
-      label="LABELS.QUESTION_TEXT"
-      [placeHolder]="PlaceHolder.TYPE_QUESTION"
-      [control]="title">
-    </quiz-app-input>
+<quiz-app-loader [isLoading]="isLoading">
+  <div class="w-full">
     <p
-      class="font-inter text-base font-semibold leading-5 tracking-normal text-left mb-2 mt-6">
-      {{ 'LABELS.ANSWERS' | translateJson }}
+      class="modal-title mb-8">
+      {{ label | translateJson }}
     </p>
-    <div class="flex flex-col">
-      <div class="space-x-4 flex font-inter text-xs font-normal leading-5 tracking-normal text-left">
-        <p>{{ 'LABELS.CORRECTNESS' | translateJson }}</p>
-        <p>{{ 'LABELS.ANSWERS_TEXT' | translateJson }}</p>
-      </div>
-      <div class="flex-col justify-center">
-        <ng-container formArrayName="answers" class="py-12 flex-col justify-center">
-          <ng-container class="flex items-center justify-center" *ngFor="let answer of answersControl; let index = index">
-            <div class="xs:flex-wrap flex items-center justify-center w-full">
-              <div class="w-full flex justify-center items-center">
-                <quiz-app-radio-button
-                  class="flex justify-center items-center pl-5 pr-5"
-                  [isChecked]="answer.controls.isCorrect.value"
-                  (whenChecked)="onRadioChecked(answer)">
-                </quiz-app-radio-button>
-                <quiz-app-input
-                  class="m-4 w-full"
-                  [control]="answer.controls.text"
-                  [placeHolder]="PlaceHolder.TYPE_ANSWER">
-                </quiz-app-input>
-                <quiz-app-button
-                  class="h-1/2 flex justify-center items-center w-[24px]"
-                  [isDisabled]="answerCount <= minQuestionsAmount"
-                  (whenClicked)="deleteAnswer(index)">
-                <quiz-app-svg-icon
-                  class="h-1/2 flex items-center justify-center"
-                  [svgName]="SVG_TYPE.TRASH"
-                  [iconColor]="SVG_COLOR.RED">
-                </quiz-app-svg-icon>
-                </quiz-app-button>
-              </div>
-            </div>
-          </ng-container>
-        </ng-container>
-      </div>
-      <quiz-app-add-quiz
-        class="w-full h-[44px] text-secondary"
-        (whenClicked)="addAnswer()"
-        [isDisabled]="answerCount >= maxQuestionsAmount">
-        + {{ 'BUTTON.ADD_QUESTION' | translateJson }}
-      </quiz-app-add-quiz>
-    </div>
-  </form>
-  <div class="flex justify-center items-center">
-    <div class="flex justify-start items-center w-1/2">
-      <quiz-app-button
-        class="w-[128px] h-[44px] flex items-center justify-center"
-        [type]="BUTTON_TYPE.SECONDARY"
-        *ngIf="isFetch">
-        <div class="w-full flex justify-center items-center">
-          <quiz-app-svg-icon
-            class="w-full"
-            [svgName]="SVG_TYPE.REFRESH"
-            [iconColor]="SVG_COLOR.SECONDARY">
-          </quiz-app-svg-icon>
-          <p>{{ 'BUTTON.REFETCH' | translateJson }}</p>
+    <form class="mb-8" [formGroup]="form" *ngIf="form">
+      <quiz-app-input
+        label="LABELS.QUESTION_TEXT"
+        [placeHolder]="PlaceHolder.TYPE_QUESTION"
+        [control]="title">
+      </quiz-app-input>
+      <p
+        class="font-inter text-base font-semibold leading-5 tracking-normal text-left mb-2 mt-6">
+        {{ 'LABELS.ANSWERS' | translateJson }}
+      </p>
+      <div class="flex flex-col">
+        <div class="space-x-4 flex font-inter text-xs font-normal leading-5 tracking-normal text-left">
+          <p>{{ 'LABELS.CORRECTNESS' | translateJson }}</p>
+          <p>{{ 'LABELS.ANSWERS_TEXT' | translateJson }}</p>
         </div>
-      </quiz-app-button>
-    </div>
-    <div class="w-full flex justify-end items-center">
-      <quiz-app-modal-footer
-        primaryButtonText="BUTTON.SAVE"
-        secondaryButtonText="BUTTON.PREVIOUS"
-        (whenCancel)="goPrevious()"
-        (whenConfirm)="saveQuestion()">
-      </quiz-app-modal-footer>
+        <div class="flex-col justify-center">
+          <ng-container formArrayName="answers" class="py-12 flex-col justify-center">
+            <ng-container class="flex items-center justify-center" *ngFor="let answer of answersControl; let index = index">
+              <div class="xs:flex-wrap flex items-center justify-center w-full">
+                <div class="w-full flex justify-center items-center">
+                  <quiz-app-radio-button
+                    class="flex justify-center items-center pl-5 pr-5"
+                    [isChecked]="answer.controls.isCorrect.value"
+                    (whenChecked)="onRadioChecked(answer)">
+                  </quiz-app-radio-button>
+                  <quiz-app-input
+                    class="m-4 w-full"
+                    [control]="answer.controls.text"
+                    [placeHolder]="PlaceHolder.TYPE_ANSWER">
+                  </quiz-app-input>
+                  <quiz-app-button
+                    class="h-1/2 flex justify-center items-center w-[24px]"
+                    [isDisabled]="answerCount <= minQuestionsAmount"
+                    (whenClicked)="deleteAnswer(index)">
+                    <quiz-app-svg-icon
+                      class="h-1/2 flex items-center justify-center"
+                      [svgName]="SVG_TYPE.TRASH"
+                      [iconColor]="SVG_COLOR.RED">
+                    </quiz-app-svg-icon>
+                  </quiz-app-button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <quiz-app-add-quiz
+          class="w-full h-[44px] text-secondary"
+          (whenClicked)="addAnswer()"
+          [isDisabled]="answerCount >= maxQuestionsAmount">
+          + {{ 'BUTTON.ADD_QUESTION' | translateJson }}
+        </quiz-app-add-quiz>
+      </div>
+    </form>
+    <div class="flex justify-center items-center">
+      <div class="flex justify-start items-center w-1/2">
+        <quiz-app-button
+          class="w-[128px] h-[44px] flex items-center justify-center"
+          [type]="BUTTON_TYPE.SECONDARY"
+          *ngIf="isFetch"
+          (whenClicked)="refetchQuestion()">
+          <div class="w-full flex justify-center items-center">
+            <quiz-app-svg-icon
+              class="w-full"
+              [svgName]="SVG_TYPE.REFRESH"
+              [iconColor]="SVG_COLOR.SECONDARY">
+            </quiz-app-svg-icon>
+            <p>{{ 'BUTTON.REFETCH' | translateJson }}</p>
+          </div>
+        </quiz-app-button>
+      </div>
+      <div class="w-full flex justify-end items-center">
+        <quiz-app-modal-footer
+          primaryButtonText="BUTTON.SAVE"
+          secondaryButtonText="BUTTON.PREVIOUS"
+          (whenCancel)="goPrevious()"
+          [disableButton]="isFormInvalid"
+          (whenConfirm)="saveQuestion()">
+        </quiz-app-modal-footer>
+      </div>
     </div>
   </div>
-</div>
+</quiz-app-loader>

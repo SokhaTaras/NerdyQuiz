@@ -15,6 +15,7 @@ import {
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 
 @Component({
   selector: 'quiz-app-create-question',
@@ -27,8 +28,9 @@ import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 })
 export class CreateQuestionComponent {
   @Input() label: string;
-  @Input() quizId: string;
+  @Input() currentQuiz: Quiz;
   @Input() isFetch: boolean;
+  @Input() fetchedQuestion: Question;
   @Output() whenPreviousClicked = new EventEmitter<void>();
 
   readonly PlaceHolder = PlaceHolder;
@@ -37,6 +39,9 @@ export class CreateQuestionComponent {
   readonly BUTTON_TYPE = BUTTON_TYPE;
   readonly SVG_TYPE = SVG_TYPE;
   readonly SVG_COLOR = SVG_COLOR;
+
+  isLoading: boolean;
+  isFormInvalid = true;
 
   get form(): FormGroup<QuestionForm> {
     return this.questionFormHelper?.currentForm;
@@ -54,6 +59,14 @@ export class CreateQuestionComponent {
     return this.questionFormHelper.title;
   }
 
+  get quizId(): string {
+    return this.currentQuiz?.id;
+  }
+
+  get category(): string {
+    return this.currentQuiz?.category.value;
+  }
+
   constructor(
     private questionFormHelper: QuestionFormHelperService,
     private modalRefFacadeService: ModalRefFacadeService,
@@ -63,6 +76,7 @@ export class CreateQuestionComponent {
 
   ngOnInit(): void {
     this.initForm();
+    this.subscribeOnFormChange(this.form);
   }
 
   close(data?: Question): void {
@@ -96,11 +110,20 @@ export class CreateQuestionComponent {
     answer.controls.isCorrect.setValue(true);
   }
 
-  private initForm(): void {
-    const question: Question = {
-      type: QUESTION_TYPE.MULTIPLE
-    };
+  refetchQuestion(): void {
+    this.isLoading = true;
+    this.subscriptionsService.addSubscription(
+      this.quizService.fetchQuestion(this.category).subscribe((question) => {
+        this.questionFormHelper.initForm(question);
+        this.isLoading = false;
+      })
+    );
+  }
 
+  private initForm(): void {
+    const question = this.isFetch
+      ? this.fetchedQuestion
+      : { type: QUESTION_TYPE.MULTIPLE };
     this.questionFormHelper.initForm(question);
   }
 
@@ -114,5 +137,13 @@ export class CreateQuestionComponent {
     };
 
     return question;
+  }
+
+  private subscribeOnFormChange(formGroup: FormGroup): void {
+    this.subscriptionsService.addSubscription(
+      formGroup.valueChanges.subscribe(() => {
+        this.isFormInvalid = formGroup.invalid;
+      })
+    );
   }
 }

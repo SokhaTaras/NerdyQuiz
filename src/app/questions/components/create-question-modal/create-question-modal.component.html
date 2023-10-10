@@ -1,28 +1,31 @@
-<div *ngIf="!isCreation">
-  <p class="modal-title mb-8">{{ label | translateJson }}</p>
-  <div class="mb-8">
-    <div class="mb-4" *ngFor="let card of infoCardSetup">
-      <quiz-app-info-card
-        [label]="card.label"
-        [subLabel]="card.subLabel">
-        <quiz-app-radio-button
-          [isChecked]="selectedCardValue === card?.value"
-          (whenChecked)="onRadioButtonCheck(card)">
-        </quiz-app-radio-button>
-      </quiz-app-info-card>
+<quiz-app-loader [isLoading]="isLoading">
+  <div *ngIf="!isCreation">
+    <p class="modal-title mb-8">{{ label | translateJson }}</p>
+    <div class="mb-8">
+      <div class="mb-4" *ngFor="let card of infoCardSetup">
+        <quiz-app-info-card
+          [label]="card.label"
+          [subLabel]="card.subLabel">
+          <quiz-app-radio-button
+            [isChecked]="selectedCardValue === card?.value"
+            (whenChecked)="onRadioButtonCheck(card)">
+          </quiz-app-radio-button>
+        </quiz-app-info-card>
+      </div>
     </div>
+    <quiz-app-modal-footer
+      primaryButtonText="BUTTON.NEXT"
+      secondaryButtonText="BUTTON.CANCEL"
+      (whenCancel)="close()"
+      (whenConfirm)="handleQuestionCreation()">
+    </quiz-app-modal-footer>
   </div>
-  <quiz-app-modal-footer
-    primaryButtonText="BUTTON.NEXT"
-    secondaryButtonText="BUTTON.CANCEL"
-    (whenCancel)="close()"
-    (whenConfirm)="goToQuestionCreation()">
-  </quiz-app-modal-footer>
-</div>
-<quiz-app-create-question
-  *ngIf="isCreation"
-  [isFetch]="isFetch"
-  [quizId]="quizId"
-  [label]="creationModalLabel"
-  (whenPreviousClicked)="toggleCreation()">
-</quiz-app-create-question>
+  <quiz-app-create-question
+    *ngIf="isCreation"
+    [isFetch]="isFetch"
+    [currentQuiz]="currentQuiz"
+    [label]="creationModalLabel"
+    [fetchedQuestion]="fetchedQuestion"
+    (whenPreviousClicked)="toggleCreation()">
+  </quiz-app-create-question>
+</quiz-app-loader>
