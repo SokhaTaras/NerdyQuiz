@@ -27,10 +27,11 @@ import { Quiz } from '@a-quizzes/interfaces/quiz';
   ]
 })
 export class CreateQuestionComponent {
-  @Input() label: string;
   @Input() currentQuiz: Quiz;
-  @Input() isFetch: boolean;
   @Input() fetchedQuestion: Question;
+  @Input() questionToEdit: Question;
+  @Input() label: string;
+  @Input() isFetch: boolean;
   @Output() whenPreviousClicked = new EventEmitter<void>();
 
   readonly PlaceHolder = PlaceHolder;
@@ -123,7 +124,8 @@ export class CreateQuestionComponent {
   private initForm(): void {
     const question = this.isFetch
       ? this.fetchedQuestion
-      : { type: QUESTION_TYPE.MULTIPLE };
+      : this.questionToEdit ?? { type: QUESTION_TYPE.MULTIPLE };
+
     this.questionFormHelper.initForm(question);
   }
 

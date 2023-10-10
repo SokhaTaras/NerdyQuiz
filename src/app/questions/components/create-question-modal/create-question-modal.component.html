@@ -1,5 +1,5 @@
 <quiz-app-loader [isLoading]="isLoading">
-  <div *ngIf="!isCreation">
+  <div *ngIf="!isSecondStep">
     <p class="modal-title mb-8">{{ label | translateJson }}</p>
     <div class="mb-8">
       <div class="mb-4" *ngFor="let card of infoCardSetup">
@@ -21,11 +21,12 @@
     </quiz-app-modal-footer>
   </div>
   <quiz-app-create-question
-    *ngIf="isCreation"
+    *ngIf="isSecondStep"
     [isFetch]="isFetch"
     [currentQuiz]="currentQuiz"
     [label]="creationModalLabel"
     [fetchedQuestion]="fetchedQuestion"
-    (whenPreviousClicked)="toggleCreation()">
+    [questionToEdit]="question"
+    (whenPreviousClicked)="showPreViewPage()">
   </quiz-app-create-question>
 </quiz-app-loader>

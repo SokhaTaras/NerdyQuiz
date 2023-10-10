@@ -13,7 +13,10 @@ import { PopoverItem } from '@a-shared/types/popover';
 import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
 import { CorrectnessIndicatorInfo } from '@a-shared/types/correctness-indicator-info';
 import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
-import { ConfirmationModalData } from '@a-quizzes/interfaces/modal-data';
+import {
+  ConfirmationModalData,
+  CreateQuestionModalData
+} from '@a-quizzes/interfaces/modal-data';
 
 @Component({
   selector: 'quiz-app-question-card',
@@ -48,7 +51,7 @@ export class QuestionCardComponent implements OnInit {
 
   deleteQuestionConfirm(): void {
     const data: ConfirmationModalData = {
-      text: 'CONFIRM_MODAL_TEXT.DELETE_QUESTION',
+      text: 'CONFIRM_MODAL_TEXT.TEXT.DELETE_QUESTION',
       label: 'CONFIRM_MODAL_TEXT.LABEL.QUIZ_DELETION'
     };
 
@@ -81,12 +84,22 @@ export class QuestionCardComponent implements OnInit {
         POPOVER_ITEM_TYPE.ERROR,
         SVG_TYPE.TRASH,
         SVG_COLOR.RED,
-        this.deleteQuestion.bind(this)
+        this.deleteQuestionConfirm.bind(this)
       )
     ];
   }
 
-  private editQuestion(): void {}
+  private editQuestion(): void {
+    const data: CreateQuestionModalData = {
+      modalWidth: '768px',
+      buttonText: 'BUTTON.NEXT',
+      label: 'BUTTON.NEW_QUESTION',
+      question: this.question,
+      isSecondStep: true
+    };
+
+    this.modalQuizService.showCreateQuestionModal(data);
+  }
 
   private deleteQuestion(): void {
     this.subscriptionsService.addSubscription(

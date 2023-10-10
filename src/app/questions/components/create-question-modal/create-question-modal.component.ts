@@ -16,13 +16,14 @@ import { Question } from '@a-questions/interfaces/question';
 })
 export class CreateQuestionModalComponent {
   @Input() currentQuiz: Quiz;
+  @Input() question: Question;
   @Input() label: string;
+  @Input() isSecondStep: boolean;
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
   isFetch: boolean;
   isLoading: boolean;
-  isCreation: boolean;
   creationModalLabel: string;
   infoCardSetup: InfoCardItem[];
   selectedCard: InfoCardItem;
@@ -54,12 +55,12 @@ export class CreateQuestionModalComponent {
   async handleQuestionCreation(): Promise<void> {
     if (this.selectedCardValue === QUESTION_CREATION_TYPE.MANUALLY) {
       this.creationModalLabel = 'CREATE_QUESTION_MODAL_TEXT.MANUAL_ADDING';
-      this.isCreation = true;
+      this.isSecondStep = true;
     } else {
       await this.fetchQuestion();
       this.creationModalLabel = 'CREATE_QUESTION_MODAL_TEXT.FETCH';
       this.isFetch = true;
-      this.isCreation = true;
+      this.isSecondStep = true;
     }
   }
 
@@ -67,8 +68,8 @@ export class CreateQuestionModalComponent {
     this.selectedCard = item;
   }
 
-  toggleCreation(): void {
-    this.isCreation = false;
+  showPreViewPage(): void {
+    this.isSecondStep = false;
   }
 
   private setupInfoCardItems(): void {

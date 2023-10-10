@@ -16,6 +16,7 @@ export interface CreateQuestionModalData {
   buttonText: string;
   modalWidth?: string;
   modalHeight?: string;
+  isSecondStep?: boolean;
 }
 
 export interface ConfirmationModalData {
