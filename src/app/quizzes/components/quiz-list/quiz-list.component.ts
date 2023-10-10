@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, Observable } from 'rxjs';
+import { filter } from 'rxjs';
 
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
@@ -17,7 +17,7 @@ import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.serv
 export class QuizListComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  quizzes$ = new Observable<Quiz[]>();
+  quizzes: Quiz[];
 
   isLoading: boolean;
 
@@ -51,10 +51,15 @@ export class QuizListComponent implements OnInit {
   private initQuizzes(): void {
     this.isLoading = true;
 
-    this.quizzes$ = this.quizState.quizzesList$.pipe(
+    const quizzes$ = this.quizState.quizzesList$.pipe(
       filter((quizzes) => quizzes !== null)
     );
 
-    this.quizzes$.subscribe(() => (this.isLoading = false));
+    this.subscriptionsService.addSubscription(
+      quizzes$.subscribe((quizzes) => {
+        this.quizzes = quizzes;
+        this.isLoading = false;
+      })
+    );
   }
 }

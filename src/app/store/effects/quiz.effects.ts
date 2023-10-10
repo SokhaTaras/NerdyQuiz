@@ -29,7 +29,9 @@ export class QuizEffects {
       ofType(QuizActions.DeleteQuiz),
       switchMap((action: { quizToDelete: Quiz }) =>
         this.quizService.deleteQuiz(action.quizToDelete).pipe(
-          map((quiz: Quiz) => DeleteQuizSuccess({ quizToDelete: quiz })),
+          map(() => {
+            return DeleteQuizSuccess({ quizToDelete: action.quizToDelete });
+          }),
           catchError((error) => of(error))
         )
       )
