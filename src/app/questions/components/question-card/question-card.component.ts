@@ -80,7 +80,7 @@ export class QuestionCardComponent implements OnInit {
         POPOVER_ITEM_TYPE.ERROR,
         SVG_TYPE.TRASH,
         SVG_COLOR.RED,
-        this.deleteQuestion.bind(this)
+        this.deleteQuestionConfirm.bind(this)
       )
     ];
   }
