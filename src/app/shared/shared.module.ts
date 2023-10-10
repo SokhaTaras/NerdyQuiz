@@ -35,7 +35,7 @@ import { DividerComponent } from './components/divider/divider.component';
 import { PopoverItemComponent } from './components/popover-item/popover-item.component';
 import { LabelsListComponent } from './components/labels-list/labels-list.component';
 import { CollapsePanelComponent } from './components/collapse-panel/collapse-panel.component';
-import { CorrectnessIndicatorComponent } from '@a-shared/components/correctness-indicator/correctness-indicator.component';
+import { CorrectnessStatusComponent } from '@a-shared/components/correctness-status/correctness-status.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,7 @@ import { CorrectnessIndicatorComponent } from '@a-shared/components/correctness-
     PopoverItemComponent,
     LabelsListComponent,
     CollapsePanelComponent,
-    CorrectnessIndicatorComponent
+    CorrectnessStatusComponent
   ],
   imports: [
     CommonModule,
@@ -100,7 +100,7 @@ import { CorrectnessIndicatorComponent } from '@a-shared/components/correctness-
     LabelsListComponent,
     SvgIconComponent,
     CollapsePanelComponent,
-    CorrectnessIndicatorComponent
+    CorrectnessStatusComponent
   ]
 })
 export class SharedModule {}

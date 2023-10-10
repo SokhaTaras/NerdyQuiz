@@ -5,10 +5,10 @@ import { SVG_TYPE } from '@a-shared/enums/svg';
 import { CorrectnessIndicatorInfo } from '@a-shared/types/correctness-indicator-info';
 
 @Component({
-  selector: 'quiz-app-correctness-indicator',
-  templateUrl: './correctness-indicator.component.html'
+  selector: 'quiz-app-correctness-status',
+  templateUrl: './correctness-status.component.html'
 })
-export class CorrectnessIndicatorComponent implements OnInit {
+export class CorrectnessStatusComponent implements OnInit {
   @Input() indicatorInfo: CorrectnessIndicatorInfo;
 
   readonly SVG_TYPE = SVG_TYPE;

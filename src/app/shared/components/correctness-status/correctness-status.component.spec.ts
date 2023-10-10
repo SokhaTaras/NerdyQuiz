@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CorrectnessIndicatorComponent } from './correctness-indicator.component';
+import { CorrectnessStatusComponent } from './correctness-status.component';
 
 describe('CorrectnessComponent', () => {
-  let component: CorrectnessIndicatorComponent;
-  let fixture: ComponentFixture<CorrectnessIndicatorComponent>;
+  let component: CorrectnessStatusComponent;
+  let fixture: ComponentFixture<CorrectnessStatusComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CorrectnessIndicatorComponent]
+      declarations: [CorrectnessStatusComponent]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CorrectnessIndicatorComponent);
+    fixture = TestBed.createComponent(CorrectnessStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
