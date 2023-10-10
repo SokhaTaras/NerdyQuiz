@@ -14,6 +14,7 @@ import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.serv
 import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
 import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
 import { CreateQuizModalData } from '@a-quizzes/interfaces/modal-data';
+import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -24,6 +25,8 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
   readonly DIVIDER = DIVIDER;
   readonly LABELS = LABELS;
+  readonly SVG_TYPE = SVG_TYPE;
+  readonly SVG_COLOR = SVG_COLOR;
 
   selectedQuiz: Quiz;
 

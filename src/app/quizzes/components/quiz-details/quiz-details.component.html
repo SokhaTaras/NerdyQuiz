@@ -5,7 +5,7 @@
       class="flex items-center justify-center"
       (whenClicked)="goHome()">
       <div class="flex justify-center items-center">
-        <span class="flex items-center w-6 h-6 pr-2" nz-icon nzType="left" nzTheme="outline"></span>
+        <quiz-app-svg-icon class="rotate-90 mr-1" [svgName]="SVG_TYPE.CHEVRON_DOWN" [iconColor]="SVG_COLOR.SECONDARY"></quiz-app-svg-icon>
         {{ 'BUTTON.BACK' | translateJson }}
       </div>
     </quiz-app-button>
