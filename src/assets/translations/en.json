@@ -108,9 +108,16 @@
   },
 
   "CONFIRM_MODAL_TEXT": {
-    "CANCEL_QUIZ": "Are you sure you want cancel quiz?",
-    "DELETE_QUESTION": "Are you sure you want to delete question?",
-    "DELETE_QUIZ": "Are you sure you want to delete quiz?"
+    "TEXT": {
+      "CANCEL_QUIZ": "Are you sure you want to cancel quiz?",
+      "DELETE_QUESTION": "Are you sure you want to delete question?",
+      "DELETE_QUIZ": "Are you sure you want to delete quiz?"
+    },
+    "LABEL": {
+      "QUIZ_DELETION": "Quiz deletion",
+      "QUESTION_DELETION": "Question deletion",
+      "QUIZ_CANCELLATION": "Quiz cancellation"
+    }
   },
 
   "CREATE_QUESTION_MODAL_TEXT": {

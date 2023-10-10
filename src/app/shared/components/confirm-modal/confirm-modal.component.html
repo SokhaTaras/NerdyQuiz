@@ -1,6 +1,7 @@
 <div class="flex items-center justify-center">
   <div class="flex-col justify-center content-center items-center w-full">
-    <div class="flex justify-center mb-8">
+    <p class="font-inter text-xl font-semibold leading-6 tracking-normal text-left">{{ label | translateJson }}</p>
+    <div class="my-8 font-inter text-base font-normal leading-6 tracking-normal text-left">
       {{ text | translateJson }}
     </div>
     <quiz-app-modal-footer

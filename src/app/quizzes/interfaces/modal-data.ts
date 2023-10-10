@@ -20,4 +20,5 @@ export interface CreateQuestionModalData {
 
 export interface ConfirmationModalData {
   text: string;
+  label: string;
 }

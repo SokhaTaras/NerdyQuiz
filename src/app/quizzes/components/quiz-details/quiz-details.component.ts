@@ -71,7 +71,8 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
 
   confirmRemoving(): void {
     const data: ConfirmationModalData = {
-      text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ'
+      text: 'CONFIRM_MODAL_TEXT.TEXT.DELETE_QUIZ',
+      label: 'CONFIRM_MODAL_TEXT.LABEL.QUIZ_DELETION'
     };
 
     this.subscriptionsService.addSubscription(

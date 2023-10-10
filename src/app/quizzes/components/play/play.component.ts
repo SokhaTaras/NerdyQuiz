@@ -81,7 +81,8 @@ export class PlayComponent implements OnInit {
 
   cancelQuizConfirm(): void {
     const data: ConfirmationModalData = {
-      text: 'CONFIRM_MODAL_TEXT.CANCEL_QUIZ'
+      text: 'CONFIRM_MODAL_TEXT.TEXT.CANCEL_QUIZ',
+      label: 'CONFIRM_MODAL_TEXT.LABEL.QUIZ_CANCELLATION'
     };
 
     this.subscriptions.addSubscription(
