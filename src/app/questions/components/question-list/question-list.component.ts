@@ -14,9 +14,12 @@ import { CreateQuestionModalData } from '@a-quizzes/interfaces/modal-data';
 })
 export class QuestionListComponent {
   @Input() quiz: Quiz;
-  @Input() questions: Question[];
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
+
+  get questions(): Question[] {
+    return this.quiz?.questions;
+  }
 
   constructor(private modalQuizService: ModalQuizService) {}
 
