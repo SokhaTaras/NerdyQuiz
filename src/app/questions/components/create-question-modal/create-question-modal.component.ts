@@ -92,10 +92,9 @@ export class CreateQuestionModalComponent {
     this.isLoading = true;
 
     try {
-      const question = await this.quizService
+      this.fetchedQuestion = await this.quizService
         .fetchQuestion(this.category)
         .toPromise();
-      this.fetchedQuestion = question;
     } catch (error) {
       console.error(error);
     } finally {
