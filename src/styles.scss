@@ -159,9 +159,16 @@ button {
     @apply flex justify-center items-center rounded-[10px] hover:bg-black/5 h-full w-full hover:cursor-pointer
   }
 
-
   .disabled-button {
     @apply opacity-50 cursor-not-allowed pointer-events-none
+  }
+
+  .rotate-0 {
+    @apply transform rotate-[0deg] transition-transform duration-300 ease-in-out;
+  }
+
+  .rotate-270 {
+    @apply transform rotate-[270deg] transition-transform duration-300 ease-in-out;
   }
 }
 

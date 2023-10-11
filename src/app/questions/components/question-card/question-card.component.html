@@ -1,11 +1,10 @@
 <div class="flex flex-col min-h-[56px] justify-start items-center bg-white shadow-lg border border-primary rounded-2xl w-full h-full hover:shadow-xl mb-4">
   <div class="flex justify-start w-full h-full cursor-pointer p-4" (click)="toggleCollapse()">
     <quiz-app-svg-icon
-      class="rotate-[270deg]"
-      [ngClass]="{'rotate-[-0deg]' : isShown}"
+      [ngClass]="{'transform rotate-0 transition-transform': isShown,
+       'transform rotate-270 transition-transform': !isShown}"
       [svgName]="SVG_TYPE.CHEVRON_DOWN"
-      [iconColor]="SVG_COLOR.PRIMARY"
-    >
+      [iconColor]="SVG_COLOR.PRIMARY">
     </quiz-app-svg-icon>
     <div class="flex-auto ml-2">
       <p class="line-clamp-1" [innerHTML]="question.title | sanitize"></p>
