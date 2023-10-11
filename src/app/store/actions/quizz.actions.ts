@@ -39,12 +39,12 @@ export const GetQuizSuccess = createAction(
 
 export const DeleteQuiz = createAction(
   QuizActions.DeleteQuiz,
-  props<{ quizToDelete: Quiz }>()
+  props<{ quiz: Quiz }>()
 );
 
 export const DeleteQuizSuccess = createAction(
   QuizActions.DeleteQuizSuccess,
-  props<{ quizToDelete: Quiz }>()
+  props<{ quiz: Quiz }>()
 );
 
 export const AddQuiz = createAction(

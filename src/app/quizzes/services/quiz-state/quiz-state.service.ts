@@ -32,8 +32,8 @@ export class QuizStateService {
     this.store.dispatch(GetQuiz({ quizId }));
   }
 
-  deleteQuiz(quizToDelete: Quiz): void {
-    this.store.dispatch(DeleteQuiz({ quizToDelete }));
+  deleteQuiz(quiz: Quiz): void {
+    this.store.dispatch(DeleteQuiz({ quiz }));
   }
 
   editQuiz(quizId: string, quiz: Quiz): void {
