@@ -3,7 +3,7 @@
   class="cursor-pointer"
   nzPopoverTrigger="click"
   nzPopoverPlacement="bottom"
-  [nzPopoverTitle]= label
+  [nzPopoverTitle]="label"
   [nzPopoverContent]="content">
   <span class="font-bold" *ngIf="!altTrigger.children.length">...</span>
   <div class="h-full" #altTrigger>

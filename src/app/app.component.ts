@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AppState } from '@a-store/state/app.state';
-import { GetQuizzes } from '@a-store/actions/quizz.actions';
-import { StoreService } from '@a-store/services/store.service';
+import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
 import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 import { CategoriesResponse } from '@a-quizzes/interfaces/quiz';
 import { mapArrayToDropDownItems } from '@a-shared/utils/drop-down-mapper';
@@ -19,19 +17,19 @@ export class AppComponent implements OnInit {
   title = 'nerdyQuiz-app';
 
   constructor(
-    private store: StoreService<AppState>,
+    private quizState: QuizStateService,
     private quizApi: QuizApiService,
     private quizService: QuizService,
     private subscriptionsService: SubscriptionsService
   ) {}
 
   ngOnInit(): void {
-    this.getQuizzes();
+    this.setQuizzes();
     this.getCategories();
   }
 
-  private getQuizzes(): void {
-    this.store.dispatch(GetQuizzes());
+  private setQuizzes(): void {
+    this.quizState.getQuizzesList();
   }
 
   private getCategories(): void {

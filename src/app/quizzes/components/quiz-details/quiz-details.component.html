@@ -9,15 +9,15 @@
 <div>
   <div class="flex content-center justify-center pt-10 text-2xl">
     <div>
-      <div class="flex flex-col" *ngIf="selectedQuiz$">
+      <div class="flex flex-col" *ngIf="selectedQuiz">
         <div class="mx-3.5 modal-title">
-        {{ 'LABELS.TITLE' | translateJson }}: {{ (selectedQuiz$ | async)?.title }}
+        {{ 'LABELS.TITLE' | translateJson }}: {{ selectedQuiz?.title }}
         </div>
         <div class="mx-3.5 modal-title">
-          {{ 'LABELS.THEME' | translateJson }}: {{ quizCategory }}
+          {{ 'LABELS.THEME' | translateJson }}: {{ selectedQuiz?.theme }}
         </div>
         <div class="mx-3.5 modal-title">
-          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ (selectedQuiz$ | async)?.difficulty.text | translateJson }}
+          {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ selectedQuiz?.difficulty?.text | translateJson }}
         </div>
       </div>
       <div class="w-full">
@@ -41,8 +41,8 @@
     </div>
   </div>
   <quiz-app-question-list
-    [quizId]="(selectedQuiz$ | async)?.id"
-    [questions]="(selectedQuiz$ | async)?.questions">
+    [quizId]="selectedQuiz?.id"
+    [questions]="selectedQuiz?.questions">
   </quiz-app-question-list>
 </div>
 
