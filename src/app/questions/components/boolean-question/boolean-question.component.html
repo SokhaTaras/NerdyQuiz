@@ -20,7 +20,6 @@
                 {{ AnswerBooleanList[index].text | translateJson }}
                 <quiz-app-radio-button
                   class="flex w-1/10 pl-2 pt-1"
-                  [currentItem]="answer"
                   [isChecked]="answer.controls.isCorrect.value"
                   (whenChecked)="onRadioChecked(answer)">
                 </quiz-app-radio-button>

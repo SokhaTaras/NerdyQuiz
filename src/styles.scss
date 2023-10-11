@@ -74,6 +74,10 @@ body {
   border-radius: var(--border-radius);
 }
 
+.ant-select-dropdown {
+  border-radius: 10px;
+}
+
 .ant-popover-inner-content{
   padding: 0;
 }

@@ -3,9 +3,8 @@
   <div class="flex items-center justify-center" *ngFor="let label of labelsList; let index = index">
     <quiz-app-radio-button
       [id]="index"
-      [currentItem]="label"
       [isChecked]="controlValue === labelsList[index].value"
-      (whenChecked)="onRadioChecked($event)">
+      (whenChecked)="onRadioChecked(label)">
     </quiz-app-radio-button>
     <quiz-app-label [type]="label?.type">{{ label?.text | translateJson }}</quiz-app-label>
   </div>

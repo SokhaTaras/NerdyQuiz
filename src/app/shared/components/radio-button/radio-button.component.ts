@@ -8,10 +8,9 @@ import { RadioButtonItem } from '@a-questions/interfaces/question';
 })
 export class RadioButtonComponent {
   @Input() isChecked: boolean;
-  @Input() currentItem: any;
   @Output() whenChecked = new EventEmitter<RadioButtonItem>();
 
-  onRadioClick(item: RadioButtonItem): void {
-    this.whenChecked.emit(item);
+  onRadioClick(): void {
+    this.whenChecked.emit();
   }
 }
