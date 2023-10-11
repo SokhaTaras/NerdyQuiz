@@ -172,12 +172,9 @@ export class QuizService {
         const currentQuiz = updatedQuizzes[quizIndex];
         const updatedQuestions = [...currentQuiz?.questions];
 
-        const questionIndex = updatedQuestions.findIndex((q) => {
-          console.log(q.id, updatedQuestion?.id);
-          return q.id === updatedQuestion?.id;
-        });
-
-        console.log('questionIndex', questionIndex);
+        const questionIndex = updatedQuestions.findIndex(
+          (q) => q.id === updatedQuestion?.id
+        );
 
         if (questionIndex !== -1) {
           updatedQuestions[questionIndex] = updatedQuestion;
@@ -190,7 +187,6 @@ export class QuizService {
           updatedQuizzes[quizIndex] = updatedQuiz;
 
           this.quizzes$.next(updatedQuizzes);
-          console.log('updated', updatedQuizzes);
           this.localStorageService.updateLocalStorage(
             StorageKey.QUIZZES,
             updatedQuizzes
