@@ -10,12 +10,10 @@
       </quiz-app-input>
       <quiz-app-select
         class="w-full flex justify-center items-center"
-        [control]="category"
         [label]="'LABELS.CATEGORY' | translateJson"
         [list]="dropDownCategories"
         [selectedValue]="category.value"
-        (whenSelected)="setCategory($event)"
-      >
+        (whenSelected)="setCategory($event)">
       </quiz-app-select>
       <quiz-app-select
         class="w-full flex justify-center items-center"

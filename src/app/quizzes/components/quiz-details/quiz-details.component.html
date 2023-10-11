@@ -14,7 +14,7 @@
         {{ 'LABELS.TITLE' | translateJson }}: {{ selectedQuiz?.title }}
         </div>
         <div class="mx-3.5 modal-title">
-          {{ 'LABELS.THEME' | translateJson }}: {{ selectedQuiz?.theme }}
+          {{ 'LABELS.THEME' | translateJson }}: {{ selectedQuiz?.category?.text | translateJson }}
         </div>
         <div class="mx-3.5 modal-title">
           {{ 'LABELS.DIFFICULTY' | translateJson }}: {{ selectedQuiz?.difficulty?.text | translateJson }}
