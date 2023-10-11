@@ -11,7 +11,7 @@ import {
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { PopoverItem } from '@a-shared/types/popover';
 import { PopoverItemClass } from '@a-shared/classes/popover-item/popover-item';
-import { CorrectnessIndicatorInfo } from '@a-shared/types/correctness-indicator-info';
+import { CorrectnessStatusInfo } from '@a-shared/types/correctness-status-info';
 import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
 import {
   ConfirmationModalData,
@@ -35,7 +35,7 @@ export class QuestionCardComponent implements OnInit {
 
   popoverSetup: PopoverItem[];
   isShown = false;
-  indicatorsInfo: CorrectnessIndicatorInfo[];
+  indicatorsInfo: CorrectnessStatusInfo[];
 
   constructor(
     private modalQuizService: ModalQuizService,
@@ -111,7 +111,7 @@ export class QuestionCardComponent implements OnInit {
 
   private setIndicatorInfoInfo(): void {
     this.indicatorsInfo = this.question.answers.map(
-      (answer): CorrectnessIndicatorInfo => {
+      (answer): CorrectnessStatusInfo => {
         return answer.isCorrect
           ? {
               correctness: this.CORRECTNESS.CORRECT,

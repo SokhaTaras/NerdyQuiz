@@ -80,10 +80,6 @@ export class CreateQuestionComponent {
     this.subscribeOnFormChange(this.form);
   }
 
-  close(data?: Question): void {
-    this.modalRefFacadeService.close(data);
-  }
-
   goPrevious(): void {
     this.whenPreviousClicked.emit();
   }
@@ -111,22 +107,25 @@ export class CreateQuestionComponent {
     answer.controls.isCorrect.setValue(true);
   }
 
-  refetchQuestion(): void {
+  fetchQuestion(): void {
     this.isLoading = true;
     this.subscriptionsService.addSubscription(
       this.quizService.fetchQuestion(this.category).subscribe((question) => {
         this.questionFormHelper.initForm(question);
+        this.isFormInvalid = this.form.invalid;
         this.isLoading = false;
       })
     );
   }
 
   private initForm(): void {
-    const question = this.isFetch
-      ? this.fetchedQuestion
-      : this.questionToEdit ?? { type: QUESTION_TYPE.MULTIPLE };
-
-    this.questionFormHelper.initForm(question);
+    if (this.isFetch) {
+      this.questionFormHelper.initForm({});
+      this.fetchQuestion();
+    } else {
+      const question = { type: QUESTION_TYPE.MULTIPLE };
+      this.questionFormHelper.initForm(question);
+    }
   }
 
   private mapQuestionToObject(): Question {
@@ -139,6 +138,10 @@ export class CreateQuestionComponent {
     };
 
     return question;
+  }
+
+  private close(data?: Question): void {
+    this.modalRefFacadeService.close(data);
   }
 
   private subscribeOnFormChange(formGroup: FormGroup): void {

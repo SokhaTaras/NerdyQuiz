@@ -11,11 +11,13 @@ body {
 
 .ant-modal-body {
   padding: 32px;
+  max-width: 768px
 }
 
 .ant-modal-content {
   border-radius: var(--border-radius);
   background-color: var(--color-background);
+  max-width: 768px
 }
 
 .ant-modal-confirm-btns {

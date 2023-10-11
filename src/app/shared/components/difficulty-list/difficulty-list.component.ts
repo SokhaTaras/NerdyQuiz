@@ -4,10 +4,10 @@ import { FormControl } from '@angular/forms';
 import { RadioButtonItem } from '@a-questions/interfaces/question';
 
 @Component({
-  selector: 'quiz-app-labels-list',
-  templateUrl: './labels-list.component.html'
+  selector: 'quiz-app-difficulty-list',
+  templateUrl: './difficulty-list.component.html'
 })
-export class LabelsListComponent {
+export class DifficultyListComponent {
   @Input() label: string;
   @Input() labelsList: RadioButtonItem[];
   @Input() control: FormControl<RadioButtonItem>;
