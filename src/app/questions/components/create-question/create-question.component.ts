@@ -30,7 +30,7 @@ export class CreateQuestionComponent {
   @Input() label: string;
   @Input() isFetch: boolean;
   @Input() currentQuiz: Quiz;
-  @Input() questionToEdit: Question;
+  @Input() currentQuestion: Question;
   @Output() whenPreviousClicked = new EventEmitter<void>();
 
   readonly PlaceHolder = PlaceHolder;
@@ -80,7 +80,7 @@ export class CreateQuestionComponent {
   }
 
   goPrevious(): void {
-    if (!this.questionToEdit) {
+    if (!this.currentQuestion?.id) {
       this.whenPreviousClicked.emit();
     }
   }
@@ -90,8 +90,6 @@ export class CreateQuestionComponent {
     this.subscriptionsService.addSubscription(
       this.quizService.addQuestion(this.quizId, question).subscribe()
     );
-
-    console.log(question);
 
     this.close(question);
   }
@@ -122,29 +120,27 @@ export class CreateQuestionComponent {
   }
 
   private initForm(): void {
-    let initialQuestion: Question;
-
     if (this.isFetch) {
-      initialQuestion = {};
+      this.currentQuestion = {};
       this.fetchQuestion();
-    } else if (this.questionToEdit) {
-      initialQuestion = this.questionToEdit;
+    } else if (this.currentQuestion) {
+      this.questionFormHelper.initForm(this.currentQuestion);
+      return;
     } else {
-      initialQuestion = { type: QUESTION_TYPE.MULTIPLE };
+      this.currentQuestion = { type: QUESTION_TYPE.MULTIPLE };
     }
 
-    this.questionFormHelper.initForm(initialQuestion);
+    this.questionFormHelper.initForm(this.currentQuestion);
   }
 
   private mapQuestionToObject(): Question {
     const formData = this.form.value as Question;
-    console.log('formData', formData);
 
     const question: Question = {
       title: formData.title,
       type: formData.type,
       answers: formData.answers,
-      id: formData.id
+      id: this.currentQuestion.id
     };
 
     return question;
@@ -156,7 +152,7 @@ export class CreateQuestionComponent {
 
   private subscribeOnFormChange(formGroup: FormGroup): void {
     this.subscriptionsService.addSubscription(
-      formGroup.valueChanges.subscribe(() => {
+      formGroup?.valueChanges.subscribe(() => {
         this.isFormInvalid = formGroup.invalid;
       })
     );
