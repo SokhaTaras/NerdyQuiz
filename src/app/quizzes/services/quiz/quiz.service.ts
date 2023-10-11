@@ -50,9 +50,11 @@ export class QuizService {
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
 
       if (quizIndex !== -1) {
-        const updatedQuiz = {
-          ...currentQuizzes[quizIndex],
-          ...updatedData
+        const currentQuiz = currentQuizzes[quizIndex];
+        const updatedQuiz: Quiz = {
+          ...currentQuiz,
+          ...updatedData,
+          questions: currentQuiz.questions
         };
 
         currentQuizzes[quizIndex] = updatedQuiz;
