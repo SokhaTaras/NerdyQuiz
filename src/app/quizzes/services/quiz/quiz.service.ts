@@ -19,8 +19,9 @@ import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 })
 export class QuizService {
   quizzes$ = new BehaviorSubject<Quiz[]>([]);
-  categories$ = new BehaviorSubject<DropDownItem[]>([]);
   questionsResults = new BehaviorSubject<QuestionResult[]>([]);
+
+  categories: DropDownItem[] = [];
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -43,7 +44,7 @@ export class QuizService {
     });
   }
 
-  editQuiz(quizId: string | undefined, data: Quiz): Observable<Quiz> {
+  editQuiz(quizId: string | undefined, updatedData: Quiz): Observable<Quiz> {
     return new Observable<Quiz>((subscriber) => {
       const currentQuizzes = [...this.quizzes$.value];
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
@@ -51,9 +52,7 @@ export class QuizService {
       if (quizIndex !== -1) {
         const updatedQuiz = {
           ...currentQuizzes[quizIndex],
-          title: data.title,
-          category: data.category,
-          difficulty: data.difficulty
+          ...updatedData
         };
 
         currentQuizzes[quizIndex] = updatedQuiz;

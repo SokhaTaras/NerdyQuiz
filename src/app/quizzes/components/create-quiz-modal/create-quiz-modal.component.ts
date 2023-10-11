@@ -31,6 +31,8 @@ export class CreateQuizModalComponent implements OnInit {
   @Input() label: string;
   @Input() buttonText: string;
 
+  readonly PlaceHolder = PlaceHolder;
+
   isLoading: boolean;
 
   initQuizForm: FormGroup<InitQuizForm>;
@@ -38,7 +40,6 @@ export class CreateQuizModalComponent implements OnInit {
   dropDownCategories: DropDownItem[];
   labelsList: RadioButtonItem[];
 
-  readonly PlaceHolder = PlaceHolder;
 
   get title(): FormControl<string> {
     return this.initQuizForm?.controls?.title;
@@ -119,7 +120,7 @@ export class CreateQuizModalComponent implements OnInit {
   }
 
   private setCategories(): void {
-    this.dropDownCategories = this.quizService?.categories$?.value;
+    this.dropDownCategories = this.quizService?.categories;
   }
 
   private labelsSetup(): void {

@@ -14,45 +14,89 @@ const initialState: QuizState = initialQuizState;
 
 export const quizReducers = createReducer(
   initialState,
-  on(GetQuizSuccess, (state, { quiz }) => ({
-    ...state,
-    selectedQuiz: quiz
-  })),
 
-  on(GetQuizzesSuccess, (state, action) => ({
-    ...state,
-    quizzes: [...action.quizzes]
-  })),
+  on(GetQuizSuccess, (state, action) => {
+    const selectedQuiz = action?.quiz;
+    return {
+      ...state,
+      selectedQuiz: selectedQuiz
+    };
+  }),
 
-  on(DeleteQuizSuccess, (state, { quizToDelete }) => ({
-    ...state,
-    quizzes: state.quizzes.filter((q) => q.id !== quizToDelete.id)
-  })),
+  on(GetQuizzesSuccess, (state, action) => {
+    const quizzes = [...action?.quizzes];
+    return {
+      ...state,
+      quizzes: quizzes
+    };
+  }),
 
-  on(AddQuizSuccess, (state, { quiz }) => ({
-    ...state,
-    quizzes: [...state.quizzes, quiz]
-  })),
+  on(DeleteQuizSuccess, (state, action) => {
+    const quiz = action?.quiz;
+    const newQuizzes = state.quizzes.filter(
+      (currentQuiz) => currentQuiz?.id !== quiz?.id
+    );
 
-  on(EditQuizSuccess, (state, { quizId, quiz }) => ({
-    ...state,
-    selectedQuiz: quizId === state.selectedQuiz.id ? quiz : state.selectedQuiz,
-    quizzes: state.quizzes.map((q) => (q.id === quizId ? quiz : q))
-  })),
+    return {
+      ...state,
+      quizzes: newQuizzes
+    };
+  }),
 
-  on(AddQuestionSuccess, (state, { question }) => {
+  on(AddQuizSuccess, (state, action) => {
+    const quiz = action?.quiz;
+    const newQuizzes = [...state.quizzes, quiz];
+    return {
+      ...state,
+      quizzes: newQuizzes
+    };
+  }),
+
+  on(EditQuizSuccess, (state, action) => {
+    const quiz = action?.quiz;
+    const quizId = action?.quizId;
+
+    const selectedQuizIndex = state.quizzes.findIndex(
+      (quiz) => quiz.id === state.selectedQuiz.id
+    );
+    if (selectedQuizIndex === -1) {
+      return state;
+    }
+
+    const newSelectedQuiz =
+      quizId === state.selectedQuiz?.id ? quiz : state.selectedQuiz;
+
+    const newQuizzes = [...state.quizzes];
+
+    newQuizzes.splice(selectedQuizIndex, 1, quiz);
+
+    return {
+      ...state,
+      selectedQuiz: newSelectedQuiz,
+      quizzes: newQuizzes
+    };
+  }),
+
+  on(AddQuestionSuccess, (state, action) => {
+    const question = action?.question;
+    const selectedQuizIndex = state.quizzes.findIndex(
+      (quiz) => quiz.id === state.selectedQuiz?.id
+    );
+
+    if (selectedQuizIndex === -1) {
+      return state;
+    }
+
+    const updatedQuestions = [...state.selectedQuiz?.questions, question];
+
     const updatedSelectedQuiz = {
       ...state.selectedQuiz,
-      questions: [...state.selectedQuiz.questions, question]
+      questions: updatedQuestions
     };
 
-    const updatedQuizzes = state.quizzes.map((quiz) => {
-      if (quiz.id === updatedSelectedQuiz.id) {
-        return updatedSelectedQuiz;
-      } else {
-        return quiz;
-      }
-    });
+    const updatedQuizzes = [...state.quizzes];
+
+    updatedQuizzes.splice(selectedQuizIndex, 1, updatedSelectedQuiz);
 
     return {
       ...state,
@@ -61,21 +105,25 @@ export const quizReducers = createReducer(
     };
   }),
 
-  on(DeleteQuestionSuccess, (state, { question }) => {
+  on(DeleteQuestionSuccess, (state, action) => {
+    const question = action?.question;
+
+    const updatedQuestions = state.selectedQuiz.questions.filter(
+      (quest) => quest?.id !== question?.id
+    );
     const updatedSelectedQuiz = {
       ...state.selectedQuiz,
-      questions: state.selectedQuiz.questions.filter((q) => {
-        return q?.title !== question?.title;
-      })
+      questions: updatedQuestions
     };
 
-    const updatedQuizzes = state.quizzes.map((quiz) => {
-      if (quiz.id === state.selectedQuiz.id) {
-        return updatedSelectedQuiz;
-      } else {
-        return quiz;
-      }
-    });
+    const updatedQuizzes = [...state.quizzes];
+
+    const selectedQuizIndex = updatedQuizzes.findIndex(
+      (quiz) => quiz.id === state.selectedQuiz.id
+    );
+    if (selectedQuizIndex !== -1) {
+      updatedQuizzes[selectedQuizIndex] = updatedSelectedQuiz;
+    }
 
     return {
       ...state,
