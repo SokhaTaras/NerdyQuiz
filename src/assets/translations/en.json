@@ -127,5 +127,10 @@
     "FROM_API": "Fetch from 3rd-party API",
     "MANUAL_ADDING": "Manual adding",
     "FETCH": "Fetching from API"
+  },
+
+  "PRE_PLAY_PAGE": {
+    "PRE_PLAY_INFO": "Pre play info",
+    "PRE_PLAY_TEXT": "Are you ready? By clicking the 'Play' button, you will start the quiz. Once the quiz starts, your timer will begin counting time. You must choose one of the suggested answers and click the 'Next' button to proceed to the following question. Good luck, buddy!"
   }
 }

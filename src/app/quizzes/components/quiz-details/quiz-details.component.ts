@@ -11,7 +11,7 @@ import {
   LABELS
 } from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
-import { Quiz, QUIZ_DIFFICULTY } from '@a-quizzes/interfaces/quiz';
+import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.service';
 import {
   ConfirmationModalData,
@@ -32,16 +32,6 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   readonly SVG_COLOR = SVG_COLOR;
 
   selectedQuiz: Quiz;
-
-  get quizDifficultyLabel(): LABELS {
-    if (this.currentQuiz.difficulty.value === QUIZ_DIFFICULTY.EASY) {
-      return LABELS.GREEN;
-    } else if (this.currentQuiz.difficulty.value === QUIZ_DIFFICULTY.MEDIUM) {
-      return LABELS.YELLOW;
-    } else {
-      return LABELS.RED;
-    }
-  }
 
   constructor(
     quizService: QuizService,

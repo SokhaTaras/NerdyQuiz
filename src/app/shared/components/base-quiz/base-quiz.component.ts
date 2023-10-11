@@ -5,7 +5,9 @@ import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
-import { Question } from '@a-questions/interfaces/question';
+import { Question, RadioButtonItem } from '@a-questions/interfaces/question';
+import { getDifficultyLabel } from '@a-shared/utils/getDifficultyLabel';
+import { LABELS } from '@a-shared/enums/shared-components';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -24,12 +26,17 @@ export class BaseQuizComponent implements OnInit {
     return this.currentQuiz?.category.text;
   }
 
-  get quizDifficulty(): string {
-    return this.currentQuiz?.difficulty.text;
+  get quizDifficulty(): RadioButtonItem {
+    return this.currentQuiz?.difficulty;
   }
 
   get quizQuestions(): Question[] {
     return this.currentQuiz?.questions;
+  }
+
+  get quizLabelType(): LABELS {
+    const labelType = getDifficultyLabel(this.quizDifficulty.value);
+    return labelType;
   }
 
   constructor(

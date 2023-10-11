@@ -20,9 +20,8 @@
         [type]="DIVIDER.VERTICAL">
       </quiz-app-divider>
       <quiz-app-label
-        [type]="
-        quizDifficultyLabel">
-        {{ quizDifficulty | translateJson }}
+        [type]="quizLabelType">
+        {{ quizDifficulty?.text | translateJson }}
       </quiz-app-label>
     </div>
     <div class="flex justify-center items-center space-x-4 mt-8">
