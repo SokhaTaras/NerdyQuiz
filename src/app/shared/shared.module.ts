@@ -33,7 +33,7 @@ import { LabelComponent } from './components/label/label.component';
 import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 import { DividerComponent } from './components/divider/divider.component';
 import { PopoverItemComponent } from './components/popover-item/popover-item.component';
-import { LabelsListComponent } from './components/labels-list/labels-list.component';
+import { DifficultyListComponent } from '@a-shared/components/difficulty-list/difficulty-list.component';
 import { CollapsePanelComponent } from './components/collapse-panel/collapse-panel.component';
 import { CorrectnessIndicatorComponent } from '@a-shared/components/correctness-indicator/correctness-indicator.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
@@ -60,10 +60,10 @@ import { InfoCardComponent } from './components/info-card/info-card.component';
     SvgIconComponent,
     DividerComponent,
     PopoverItemComponent,
-    LabelsListComponent,
     CollapsePanelComponent,
     CorrectnessIndicatorComponent,
-    InfoCardComponent
+    InfoCardComponent,
+    DifficultyListComponent
   ],
   imports: [
     CommonModule,
@@ -99,11 +99,11 @@ import { InfoCardComponent } from './components/info-card/info-card.component';
     AddQuizComponent,
     LabelComponent,
     DividerComponent,
-    LabelsListComponent,
     SvgIconComponent,
     CollapsePanelComponent,
     CorrectnessIndicatorComponent,
-    InfoCardComponent
+    InfoCardComponent,
+    DifficultyListComponent
   ]
 })
 export class SharedModule {}
