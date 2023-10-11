@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
@@ -18,6 +17,7 @@ import {
   ConfirmationModalData,
   CreateQuizModalData
 } from '@a-quizzes/interfaces/modal-data';
+import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
 
 @Component({
   selector: 'quiz-app-quiz-details',
@@ -28,8 +28,10 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
   readonly DIVIDER = DIVIDER;
   readonly LABELS = LABELS;
+  readonly SVG_TYPE = SVG_TYPE;
+  readonly SVG_COLOR = SVG_COLOR;
 
-  selectedQuiz$: Observable<Quiz>;
+  selectedQuiz: Quiz;
 
   get quizDifficultyLabel(): LABELS {
     if (this.currentQuiz.difficulty.value === QUIZ_DIFFICULTY.EASY) {
@@ -92,7 +94,11 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   private setQuiz(): void {
-    this.selectedQuiz$ = this.quizState.selectedQuiz$;
+    this.subscriptionsService.addSubscription(
+      this.quizState.selectedQuiz$.subscribe((quiz) => {
+        this.selectedQuiz = quiz;
+      })
+    );
   }
 
   private getQuiz(): void {

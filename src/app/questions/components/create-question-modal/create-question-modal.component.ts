@@ -1,13 +1,11 @@
 import { Component, Input } from '@angular/core';
 
-import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { InfoCardItem } from '@a-shared/classes/info-card-item/info-card-item';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { QUESTION_CREATION_TYPE } from '@a-shared/enums/question-info';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
-import { Question } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-create-question-modal',
@@ -26,7 +24,6 @@ export class CreateQuestionModalComponent {
   creationModalLabel: string;
   infoCardSetup: InfoCardItem[];
   selectedCard: InfoCardItem;
-  fetchedQuestion: Question;
 
   get selectedCardValue() {
     return this.selectedCard?.value;
@@ -40,10 +37,7 @@ export class CreateQuestionModalComponent {
     return this.currentQuiz?.category.value;
   }
 
-  constructor(
-    private modalRefFacadeService: ModalRefFacadeService,
-    private quizService: QuizService
-  ) {
+  constructor(private modalRefFacadeService: ModalRefFacadeService) {
     this.setupInfoCardItems();
   }
 
@@ -51,19 +45,19 @@ export class CreateQuestionModalComponent {
     this.modalRefFacadeService.close();
   }
 
-  async handleQuestionCreation(): Promise<void> {
+  handleQuestionCreation(): void {
     if (this.selectedCardValue === QUESTION_CREATION_TYPE.MANUALLY) {
       this.creationModalLabel = 'CREATE_QUESTION_MODAL_TEXT.MANUAL_ADDING';
+      this.isFetch = false;
       this.isCreation = true;
     } else {
-      await this.fetchQuestion();
       this.creationModalLabel = 'CREATE_QUESTION_MODAL_TEXT.FETCH';
       this.isFetch = true;
       this.isCreation = true;
     }
   }
 
-  onRadioButtonCheck(item: InfoCardItem) {
+  onRadioButtonCheck(item: InfoCardItem): void {
     this.selectedCard = item;
   }
 
@@ -85,20 +79,5 @@ export class CreateQuestionModalComponent {
       )
     ];
     this.selectedCard = this.infoCardSetup[0];
-  }
-
-  //todo is it fine to use promise here?
-  private async fetchQuestion(): Promise<void> {
-    this.isLoading = true;
-
-    try {
-      this.fetchedQuestion = await this.quizService
-        .fetchQuestion(this.category)
-        .toPromise();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      this.isLoading = false;
-    }
   }
 }

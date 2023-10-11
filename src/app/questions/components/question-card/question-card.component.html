@@ -1,8 +1,8 @@
-<div class="flex flex-col min-h-[56px] justify-start items-center bg-white shadow-lg rounded-2xl w-full h-full hover:shadow-xl mb-4">
+<div class="flex flex-col min-h-[56px] justify-start items-center bg-white shadow-lg border border-primary rounded-2xl w-full h-full hover:shadow-xl mb-4">
   <div class="flex justify-start w-full h-full cursor-pointer p-4" (click)="toggleCollapse()">
     <quiz-app-svg-icon
       class="rotate-[270deg]"
-      [ngClass]="{'rotate-[0deg]' : isShown}"
+      [ngClass]="{'rotate-[-0deg]' : isShown}"
       [svgName]="SVG_TYPE.CHEVRON_DOWN"
       [iconColor]="SVG_COLOR.PRIMARY"
     >
@@ -32,9 +32,9 @@
               class="font-inter text-base font-normal leading-6 tracking-normal text-left">
               {{ i + 1 + '.' }} {{ answer.text }}
             </p>
-            <quiz-app-correctness-indicator
+            <quiz-app-correctness-status
               [indicatorInfo]="indicatorsInfo[i]">
-            </quiz-app-correctness-indicator>
+            </quiz-app-correctness-status>
           </div>
         </div>
         <div>
