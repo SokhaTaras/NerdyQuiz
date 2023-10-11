@@ -35,7 +35,7 @@ import { DividerComponent } from './components/divider/divider.component';
 import { PopoverItemComponent } from './components/popover-item/popover-item.component';
 import { DifficultyListComponent } from '@a-shared/components/difficulty-list/difficulty-list.component';
 import { CollapsePanelComponent } from './components/collapse-panel/collapse-panel.component';
-import { CorrectnessIndicatorComponent } from '@a-shared/components/correctness-indicator/correctness-indicator.component';
+import { CorrectnessStatusComponent } from '@a-shared/components/correctness-status/correctness-status.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
 
 @NgModule({
@@ -61,9 +61,9 @@ import { InfoCardComponent } from './components/info-card/info-card.component';
     DividerComponent,
     PopoverItemComponent,
     CollapsePanelComponent,
-    CorrectnessIndicatorComponent,
     InfoCardComponent,
-    DifficultyListComponent
+    DifficultyListComponent,
+    CorrectnessStatusComponent
   ],
   imports: [
     CommonModule,
@@ -101,7 +101,7 @@ import { InfoCardComponent } from './components/info-card/info-card.component';
     DividerComponent,
     SvgIconComponent,
     CollapsePanelComponent,
-    CorrectnessIndicatorComponent,
+    CorrectnessStatusComponent,
     InfoCardComponent,
     DifficultyListComponent
   ]
