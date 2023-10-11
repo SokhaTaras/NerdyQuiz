@@ -63,7 +63,7 @@
           class="w-[128px] h-[44px] flex items-center justify-center"
           [type]="BUTTON_TYPE.SECONDARY"
           *ngIf="isFetch"
-          (whenClicked)="refetchQuestion()">
+          (whenClicked)="fetchQuestion()">
           <div class="w-full flex justify-center items-center">
             <quiz-app-svg-icon
               class="w-full"
