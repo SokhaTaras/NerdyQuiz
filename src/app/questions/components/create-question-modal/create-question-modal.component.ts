@@ -6,6 +6,7 @@ import { InfoCardItem } from '@a-shared/classes/info-card-item/info-card-item';
 import { ModalRefFacadeService } from '@a-shared/services/modal-ref-facade/modal-ref-facade.service';
 import { QUESTION_CREATION_TYPE } from '@a-shared/enums/question-info';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
+import { Question } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-create-question-modal',

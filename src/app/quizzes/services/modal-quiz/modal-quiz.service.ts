@@ -9,6 +9,7 @@ import {
   CreateQuestionModalData,
   CreateQuizModalData
 } from '@a-quizzes/interfaces/modal-data';
+import { Question } from '@a-questions/interfaces/question';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,9 @@ export class ModalQuizService {
     return this.modalService.showModal(CreateQuizModalComponent, data);
   }
 
-  showCreateQuestionModal(data: CreateQuestionModalData): ModalResponse<Quiz> {
+  showCreateQuestionModal(
+    data: CreateQuestionModalData
+  ): ModalResponse<Question> {
     return this.modalService.showModal(CreateQuestionModalComponent, data);
   }
 

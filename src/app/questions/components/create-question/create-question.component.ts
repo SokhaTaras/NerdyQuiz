@@ -27,11 +27,10 @@ import { Quiz } from '@a-quizzes/interfaces/quiz';
   ]
 })
 export class CreateQuestionComponent {
-  @Input() currentQuiz: Quiz;
-  @Input() fetchedQuestion: Question;
-  @Input() questionToEdit: Question;
   @Input() label: string;
   @Input() isFetch: boolean;
+  @Input() currentQuiz: Quiz;
+  @Input() questionToEdit: Question;
   @Output() whenPreviousClicked = new EventEmitter<void>();
 
   readonly PlaceHolder = PlaceHolder;
@@ -81,7 +80,9 @@ export class CreateQuestionComponent {
   }
 
   goPrevious(): void {
-    this.whenPreviousClicked.emit();
+    if (!this.questionToEdit) {
+      this.whenPreviousClicked.emit();
+    }
   }
 
   saveQuestion(): void {
@@ -89,6 +90,8 @@ export class CreateQuestionComponent {
     this.subscriptionsService.addSubscription(
       this.quizService.addQuestion(this.quizId, question).subscribe()
     );
+
+    console.log(question);
 
     this.close(question);
   }
@@ -119,22 +122,29 @@ export class CreateQuestionComponent {
   }
 
   private initForm(): void {
+    let initialQuestion: Question;
+
     if (this.isFetch) {
-      this.questionFormHelper.initForm({});
+      initialQuestion = {};
       this.fetchQuestion();
+    } else if (this.questionToEdit) {
+      initialQuestion = this.questionToEdit;
     } else {
-      const question = { type: QUESTION_TYPE.MULTIPLE };
-      this.questionFormHelper.initForm(question);
+      initialQuestion = { type: QUESTION_TYPE.MULTIPLE };
     }
+
+    this.questionFormHelper.initForm(initialQuestion);
   }
 
   private mapQuestionToObject(): Question {
     const formData = this.form.value as Question;
+    console.log('formData', formData);
 
     const question: Question = {
       title: formData.title,
       type: formData.type,
-      answers: formData.answers
+      answers: formData.answers,
+      id: formData.id
     };
 
     return question;

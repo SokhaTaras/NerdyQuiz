@@ -152,6 +152,58 @@ export class QuizService {
     });
   }
 
+  editQuestion(
+    quizId: string | null,
+    updatedQuestion: Question
+  ): Observable<Question> {
+    return new Observable<Question>((subscriber) => {
+      const currentQuizzes = this.quizzes$.value;
+
+      if (!currentQuizzes) {
+        subscriber.error();
+        subscriber.complete();
+        return;
+      }
+
+      const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
+
+      if (quizIndex !== -1) {
+        const updatedQuizzes = [...currentQuizzes];
+        const currentQuiz = updatedQuizzes[quizIndex];
+        const updatedQuestions = [...currentQuiz?.questions];
+
+        const questionIndex = updatedQuestions.findIndex((q) => {
+          console.log(q.id, updatedQuestion?.id);
+          return q.id === updatedQuestion?.id;
+        });
+
+        console.log('questionIndex', questionIndex);
+
+        if (questionIndex !== -1) {
+          updatedQuestions[questionIndex] = updatedQuestion;
+
+          const updatedQuiz = {
+            ...currentQuiz,
+            questions: updatedQuestions
+          };
+
+          updatedQuizzes[quizIndex] = updatedQuiz;
+
+          this.quizzes$.next(updatedQuizzes);
+          console.log('updated', updatedQuizzes);
+          this.localStorageService.updateLocalStorage(
+            StorageKey.QUIZZES,
+            updatedQuizzes
+          );
+
+          subscriber.next(updatedQuestion);
+        }
+      }
+
+      subscriber.complete();
+    });
+  }
+
   getQuizQuestions(quizId: string | null): Observable<Question[]> {
     return this.getQuizById(quizId).pipe(
       map((quiz) => {

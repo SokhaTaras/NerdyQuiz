@@ -77,7 +77,7 @@ export class QuestionCardComponent implements OnInit {
         POPOVER_ITEM_TYPE.PRIMARY,
         SVG_TYPE.EDIT,
         SVG_COLOR.PRIMARY,
-        this.editQuestion.bind(this)
+        this.openEditQuestionModal.bind(this)
       ),
       new PopoverItemClass(
         'BUTTON.DELETE_QUESTION',
@@ -89,7 +89,7 @@ export class QuestionCardComponent implements OnInit {
     ];
   }
 
-  private editQuestion(): void {
+  private openEditQuestionModal(): void {
     const data: CreateQuestionModalData = {
       modalWidth: '768px',
       buttonText: 'BUTTON.NEXT',
@@ -98,7 +98,13 @@ export class QuestionCardComponent implements OnInit {
       isSecondStep: true
     };
 
-    this.modalQuizService.showCreateQuestionModal(data);
+    this.modalQuizService
+      .showCreateQuestionModal(data)
+      .onClose.subscribe((updatedQuestion) => {
+        if (updatedQuestion) {
+          this.editQuestion(updatedQuestion);
+        }
+      });
   }
 
   private deleteQuestion(): void {
@@ -106,6 +112,12 @@ export class QuestionCardComponent implements OnInit {
       this.quizService
         .deleteQuestion(this.quizId, this.questionIndex)
         .subscribe()
+    );
+  }
+
+  private editQuestion(updatedQuestion: Question): void {
+    this.subscriptionsService.addSubscription(
+      this.quizService.editQuestion(this.quizId, updatedQuestion).subscribe()
     );
   }
 
