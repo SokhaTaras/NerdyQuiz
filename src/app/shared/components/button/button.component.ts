@@ -3,7 +3,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  Output,
+  Output
 } from '@angular/core';
 
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';

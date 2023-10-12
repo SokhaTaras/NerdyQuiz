@@ -1,3 +1,22 @@
+<quiz-app-info-card containerClass="flex items-center flex-grow">
+  <div class="w-full">
+    <p [innerHTML]="title | sanitize"></p>
+    <div class="flex w-full justify-end items-center mt-4">
+      <p
+        class="text-font-grey font-inter text-xs font-normal leading-4">
+        <span class="">{{ 'LABELS.TIME' | translateJson }}: </span>
+        {{ timer$ | async }}
+      </p>
+      <quiz-app-divider [type]="DIVIDER.VERTICAL"></quiz-app-divider>
+      <quiz-app-label
+        [type]="LABELS.PURPLE">
+        <span>{{ 'LABELS.STEP' | translateJson }}: </span>
+        {{ currentPosition + 1 + '/' + questions.length }}
+      </quiz-app-label>
+    </div>
+  </div>
+</quiz-app-info-card>
+
 <div class="flex-col justify-center items-center w-full">
   <div class="flex justify-center items-center h-1/2 w-full sm:h-1/3">
     <div class="w-full">
@@ -23,15 +42,15 @@
     (whenSelectAnswer)="selectAnswer($event)">
   </quiz-app-answer-selection>
   <div class="flex justify-center items-center text-2xl h-1/4 w-full mt-8">
-    <div class="w-1/2 h-1/2 flex items-center justify-evenly xs:w-full xs:flex-col xs:space-y-2">
+    <div class="w-1/2 h-1/2 flex items-center justify-evenly xs:w-full">
       <quiz-app-button
-        class="xs:w-4/5"
+        class="xs:w-1/3"
         [type]="BUTTON_TYPE.SECONDARY"
         (whenClicked)="cancelHandler">
         {{ cancelText | translateJson }}
       </quiz-app-button>
       <quiz-app-button
-        class="xs:w-4/5"
+        class="xs:w-1/3"
         [type]="BUTTON_TYPE.PRIMARY"
         (whenClicked)="confirmHandler"
         [isDisabled]="isDisabled">
