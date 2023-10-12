@@ -76,7 +76,7 @@ export class QuizEffects {
     )
   );
 
-  eitQuiz$ = createEffect(() =>
+  editQuiz$ = createEffect(() =>
     this.actions$.pipe(
       ofType(QuizActions.EditQuiz),
       switchMap((action: { quiz: Quiz }) =>
