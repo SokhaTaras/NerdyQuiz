@@ -2,7 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
+  OnInit,
   Output
 } from '@angular/core';
 
@@ -12,14 +12,14 @@ import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
   selector: 'quiz-app-button',
   templateUrl: './button.component.html'
 })
-export class ButtonComponent implements OnChanges {
+export class ButtonComponent implements OnInit {
   @Input() type: BUTTON_TYPE;
   @Input() isDisabled: boolean;
   @Output() whenClicked: EventEmitter<void> = new EventEmitter();
 
   dynamicClass: string;
 
-  ngOnChanges(): void {
+  ngOnInit(): void {
     this.setType();
   }
 
