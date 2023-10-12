@@ -17,10 +17,7 @@ export class AnswerSelectionComponent {
   readonly SVG_COLOR = SVG_COLOR;
   readonly SVG_TYPE = SVG_TYPE;
 
-  buttonType = BUTTON_TYPE.SECONDARY;
-
   selectAnswer(answer: Answer): void {
-    this.buttonType = BUTTON_TYPE.PRIMARY;
     this.whenSelectAnswer.emit(answer);
   }
 }

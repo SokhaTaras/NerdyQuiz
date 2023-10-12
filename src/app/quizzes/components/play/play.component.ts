@@ -40,12 +40,6 @@ export class PlayComponent implements OnInit {
   quizTime = 0;
   timePerQuestion = 0;
 
-  get cancelHandler(): void {
-    return this.currentPosition === 0
-      ? this.cancelQuizConfirm()
-      : this.previousQuestion();
-  }
-
   get confirmHandler(): void {
     return this.currentPosition !== this.quiz.questions.length - 1
       ? this.nextQuestion(this.currentQuestion)
