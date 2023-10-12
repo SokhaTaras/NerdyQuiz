@@ -29,8 +29,14 @@
       class="text-font-grey font-inter text-xs font-normal leading-4">
       {{ 'BUTTON.QUESTIONS' | translateJson }}: {{ quizQuestions.length }}
     </p>
+    <quiz-app-info-card
+      class="mt-8 w-full"
+      label="PRE_PLAY_PAGE.PRE_PLAY_INFO"
+      subLabel="PRE_PLAY_PAGE.PRE_PLAY_TEXT"
+      *ngIf="!playMode">
+    </quiz-app-info-card>
     <div
-      class="flex justify-center items-center space-x-4 mt-8"
+      class="flex w-full justify-end items-center mt-8"
       *ngIf="!playMode">
       <quiz-app-button
         [type]="BUTTON_TYPE.PRIMARY"
@@ -38,13 +44,8 @@
         {{ 'BUTTON.PLAY' | translateJson }}
       </quiz-app-button>
     </div>
-    <quiz-app-info-card
-      class="mt-8 pb-8 pr-6"
-      label="PRE_PLAY_PAGE.PRE_PLAY_INFO"
-      subLabel="PRE_PLAY_PAGE.PRE_PLAY_TEXT"
-      *ngIf="!playMode">
-    </quiz-app-info-card>
   </div>
+
 </div>
 
 <div *ngIf="playMode">
