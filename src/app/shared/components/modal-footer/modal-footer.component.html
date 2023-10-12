@@ -1,6 +1,6 @@
 <div class="flex justify-end">
   <div class="flex space-x-2">
-    <quiz-app-button [type]="BUTTON_TYPE.DEFAULT" (whenClicked)="handleCancel()">
+    <quiz-app-button *ngIf="showSecondary" [type]="secondaryButtonType" (whenClicked)="handleCancel()">
       {{ secondaryButtonText | translateJson }}
     </quiz-app-button>
     <quiz-app-button [type]="BUTTON_TYPE.PRIMARY" [isDisabled]="disableButton" (whenClicked)="handleSubmit()">

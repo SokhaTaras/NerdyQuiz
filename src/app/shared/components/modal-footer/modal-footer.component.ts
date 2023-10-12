@@ -7,9 +7,11 @@ import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
   templateUrl: './modal-footer.component.html'
 })
 export class ModalFooterComponent {
-  @Input() disableButton: boolean;
+  @Input() secondaryButtonType: BUTTON_TYPE = BUTTON_TYPE.DEFAULT;
   @Input() primaryButtonText: string = 'BUTTON.CONFIRM';
   @Input() secondaryButtonText: string = 'BUTTON.CANCEL';
+  @Input() disableButton: boolean;
+  @Input() showSecondary = true;
   @Output() whenConfirm: EventEmitter<void> = new EventEmitter();
   @Output() whenCancel: EventEmitter<void> = new EventEmitter();
 

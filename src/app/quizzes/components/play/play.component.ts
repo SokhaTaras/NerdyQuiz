@@ -14,6 +14,7 @@ import { SubscriptionsService } from '@a-shared/services/subscription/subscripti
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizHelperService } from '@a-shared/services/quiz-helper/quiz-helper.service';
 import { ConfirmationModalData } from '@a-quizzes/interfaces/modal-data';
+import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
 
 @Component({
   selector: 'quiz-app-play',
@@ -25,6 +26,10 @@ export class PlayComponent implements OnInit {
   @Output() whenCancel: EventEmitter<void> = new EventEmitter();
 
   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly LABELS = LABELS;
+  readonly DIVIDER = DIVIDER;
+  readonly SVG_COLOR = SVG_COLOR;
+  readonly SVG_TYPE = SVG_TYPE;
 
   timer$: Observable<number>;
 
@@ -67,6 +72,10 @@ export class PlayComponent implements OnInit {
 
   get title(): string {
     return this.currentQuestion?.title;
+  }
+
+  get showSecondaryButton(): boolean {
+    return this.currentPosition !== 0;
   }
 
   constructor(
@@ -166,7 +175,4 @@ export class PlayComponent implements OnInit {
       this.timer$.subscribe((time) => (this.quizTime = time))
     );
   }
-
-  protected readonly LABELS = LABELS;
-  protected readonly DIVIDER = DIVIDER;
 }

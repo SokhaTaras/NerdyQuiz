@@ -50,7 +50,7 @@
       </quiz-app-button>
     </div>
   </div>
-  <div *ngIf="playMode">
+  <div class="mt-8" *ngIf="playMode">
     <quiz-app-play (whenCancel)="togglePlayMode()" [quiz]="currentQuiz"></quiz-app-play>
   </div>
 </div>
