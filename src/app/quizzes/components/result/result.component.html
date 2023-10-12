@@ -1,44 +1,52 @@
-<div class="flex justify-center items-center pt-4">
-  <h1 class="flex text-5xl mb-4 underline">{{ 'LABELS.QUIZ_RESULT' | translateJson }}</h1>
-</div>
-<div class="h-4/5 flex items-center justify-between mt-6">
-  <div class="flex w-full h-full items-center justify-center">
-    <div class="flex-col flex justify-between w-1/2 h-full mt-10 border-2 border-primary shadow p-4 rounded xs:w-4/5 sm:w-3/4">
-        <div class="flex text-lg mb-4 justify-center items-center xs:flex-col sm:flex-col">
-          <p class="text-4xl xs:2text-xl xs:mb-2">{{ resultText | translateJson }}:</p>
-          <span class="text-4xl ml-1 underline">{{ rating + '%' }}</span>
-        </div>
-        <div class="flex justify-center items-center min-h-[80px] border border-secondary p-4 rounded shadow text-2xl xs:text-xl">
-          <div class="w-full h-full flex justify-center items-center">
-            <p>{{ 'LABELS.POINTS' | translateJson }}: {{ correctAnswersCount + '/' + quizQuestionResults?.length }}</p>
-          </div>
-          <div class="flex justify-center items-center w-full h-full">
-            <p>
+<div class="mx-[80px] xs:mx-[20px] h-screen max-h-screen flex justify-center items-center flex-col">
+  <quiz-app-info-card class="w-full" containerClass="flex items-center flex-grow flex-col p-4">
+    <div class="flex justify-center items-center py-4">
+      <h1 class="flex text-2xl font-semibold">{{ 'LABELS.QUIZ_RESULT' | translateJson }}</h1>
+    </div>
+    <div class="flex-col flex justify-between w-full h-full">
+      <div class="flex justify-center items-center space-x-2">
+        <p class="font-semibold text-xl xs:mb-2">{{ resultText | translateJson }}:</p>
+        <quiz-app-label [type]="resultLabelType">{{ rating + '%' }}</quiz-app-label>
+      </div>
+      <div class="flex justify-center items-center min-h-[80px] rounded text-2xl xs:text-xl">
+          <quiz-app-label [type]="LABELS.PURPLE">
+            <p class="text-xl">
               {{ 'LABELS.TIME' | translateJson }}: {{ quizTime + ' ' + ('LABELS.SEC' | translateJson) }}
             </p>
-          </div>
-        </div>
-      <quiz-app-progress-bar [percentageProgress]="rating">
-        {{ 'LABELS.CORRECTNESS' | translateJson }} {{ rating + '%' }}
-      </quiz-app-progress-bar>
-        <div class="flex text-2xl space-x-12 justify-center items-center xs:w-full xs:flex-col xs:space-x-0">
-          <div class="flex items-center justify-center my-2 w-full h-full xs:w-full">
-            <quiz-app-button
-              class="items-center justify-center h-full w-full"
-              [type]="BUTTON_TYPE.SECONDARY"
-              (whenClicked)="goHome()">
-              {{ 'BUTTON.HOME' | translateJson }}
-            </quiz-app-button>
-          </div>
-          <div class="flex items-center justify-center my-2 h-full w-full xs:w-full">
-            <quiz-app-button
-              class="items-center justify-center h-full w-full"
-              [type]="BUTTON_TYPE.PRIMARY"
-              (whenClicked)="playAgain()">
-              {{ 'BUTTON.PLAY_AGAIN' | translateJson }}
-            </quiz-app-button>
-          </div>
-        </div>
+          </quiz-app-label>
       </div>
     </div>
+  </quiz-app-info-card>
+  <div class="flex w-full space-x-2 my-8 justify-end items-center xs:w-full xs:flex-col xs:space-x-0">
+    <div class="flex items-center justify-center my-2 xs:w-full">
+      <quiz-app-button
+        class="items-center justify-center h-full w-full"
+        [type]="BUTTON_TYPE.DEFAULT"
+        (whenClicked)="goHome()">
+        <div class="w-full flex justify-center items-center">
+          <quiz-app-svg-icon
+            class="mr-2"
+            [svgName]="SVG_TYPE.HOME"
+            [iconColor]="SVG_COLOR.SECONDARY">
+          </quiz-app-svg-icon>
+          {{ 'BUTTON.HOME' | translateJson }}
+        </div>
+      </quiz-app-button>
+    </div>
+    <div class="flex items-center justify-center my-2 xs:w-full">
+      <quiz-app-button
+        class="flex items-center justify-center h-full w-full"
+        [type]="BUTTON_TYPE.PRIMARY"
+        (whenClicked)="playAgain()">
+        <div class="w-full flex justify-center items-center">
+          <quiz-app-svg-icon
+            class="mr-2"
+            [svgName]="SVG_TYPE.REFRESH"
+            [iconColor]="SVG_COLOR.WHITE">
+          </quiz-app-svg-icon>
+          {{ 'BUTTON.PLAY_AGAIN' | translateJson }}
+        </div>
+      </quiz-app-button>
+    </div>
+  </div>
 </div>

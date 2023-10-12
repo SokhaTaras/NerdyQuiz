@@ -7,6 +7,7 @@ export enum SVG_TYPE {
   MORE_HORIZONTAL = 'more-horizontal',
   REFRESH = 'refresh-ccw',
   TRASH = 'trash-2',
+  HOME = 'home',
   X = 'x'
 }
 

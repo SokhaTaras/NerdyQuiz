@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
-import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
+import { BUTTON_TYPE, LABELS } from '@a-shared/enums/shared-components';
 import { QuestionResult, QuizResult } from '@a-questions/interfaces/question';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
-import { getResultText } from '@a-shared/utils/result';
+import { getResultSetup } from '@a-shared/utils/result';
+import { ResultSetup } from '@a-shared/types/result-setup';
+import { SVG_COLOR, SVG_TYPE } from '@a-shared/enums/svg';
 
 @Component({
   selector: 'quiz-app-result',
@@ -17,13 +19,16 @@ import { getResultText } from '@a-shared/utils/result';
 })
 export class ResultComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
+  readonly LABELS = LABELS;
+  readonly SVG_TYPE = SVG_TYPE;
+  readonly SVG_COLOR = SVG_COLOR;
+
+  resultSetup: ResultSetup;
+  currentQuiz: Quiz;
+  quizResult: QuizResult;
 
   rating: number;
   correctAnswersCount: number;
-  resultText: string;
-
-  currentQuiz: Quiz;
-  quizResult: QuizResult;
 
   get quizQuestionResults(): QuestionResult[] {
     return this.quizResult?.questionResults;
@@ -31,6 +36,14 @@ export class ResultComponent implements OnInit {
 
   get quizTime(): number {
     return this.quizResult?.quizTime;
+  }
+
+  get resultText(): string {
+    return this.resultSetup?.text;
+  }
+
+  get resultLabelType(): LABELS {
+    return this.resultSetup?.labelType;
   }
 
   constructor(
@@ -46,7 +59,7 @@ export class ResultComponent implements OnInit {
     this.setQuizResults();
     this.setCorrectAnswersCount();
     this.setRating();
-    this.setResultText();
+    this.setResultSetup();
   }
 
   playAgain(): void {
@@ -89,7 +102,9 @@ export class ResultComponent implements OnInit {
     }
   }
 
-  private setResultText(): void {
-    this.resultText = getResultText(this.rating);
+  private setResultSetup(): void {
+    console.log(this.resultSetup);
+    this.resultSetup = getResultSetup(this.rating);
+    console.log(this.resultSetup);
   }
 }

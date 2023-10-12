@@ -1,6 +1,8 @@
-<div class="mb-4 text-2xl">
-  <p><ng-content></ng-content></p>
-  <div class="h-4 mt-2 rounded-full bg-primary border border-secondary">
+<div class="flex mb-4 text-2xl">
+  <div class="h-2 flex-auto mt-2 rounded-[8px] bg-primary border border-secondary">
     <div class="bg-secondary h-full rounded-full" [style.width.%]="percentageProgress"></div>
+  </div>
+  <div class="font-inter text-sm font-medium leading-5 text-left ml-3">
+    <ng-content></ng-content>
   </div>
 </div>
