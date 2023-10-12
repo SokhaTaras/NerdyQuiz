@@ -2,7 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, timer } from 'rxjs';
 
 import { Answer, Question, QuizResult } from '@a-questions/interfaces/question';
-import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
+import {
+  BUTTON_TYPE,
+  DIVIDER,
+  LABELS
+} from '@a-shared/enums/shared-components';
 import { ModalQuizService } from '@a-quizzes/services/modal-quiz/modal-quiz.service';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
@@ -59,6 +63,10 @@ export class PlayComponent implements OnInit {
 
   get questions(): Question[] {
     return this.quiz.questions;
+  }
+
+  get title(): string {
+    return this.currentQuestion?.title;
   }
 
   constructor(
@@ -158,4 +166,7 @@ export class PlayComponent implements OnInit {
       this.timer$.subscribe((time) => (this.quizTime = time))
     );
   }
+
+  protected readonly LABELS = LABELS;
+  protected readonly DIVIDER = DIVIDER;
 }

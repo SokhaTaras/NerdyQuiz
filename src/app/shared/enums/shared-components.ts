@@ -16,6 +16,7 @@ export enum POPOVER_ITEM_TYPE {
 }
 
 export enum LABELS {
+  PURPLE,
   GREEN,
   YELLOW,
   RED

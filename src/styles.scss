@@ -147,14 +147,6 @@ button {
     @apply text-3xl font-semibold leading-7 text-left;
   }
 
-  .question-info {
-    @apply text-5xl flex justify-center items-center mb-8 text-center
-  }
-
-  .button-selected {
-    @apply border border-secondary rounded
-  }
-
   .highlighted-text {
     @apply mx-4 underline
   }

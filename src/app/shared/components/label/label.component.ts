@@ -25,6 +25,9 @@ export class LabelComponent implements OnChanges {
       case LABELS.RED:
         this.dynamicClass = 'bg-red-50 text-red-700';
         break;
+      case LABELS.PURPLE:
+        this.dynamicClass = 'bg-primary text-secondary';
+        break;
     }
   }
 }

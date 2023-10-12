@@ -1,11 +1,16 @@
-<div class="mx-[80px] overflow-hidden">
+<div class="mx-[80px] xs:mx-[20px] overflow-hidden">
   <div class="mt-[40px] flex items-center justify-start my-6">
     <quiz-app-button
+      *ngIf="!playMode"
       [type]="BUTTON_TYPE.SECONDARY"
       class="flex items-center justify-center"
       (whenClicked)="goHome()">
       <div class="flex justify-center items-center">
-        <quiz-app-svg-icon class="rotate-90 mr-1" [svgName]="SVG_TYPE.CHEVRON_DOWN" [iconColor]="SVG_COLOR.SECONDARY"></quiz-app-svg-icon>
+        <quiz-app-svg-icon
+          class="rotate-90 mr-1"
+          [svgName]="SVG_TYPE.CHEVRON_DOWN"
+          [iconColor]="SVG_COLOR.SECONDARY">
+        </quiz-app-svg-icon>
         {{ 'BUTTON.BACK' | translateJson }}
       </div>
     </quiz-app-button>
@@ -45,8 +50,8 @@
       *ngIf="!playMode">
     </quiz-app-info-card>
   </div>
+  <div *ngIf="playMode">
+    <quiz-app-play (whenCancel)="togglePlayMode()" [quiz]="currentQuiz"></quiz-app-play>
+  </div>
 </div>
 
-<div *ngIf="playMode">
-  <quiz-app-play (whenCancel)="togglePlayMode()" [quiz]="currentQuiz"></quiz-app-play>
-</div>
