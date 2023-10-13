@@ -1,11 +1,11 @@
-<div class="bg-transparent w-full h-full rounded-[10px] font-inter text-md font-semibold leading-6">
+<div class="bg-transparent w-full h-full rounded-[8px] font-inter text-md font-semibold leading-6">
   <button
-    class="{{ dynamicClass }} rounded-[10px] w-full h-full relative disabled:disabled-button"
+    class="{{ dynamicClass }} rounded-[8px] w-full h-full relative disabled:disabled-button"
     [disabled]="isDisabled"
     (click)="emitClick()">
     <ng-content></ng-content>
     <span
-      class="rounded-[10px] absolute inset-0 bg-black/5 opacity-0 hover:opacity-100 transition-opacity duration-300 h-full w-full"
+      class="rounded-[8px] absolute inset-0 bg-black/5 opacity-0 hover:opacity-100 transition-opacity duration-300 h-full w-full"
     ></span>
   </button>
 </div>
