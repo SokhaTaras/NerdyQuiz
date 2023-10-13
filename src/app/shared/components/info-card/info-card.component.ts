@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './info-card.component.html'
 })
 export class InfoCardComponent {
-  @Input() label = '';
-  @Input() subLabel = '';
+  @Input() label: string = '';
+  @Input() subLabel: string = '';
   @Input() containerClass: string;
 }
