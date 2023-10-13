@@ -43,17 +43,17 @@ export class QuizService {
     });
   }
 
-  editQuiz(quizId: string | undefined, data: Quiz): Observable<Quiz> {
+  editQuiz(quizId: string | undefined, updatedData: Quiz): Observable<Quiz> {
     return new Observable<Quiz>((subscriber) => {
       const currentQuizzes = [...this.quizzes$.value];
       const quizIndex = currentQuizzes.findIndex((q) => q.id === quizId);
 
       if (quizIndex !== -1) {
-        const updatedQuiz = {
-          ...currentQuizzes[quizIndex],
-          title: data.title,
-          category: data.category,
-          difficulty: data.difficulty
+        const currentQuiz = currentQuizzes[quizIndex];
+        const updatedQuiz: Quiz = {
+          ...currentQuiz,
+          ...updatedData,
+          questions: currentQuiz.questions
         };
 
         currentQuizzes[quizIndex] = updatedQuiz;

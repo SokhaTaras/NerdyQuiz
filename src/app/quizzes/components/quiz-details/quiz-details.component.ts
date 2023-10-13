@@ -58,7 +58,7 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   openEditPopUp(): void {
-    const data: CreateQuizModalData = {
+    const data: any = {
       label: 'BUTTON.EDIT_QUIZ',
       buttonText: 'BUTTON.EDIT',
       quiz: this.currentQuiz,
@@ -69,7 +69,7 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   confirmRemoving(): void {
-    const data: any = {
+    const data = {
       text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ',
       primaryButtonText: 'BUTTON.CONFIRM'
     };

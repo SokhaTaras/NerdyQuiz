@@ -53,15 +53,13 @@ export class QuizListComponent implements OnInit {
   private initQuizzes(): void {
     this.isLoading = true;
 
-    const quizzes$ = this.quizState.quizzesList$.pipe(
-      filter((quizzes) => quizzes !== null)
-    );
-
     this.subscriptionsService.addSubscription(
-      quizzes$.subscribe((quizzes) => {
-        this.quizzes = quizzes;
-        this.isLoading = false;
-      })
+      this.quizState.quizzesList$
+        .pipe(filter((quizzes) => quizzes !== null))
+        .subscribe((quizzes) => {
+          this.quizzes = quizzes;
+          this.isLoading = false;
+        })
     );
   }
 }
