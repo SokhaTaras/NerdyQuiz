@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
@@ -19,7 +18,7 @@ import { QuizStateService } from '@a-quizzes/services/quiz-state/quiz-state.serv
 export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   readonly BUTTON_TYPE = BUTTON_TYPE;
 
-  selectedQuiz$: Observable<Quiz>;
+  selectedQuiz: Quiz;
 
   constructor(
     quizService: QuizService,
@@ -39,7 +38,7 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   openEditPopUp(): void {
-    const data: any = {
+    const data = {
       label: 'BUTTON.EDIT_QUIZ',
       buttonText: 'BUTTON.EDIT',
       quiz: this.currentQuiz
@@ -48,7 +47,7 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   confirmRemoving(): void {
-    const data: any = {
+    const data = {
       text: 'CONFIRM_MODAL_TEXT.DELETE_QUIZ',
       buttonText: 'BUTTON.CONFIRM'
     };
@@ -70,7 +69,11 @@ export class QuizDetailsComponent extends BaseQuizComponent implements OnInit {
   }
 
   private setQuiz(): void {
-    this.selectedQuiz$ = this.quizState.selectedQuiz$;
+    this.subscriptionsService.addSubscription(
+      this.quizState.selectedQuiz$.subscribe((quiz) => {
+        this.selectedQuiz = quiz;
+      })
+    );
   }
 
   private getQuiz(): void {

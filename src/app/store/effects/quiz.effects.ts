@@ -27,9 +27,11 @@ export class QuizEffects {
   deleteQuiz$ = createEffect(() =>
     this.actions$.pipe(
       ofType(QuizActions.DeleteQuiz),
-      switchMap((action: { quizToDelete: Quiz }) =>
-        this.quizService.deleteQuiz(action.quizToDelete).pipe(
-          map((quiz: Quiz) => DeleteQuizSuccess({ quizToDelete: quiz })),
+      switchMap((action: { quiz: Quiz }) =>
+        this.quizService.deleteQuiz(action.quiz).pipe(
+          map(() => {
+            return DeleteQuizSuccess({ quiz: action.quiz });
+          }),
           catchError((error) => of(error))
         )
       )
@@ -74,7 +76,7 @@ export class QuizEffects {
     )
   );
 
-  EditQuiz$ = createEffect(() =>
+  editQuiz$ = createEffect(() =>
     this.actions$.pipe(
       ofType(QuizActions.EditQuiz),
       switchMap((action: { quiz: Quiz }) =>
