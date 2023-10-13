@@ -1,14 +1,14 @@
 <div class="mx-[80px] xs:mx-[20px] h-screen max-h-screen flex justify-center items-center flex-col">
   <quiz-app-info-card class="w-full" containerClass="flex items-center flex-grow flex-col p-4">
-    <div class="flex justify-center items-center py-4">
+    <div class="flex justify-center items-center pb-4">
       <h1 class="flex text-2xl font-semibold">{{ 'LABELS.QUIZ_RESULT' | translateJson }}</h1>
     </div>
     <div class="flex-col flex justify-between w-full h-full">
-      <div class="flex justify-center items-center space-x-2">
+      <div class="flex justify-center items-center space-x-2 pb-4">
         <p class="font-semibold text-xl xs:mb-2">{{ resultText | translateJson }}:</p>
         <quiz-app-label [type]="resultLabelType">{{ rating + '%' }}</quiz-app-label>
       </div>
-      <div class="flex justify-center items-center min-h-[80px] rounded text-2xl xs:text-xl">
+      <div class="flex justify-center items-center rounded text-2xl xs:text-xl">
           <quiz-app-label [type]="LABELS.PURPLE">
             <p class="text-xl">
               {{ 'LABELS.TIME' | translateJson }}: {{ quizTime + ' ' + ('LABELS.SEC' | translateJson) }}

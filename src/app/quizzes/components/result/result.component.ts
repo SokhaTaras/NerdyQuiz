@@ -24,8 +24,8 @@ export class ResultComponent implements OnInit {
   readonly SVG_COLOR = SVG_COLOR;
 
   resultSetup: ResultSetup;
-  currentQuiz: Quiz;
   quizResult: QuizResult;
+  currentQuiz: Quiz;
 
   rating: number;
   correctAnswersCount: number;
@@ -103,8 +103,6 @@ export class ResultComponent implements OnInit {
   }
 
   private setResultSetup(): void {
-    console.log(this.resultSetup);
     this.resultSetup = getResultSetup(this.rating);
-    console.log(this.resultSetup);
   }
 }
