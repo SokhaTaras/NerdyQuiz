@@ -25,7 +25,7 @@
               <div class="xs:flex-wrap flex items-center justify-center w-full">
                 <div class="w-full flex justify-center items-center">
                   <quiz-app-radio-button
-                    class="flex justify-center items-center pl-5 pr-5"
+                    class="flex justify-center items-center"
                     [isChecked]="answer.controls.isCorrect.value"
                     (whenChecked)="onRadioChecked(answer)">
                   </quiz-app-radio-button>
@@ -51,8 +51,8 @@
         </div>
         <quiz-app-add-quiz
           class="w-full h-[44px] text-secondary"
-          (whenClicked)="addAnswer()"
-          [isDisabled]="answerCount >= maxQuestionsAmount">
+          *ngIf="answerCount < maxQuestionsAmount"
+          (whenClicked)="addAnswer()">
           + {{ 'BUTTON.ADD_QUESTION' | translateJson }}
         </quiz-app-add-quiz>
       </div>
