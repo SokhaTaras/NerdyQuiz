@@ -31,9 +31,11 @@
     </p>
     <quiz-app-info-card
       class="mt-8 w-full"
-      label="PRE_PLAY_PAGE.PRE_PLAY_INFO"
-      subLabel="PRE_PLAY_PAGE.PRE_PLAY_TEXT"
       *ngIf="!playMode">
+      <div class="flex flex-col justify-center">
+        <p class="font-inter text-base font-normal leading-6 tracking-normal text-left">{{ 'PRE_PLAY_PAGE.PRE_PLAY_INFO' | translateJson }}</p>
+        <p class="font-inter text-xs font-normal leading-5 tracking-normal text-left text-gray-400">{{ 'PRE_PLAY_PAGE.PRE_PLAY_TEXT' | translateJson }}</p>
+      </div>
     </quiz-app-info-card>
     <div
       class="flex w-full justify-end items-center mt-8"
