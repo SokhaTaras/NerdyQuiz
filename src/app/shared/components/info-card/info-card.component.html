@@ -1,11 +1,7 @@
-<div class="shadow-lg rounded-2xl w-full min-h-[62px] border border-primary hover:shadow-xl">
+<div class="shadow-lg rounded-[8px] w-full min-h-[62px] border border-primary">
   <div class="flex mx-4 my-2">
     <div [class]="containerClass">
       <ng-content></ng-content>
-    </div>
-    <div class="flex-col justify-center ml-2">
-      <p class="font-inter text-base font-normal leading-6 tracking-normal text-left">{{ label | translateJson }}</p>
-      <p class="font-inter text-xs font-normal leading-5 tracking-normal text-left text-gray-400">{{ subLabel | translateJson }}</p>
     </div>
   </div>
 </div>

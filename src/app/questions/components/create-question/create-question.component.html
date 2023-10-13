@@ -51,8 +51,8 @@
         </div>
         <quiz-app-add-quiz
           class="w-full h-[44px] text-secondary"
-          (whenClicked)="addAnswer()"
-          [isDisabled]="answerCount >= maxQuestionsAmount">
+          *ngIf="answerCount < maxQuestionsAmount"
+          (whenClicked)="addAnswer()">
           + {{ 'BUTTON.ADD_QUESTION' | translateJson }}
         </quiz-app-add-quiz>
       </div>
