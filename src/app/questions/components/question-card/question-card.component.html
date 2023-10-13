@@ -28,8 +28,8 @@
         <div class="" *ngFor="let answer of question.answers; let i = index">
           <div class="flex justify-between space-y-2">
             <p
-              class="font-inter text-base font-normal leading-6 tracking-normal text-left">
-              {{ i + 1 + '.' }} {{ answer.text }}
+              class="font-inter text-base font-normal leading-6 tracking-normal text-left"
+              [innerHTML]="i + 1 + '.' + ' ' + answer.text | sanitize">
             </p>
             <quiz-app-correctness-status
               [indicatorInfo]="indicatorsInfo[i]">
