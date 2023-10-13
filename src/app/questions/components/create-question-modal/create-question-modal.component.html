@@ -4,13 +4,15 @@
     <div class="mb-8">
       <div class="mb-4" *ngFor="let card of infoCardSetup">
         <quiz-app-info-card
-          containerClass="flex items-center"
-          [label]="card.label"
-          [subLabel]="card.subLabel">
+          containerClass="flex items-center">
           <quiz-app-radio-button
             [isChecked]="selectedCardValue === card?.value"
             (whenChecked)="onRadioButtonCheck(card)">
           </quiz-app-radio-button>
+          <div class="flex flex-col justify-center ml-4">
+            <p class="font-inter text-base font-normal leading-6 tracking-normal text-left">{{ card.label | translateJson }}</p>
+            <p class="font-inter text-xs font-normal leading-5 tracking-normal text-left text-gray-400">{{ card.subLabel | translateJson }}</p>
+          </div>
         </quiz-app-info-card>
       </div>
     </div>
