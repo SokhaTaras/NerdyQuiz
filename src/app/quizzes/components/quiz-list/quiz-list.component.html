@@ -4,7 +4,7 @@
       <div class="m-4 min-h-[148px] w-[344px]">
         <quiz-app-add-quiz class="text-secondary text-xl" (whenClicked)="openInitPopUp()">+ {{ 'BUTTON.ADD_QUIZ' | translateJson }}</quiz-app-add-quiz>
       </div>
-      <ng-container *ngFor="let quiz of (quizzes$ | async)">
+      <ng-container *ngFor="let quiz of quizzes">
         <div class="m-4 min-h-[148px] w-[344px]">
           <quiz-app-quiz-card [quiz]="quiz"></quiz-app-quiz-card>
         </div>

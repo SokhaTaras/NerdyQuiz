@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 
-import { Question } from '@a-questions/interfaces/question';
 import { BUTTON_TYPE } from '@a-shared/enums/shared-components';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { Quiz } from '@a-quizzes/interfaces/quiz';
 import { QuizApiService } from '@a-quizzes/services/quiz-api/quiz-api.service';
 import { mapQuestion } from '@a-shared/utils/questionsMapper';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
+import { Question } from '@a-questions/interfaces/question';
 
 @Component({
   selector: 'quiz-app-question-list',
@@ -15,15 +15,18 @@ import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
 })
 export class QuestionListComponent {
   @Input() quiz: Quiz;
-  @Input() questions: Question[];
+
+  readonly BUTTON_TYPE = BUTTON_TYPE;
 
   displayCreateQuestion = false;
   isBoolean: boolean;
 
-  readonly BUTTON_TYPE = BUTTON_TYPE;
-
   get categoryValue(): string {
-    return this?.quiz?.category?.value;
+    return this.quiz?.category?.value;
+  }
+
+  get questions(): Question[] {
+    return this.quiz?.questions;
   }
 
   constructor(
