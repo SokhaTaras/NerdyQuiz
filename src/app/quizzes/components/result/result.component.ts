@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { StatisticsService } from '@a-shared/services/statistics/statistics.service';
-import { BUTTON_TYPE, LABELS } from '@a-shared/enums/shared-components';
 import { QuestionResult, QuizResult } from '@a-questions/interfaces/question';
+import { BUTTON_TYPE, LABELS } from '@a-shared/enums/shared-components';
 import { NavigateToService } from '@a-shared/services/navigate-to/navigate-to.service';
 import { SubscriptionsService } from '@a-shared/services/subscription/subscriptions.service';
 import { QuizService } from '@a-quizzes/services/quiz/quiz.service';
