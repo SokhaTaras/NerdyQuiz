@@ -5,5 +5,5 @@ export enum PlaceHolder {
   ANSWER = 'Enter answer',
   DIFFICULTY = 'Difficulty',
   TYPE_QUESTION = 'Type your question',
-  TYPE_ANSWER = 'Type your question'
+  TYPE_ANSWER = 'Type your answer'
 }
